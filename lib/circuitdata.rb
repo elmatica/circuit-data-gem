@@ -16,17 +16,19 @@ module Circuitdata
       capabilitieserrors: {},
     }
 
-    # Check to see if the URIs are correct on the received files
-    if not File.exist?(productfile)
-      returnarray[:error] = true
-      returnarray[:errormessage] = "Could not access the file to test"
-      return returnarray
-    end
-    if not checksfile.nil?
-      if not File.exist?(checksfile)
+    unless productfile.is_a? Hash
+      # Check to see if the URIs are correct on the received files
+      if not File.exist?(productfile)
         returnarray[:error] = true
-        returnarray[:errormessage] = "Could not access the file to check agains (profile or capability)"
+        returnarray[:errormessage] = "Could not access the file to test"
         return returnarray
+      end
+      if not checksfile.nil?
+        if not File.exist?(checksfile)
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Could not access the file to check agains (profile or capability)"
+          return returnarray
+        end
       end
     end
 
@@ -38,7 +40,11 @@ module Circuitdata
         returnarray[:errormessage] = "Could not validate the product file against the CircuitData json schema"
         prod.each do |valerror|
           returnarray[:validationserrors][valerror[:fragment]] = [] unless returnarray[:validationserrors].has_key? valerror[:fragment]
-          scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+          begin
+            scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+          rescue
+            keep = valerror[:message]
+          end
           returnarray[:validationserrors][valerror[:fragment]] << keep
         end
       end
@@ -49,7 +55,11 @@ module Circuitdata
           returnarray[:errormessage] = "Could not validate the file to check agains (profile or capability) against the CircuitData json schema"
           checks.each do |valerror|
             returnarray[:validationserrors][valerror[:fragment]] = [] unless returnarray[:validationserrors].has_key? valerror[:fragment]
-            scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+            begin
+              scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+            rescue
+              keep = valerror[:message]
+            end
             returnarray[:validationserrors][valerror[:fragment]] << keep
           end
           return returnarray
