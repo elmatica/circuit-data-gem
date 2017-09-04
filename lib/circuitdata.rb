@@ -23,6 +23,8 @@ module Circuitdata
         returnarray[:errormessage] = "Could not access the file to test"
         return returnarray
       end
+    end
+    unless checksfile.is_a? Hash
       if not checksfile.nil?
         if not File.exist?(checksfile)
           returnarray[:error] = true
@@ -34,26 +36,23 @@ module Circuitdata
 
     # Validate the original files against the CircuitData schema
     if validate_origins
-      prod = JSON::Validator.fully_validate($jsonschema_v1, productfile, :errors_as_objects => true)
-      if prod.count > 0
+      $error = false
+      begin
+        prod = JSON::Validator.fully_validate($jsonschema_v1, productfile, :errors_as_objects => true)
+      rescue JSON::Schema::ReadFailed
+        $errors = true
         returnarray[:error] = true
-        returnarray[:errormessage] = "Could not validate the product file against the CircuitData json schema"
-        prod.each do |valerror|
-          returnarray[:validationserrors][valerror[:fragment]] = [] unless returnarray[:validationserrors].has_key? valerror[:fragment]
-          begin
-            scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
-          rescue
-            keep = valerror[:message]
-          end
-          returnarray[:validationserrors][valerror[:fragment]] << keep
-        end
+        returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
+      rescue JSON::Schema::SchemaError
+        $errors = true
+        returnarray[:error] = true
+        returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
       end
-      if not checksfile.nil?
-        checks = JSON::Validator.fully_validate($jsonschema_v1, checksfile, :errors_as_objects => true)
-        if checks.count > 0
+      unless $errors
+        if prod.count > 0
           returnarray[:error] = true
-          returnarray[:errormessage] = "Could not validate the file to check agains (profile or capability) against the CircuitData json schema"
-          checks.each do |valerror|
+          returnarray[:errormessage] = "Could not validate the product file against the CircuitData json schema"
+          prod.each do |valerror|
             returnarray[:validationserrors][valerror[:fragment]] = [] unless returnarray[:validationserrors].has_key? valerror[:fragment]
             begin
               scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
@@ -62,7 +61,36 @@ module Circuitdata
             end
             returnarray[:validationserrors][valerror[:fragment]] << keep
           end
-          return returnarray
+        end
+      end
+      if not checksfile.nil?
+        $error = false
+        begin
+          checks = JSON::Validator.fully_validate($jsonschema_v1, checksfile, :errors_as_objects => true)
+        rescue JSON::Schema::ReadFailed
+          $errors = true
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
+        rescue JSON::Schema::SchemaError
+          $errors = true
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
+        end
+        unless $errors
+          if checks.count > 0
+            returnarray[:error] = true
+            returnarray[:errormessage] = "Could not validate the file to check agains (profile or capability) against the CircuitData json schema"
+            checks.each do |valerror|
+              returnarray[:validationserrors][valerror[:fragment]] = [] unless returnarray[:validationserrors].has_key? valerror[:fragment]
+              begin
+                scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+              rescue
+                keep = valerror[:message]
+              end
+              returnarray[:validationserrors][valerror[:fragment]] << keep
+            end
+            return returnarray
+          end
         end
       end
     end
@@ -228,18 +256,31 @@ module Circuitdata
 
       # Test enforced
       if $has_enforced
-        enforcedvalidate = JSON::Validator.fully_validate(enforcedschema.to_json, productfile, :errors_as_objects => true)
-        if enforcedvalidate.count > 0
+        $error = false
+        begin
+          enforcedvalidate = JSON::Validator.fully_validate(enforcedschema.to_json, productfile, :errors_as_objects => true)
+        rescue JSON::Schema::ReadFailed
+          $errors = true
           returnarray[:error] = true
-          returnarray[:errormessage] = "The product to check did not meet the requirements"
-          enforcedvalidate.each do |valerror|
-            returnarray[:enforcederrors][valerror[:fragment]] = [] unless returnarray[:enforcederrors].has_key? valerror[:fragment]
-            begin
-              scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
-            rescue
-              keep = valerror[:message]
+          returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
+        rescue JSON::Schema::SchemaError
+          $errors = true
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
+        end
+        unless $errors
+          if enforcedvalidate.count > 0
+            returnarray[:error] = true
+            returnarray[:errormessage] = "The product to check did not meet the requirements"
+            enforcedvalidate.each do |valerror|
+              returnarray[:enforcederrors][valerror[:fragment]] = [] unless returnarray[:enforcederrors].has_key? valerror[:fragment]
+              begin
+                scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+              rescue
+                keep = valerror[:message]
+              end
+              returnarray[:enforcederrors][valerror[:fragment]] << keep
             end
-            returnarray[:enforcederrors][valerror[:fragment]] << keep
           end
         end
       end
@@ -247,36 +288,62 @@ module Circuitdata
 
       # Test restricted
       if $has_restrictions
-        restrictedvalidate = JSON::Validator.fully_validate(restrictedschema.to_json, productfile, :errors_as_objects => true)
-        if restrictedvalidate.count > 0
+        $error = false
+        begin
+          restrictedvalidate = JSON::Validator.fully_validate(restrictedschema.to_json, productfile, :errors_as_objects => true)
+        rescue JSON::Schema::ReadFailed
+          $errors = true
           returnarray[:error] = true
-          returnarray[:errormessage] = "The product to check did not meet the requirements"
-          restrictedvalidate.each do |valerror|
-            returnarray[:restrictederrors][valerror[:fragment]] = [] unless returnarray[:restrictederrors].has_key? valerror[:fragment]
-            begin
-              scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
-            rescue
-              keep = valerror[:message]
+          returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
+        rescue JSON::Schema::SchemaError
+          $errors = true
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
+        end
+        unless $errors
+          if restrictedvalidate.count > 0
+            returnarray[:error] = true
+            returnarray[:errormessage] = "The product to check did not meet the requirements"
+            restrictedvalidate.each do |valerror|
+              returnarray[:restrictederrors][valerror[:fragment]] = [] unless returnarray[:restrictederrors].has_key? valerror[:fragment]
+              begin
+                scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+              rescue
+                keep = valerror[:message]
+              end
+              returnarray[:restrictederrors][valerror[:fragment]] << keep
             end
-            returnarray[:restrictederrors][valerror[:fragment]] << keep
           end
         end
       end
 
       # Test capabilites
       if $has_capabilities
-        capabilitiesvalidate = JSON::Validator.fully_validate(capabilityschema.to_json, productfile, :errors_as_objects => true)
-        if capabilitiesvalidate.count > 0
+        $error = false
+        begin
+          capabilitiesvalidate = JSON::Validator.fully_validate(capabilityschema.to_json, productfile, :errors_as_objects => true)
+        rescue JSON::Schema::ReadFailed
+          $errors = true
           returnarray[:error] = true
-          returnarray[:errormessage] = "The product to check did not meet the requirements"
-          capabilitiesvalidate.each do |valerror|
-            returnarray[:capabilitieserrors][valerror[:fragment]] = [] unless returnarray[:capabilitieserrors].has_key? valerror[:fragment]
-            begin
-              scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
-            rescue
-              keep = valerror[:message]
+          returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
+        rescue JSON::Schema::SchemaError
+          $errors = true
+          returnarray[:error] = true
+          returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
+        end
+        unless $errors
+          if capabilitiesvalidate.count > 0
+            returnarray[:error] = true
+            returnarray[:errormessage] = "The product to check did not meet the requirements"
+            capabilitiesvalidate.each do |valerror|
+              returnarray[:capabilitieserrors][valerror[:fragment]] = [] unless returnarray[:capabilitieserrors].has_key? valerror[:fragment]
+              begin
+                scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+              rescue
+                keep = valerror[:message]
+              end
+              returnarray[:capabilitieserrors][valerror[:fragment]] << keep
             end
-            returnarray[:capabilitieserrors][valerror[:fragment]] << keep
           end
         end
       end
