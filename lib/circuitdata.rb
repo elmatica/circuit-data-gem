@@ -2,17 +2,19 @@ module Circuitdata
 
 
   def self.content(checksjson)
-    product = false
+    number_of_products = 0
     stackup =  false
     profile_defaults = false
     profile_enforced = false
     profile_restricted = false
     capabilities = false
+    productname = nil
     if checksjson.has_key? "open_trade_transfer_package"
       if checksjson["open_trade_transfer_package"].has_key? "products"
         if checksjson["open_trade_transfer_package"]["products"].length > 0
-          product = true
+          number_of_products = checksjson["open_trade_transfer_package"]["products"].length
           checksjson["open_trade_transfer_package"]["products"].each do |key, value|
+            productname = key.to_s
             if checksjson["open_trade_transfer_package"]["products"][key].has_key? "stackup"
               if checksjson["open_trade_transfer_package"]["products"][key]["stackup"].has_key? "specification_level"
                 if checksjson["open_trade_transfer_package"]["products"][key]["stackup"]["specification_level"] == "specified"
@@ -50,7 +52,7 @@ module Circuitdata
         end
       end
     end
-    return product, stackup, profile_defaults, profile_restricted, profile_enforced, capabilities
+    return number_of_products, stackup, profile_defaults, profile_restricted, profile_enforced, capabilities, productname
   end
 
   def self.read_json(content)
@@ -63,7 +65,7 @@ module Circuitdata
     returncontent = nil
     if content.is_a? Hash
       begin
-        returncontent = JSON.parse(content)
+        returncontent = content
       rescue
         error = true
         message = "Could not convert the Hash into JSON"
@@ -114,7 +116,78 @@ module Circuitdata
       end
     end
     return error, message, validationserrors
+  end
 
+  def self.compare_files(filearray, validate_origins=false)
+    # Prepare the return
+    ra = {
+      error: false,
+      errormessage: "",
+      summary: {},
+      conflicts: {},
+      product: nil,
+      layers: [],
+    }
+    totalproducts = 0
+    productjson = {}
+    productfile = ""
+    if not filearray.is_a? Hash
+      ra[:error] = true
+      ra[:errormessage] = "You have to feed this function with a hash of names and hashes"
+      return ra
+    end
+
+    # Do preliminary tests
+    filearray.each do |key, value|
+      error, message, returncontent = self.read_json(value)
+      if error
+        ra[:error] = true
+        ra[:errormessage] = "Could not read the value in key #{key} (#{value})"
+        ra[:summary] = {}
+        ra[:conflicts] = {}
+        return ra
+      end
+      if validate_origins
+        ra[:error], ra[:errormessage], validationserrors = self.validate(returncontent)
+        if ra[:error]
+          ra[:summary] = {}
+          ra[:conflicts] = {}
+          return ra
+        end
+      end
+
+      products, stackup, profile_default, profile_restricted, profile_enforced, capabilities, product = self.content(returncontent)
+      if ra[:product].nil?
+        ra[:product] = product unless product.nil?
+        totalproducts += 1
+      else
+        totalproducts += products if product != ra[:product]
+      end
+      if totalproducts > 1
+        ra[:error] = true
+        ra[:errormessage] = "There are more than one product amongst you files"
+        ra[:summary] = {}
+        ra[:conflicts] = {}
+        return ra
+      end
+      if products == 1
+        productjson = returncontent
+        productfile = key.to_s
+      end
+      ra[:layers] << key.to_s
+    end
+
+    # Populate the summary
+    ra[:summary] = productjson["open_trade_transfer_package"]["products"][ra[:product]]["printed_circuits_fabrication_data"]
+
+    # Do comparisons
+    filearray.each do |key, value|
+      unless key.to_s == productfile
+        #puts self.compatibility_checker( productjson, value, false )
+      end
+    end
+    puts JSON.pretty_generate(ra)
+    return ra
   end
 
   def self.compatibility_checker( productfile, checksfile=nil, validate_origins=true )
@@ -135,7 +208,7 @@ module Circuitdata
       capabilitieserrors: {},
       contains: {
         file1: {
-          product: false,
+          products: 0,
           stackup: false,
           profile_defaults: false,
           profile_enforced: false,
@@ -143,7 +216,7 @@ module Circuitdata
           capabilities: false
         },
         file2: {
-          product: false,
+          products: 0,
           stackup: false,
           profile_defaults: false,
           profile_enforced: false,
@@ -173,9 +246,9 @@ module Circuitdata
     end
 
     # Check against the content
-    returnarray[:contains][:file1][:product], returnarray[:contains][:file1][:stackup], returnarray[:contains][:file1][:profile_defaults], returnarray[:contains][:file1][:profile_restricted], returnarray[:contains][:file1][:profile_enforced], returnarray[:contains][:file1][:capabilities] = self.content(json_productfile)
+    returnarray[:contains][:file1][:products], returnarray[:contains][:file1][:stackup], returnarray[:contains][:file1][:profile_defaults], returnarray[:contains][:file1][:profile_restricted], returnarray[:contains][:file1][:profile_enforced], returnarray[:contains][:file1][:capabilities], productname = self.content(json_productfile)
     if not checksfile.nil?
-      returnarray[:contains][:file2][:product], returnarray[:contains][:file2][:stackup], returnarray[:contains][:file2][:profile_defaults], returnarray[:contains][:file2][:profile_restricted], returnarray[:contains][:file2][:profile_enforced], returnarray[:contains][:file2][:capabilities] = self.content(json_checksfile)
+      returnarray[:contains][:file2][:products], returnarray[:contains][:file2][:stackup], returnarray[:contains][:file2][:profile_defaults], returnarray[:contains][:file2][:profile_restricted], returnarray[:contains][:file2][:profile_enforced], returnarray[:contains][:file2][:capabilities], productname = self.content(json_checksfile)
     end
 
     if not checksfile.nil?
@@ -237,7 +310,7 @@ module Circuitdata
         }
       }
 
-      if returnarray[:contains][:file1][:product] or returnarray[:contains][:file1][:stackup]
+      if returnarray[:contains][:file1][:products] > 0 or returnarray[:contains][:file1][:stackup]
         # RUN THROUGH THE ENFORCED
         if returnarray[:contains][:file2][:profile_enforced]
           json_checksfile["open_trade_transfer_package"]["profiles"]["enforced"]["printed_circuits_fabrication_data"].each do |key, value|
