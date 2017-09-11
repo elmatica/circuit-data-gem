@@ -1,5 +1,17 @@
 module Circuitdata
 
+  require 'active_support/all'
+
+  def self.deep_traverse(&block)
+    stack = self.map{ |k,v| [ [k], v ] }
+    while not stack.empty?
+      key, value = stack.pop
+      yield(key, value)
+      if value.is_a? Hash
+        value.each{ |k,v| stack.push [ key.dup << k, v ] }
+      end
+    end
+  end
 
   def self.content(checksjson)
     number_of_products = 0
@@ -9,17 +21,18 @@ module Circuitdata
     profile_restricted = false
     capabilities = false
     productname = nil
-    if checksjson.has_key? "open_trade_transfer_package"
-      if checksjson["open_trade_transfer_package"].has_key? "products"
-        if checksjson["open_trade_transfer_package"]["products"].length > 0
-          number_of_products = checksjson["open_trade_transfer_package"]["products"].length
-          checksjson["open_trade_transfer_package"]["products"].each do |key, value|
+    checksjson.deep_symbolize_keys!
+    if checksjson.has_key? :open_trade_transfer_package
+      if checksjson[:open_trade_transfer_package].has_key? :products
+        if checksjson[:open_trade_transfer_package][:products].length > 0
+          number_of_products = checksjson[:open_trade_transfer_package][:products].length
+          checksjson[:open_trade_transfer_package][:products].each do |key, value|
             productname = key.to_s
-            if checksjson["open_trade_transfer_package"]["products"][key].has_key? "stackup"
-              if checksjson["open_trade_transfer_package"]["products"][key]["stackup"].has_key? "specification_level"
-                if checksjson["open_trade_transfer_package"]["products"][key]["stackup"]["specification_level"] == "specified"
-                  if checksjson["open_trade_transfer_package"]["products"][key]["stackup"].has_key? "specified"
-                    if checksjson["open_trade_transfer_package"]["products"][key]["stackup"]["specified"].length > 0
+            if checksjson[:open_trade_transfer_package][:products][key].has_key? :stackup
+              if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specification_level
+                if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specification_level] == :specified
+                  if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specified
+                    if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specified].length > 0
                       stackup = true
                     end
                   end
@@ -29,25 +42,25 @@ module Circuitdata
           end
         end
       end
-      if checksjson["open_trade_transfer_package"].has_key? "profiles"
-        if checksjson["open_trade_transfer_package"]["profiles"].has_key? "enforced"
-          if checksjson["open_trade_transfer_package"]["profiles"]["enforced"].length > 0
+      if checksjson[:open_trade_transfer_package].has_key? :profiles
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :enforced
+          if checksjson[:open_trade_transfer_package][:profiles][:enforced].length > 0
             profile_enforced = true
           end
         end
-        if checksjson["open_trade_transfer_package"]["profiles"].has_key? "restricted"
-          if checksjson["open_trade_transfer_package"]["profiles"]["restricted"].length > 0
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :restricted
+          if checksjson[:open_trade_transfer_package][:profiles][:restricted].length > 0
             profile_restricted = true
           end
         end
-        if checksjson["open_trade_transfer_package"]["profiles"].has_key? "defaults"
-          if checksjson["open_trade_transfer_package"]["profiles"]["defaults"].length > 0
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :defaults
+          if checksjson[:open_trade_transfer_package][:profiles][:defaults].length > 0
             profile_defaults = true
           end
         end
       end
-      if checksjson["open_trade_transfer_package"].has_key? "capabilities"
-        if checksjson["open_trade_transfer_package"]["capabilities"].length > 0
+      if checksjson[:open_trade_transfer_package].has_key? :capabilities
+        if checksjson[:open_trade_transfer_package][:capabilities].length > 0
           capabilities = true
         end
       end
@@ -107,7 +120,7 @@ module Circuitdata
         validated.each do |valerror|
           validationserrors[valerror[:fragment]] = [] unless validationserrors.has_key? valerror[:fragment]
           begin
-            scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures
+            keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures[1]
           rescue
             keep = valerror[:message]
           end
@@ -118,7 +131,7 @@ module Circuitdata
     return error, message, validationserrors
   end
 
-  def self.compare_files(filearray, validate_origins=false)
+  def self.compare_files(filehash, validate_origins=false)
     # Prepare the return
     ra = {
       error: false,
@@ -126,67 +139,102 @@ module Circuitdata
       summary: {},
       conflicts: {},
       product: nil,
-      layers: [],
+      columns: [],
+      mastercolumn: nil,
+      rows: []
     }
-    totalproducts = 0
-    productjson = {}
-    productfile = ""
-    if not filearray.is_a? Hash
+
+    #parsedfiles
+    unless filehash.is_a? Hash
       ra[:error] = true
       ra[:errormessage] = "You have to feed this function with a hash of names and hashes"
       return ra
     end
 
-    # Do preliminary tests
-    filearray.each do |key, value|
-      error, message, returncontent = self.read_json(value)
-      if error
-        ra[:error] = true
-        ra[:errormessage] = "Could not read the value in key #{key} (#{value})"
-        ra[:summary] = {}
-        ra[:conflicts] = {}
-        return ra
-      end
+    # extend the hash that is received
+    nh = {}
+    filehash.each do |fhk, fhv|
+      nh[fhk] = {
+        orig: fhv,
+        parsed: nil,
+        content: nil,
+        has: {}
+      }
+      # READ THE CONTENT
+      ra[:error], ra[:errormessage], nh[fhk][:content] = self.read_json(fhv)
+      ra[:summary] = {} if ra[:error]
+      ra[:conflicts] = {} if ra[:error]
+      return ra if ra[:error]
+      # VALIDATE THE FILES
       if validate_origins
-        ra[:error], ra[:errormessage], validationserrors = self.validate(returncontent)
-        if ra[:error]
+        ra[:error], ra[:errormessage], validationserrors = self.validate(nh[fhk][:content])
+        ra[:summary] = {} if ra[:error]
+        ra[:conflicts] = {} if ra[:error]
+        return ra if ra[:error]
+      end
+
+
+      # SET THE PRODUCT NAME
+      nh[fhk][:has][:products], nh[fhk][:has][:stackup], nh[fhk][:has][:profile_default], nh[fhk][:has][:profile_restricted], nh[fhk][:has][:profile_enforced], nh[fhk][:has][:capabilities], nh[fhk][:has][:product] = self.content(nh[fhk][:content])
+      unless nh[fhk][:has][:product].nil?
+        #self.iterate(nh[fhk][:content])
+
+        #root_node = Tree::TreeNode.new("ROOT", "Root Content")
+        #root_node.print_tree
+
+        ra[:product] = nh[fhk][:has][:product] if ra[:product].nil?
+        if nh[fhk][:has][:product] != ra[:product]
+          ra[:error] = true
+          ra[:errormessage] = "Your files contains several different product names"
           ra[:summary] = {}
           ra[:conflicts] = {}
           return ra
         end
+        ra[:mastercolumn] = fhk if ra[:mastercolumn].nil?
       end
 
-      products, stackup, profile_default, profile_restricted, profile_enforced, capabilities, product = self.content(returncontent)
-      if ra[:product].nil?
-        ra[:product] = product unless product.nil?
-        totalproducts += 1
-      else
-        totalproducts += products if product != ra[:product]
-      end
-      if totalproducts > 1
-        ra[:error] = true
-        ra[:errormessage] = "There are more than one product amongst you files"
-        ra[:summary] = {}
-        ra[:conflicts] = {}
-        return ra
-      end
-      if products == 1
-        productjson = returncontent
-        productfile = key.to_s
-      end
-      ra[:layers] << key.to_s
+      # THIS IS WHERE I NEED THINGS TO HAPPEN
+
     end
 
-    # Populate the summary
-    ra[:summary] = productjson["open_trade_transfer_package"]["products"][ra[:product]]["printed_circuits_fabrication_data"]
+    # RETURN IF THERE IS NO PRODUCT
+    if ra[:mastercolumn].nil?
+      ra[:error] = true
+      ra[:errormessage] = "none of the files contains a product"
+      ra[:summary] = {}
+      ra[:conflicts] = {}
+      return ra
+    end
+
+    {
+      current_level: 0,
+      current_key: nil,
+
+    }
+    # Populate the master column
+    #self.iterate(filehash[ra[:mastercolumn].to_sym])
+    #ra[:summary] = productjson[:open_trade_transfer_package][:products][ra[:product]][:printed_circuits_fabrication_data]
+
+    #test = {}
+    #self.save_pair(productjson[:open_trade_transfer_package][:products][ra[:product]][:printed_circuits_fabrication_data], test)
+    #puts test
+    # Populate the product rows
+    #productjson[:open_trade_transfer_package]["products"][ra[:product]]["printed_circuits_fabrication_data"].each do |key, value|
+    #  if value.is_a? Hash
+    #    value.each do |subkey, subvalue|
+    #      ra[:rows][]
+    #end
 
     # Do comparisons
-    filearray.each do |key, value|
-      unless key.to_s == productfile
-        #puts self.compatibility_checker( productjson, value, false )
-      end
-    end
-    puts JSON.pretty_generate(ra)
+    #number = 1
+    #filehash.each do |key, value|
+  #    unless key.to_s == productfile
+  #      #puts self.compatibility_checker( productjson, value, false )
+  #      number += 1
+  #    end
+  #  end
+    #puts JSON.pretty_generate(ra)
+    #puts JSON.pretty_generate(nh)
     return ra
   end
 
@@ -313,9 +361,9 @@ module Circuitdata
       if returnarray[:contains][:file1][:products] > 0 or returnarray[:contains][:file1][:stackup]
         # RUN THROUGH THE ENFORCED
         if returnarray[:contains][:file2][:profile_enforced]
-          json_checksfile["open_trade_transfer_package"]["profiles"]["enforced"]["printed_circuits_fabrication_data"].each do |key, value|
-            if json_checksfile["open_trade_transfer_package"]["profiles"]["enforced"]["printed_circuits_fabrication_data"][key].is_a? Hash
-              json_checksfile["open_trade_transfer_package"]["profiles"]["enforced"]["printed_circuits_fabrication_data"][key].each do |subkey, subvalue|
+          json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data].each do |key, value|
+            if json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data][key].is_a? Hash
+              json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
                 enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => "object", :properties => {} } unless enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
                 enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => "object", :properties => {} } unless enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
                 if subvalue.is_a? String
@@ -339,6 +387,7 @@ module Circuitdata
           end
           begin
             enforcedvalidate = JSON::Validator.fully_validate(enforcedschema.to_json, json_productfile, :errors_as_objects => true)
+            $errors = false
           rescue JSON::Schema::ReadFailed
             $errors = true
             returnarray[:error] = true
@@ -355,7 +404,7 @@ module Circuitdata
               enforcedvalidate.each do |valerror|
                 returnarray[:enforcederrors][valerror[:fragment]] = [] unless returnarray[:enforcederrors].has_key? valerror[:fragment]
                 begin
-                  scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+                  keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
                 rescue
                   keep = valerror[:message]
                 end
@@ -366,9 +415,9 @@ module Circuitdata
         end
         # RUN THROUGH THE RESTRICTED
         if returnarray[:contains][:file2][:profile_restricted]
-          json_checksfile["open_trade_transfer_package"]["profiles"]["restricted"]["printed_circuits_fabrication_data"].each do |key, value|
-            if json_checksfile["open_trade_transfer_package"]["profiles"]["restricted"]["printed_circuits_fabrication_data"][key].is_a? Hash
-              json_checksfile["open_trade_transfer_package"]["profiles"]["restricted"]["printed_circuits_fabrication_data"][key].each do |subkey, subvalue|
+          json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data].each do |key, value|
+            if json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data][key].is_a? Hash
+              json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
                 restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => "object", :properties => {} } unless restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
                 restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => "object", :properties => {} } unless restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
                 if subvalue.is_a? String
@@ -411,7 +460,7 @@ module Circuitdata
               restrictedvalidate.each do |valerror|
                 returnarray[:restrictederrors][valerror[:fragment]] = [] unless returnarray[:restrictederrors].has_key? valerror[:fragment]
                 begin
-                  scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+                  keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
                 rescue
                   keep = valerror[:message]
                 end
@@ -422,9 +471,9 @@ module Circuitdata
         end
         # RUN THROUGH THE CAPABILITIES
         if returnarray[:contains][:file2][:capabilities]
-          json_checksfile["open_trade_transfer_package"]["capabilities"]["printed_circuits_fabrication_data"].each do |key, value|
-            if json_checksfile["open_trade_transfer_package"]["capabilities"]["printed_circuits_fabrication_data"][key].is_a? Hash
-              json_checksfile["open_trade_transfer_package"]["capabilities"]["printed_circuits_fabrication_data"][key].each do |subkey, subvalue|
+          json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data].each do |key, value|
+            if json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data][key].is_a? Hash
+              json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
                 capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => "object", :properties => {} } unless capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
                 capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => "object", :properties => {} } unless capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:"^(?!generic$).*"][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
                 if subvalue.is_a? String
@@ -464,7 +513,7 @@ module Circuitdata
               capabilitiesvalidate.each do |valerror|
                 returnarray[:capabilitieserrors][valerror[:fragment]] = [] unless returnarray[:capabilitieserrors].has_key? valerror[:fragment]
                 begin
-                  scrap, keep, scrap2 = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures
+                  keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
                 rescue
                   keep = valerror[:message]
                 end
