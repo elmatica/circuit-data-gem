@@ -1,6 +1,8 @@
 module Circuitdata
 
   require 'active_support/all'
+  require 'circuitdata/file_comparer'
+  require 'circuitdata/compatibility_checker'
 
   def self.deep_traverse(&block)
     stack = self.map{ |k,v| [ [k], v ] }
@@ -132,6 +134,16 @@ module Circuitdata
   end
 
   def self.compare_files(filehash, validate_origins=false)
+    compare_files = FileComparer.new(filehash, validate_origins)
+    compare_files.compare
+  end
+
+  def self.compatibility_checker(productfile, checksfile=nil, validate_origins=true)
+    checker = CompatibilityChecker.new(productfile, checksfile, validate_origins)
+    checker.start_check
+  end
+
+  def self.compare_files2(filehash, validate_origins=false)
     # Prepare the return
     ra = {
       error: false,
@@ -238,7 +250,7 @@ module Circuitdata
     return ra
   end
 
-  def self.compatibility_checker( productfile, checksfile=nil, validate_origins=true )
+  def self.compatibility_checker2( productfile, checksfile=nil, validate_origins=true )
 
     require 'open-uri'
     require 'json'
