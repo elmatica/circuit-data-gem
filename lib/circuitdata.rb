@@ -59,7 +59,6 @@ module Circuitdata
   end
 
   def self.read_json(content)
-
     require 'open-uri'
     require 'json'
 
@@ -122,8 +121,8 @@ module Circuitdata
   end
 
   def self.compare_files(filehash, validate_origins=false)
-    compare_files = FileComparer.new(filehash, validate_origins)
-    compare_files.compare
+    comparer = FileComparer.new(filehash, validate_origins)
+    comparer.compare
   end
 
   def self.compatibility_checker(productfile, checksfile=nil, validate_origins=true)

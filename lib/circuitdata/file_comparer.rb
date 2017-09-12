@@ -1,6 +1,12 @@
 class Circuitdata::FileComparer
   def initialize(files_hash, validate_origins=false)
     @files_hash = files_hash
+    @columns = ['summary']
+    @rows = []
+    # Final hash
+    @fh = { error: false, errormessage: nil, productname: nil, columns: @columns, mastercolumn: nil, rows: @rows }
+
+    # final return
     @ra = {
       error: false,
       errormessage: "",
@@ -14,22 +20,60 @@ class Circuitdata::FileComparer
     @validate_origins = validate_origins
   end
 
-  def compare
-    # Prepare the return
-    filehash = @files_hash
-    validate_origins = @validate_origins
-    ra = @ra
+  # def deep_traverse(&block)
+  #   stack = self.map{ |k,v| [ [k], v ] }
+  #   while not stack.empty?
+  #     key, value = stack.pop
+  #     yield(key, value)
+  #     if value.is_a? Hash
+  #       value.each{ |k,v| stack.push [ key.dup << k, v ] }
+  #     end
+  #   end
+  # end
 
-    #parsedfiles
-    unless filehash.is_a? Hash
-      ra[:error] = true
-      ra[:errormessage] = "You have to feed this function with a hash of names and hashes"
-      return ra
+  def compare
+    # Initial check
+    unless @files_hash.is_a? Hash
+      @fh[:error] = true
+      @fh[:errormessage] = "You have to feed this function with a hash of names and hashes"
+      return @fh
     end
 
+    # Process the hashes
+    master_product = nil
+    # extend the hash that is received - New Hash
+    nh = {}
+    @files_hash.each_with_index do |(k, v), i|
+      @columns << k.to_s
+      # read content
+      error, error_msg, file_content = Circuitdata.read_json(v)
+      @fh[:mastercolumn] = k.to_s if i == 0 # the first item
+
+      # Get details about each v
+      nh[k] = {data: file_content, has: {} } # init
+      nh[k][:has][:products], nh[k][:has][:stackup], nh[k][:has][:profile_default], nh[k][:has][:profile_restricted], nh[k][:has][:profile_enforced], nh[k][:has][:capabilities], nh[k][:has][:product] = Circuitdata.content(file_content)
+      
+
+      puts "Columns: #{@columns}"
+      puts "Error: #{error}"
+      puts "Error Msg: #{error_msg}"
+      puts "File_content: #{file_content}"
+    end
+
+    puts "\n\n\nEXTENDED HASH: #{nh}\n\n\n"
+    puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
+
+    # Function to interact with nh here - adding it later
+
+
+    #====================== Start of older code ======================
+
+    # Prepare the return
+    ra = @ra
+    
     # extend the hash that is received
     nh = {}
-    filehash.each do |fhk, fhv|
+    @files_hash.each do |fhk, fhv|
       nh[fhk] = {
         orig: fhv,
         parsed: nil,
@@ -42,7 +86,7 @@ class Circuitdata::FileComparer
       ra[:conflicts] = {} if ra[:error]
       return ra if ra[:error]
       # VALIDATE THE FILES
-      if validate_origins
+      if @validate_origins
         ra[:error], ra[:errormessage], validationserrors = Circuitdata.validate(nh[fhk][:content])
         ra[:summary] = {} if ra[:error]
         ra[:conflicts] = {} if ra[:error]
@@ -88,7 +132,7 @@ class Circuitdata::FileComparer
 
     }
     # Populate the master column
-    #Circuitdata.iterate(filehash[ra[:mastercolumn].to_sym])
+    #Circuitdata.iterate(@files_hash[ra[:mastercolumn].to_sym])
     #ra[:summary] = productjson[:open_trade_transfer_package][:products][ra[:product]][:printed_circuits_fabrication_data]
 
     #test = {}
@@ -103,7 +147,7 @@ class Circuitdata::FileComparer
 
     # Do comparisons
     #number = 1
-    #filehash.each do |key, value|
+    #@files_hash.each do |key, value|
   #    unless key.to_s == productfile
   #      #puts Circuitdata.compatibility_checker( productjson, value, false )
   #      number += 1
@@ -111,6 +155,8 @@ class Circuitdata::FileComparer
   #  end
     #puts JSON.pretty_generate(ra)
     #puts JSON.pretty_generate(nh)
-    return ra
+    return @ra
+    #====================== Start of older code ======================
+    # return @fh
   end
 end
