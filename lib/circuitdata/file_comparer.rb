@@ -1,35 +1,12 @@
 class Circuitdata::FileComparer
   def initialize(files_hash, validate_origins=false)
     @files_hash = files_hash
+    @validate_origins = validate_origins
     @columns = ['summary']
     @rows = []
     # Final hash
-    @fh = { error: false, errormessage: nil, productname: nil, columns: @columns, mastercolumn: nil, rows: @rows }
-
-    # final return
-    @ra = {
-      error: false,
-      errormessage: "",
-      summary: {},
-      conflicts: {},
-      product: nil,
-      columns: [],
-      mastercolumn: nil,
-      rows: []
-    }
-    @validate_origins = validate_origins
+    @fh = {error: false, message: nil, productname: nil, columns: @columns, master_column: nil, rows: @rows}
   end
-
-  # def deep_traverse(&block)
-  #   stack = self.map{ |k,v| [ [k], v ] }
-  #   while not stack.empty?
-  #     key, value = stack.pop
-  #     yield(key, value)
-  #     if value.is_a? Hash
-  #       value.each{ |k,v| stack.push [ key.dup << k, v ] }
-  #     end
-  #   end
-  # end
 
   def compare
     # Initial check
@@ -43,120 +20,82 @@ class Circuitdata::FileComparer
     master_product = nil
     # extend the hash that is received - New Hash
     nh = {}
+    product_names = []
     @files_hash.each_with_index do |(k, v), i|
-      @columns << k.to_s
+      puts "\n\n====================="
+      puts "Working on file: #{k}"
+      @fh[:master_column] = k.to_s  # if its the first item
+
       # read content
       error, error_msg, file_content = Circuitdata.read_json(v)
-      @fh[:mastercolumn] = k.to_s if i == 0 # the first item
-
-      # Get details about each v
-      nh[k] = {data: file_content, has: {} } # init
-      nh[k][:has][:products], nh[k][:has][:stackup], nh[k][:has][:profile_default], nh[k][:has][:profile_restricted], nh[k][:has][:profile_enforced], nh[k][:has][:capabilities], nh[k][:has][:product] = Circuitdata.content(file_content)
-      
-
-      puts "Columns: #{@columns}"
       puts "Error: #{error}"
       puts "Error Msg: #{error_msg}"
-      puts "File_content: #{file_content}"
+      # Get details about the file_content
+      products, types = check_data(file_content)
+      puts "products: #{products}"
+      puts "types: #{types}"
+      product_names.push(*products) # add products to tracking array
+      # populate the new_hash to be used later
+      nh[k] = {type: types, products: products, data: file_content}
+      puts "New Hash: #{nk}"
+      puts "=====================\n\n"
     end
 
     puts "\n\n\nEXTENDED HASH: #{nh}\n\n\n"
     puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
 
-    # Function to interact with nh here - adding it later
+    if valid_product?(products_array) # check if the files content meet the requirements
+      puts "Files are valid"
 
+      # generate summary insert into rows for each array
+      master_json = @nh.dig(master_column.to_sym, :data)
+      @nh.each do |k, v|
+        types = v[:types]
+        products = v[:products]
+        data = v[:data]
 
-    #====================== Start of older code ======================
+        check_results = Circuitdata.compatibility_checker(master_json, data, false)
+        pp check_results
+        # from the results, we will populate the rows
 
-    # Prepare the return
-    ra = @ra
-    
-    # extend the hash that is received
-    nh = {}
-    @files_hash.each do |fhk, fhv|
-      nh[fhk] = {
-        orig: fhv,
-        parsed: nil,
-        content: nil,
-        has: {}
-      }
-      # READ THE CONTENT
-      ra[:error], ra[:errormessage], nh[fhk][:content] = Circuitdata.read_json(fhv)
-      ra[:summary] = {} if ra[:error]
-      ra[:conflicts] = {} if ra[:error]
-      return ra if ra[:error]
-      # VALIDATE THE FILES
-      if @validate_origins
-        ra[:error], ra[:errormessage], validationserrors = Circuitdata.validate(nh[fhk][:content])
-        ra[:summary] = {} if ra[:error]
-        ra[:conflicts] = {} if ra[:error]
-        return ra if ra[:error]
       end
-
-
-      # SET THE PRODUCT NAME
-      nh[fhk][:has][:products], nh[fhk][:has][:stackup], nh[fhk][:has][:profile_default], nh[fhk][:has][:profile_restricted], nh[fhk][:has][:profile_enforced], nh[fhk][:has][:capabilities], nh[fhk][:has][:product] = Circuitdata.content(nh[fhk][:content])
-      unless nh[fhk][:has][:product].nil?
-        #Circuitdata.iterate(nh[fhk][:content])
-
-        #root_node = Tree::TreeNode.new("ROOT", "Root Content")
-        #root_node.print_tree
-
-        ra[:product] = nh[fhk][:has][:product] if ra[:product].nil?
-        if nh[fhk][:has][:product] != ra[:product]
-          ra[:error] = true
-          ra[:errormessage] = "Your files contains several different product names"
-          ra[:summary] = {}
-          ra[:conflicts] = {}
-          return ra
-        end
-        ra[:mastercolumn] = fhk if ra[:mastercolumn].nil?
-      end
-
-      # THIS IS WHERE I NEED THINGS TO HAPPEN
-
     end
 
-    # RETURN IF THERE IS NO PRODUCT
-    if ra[:mastercolumn].nil?
-      ra[:error] = true
-      ra[:errormessage] = "none of the files contains a product"
-      ra[:summary] = {}
-      ra[:conflicts] = {}
-      return ra
+    return @fh
+  end
+
+  def check_data(data)
+    types = []
+    wrapper = data.dig(:open_trade_transfer_package)
+    types << 'profile_enforced' unless wrapper.dig(:profiles, :enforced).nil?
+    types << 'profile_restricted' unless wrapper.dig(:profiles, :restricted).nil?
+    types << 'profile_defaults' unless wrapper.dig(:profiles, :defaults).nil?
+    types << 'capabilities' unless wrapper.dig(:capabilities).nil?
+
+    products = wrapper.dig(:products) if wrapper
+    product_names = products.keys # this will return all the product names
+    # loop through the products
+    products.each do |k, v|
+      if v.dig(:stackup, :specification_level) == 'specified' && !v.dig(:stackup, :specification_level, :specified).nil?
+        types << 'stackup'
+      end
+    end unless products.nil?
+
+    product_names.uniq, types
+  end
+
+  def valid_product?(products_array)
+    if products_array.uniq.count > 1
+      @fh[:error] = true
+      @fh[:message] = "Your files contains several different product names"
+      return false # validation fails because of different product names
     end
-
-    {
-      current_level: 0,
-      current_key: nil,
-
-    }
-    # Populate the master column
-    #Circuitdata.iterate(@files_hash[ra[:mastercolumn].to_sym])
-    #ra[:summary] = productjson[:open_trade_transfer_package][:products][ra[:product]][:printed_circuits_fabrication_data]
-
-    #test = {}
-    #Circuitdata.save_pair(productjson[:open_trade_transfer_package][:products][ra[:product]][:printed_circuits_fabrication_data], test)
-    #puts test
-    # Populate the product rows
-    #productjson[:open_trade_transfer_package]["products"][ra[:product]]["printed_circuits_fabrication_data"].each do |key, value|
-    #  if value.is_a? Hash
-    #    value.each do |subkey, subvalue|
-    #      ra[:rows][]
-    #end
-
-    # Do comparisons
-    #number = 1
-    #@files_hash.each do |key, value|
-  #    unless key.to_s == productfile
-  #      #puts Circuitdata.compatibility_checker( productjson, value, false )
-  #      number += 1
-  #    end
-  #  end
-    #puts JSON.pretty_generate(ra)
-    #puts JSON.pretty_generate(nh)
-    return @ra
-    #====================== Start of older code ======================
-    # return @fh
+    if products_array.empty?
+      @fh[:error] = true
+      @fh[:message] = "None of the files contains a product"
+      return false # c=validation fails because there are no products
+    end
+    true
   end
 end
+
