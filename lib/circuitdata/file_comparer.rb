@@ -5,7 +5,7 @@ class Circuitdata::FileComparer
     @columns = ['summary']
     @rows = {}
     # Final hash
-    @fh = {error: false, message: nil, productname: nil, columns: @columns, master_column: nil, rows: @rows}
+    @fh = {error: false, message: nil, productname: nil, columns: nil, master_column: nil, rows: nil}
   end
 
   def compare
@@ -36,64 +36,45 @@ class Circuitdata::FileComparer
       puts "types: #{types}"
       products_array.push(*products) # add products to tracking array
       # populate the new_hash to be used later
-      nh[k] = {type: types, products: products, data: file_content}
+      nh[k] = {types: types, products: products, data: file_content}
       puts "New Hash: #{nh}"
       puts "=====================\n\n"
     end
-
+    
     puts "\n\n\nEXTENDED HASH: #{nh}\n\n\n"
-    puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
 
     # check if the files content meet the requirements
     if valid_product?(products_array)
       puts 'Files are valid'
 
       # generate summary insert into rows for each array
-      master_json = nh.dig(@fh[:master_column].to_sym, :data)
+      master_json = nh&.dig(@fh[:master_column].to_sym, :data)
       nh.each do |k, v|
-        # types = v[:types]
-        # products = v[:products]
+        types = v[:types]
+        products = v[:products]
+        puts "\n\n\n*********************"
+        puts "Key: #{k}"
+        puts "Types: #{types}"
+        puts "products: #{products}"
+
+        @columns << k
         data = v[:data]
 
         check_results = Circuitdata.compatibility_checker(master_json, data, false)
-        pp check_results
+        puts "\n\n\nCHECK RESULTS: #{check_results}\n\n\n"
         # from the results, we will populate the rows
 
-        # assuming the check_results will be something like:
-        # check_results = {
-        #   :error=>true,
-        #   :errormessage=>"The product to check did not meet the requirements",
-        #   :validationserrors=>{},
-        #   :restrictederrors=>{},
-        #   :enforcederrors=>{},
-        #   :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]},
-        #   :contains=>{
-        #     :file1=>{
-        #       :products=>1,
-        #       :stackup=>false,
-        #       :profile_defaults=>false,
-        #       :profile_enforced=>false,
-        #       :profile_restricted=>false,
-        #       :capabilities=>false
-        #     },
-        #     :file2=>{
-        #       :products=>0,
-        #       :stackup=>false,
-        #       :profile_defaults=>false,
-        #       :profile_enforced=>false,
-        #       :profile_restricted=>false,
-        #       :capabilities=>true
-        #     }
-        #   }
-        # }
         folders = check_results[:capabilitieserrors].keys.first
         folders_array = folders.split('/')
         if folders_array[2] == 'products'
           # this is from the product
           if (folders_array[4] = 'printed_circuits_fabrication_data')
             folder, key = folders_array[5].to_sym, folders_array[6].to_sym
-            row_folder = @rows.dig(folder) || @rows[folder] = {}
-            row_key = row_folder.dig(key) || row_folder[key] = {}
+
+            puts "\n\nFolder: #{products}"
+            puts "Key: #{key}\n\n"
+            row_folder = @rows&.dig(folder) || @rows[folder] = {}
+            row_key = row_folder&.dig(key) || row_folder[key] = {}
             # Other checks here.
             # This should be done via a function
             row_key[:summary] = {
@@ -104,30 +85,36 @@ class Circuitdata::FileComparer
             }
           end
         end
+        puts "*******************\n\n\n"
       end
     end
+
+    @fh[:columns] = @columns
+    @fh[:rows] = @rows
+
+    puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
 
     return @fh
   end
 
   def check_data(data)
     types = []
-    wrapper = data.dig(:open_trade_transfer_package)
-    types << 'profile_enforced' unless wrapper.dig(:profiles, :enforced).nil?
-    types << 'profile_restricted' unless wrapper.dig(:profiles, :restricted).nil?
-    types << 'profile_defaults' unless wrapper.dig(:profiles, :defaults).nil?
-    types << 'capabilities' unless wrapper.dig(:capabilities).nil?
+    wrapper = data&.dig(:open_trade_transfer_package)
+    types << 'profile_enforced' unless wrapper&.dig(:profiles, :enforced).nil?
+    types << 'profile_restricted' unless wrapper&.dig(:profiles, :restricted).nil?
+    types << 'profile_defaults' unless wrapper&.dig(:profiles, :defaults).nil?
+    types << 'capabilities' unless wrapper&.dig(:capabilities).nil?
 
-    products = wrapper.dig(:products) if wrapper
-    product_names = products.keys # this will return all the product names
+    products = wrapper&.dig(:products)
+    product_names = products.keys if products # this will return all the product names
     # loop through the products
     products.each do |k, v|
-      if v.dig(:stackup, :specification_level) == 'specified' && !v.dig(:stackup, :specification_level, :specified).nil?
+      if v&.dig(:stackup, :specification_level) == 'specified' && !v&.dig(:stackup, :specification_level, :specified).nil?
         types << 'stackup'
       end
     end unless products.nil?
 
-    return product_names.uniq, types
+    return (product_names.uniq rescue []), types
   end
 
   def valid_product?(products_array)
