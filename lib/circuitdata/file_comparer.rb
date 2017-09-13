@@ -22,34 +22,35 @@ class Circuitdata::FileComparer
     nh = {}
     products_array = []
     @files_hash.each_with_index do |(k, v), i|
-      puts "\n\n====================="
-      puts "Working on file: #{k}"
+      # puts "\n\n====================="
+      # puts "Working on file: #{k}"
       @fh[:master_column] = k.to_s  # if its the first item
 
       # read content
       error, error_msg, file_content = Circuitdata.read_json(v)
-      puts "Error: #{error}"
-      puts "Error Msg: #{error_msg}"
+      # puts "Error: #{error}"
+      # puts "Error Msg: #{error_msg}"
       # Get details about the file_content
       products, types = check_data(file_content)
-      puts "products: #{products}"
-      puts "types: #{types}"
+      # puts "products: #{products}"
+      # puts "types: #{types}"
       products_array.push(*products) # add products to tracking array
       # populate the new_hash to be used later
       nh[k] = {types: types, products: products, data: file_content}
-      puts "New Hash: #{nh}"
-      puts "=====================\n\n"
+      # puts "New Hash: #{nh}"
+      # puts "=====================\n\n"
     end
-    
+
     puts "\n\n\nEXTENDED HASH: #{nh}\n\n\n"
 
     # check if the files content meet the requirements
     if valid_product?(products_array)
-      puts 'Files are valid'
+      puts "\n\nFiles are valid"
 
       # generate summary insert into rows for each array
       master_json = nh&.dig(@fh[:master_column].to_sym, :data)
       nh.each do |k, v|
+        @columns << k
         types = v[:types]
         products = v[:products]
         puts "\n\n\n*********************"
@@ -57,15 +58,17 @@ class Circuitdata::FileComparer
         puts "Types: #{types}"
         puts "products: #{products}"
 
-        @columns << k
+        puts "v: #{v}"
         data = v[:data]
+        puts "data: #{data}"
 
         check_results = Circuitdata.compatibility_checker(master_json, data, false)
         puts "\n\n\nCHECK RESULTS: #{check_results}\n\n\n"
         # from the results, we will populate the rows
 
         folders = check_results[:capabilitieserrors].keys.first
-        folders_array = folders.split('/')
+        folders_array = []
+        folders_array = folders.split('/') if folders
         if folders_array[2] == 'products'
           # this is from the product
           if (folders_array[4] = 'printed_circuits_fabrication_data')
@@ -84,7 +87,7 @@ class Circuitdata::FileComparer
                 conflict_message: 'Value V is not allowed'
             }
           end
-        end
+        end if folders_array.any?
         puts "*******************\n\n\n"
       end
     end

@@ -4,6 +4,61 @@ module Circuitdata
   require 'circuitdata/file_comparer'
   require 'circuitdata/compatibility_checker'
 
+  def self.content(checksjson)
+    number_of_products = 0
+    stackup =  false
+    profile_defaults = false
+    profile_enforced = false
+    profile_restricted = false
+    capabilities = false
+    productname = nil
+    checksjson.deep_symbolize_keys!
+    if checksjson.has_key? :open_trade_transfer_package
+      if checksjson[:open_trade_transfer_package].has_key? :products
+        if checksjson[:open_trade_transfer_package][:products].length > 0
+          number_of_products = checksjson[:open_trade_transfer_package][:products].length
+          checksjson[:open_trade_transfer_package][:products].each do |key, value|
+            productname = key.to_s
+            if checksjson[:open_trade_transfer_package][:products][key].has_key? :stackup
+              if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specification_level
+                if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specification_level] == :specified
+                  if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specified
+                    if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specified].length > 0
+                      stackup = true
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+      if checksjson[:open_trade_transfer_package].has_key? :profiles
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :enforced
+          if checksjson[:open_trade_transfer_package][:profiles][:enforced].length > 0
+            profile_enforced = true
+          end
+        end
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :restricted
+          if checksjson[:open_trade_transfer_package][:profiles][:restricted].length > 0
+            profile_restricted = true
+          end
+        end
+        if checksjson[:open_trade_transfer_package][:profiles].has_key? :defaults
+          if checksjson[:open_trade_transfer_package][:profiles][:defaults].length > 0
+            profile_defaults = true
+          end
+        end
+      end
+      if checksjson[:open_trade_transfer_package].has_key? :capabilities
+        if checksjson[:open_trade_transfer_package][:capabilities].length > 0
+          capabilities = true
+        end
+      end
+    end
+    return number_of_products, stackup, profile_defaults, profile_restricted, profile_enforced, capabilities, productname
+  end
+  
   def self.read_json(content)
     require 'open-uri'
     require 'json'
