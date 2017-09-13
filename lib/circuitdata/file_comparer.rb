@@ -3,7 +3,7 @@ class Circuitdata::FileComparer
     @files_hash = files_hash
     @validate_origins = validate_origins
     @columns = ['summary']
-    @rows = []
+    @rows = {}
     # Final hash
     @fh = {error: false, message: nil, productname: nil, columns: @columns, master_column: nil, rows: @rows}
   end
@@ -54,10 +54,55 @@ class Circuitdata::FileComparer
         products = v[:products]
         data = v[:data]
 
-        check_results = Circuitdata.compatibility_checker(master_json, data, false)
-        pp check_results
+        # check_results = Circuitdata.compatibility_checker(master_json, data, false)
+        # pp check_results
         # from the results, we will populate the rows
 
+        # assuming the check_results will be something like:
+        check_results = {
+          :error=>true, 
+          :errormessage=>"The product to check did not meet the requirements", 
+          :validationserrors=>{}, 
+          :restrictederrors=>{}, 
+          :enforcederrors=>{}, 
+          :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}, 
+          :contains=>{
+            :file1=>{
+              :products=>1, 
+              :stackup=>false, 
+              :profile_defaults=>false, 
+              :profile_enforced=>false, 
+              :profile_restricted=>false, 
+              :capabilities=>false
+            }, 
+            :file2=>{
+              :products=>0, 
+              :stackup=>false, 
+              :profile_defaults=>false, 
+              :profile_enforced=>false, 
+              :profile_restricted=>false, 
+              :capabilities=>true
+            }
+          }
+        }
+        folders = check_results[:capabilitieserrors].keys.first
+        folders_array = folders.split('/')
+        if folders_array[2] == 'products'
+          # this is from the product
+          if folders_array[4] = 'printed_circuits_fabrication_data'
+            folder, key = folders_array[5].to_sym, folders_array[6].to_sym
+            row_folder = @rows.dig(folder) || @rows[folder] = {}
+            row_key = row_folder.dig(key) || row_folder[key] = {}
+            # Other checks here.
+            # This should be done via a function
+            row_key[:summary] = {
+              value: "V",
+              conflict: true,
+              conflicts_with: ["product2", "restriced"],
+              conflict_message: "Value V is not allowed"
+            }
+          end
+        end
       end
     end
 
