@@ -54,37 +54,37 @@ class Circuitdata::FileComparer
         products = v[:products]
         data = v[:data]
 
-        # check_results = Circuitdata.compatibility_checker(master_json, data, false)
-        # pp check_results
+        check_results = Circuitdata.compatibility_checker(master_json, data, false)
+        pp check_results
         # from the results, we will populate the rows
 
         # assuming the check_results will be something like:
-        check_results = {
-          :error=>true, 
-          :errormessage=>"The product to check did not meet the requirements", 
-          :validationserrors=>{}, 
-          :restrictederrors=>{}, 
-          :enforcederrors=>{}, 
-          :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}, 
-          :contains=>{
-            :file1=>{
-              :products=>1, 
-              :stackup=>false, 
-              :profile_defaults=>false, 
-              :profile_enforced=>false, 
-              :profile_restricted=>false, 
-              :capabilities=>false
-            }, 
-            :file2=>{
-              :products=>0, 
-              :stackup=>false, 
-              :profile_defaults=>false, 
-              :profile_enforced=>false, 
-              :profile_restricted=>false, 
-              :capabilities=>true
-            }
-          }
-        }
+        # check_results = {
+        #   :error=>true, 
+        #   :errormessage=>"The product to check did not meet the requirements", 
+        #   :validationserrors=>{}, 
+        #   :restrictederrors=>{}, 
+        #   :enforcederrors=>{}, 
+        #   :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}, 
+        #   :contains=>{
+        #     :file1=>{
+        #       :products=>1, 
+        #       :stackup=>false, 
+        #       :profile_defaults=>false, 
+        #       :profile_enforced=>false, 
+        #       :profile_restricted=>false, 
+        #       :capabilities=>false
+        #     }, 
+        #     :file2=>{
+        #       :products=>0, 
+        #       :stackup=>false, 
+        #       :profile_defaults=>false, 
+        #       :profile_enforced=>false, 
+        #       :profile_restricted=>false, 
+        #       :capabilities=>true
+        #     }
+        #   }
+        # }
         folders = check_results[:capabilitieserrors].keys.first
         folders_array = folders.split('/')
         if folders_array[2] == 'products'
