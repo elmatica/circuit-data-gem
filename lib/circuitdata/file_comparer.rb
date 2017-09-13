@@ -12,7 +12,7 @@ class Circuitdata::FileComparer
     # Initial check
     unless @files_hash.is_a? Hash
       @fh[:error] = true
-      @fh[:errormessage] = "You have to feed this function with a hash of names and hashes"
+      @fh[:errormessage] = 'You have to feed this function with a hash of names and hashes'
       return @fh
     end
 
@@ -20,7 +20,7 @@ class Circuitdata::FileComparer
     master_product = nil
     # extend the hash that is received - New Hash
     nh = {}
-    product_names = []
+    products_array = []
     @files_hash.each_with_index do |(k, v), i|
       puts "\n\n====================="
       puts "Working on file: #{k}"
@@ -34,24 +34,25 @@ class Circuitdata::FileComparer
       products, types = check_data(file_content)
       puts "products: #{products}"
       puts "types: #{types}"
-      product_names.push(*products) # add products to tracking array
+      products_array.push(*products) # add products to tracking array
       # populate the new_hash to be used later
       nh[k] = {type: types, products: products, data: file_content}
-      puts "New Hash: #{nk}"
+      puts "New Hash: #{nh}"
       puts "=====================\n\n"
     end
 
     puts "\n\n\nEXTENDED HASH: #{nh}\n\n\n"
     puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
 
-    if valid_product?(products_array) # check if the files content meet the requirements
-      puts "Files are valid"
+    # check if the files content meet the requirements
+    if valid_product?(products_array)
+      puts 'Files are valid'
 
       # generate summary insert into rows for each array
-      master_json = @nh.dig(master_column.to_sym, :data)
-      @nh.each do |k, v|
-        types = v[:types]
-        products = v[:products]
+      master_json = nh.dig(@fh[:master_column].to_sym, :data)
+      nh.each do |k, v|
+        # types = v[:types]
+        # products = v[:products]
         data = v[:data]
 
         check_results = Circuitdata.compatibility_checker(master_json, data, false)
@@ -60,27 +61,27 @@ class Circuitdata::FileComparer
 
         # assuming the check_results will be something like:
         # check_results = {
-        #   :error=>true, 
-        #   :errormessage=>"The product to check did not meet the requirements", 
-        #   :validationserrors=>{}, 
-        #   :restrictederrors=>{}, 
-        #   :enforcederrors=>{}, 
-        #   :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}, 
+        #   :error=>true,
+        #   :errormessage=>"The product to check did not meet the requirements",
+        #   :validationserrors=>{},
+        #   :restrictederrors=>{},
+        #   :enforcederrors=>{},
+        #   :capabilitieserrors=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]},
         #   :contains=>{
         #     :file1=>{
-        #       :products=>1, 
-        #       :stackup=>false, 
-        #       :profile_defaults=>false, 
-        #       :profile_enforced=>false, 
-        #       :profile_restricted=>false, 
+        #       :products=>1,
+        #       :stackup=>false,
+        #       :profile_defaults=>false,
+        #       :profile_enforced=>false,
+        #       :profile_restricted=>false,
         #       :capabilities=>false
-        #     }, 
+        #     },
         #     :file2=>{
-        #       :products=>0, 
-        #       :stackup=>false, 
-        #       :profile_defaults=>false, 
-        #       :profile_enforced=>false, 
-        #       :profile_restricted=>false, 
+        #       :products=>0,
+        #       :stackup=>false,
+        #       :profile_defaults=>false,
+        #       :profile_enforced=>false,
+        #       :profile_restricted=>false,
         #       :capabilities=>true
         #     }
         #   }
@@ -89,17 +90,17 @@ class Circuitdata::FileComparer
         folders_array = folders.split('/')
         if folders_array[2] == 'products'
           # this is from the product
-          if folders_array[4] = 'printed_circuits_fabrication_data'
+          if (folders_array[4] = 'printed_circuits_fabrication_data')
             folder, key = folders_array[5].to_sym, folders_array[6].to_sym
             row_folder = @rows.dig(folder) || @rows[folder] = {}
             row_key = row_folder.dig(key) || row_folder[key] = {}
             # Other checks here.
             # This should be done via a function
             row_key[:summary] = {
-              value: "V",
-              conflict: true,
-              conflicts_with: ["product2", "restriced"],
-              conflict_message: "Value V is not allowed"
+                value: 'V',
+                conflict: true,
+                conflicts_with: ['product2', 'restriced'],
+                conflict_message: 'Value V is not allowed'
             }
           end
         end
@@ -126,18 +127,18 @@ class Circuitdata::FileComparer
       end
     end unless products.nil?
 
-    product_names.uniq, types
+    return product_names.uniq, types
   end
 
   def valid_product?(products_array)
     if products_array.uniq.count > 1
       @fh[:error] = true
-      @fh[:message] = "Your files contains several different product names"
+      @fh[:message] = 'Your files contains several different product names'
       return false # validation fails because of different product names
     end
     if products_array.empty?
       @fh[:error] = true
-      @fh[:message] = "None of the files contains a product"
+      @fh[:message] = 'None of the files contains a product'
       return false # c=validation fails because there are no products
     end
     true
