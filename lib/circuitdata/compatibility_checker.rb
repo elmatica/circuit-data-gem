@@ -8,6 +8,7 @@ class Circuitdata::CompatibilityChecker
     @validate_origins = validate_origins
     blank_content = get_file_content([], [])
     # Final hash
+    # the content bit is not needed, we already have products array and types for checking
     @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}, content: {file1: blank_content, file2: blank_content}}
   end
 
@@ -42,7 +43,6 @@ class Circuitdata::CompatibilityChecker
   end
 
   def perform_comparison(product_data, check_data, schema, type)
-    # binding.pry
     case type
       when 'restricted'
         check_hash = check_data.dig(:open_trade_transfer_package, :profiles, :restricted, :printed_circuits_fabrication_data)
@@ -53,7 +53,7 @@ class Circuitdata::CompatibilityChecker
       else
         check_hash = {}
     end
-    # binding.pry
+
     check_hash.each do |k, v|
       v.each do |kl1, vl1| # level 1
         common_hash = schema.dig(:properties, :open_trade_transfer_package, :properties, :products, :patternProperties, :'^(?!generic$).*', :properties, :printed_circuits_fabrication_data, :properties)

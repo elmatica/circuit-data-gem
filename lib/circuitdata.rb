@@ -7,8 +7,8 @@ module Circuitdata
   def self.get_data_summary(data)
     types = []
     wrapper = data&.dig(:open_trade_transfer_package)
-    types << 'profile_enforced' unless wrapper&.dig(:profiles, :enforced).nil?
     types << 'profile_restricted' unless wrapper&.dig(:profiles, :restricted).nil?
+    types << 'profile_enforced' unless wrapper&.dig(:profiles, :enforced).nil?
     types << 'profile_defaults' unless wrapper&.dig(:profiles, :defaults).nil?
     types << 'capabilities' unless wrapper&.dig(:capabilities).nil?
 
@@ -88,8 +88,8 @@ module Circuitdata
     return error, message, validationserrors
   end
 
-  def self.compare_files(filehash, validate_origins=false)
-    comparer = FileComparer.new(filehash, validate_origins)
+  def self.compare_files(file_hash, validate_origins=false)
+    comparer = FileComparer.new(file_hash, validate_origins)
     comparer.compare
   end
 
@@ -98,30 +98,12 @@ module Circuitdata
     checker.start_check
   end
 
-  def self.bk_checker(product_file, check_file=nil, validate_origins=true)
-    checker = BkChecker.new(product_file, check_file, validate_origins)
-    checker.start_check
-  end
-
   def self.test
-    wrong_path= 'testfile-product.json'
-    pass_product = File.join(File.dirname(__FILE__), '../test/test_data/pass_product.json')
-    fail_product = File.join(File.dirname(__FILE__), '../test/test_data/fail_product.json')
-    pass_restricted = File.join(File.dirname(__FILE__), '../test/test_data/pass_profile_restricted.json')
-    fail_restricted = File.join(File.dirname(__FILE__), '../test/test_data/fail_profile_restricted.json')
-    pass_enforced = File.join(File.dirname(__FILE__), '../test/test_data/pass_profile_enforced.json')
-    fail_enforced = File.join(File.dirname(__FILE__), '../test/test_data/fail_profile_enforced.json')
-    pass_capabilities = File.join(File.dirname(__FILE__), '../test/test_data/pass_capabilities.json')
-    fail_capabilities = File.join(File.dirname(__FILE__), '../test/test_data/fail_capabilities.json')
+    product1 = File.join(File.dirname(__FILE__), '../test/test_data/test_product1.json')
+    product2 = File.join(File.dirname(__FILE__), '../test/test_data/test_product2.json')
+    profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/test_profile_restricted.json')
 
-    Circuitdata.compatibility_checker(wrong_path)
-    Circuitdata.compatibility_checker(pass_product)
-    Circuitdata.compatibility_checker(fail_product)
-    Circuitdata.compatibility_checker(pass_product, pass_restricted)
-    Circuitdata.compatibility_checker(pass_product, fail_restricted)
-    Circuitdata.compatibility_checker(pass_product, pass_enforced)
-    Circuitdata.compatibility_checker(pass_product, fail_enforced)
-    Circuitdata.compatibility_checker(pass_product, pass_capabilities)
-    Circuitdata.compatibility_checker(pass_product, fail_capabilities)
+    file_hash = {product1: product1, product2: product2, restricted: profile_restricted}
+    Circuitdata.compare_files(file_hash, true)
   end
 end

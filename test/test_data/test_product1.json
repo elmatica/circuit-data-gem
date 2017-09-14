@@ -1,0 +1,17 @@
+{
+  "open_trade_transfer_package": {
+    "version": "1.0",
+    "products": {
+      "testproduct": {
+        "printed_circuits_fabrication_data": {
+          "version": "0.6",
+          "rigid_conductive_layer": {
+            "count": 8,
+            "minimum_external_track_width": 0.14,
+            "minimum_external_spacing_width": 0.14
+          }
+        }
+      }
+    }
+  }
+}
