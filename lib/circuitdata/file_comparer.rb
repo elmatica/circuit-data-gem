@@ -31,7 +31,7 @@ class Circuitdata::FileComparer
       # puts "Error: #{error}"
       # puts "Error Msg: #{error_msg}"
       # Get details about the file_content
-      products, types = check_data(file_content)
+      products, types = Circuitdata.get_data_summary(file_content)
       # puts "products: #{products}"
       # puts "types: #{types}"
       products_array.push(*products) # add products to tracking array
@@ -98,26 +98,6 @@ class Circuitdata::FileComparer
     puts "\n\n\nFINAL HASH: #{@fh}\n\n\n"
 
     return @fh
-  end
-
-  def check_data(data)
-    types = []
-    wrapper = data&.dig(:open_trade_transfer_package)
-    types << 'profile_enforced' unless wrapper&.dig(:profiles, :enforced).nil?
-    types << 'profile_restricted' unless wrapper&.dig(:profiles, :restricted).nil?
-    types << 'profile_defaults' unless wrapper&.dig(:profiles, :defaults).nil?
-    types << 'capabilities' unless wrapper&.dig(:capabilities).nil?
-
-    products = wrapper&.dig(:products)
-    product_names = products.keys if products # this will return all the product names
-    # loop through the products
-    products.each do |k, v|
-      if v&.dig(:stackup, :specification_level) == 'specified' && !v&.dig(:stackup, :specification_level, :specified).nil?
-        types << 'stackup'
-      end
-    end unless products.nil?
-
-    return (product_names.uniq rescue []), types
   end
 
   def valid_product?(products_array)

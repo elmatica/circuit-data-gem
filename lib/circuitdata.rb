@@ -4,91 +4,57 @@ module Circuitdata
   require 'circuitdata/file_comparer'
   require 'circuitdata/compatibility_checker'
 
-  def self.content(checksjson)
-    number_of_products = 0
-    stackup =  false
-    profile_defaults = false
-    profile_enforced = false
-    profile_restricted = false
-    capabilities = false
-    productname = nil
-    checksjson.deep_symbolize_keys!
-    if checksjson.has_key? :open_trade_transfer_package
-      if checksjson[:open_trade_transfer_package].has_key? :products
-        if checksjson[:open_trade_transfer_package][:products].length > 0
-          number_of_products = checksjson[:open_trade_transfer_package][:products].length
-          checksjson[:open_trade_transfer_package][:products].each do |key, value|
-            productname = key.to_s
-            if checksjson[:open_trade_transfer_package][:products][key].has_key? :stackup
-              if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specification_level
-                if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specification_level] == :specified
-                  if checksjson[:open_trade_transfer_package][:products][key][:stackup].has_key? :specified
-                    if checksjson[:open_trade_transfer_package][:products][key][:stackup][:specified].length > 0
-                      stackup = true
-                    end
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
-      if checksjson[:open_trade_transfer_package].has_key? :profiles
-        if checksjson[:open_trade_transfer_package][:profiles].has_key? :enforced
-          if checksjson[:open_trade_transfer_package][:profiles][:enforced].length > 0
-            profile_enforced = true
-          end
-        end
-        if checksjson[:open_trade_transfer_package][:profiles].has_key? :restricted
-          if checksjson[:open_trade_transfer_package][:profiles][:restricted].length > 0
-            profile_restricted = true
-          end
-        end
-        if checksjson[:open_trade_transfer_package][:profiles].has_key? :defaults
-          if checksjson[:open_trade_transfer_package][:profiles][:defaults].length > 0
-            profile_defaults = true
-          end
-        end
-      end
-      if checksjson[:open_trade_transfer_package].has_key? :capabilities
-        if checksjson[:open_trade_transfer_package][:capabilities].length > 0
-          capabilities = true
-        end
-      end
-    end
-    return number_of_products, stackup, profile_defaults, profile_restricted, profile_enforced, capabilities, productname
-  end
-  
-  def self.read_json(content)
-    require 'open-uri'
-    require 'json'
+  def self.get_data_summary(data)
+    types = []
+    wrapper = data&.dig(:open_trade_transfer_package)
+    types << 'profile_enforced' unless wrapper&.dig(:profiles, :enforced).nil?
+    types << 'profile_restricted' unless wrapper&.dig(:profiles, :restricted).nil?
+    types << 'profile_defaults' unless wrapper&.dig(:profiles, :defaults).nil?
+    types << 'capabilities' unless wrapper&.dig(:capabilities).nil?
 
-    error = false
-    message = ""
-    returncontent = nil
-    if content.is_a? Hash
+    products = wrapper&.dig(:products)
+    product_names = products.nil? ? [] : products.keys# this will return all the product names
+    # loop through the products
+    products.each do |k, v|
+      if v&.dig(:stackup, :specification_level) == 'specified' && !v&.dig(:stackup, :specification_level, :specified).nil?
+        types << 'stackup'
+      end
+    end unless products.nil?
+
+    # return (product_names.uniq rescue []), types
+    return product_names, types
+  end
+
+  def self.read_json(file)
+    require 'json'
+    error, message, data = false, nil, nil
+
+    if file.is_a? Hash
       begin
-        returncontent = content
-        returncontent.deep_symbolize_keys!
+        data = file
+        data.deep_symbolize_keys!
       rescue
         error = true
         message = "Could not convert the Hash into JSON"
       end
     else
       begin
-        open(content) do |f|
-          returncontent = JSON.parse(f.read, symbolize_names: true)
+        open(file) do |f|
+          data = JSON.parse(f.read, symbolize_names: true)
         end
       rescue
         error = true
         message = "Could not read the file"
       end
     end
-    return error, message, returncontent
+    return error, message, data
   end
 
   def self.validate(content)
     require 'json-schema'
+
+    # schema_path = File.join(File.dirname(__FILE__), 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json')
+    # schema = File.read(schema_path)
     $jsonschema_v1 = 'http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json'
 
     error = false
@@ -127,8 +93,35 @@ module Circuitdata
     comparer.compare
   end
 
-  def self.compatibility_checker(productfile, checksfile=nil, validate_origins=true)
-    checker = CompatibilityChecker.new(productfile, checksfile, validate_origins)
+  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false)
+    checker = CompatibilityChecker.new(product_file, check_file, validate_origins)
     checker.start_check
+  end
+
+  def self.bk_checker(product_file, check_file=nil, validate_origins=true)
+    checker = BkChecker.new(product_file, check_file, validate_origins)
+    checker.start_check
+  end
+
+  def self.test
+    wrong_path= 'testfile-product.json'
+    pass_product = File.join(File.dirname(__FILE__), '../test/test_data/pass_product.json')
+    fail_product = File.join(File.dirname(__FILE__), '../test/test_data/fail_product.json')
+    pass_restricted = File.join(File.dirname(__FILE__), '../test/test_data/pass_profile_restricted.json')
+    fail_restricted = File.join(File.dirname(__FILE__), '../test/test_data/fail_profile_restricted.json')
+    pass_enforced = File.join(File.dirname(__FILE__), '../test/test_data/pass_profile_enforced.json')
+    fail_enforced = File.join(File.dirname(__FILE__), '../test/test_data/fail_profile_enforced.json')
+    pass_capabilities = File.join(File.dirname(__FILE__), '../test/test_data/pass_capabilities.json')
+    fail_capabilities = File.join(File.dirname(__FILE__), '../test/test_data/fail_capabilities.json')
+
+    Circuitdata.compatibility_checker(wrong_path)
+    Circuitdata.compatibility_checker(pass_product)
+    Circuitdata.compatibility_checker(fail_product)
+    Circuitdata.compatibility_checker(pass_product, pass_restricted)
+    Circuitdata.compatibility_checker(pass_product, fail_restricted)
+    Circuitdata.compatibility_checker(pass_product, pass_enforced)
+    Circuitdata.compatibility_checker(pass_product, fail_enforced)
+    Circuitdata.compatibility_checker(pass_product, pass_capabilities)
+    Circuitdata.compatibility_checker(pass_product, fail_capabilities)
   end
 end

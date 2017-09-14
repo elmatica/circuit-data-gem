@@ -1,301 +1,133 @@
 class Circuitdata::CompatibilityChecker
-    def initialize(productfile, checksfile, validate_origins)
-        @productfile = productfile
-        @checksfile = checksfile
-        @validate_origins = validate_origins
+  def initialize(product_file, check_file, validate_origins)
+    require 'json'
+    require 'json-schema'
+
+    @product_file = product_file
+    @check_file = check_file
+    @validate_origins = validate_origins
+    blank_content = get_file_content([], [])
+    # Final hash
+    @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}, content: {file1: blank_content, file2: blank_content}}
+  end
+
+  def start_check
+    # Initialize & validate
+    @fh[:error], @fh[:message], product_data = Circuitdata.read_json(@product_file)
+    return @fh if @fh[:error]
+    @fh[:error], @fh[:message], @fh[:errors][:validation] = Circuitdata.validate(product_data)
+    return @fh if @fh[:error]
+    f1_products, f1_types = Circuitdata.get_data_summary(product_data)
+    @fh[:content][:file1] = get_file_content(f1_products, f1_types)
+    if @check_file.present?
+      @fh[:error], @fh[:message], check_data = Circuitdata.read_json(@check_file)
+      return @fh if @fh[:error]
+      @fh[:error], @fh[:message], @fh[:errors][:validation] = Circuitdata.validate(check_data)
+      return @fh if @fh[:error]
+
+      # Compare the content
+      f2_products, f2_types = Circuitdata.get_data_summary(check_data)
+      @fh[:content][:file2] = get_file_content(f2_products,f2_types)
+
+      # perform advanced comparisons
+      schema_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
+      restricted_schema = enforced_schema = capability_schema = Circuitdata.read_json(schema_path)[2]
+      # restricted_schema = enforced_schema = capability_schema = get_json_schema
+      perform_comparison(product_data, check_data, restricted_schema, 'restricted') if f2_types.include? 'profile_restricted'
+      perform_comparison(product_data, check_data, enforced_schema, 'enforced') if f2_types.include? 'profile_enforced'
+      perform_comparison(product_data, check_data, capability_schema, 'capabilities') if f2_types.include? 'capabilities'
     end
 
-    def start_check
-        require 'active_support/all'
-        require 'open-uri'
-        require 'json'
-        require 'json-schema'
+    @fh
+  end
 
-        productfile = @productfile
-        checksfile = @checksfile
-        validate_origins = @validate_origins
-
-        $jsonschema_v1 = 'http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json'
-
-        # prepare the return
-        returnarray = {
-            error: false,
-            errormessage: '',
-            validationserrors: {},
-            restrictederrors: {},
-            enforcederrors: {},
-            capabilitieserrors: {},
-            contains: {
-                file1: {
-                    products: 0,
-                    stackup: false,
-                    profile_defaults: false,
-                    profile_enforced: false,
-                    profile_restricted: false,
-                    capabilities: false
-                },
-                file2: {
-                    products: 0,
-                    stackup: false,
-                    profile_defaults: false,
-                    profile_enforced: false,
-                    profile_restricted: false,
-                    capabilities: false
-                }
-            }
-        }
-
-        # Check the files or hashes
-        #
-        returnarray[:error], returnarray[:errormessage], json_productfile = Circuitdata.read_json(productfile)
-        return returnarray if returnarray[:error]
-        unless checksfile.nil?
-            returnarray[:error], returnarray[:errormessage], json_checksfile = Circuitdata.read_json(checksfile)
-            return returnarray if returnarray[:error]
-        end
-
-        # Validate the original files against the CircuitData schema
-        if validate_origins
-            returnarray[:error], returnarray[:errormessage], returnarray[:validationserrors] = Circuitdata.validate(json_productfile)
-            return returnarray if returnarray[:error]
-            if not checksfile.nil?
-                returnarray[:error], returnarray[:errormessage], returnarray[:validationserrors] = Circuitdata.validate(json_checksfile)
-                return returnarray if returnarray[:error]
-            end
-        end
-
-        # Check against the content
-        returnarray[:contains][:file1][:products], returnarray[:contains][:file1][:stackup], returnarray[:contains][:file1][:profile_defaults], returnarray[:contains][:file1][:profile_restricted], returnarray[:contains][:file1][:profile_enforced], returnarray[:contains][:file1][:capabilities], productname = Circuitdata.content(json_productfile)
-        if not checksfile.nil?
-            returnarray[:contains][:file2][:products], returnarray[:contains][:file2][:stackup], returnarray[:contains][:file2][:profile_defaults], returnarray[:contains][:file2][:profile_restricted], returnarray[:contains][:file2][:profile_enforced], returnarray[:contains][:file2][:capabilities], productname = Circuitdata.content(json_checksfile)
-        end
-
-        if not checksfile.nil?
-
-            # Create the JSON
-            restrictedschema = enforcedschema = capabilityschema = {
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'type': 'object',
-                'additionalProperties': false,
-                'required': ['open_trade_transfer_package'],
-                'properties': {
-                    'open_trade_transfer_package': {
-                        'type': 'object',
-                        'properties': {
-                            'version': {
-                                'type': 'string',
-                                'pattern': '^1.0$'
-                            },
-                            'information': {
-                                '$ref': 'https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information'
-                            },
-                            'products': {
-                                'type': 'object',
-                                'properties': {
-                                    'generic': {
-                                        'type': 'object',
-                                        'properties': {},
-                                        'id': 'generic',
-                                        'description': 'this should validate any element under generic to be valid'
-                                    }
-                                },
-                                'patternProperties': {
-                                    '^(?!generic$).*': {
-                                        'type': 'object',
-                                        'required': ['printed_circuits_fabrication_data'],
-                                        'properties': {
-                                            'printed_circuits_fabrication_data': {
-                                                'type': 'object',
-                                                'required': ['version'],
-                                                'properties': {
-                                                    'stackup': {
-                                                        'type': 'object',
-                                                        'properties': {
-                                                            'specified': {
-                                                                'type': 'object',
-                                                                'properties': {
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if returnarray[:contains][:file1][:products] > 0 or returnarray[:contains][:file1][:stackup]
-                # RUN THROUGH THE ENFORCED
-                if returnarray[:contains][:file2][:profile_enforced]
-                    json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data].each do |key, value|
-                        if json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data][key].is_a? Hash
-                            json_checksfile[:open_trade_transfer_package][:profiles][:enforced][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
-                                enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
-                                enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
-                                if subvalue.is_a? String
-                                    if subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$") #This is a value range
-                                        from, too = subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$").captures
-                                        newhash = eval("{:minimum => #{from}, :maximum => #{too}}")
-                                        enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                        enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                    else # This is a normal string - check for commas
-                                        enum = []
-                                        subvalue.split(',').each { |enumvalue| enum << enumvalue.strip }
-                                        enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => #{enum}}")
-                                        enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => #{enum}}")
-                                    end
-                                elsif subvalue.is_a? Numeric # This is a normal string
-                                    enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => [#{subvalue.to_s}]}")
-                                    enforcedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => [#{subvalue.to_s}]}")
-                                end
-                            end
-                        end
-                    end
-                    begin
-                        enforcedvalidate = JSON::Validator.fully_validate(enforcedschema.to_json, json_productfile, :errors_as_objects => true)
-                        $errors = false
-                    rescue JSON::Schema::ReadFailed
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
-                    rescue JSON::Schema::SchemaError
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
-                    end
-                    unless $errors
-                        if enforcedvalidate.count > 0
-                            returnarray[:error] = true
-                            returnarray[:errormessage] = 'The product to check did not meet the requirements'
-                            enforcedvalidate.each do |valerror|
-                                returnarray[:enforcederrors][valerror[:fragment]] = [] unless returnarray[:enforcederrors].has_key? valerror[:fragment]
-                                begin
-                                    keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
-                                rescue
-                                    keep = valerror[:message]
-                                end
-                                returnarray[:enforcederrors][valerror[:fragment]] << keep
-                            end
-                        end
-                    end
-                end
-                # RUN THROUGH THE RESTRICTED
-                if returnarray[:contains][:file2][:profile_restricted]
-                    json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data].each do |key, value|
-                        if json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data][key].is_a? Hash
-                            json_checksfile[:open_trade_transfer_package][:profiles][:restricted][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
-                                restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
-                                restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
-                                if subvalue.is_a? String
-                                    if subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$") #This is a value range
-                                        from, too = subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$").captures
-                                        newhash = {:not => {:allOf => [{:minimum => from.to_f},{:maximum => too.to_f}]}}
-                                        restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                        restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                    else # This is a normal string - check for commas
-                                        newhash = {:not => {:anyOf => [{ :enum => ''}]}}
-                                        enum = []
-                                        subvalue.split(',').each { |enumvalue| enum << enumvalue.strip }
-                                        newhash[:not][:anyOf][0][:enum] = enum
-                                        restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                        restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                    end
-                                elsif subvalue.is_a? Numeric # This is a normal string
-                                    newhash = {:not => {:allOf => [{:minimum => subvalue.to_f},{:maximum => subvalue.to_f}]}}
-                                    restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                    restrictedschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                end
-                            end
-                        end
-                    end
-                    begin
-                        restrictedvalidate = JSON::Validator.fully_validate(restrictedschema.to_json, json_productfile, :errors_as_objects => true)
-                    rescue JSON::Schema::ReadFailed
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
-                    rescue JSON::Schema::SchemaError
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
-                    end
-                    unless $errors
-                        if restrictedvalidate.count > 0
-                            returnarray[:error] = true
-                            returnarray[:errormessage] = 'The product to check did not meet the requirements'
-                            restrictedvalidate.each do |valerror|
-                                returnarray[:restrictederrors][valerror[:fragment]] = [] unless returnarray[:restrictederrors].has_key? valerror[:fragment]
-                                begin
-                                    keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
-                                rescue
-                                    keep = valerror[:message]
-                                end
-                                returnarray[:restrictederrors][valerror[:fragment]] << keep
-                            end
-                        end
-                    end
-                end
-                # RUN THROUGH THE CAPABILITIES
-                if returnarray[:contains][:file2][:capabilities]
-                    json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data].each do |key, value|
-                        if json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data][key].is_a? Hash
-                            json_checksfile[:open_trade_transfer_package][:capabilities][:printed_circuits_fabrication_data][key].each do |subkey, subvalue|
-                                capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties].has_key? key.to_sym
-                                capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym] = {:type => 'object', :properties => {} } unless capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties].has_key? key.to_sym
-                                if subvalue.is_a? String
-                                    if subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$") #This is a value range
-                                        from, too = subvalue.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$").captures
-                                        newhash = eval("{:minimum => #{from}, :maximum => #{too}}")
-                                        capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                        capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = newhash
-                                    else # This is a normal string - check for commas
-                                        enum = []
-                                        subvalue.split(',').each { |enumvalue| enum << enumvalue.strip }
-                                        capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => #{enum}}")
-                                        capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => #{enum}}")
-                                    end
-                                elsif subvalue.is_a? Numeric # This is a normal string
-                                    capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => [#{subvalue.to_s}]}")
-                                    capabilityschema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties][:'^(?!generic$).*'][:properties][:printed_circuits_fabrication_data][:properties][:stackup][:properties][:specified][:properties][key.to_sym][:properties][subkey.to_sym] = eval("{:enum => [#{subvalue.to_s}]}")
-                                end
-                            end
-                        end
-                    end
-                    begin
-                        capabilitiesvalidate = JSON::Validator.fully_validate(capabilityschema.to_json, json_productfile, :errors_as_objects => true)
-                    rescue JSON::Schema::ReadFailed
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Could not read the schema #{$jsonschema_v1}"
-                    rescue JSON::Schema::SchemaError
-                        $errors = true
-                        returnarray[:error] = true
-                        returnarray[:errormessage] = "Something was wrong with the schema #{$jsonschema_v1}"
-                    end
-                    unless $errors
-                        if capabilitiesvalidate.count > 0
-                            returnarray[:error] = true
-                            returnarray[:errormessage] = 'The product to check did not meet the requirements'
-                            capabilitiesvalidate.each do |valerror|
-                                returnarray[:capabilitieserrors][valerror[:fragment]] = [] unless returnarray[:capabilitieserrors].has_key? valerror[:fragment]
-                                begin
-                                    keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
-                                rescue
-                                    keep = valerror[:message]
-                                end
-                                returnarray[:capabilitieserrors][valerror[:fragment]] << keep
-                            end
-                        end
-                    end
-                end
-            end
-        end
-
-        return returnarray
+  def perform_comparison(product_data, check_data, schema, type)
+    # binding.pry
+    case type
+      when 'restricted'
+        check_hash = check_data.dig(:open_trade_transfer_package, :profiles, :restricted, :printed_circuits_fabrication_data)
+      when 'enforced'
+        check_hash = check_data.dig(:open_trade_transfer_package, :profiles, :enforced, :printed_circuits_fabrication_data)
+      when 'capabilities'
+        check_hash = check_data.dig(:open_trade_transfer_package, :capabilities, :printed_circuits_fabrication_data)
+      else
+        check_hash = {}
     end
+    # binding.pry
+    check_hash.each do |k, v|
+      v.each do |kl1, vl1| # level 1
+        common_hash = schema.dig(:properties, :open_trade_transfer_package, :properties, :products, :patternProperties, :'^(?!generic$).*', :properties, :printed_circuits_fabrication_data, :properties)
+        common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
+        common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
+
+        case vl1.class.name
+          when 'String'
+            if vl1.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$") #This is a value range
+              from, too = vl1.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$").captures
+              case type
+                when 'restricted'
+                  new_hash = {:not => {:allOf => [{:minimum => from.to_f},{:maximum => too.to_f}]}}
+                else
+                  new_hash = eval("{:minimum => #{from}, :maximum => #{too}}")
+              end
+            else # This is a normal string - check for commas
+              enum = []
+              vl1.split(',').each {|enumvalue| enum << enumvalue.strip}
+              case type
+                when 'restricted'
+                  new_hash = {:not => {:anyOf => [{ :enum => ''}]}}
+                  new_hash[:not][:anyOf][0][:enum] = enum
+                else
+                  new_hash = eval("{:enum => #{enum}}")
+              end
+            end
+          when 'Numeric' # This is a normal string
+            case type
+              when 'restricted'
+                new_hash = {:not => {:allOf => [{:minimum => vl1.to_f},{:maximum => vl1.to_f}]}}
+              else
+                new_hash = eval("{:enum => [#{vl1.to_s}]}")
+            end
+        end
+        common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
+        common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
+      end if v.is_a? Hash
+    end
+
+    # perform validations
+    begin
+      validation_errors = JSON::Validator.fully_validate(schema.to_json, product_data, :errors_as_objects => true)
+
+      if validation_errors.any?
+        @fh[:error] = true
+        @fh[:message] = 'The product to check did not meet the requirements'
+        validation_errors.each do |error|
+          error_array = []
+          begin
+            error_array << error[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema[\\s\\S]*)$").captures[1]
+          rescue
+            error_array << error[:message]
+          end
+          @fh[:errors][type.to_sym][error[:fragment]] = error_array
+        end
+      end
+    rescue JSON::Schema::ReadFailed
+      @fh[:error] = true
+      @fh[:message] = "Could not read the submitted `#{type}` schema" # enforced_schema
+    rescue JSON::Schema::SchemaError
+      @fh[:error] = true
+      @fh[:message] = "Something was wrong with the submitted `#{type}` schema" # enforced_schema
+    end
+  end
+
+  def get_file_content(products, types)
+    {
+      products: products.count,
+      stackup: types.include?('stackup'),
+      profile_defaults: types.include?('profile_defaults'),
+      profile_restricted: types.include?('profile_restricted'),
+      profile_enforced: types.include?('profile_enforced'),
+      capabilities: types.include?('capabilities')
+    }
+  end
 end

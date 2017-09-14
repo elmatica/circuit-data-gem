@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["open_trade_transfer_package"],
+  "properties": {
+    "open_trade_transfer_package": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^1.0$"
+        },
+        "information": {
+          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+        },
+        "products": {
+          "type": "object",
+          "properties": {
+            "generic": {
+              "type": "object",
+              "properties": {},
+              "id": "generic",
+              "description": "this should validate any element under generic to be valid"
+            }
+          },
+          "patternProperties": {
+            "^(?!generic$).*": {
+              "type": "object",
+              "required": ["printed_circuits_fabrication_data"],
+              "properties": {
+                "printed_circuits_fabrication_data": {
+                  "type": "object",
+                  "required": ["version"],
+                  "properties": {
+                    "stackup": {
+                      "type": "object",
+                      "properties": {
+                        "specified": {
+                          "type": "object",
+                          "properties": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
