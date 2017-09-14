@@ -12,11 +12,3 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-
-# Remember to delete this bit before releasing
-group :development, :test do
-  gem "pry"
-  gem "pry-debugger"
-  # gem "debugger"
-  # gem "rake"
-end
