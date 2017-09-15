@@ -9,8 +9,7 @@
             "count": 8,
             "minimum_external_track_width": 0.14,
             "minimum_external_spacing_width": 0.14,
-            "copper_foil_roughness": "V"
-//            "flexible_conductive_layer": "F"
+            "copper_foil_roughness": "L"
           }
         }
       }
