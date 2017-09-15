@@ -70,7 +70,7 @@ class Circuitdata::FileComparer
     @rows.each do |k, v| # product elements level
       if v.is_a?(Hash)
         v.each do |kl1, vl1| # specification level
-          value, conflict, conflicts_with, conflict_message = [], false, [], []
+          value, conflict, conflicts_with, conflict_message, value_cols = [], false, [], [], []
           vl1.each do |kl2, vl2| # the specification column level - call the function from here
             conflicts = @nh.dig(kl2, :conflicts)
             if action == 'populate'
@@ -92,6 +92,7 @@ class Circuitdata::FileComparer
               if value.empty? || !value.include?(items_v)
                 value << items_v
                 conflicts_with << kl2
+                value_cols << kl2 if kl2 != @fh[:master_column]
               end unless items_v.nil?
               conflict = true if vl2[:conflict]
               conflicts_with = conflicts_with + vl2[:conflicts_with]
@@ -100,7 +101,7 @@ class Circuitdata::FileComparer
           end
           if action == 'get_summary'
             if value.count > 1
-              conflict_message.unshift('Some of the file values are conflicting')
+              conflict_message.unshift("#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}")
               conflict = true
             else
               value = value.first
