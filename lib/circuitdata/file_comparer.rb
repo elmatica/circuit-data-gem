@@ -3,6 +3,8 @@ class Circuitdata::FileComparer
     @file_hash = file_hash
     @validate_origins = validate_origins
     @rows = {}
+    @nh = {} # a new_hash to combine all the data
+    @columns = []
     # Final hash
     @fh = {error: false, message: nil, product_name: nil, columns: nil, master_column: nil, rows: nil}
   end
@@ -15,7 +17,6 @@ class Circuitdata::FileComparer
       return @fh
     end
 
-    nh = {} # a new_hash to combine all the data
     # Process the hashes
     products_array = []
     @file_hash.each do |k, v|
@@ -26,17 +27,16 @@ class Circuitdata::FileComparer
       products, types = Circuitdata.get_data_summary(file_content)
       products_array.push(*products) # add products to tracking array
       # populate the new_hash to be used later
-      nh[k] = {types: types, products: products, data: file_content}
+      @nh[k] = {types: types, products: products, data: file_content}
     end
 
     # check if the files content meet the requirements
     if valid_product?(products_array)
       @fh[:product_name] = products_array.first.to_s
-      columns = nh.keys.unshift(:summary)
-      @fh[:columns] = columns
+      @columns = @nh.keys
       # generate summary insert into rows for each array
-      master_json = nh.dig(@fh[:master_column].to_sym, :data)
-      nh.each do |file_k, file_v|
+      master_json = @nh.dig(@fh[:master_column].to_sym, :data)
+      @nh.each do |file_k, file_v|
         products, data = file_v[:products], file_v[:data]
         file_v[:check_results] = Circuitdata.compatibility_checker(master_json, data, false)
 
@@ -47,7 +47,7 @@ class Circuitdata::FileComparer
             if v.is_a?(Hash)
               @rows[k] ||= {}
               v.each do |kl1, vl1|
-                @rows[k][kl1] ||= get_l1_hash(columns)
+                @rows[k][kl1] ||= get_l1_hash(@columns)
               end
             else
               @rows[k] ||= []
@@ -58,30 +58,54 @@ class Circuitdata::FileComparer
       end
 
       # populate the row hash
-      @rows.each do |k, v| # product elements level
-        if v.is_a?(Hash)
-          v.each do |kl1, vl1| # specification level
-            vl1.each do |kl2, vl2| # the specification column level - call the function from here
-              if kl2 != :summary
-                # types = file_v[:types]
-                # processed_data = process_check_results(check_results, types)
-                value = nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
-              else
-                # get summary vals here
-              end
+      process_row_hash('populate')
+      process_row_hash('get_summary')
+    end
+    @fh[:columns] = @columns.unshift(:summary)
+    @fh[:rows] = @rows
+    @fh
+  end
+
+  def process_row_hash(action)
+    @rows.each do |k, v| # product elements level
+      if v.is_a?(Hash)
+        v.each do |kl1, vl1| # specification level
+          columns = []
+          values = []
+          vl1.each do |kl2, vl2| # the specification column level - call the function from here
+            if action == 'populate'
+              value = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
               vl2[:value] = value
               vl2[:conflict] = false
               vl2[:conflicts_with] = []
               vl2[:conflict_message] = nil
+            else
+              value = vl2[:value]
+              if values.empty? || !values.include?(value)
+                values << value
+                columns << kl2
+              end unless value.nil?
             end
           end
-        else
-          # if array functionality eg Holes
+          if action == 'get_summary'
+            values&.compact!&.uniq!
+            vl1[:summary] = values.count > 1 ?
+                                {value: values, conflict: true, conflicts_with: columns, conflict_message: 'Both columns contains a value for this'} :
+                                {value: values.first, conflict: false, conflicts_with: [], conflict_message: nil}
+
+          end
         end
+      else
+        # if array functionality eg Holes
       end
     end
-    @fh[:rows] = @rows
-    @fh
+  end
+
+  def get_row_summary
+    binding.pry
+    @rows.each do |k, v|
+      v.eacd
+    end
   end
 
   def process_check_results(check_results, types)
@@ -134,4 +158,3 @@ class Circuitdata::FileComparer
     true
   end
 end
-
