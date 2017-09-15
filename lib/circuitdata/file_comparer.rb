@@ -6,7 +6,7 @@ class Circuitdata::FileComparer
     @nh = {} # a new_hash to combine all the data
     @columns = []
     # Final hash
-    @fh = {error: false, message: nil, product_name: nil, columns: nil, master_column: nil, rows: nil}
+    @fh = {error: false, message: nil, conflict: false, product_name: nil, columns: nil, master_column: nil, rows: nil}
   end
 
   def compare
@@ -107,6 +107,7 @@ class Circuitdata::FileComparer
             end
             vl1[:summary] = {value: value, conflict: conflict, conflicts_with: conflicts_with.uniq, conflict_message: conflict_message.uniq}
           end
+          @fh[:conflict] = true if conflict
         end
       else
         # if array functionality eg Holes
