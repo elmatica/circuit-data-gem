@@ -1,4 +1,4 @@
-module Circuitdata 
+module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
   require 'active_support/all'
   require 'circuitdata/file_comparer'
@@ -101,7 +101,7 @@ module Circuitdata
   def self.test
     product1 = File.join(File.dirname(__FILE__), '../test/test_data/test_product1.json')
     product2 = File.join(File.dirname(__FILE__), '../test/test_data/test_product2.json')
-    profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/test_profile_restricted.json')
+    profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
 
     file_hash = {product1: product1, product2: product2, restricted: profile_restricted}
     Circuitdata.compare_files(file_hash, true)
