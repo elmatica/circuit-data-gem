@@ -20,13 +20,13 @@
           },
           "final_finsh": [
             {
-              "finish": "b1_lfhasl",
+              "finishds": "b1_lfhasl",
               "thickness_min": 1,
               "thickness_max": 40
             }
           ],
           "legend": {
-            "top": true,
+            "topd": true,
             "bottom": false,
             "color": "white"
           }

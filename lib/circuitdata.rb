@@ -101,9 +101,11 @@ module Circuitdata
   def self.test
     product1 = File.join(File.dirname(__FILE__), '../test/test_data/test_product1.json')
     product2 = File.join(File.dirname(__FILE__), '../test/test_data/test_product2.json')
+    # profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-restricted.json')
     profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
+    profile_enforced = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
 
-    file_hash = {product1: product1, product2: product2, restricted: profile_restricted}
+    file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced}
     Circuitdata.compare_files(file_hash, true)
   end
 end

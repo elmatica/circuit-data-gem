@@ -20,7 +20,7 @@ class Circuitdata::FileComparer
     # Process the hashes
     products_array = []
     @file_hash.each do |k, v|
-      @fh[:master_column] ||= k.to_s # it'll be assigned for the first item
+      @fh[:master_column] ||= k # it'll be assigned for the first item
       # read content
       @fh[:error], @fh[:message], file_content = Circuitdata.read_json(v)
       return @fh if @fh[:error]
@@ -35,11 +35,11 @@ class Circuitdata::FileComparer
       @fh[:product_name] = products_array.first.to_s
       @columns = @nh.keys
       # generate summary insert into rows for each array
-      master_json = @nh.dig(@fh[:master_column].to_sym, :data)
+      master_json = @nh.dig(@fh[:master_column], :data)
       @nh.each do |file_k, file_v|
         products, data = file_v[:products], file_v[:data]
-        file_v[:check_results] = Circuitdata.compatibility_checker(master_json, data, false)
-
+        check_results = Circuitdata.compatibility_checker(master_json, data, false)
+        file_v[:conflicts] = get_validation_summary(check_results, file_k)
         # initialize the rows format
         product_hash = data.dig(:open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data)
         if products.any?
@@ -70,29 +70,42 @@ class Circuitdata::FileComparer
     @rows.each do |k, v| # product elements level
       if v.is_a?(Hash)
         v.each do |kl1, vl1| # specification level
-          columns = []
-          values = []
+          value, conflict, conflicts_with, conflict_message = [], false, [], []
           vl1.each do |kl2, vl2| # the specification column level - call the function from here
+            conflicts = @nh.dig(kl2, :conflicts)
             if action == 'populate'
-              value = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
-              vl2[:value] = value
-              vl2[:conflict] = false
-              vl2[:conflicts_with] = []
-              vl2[:conflict_message] = nil
+              check = conflicts.any? && conflicts.dig(:rows, k, kl1).present?
+              vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
+              vl2[:conflict] = check
+              vl2[:conflicts_with] = check ? [@fh[:master_column]] : []
+              vl2[:conflict_message] = check ? conflicts.dig(:rows, k, kl1) : []
+              # update master_column conflicts with
+              if check
+                master_row = @rows.dig(k, kl1, @fh[:master_column])
+                master_row[:conflicts_with] = master_row[:conflicts_with] + conflicts.dig(:master_conflicts)
+                master_row[:conflict] = true
+                master_row[:conflict_message] = (master_row[:conflict_message] + vl2[:conflict_message]).uniq
+              end
             else
-              value = vl2[:value]
-              if values.empty? || !values.include?(value)
-                values << value
-                columns << kl2
-              end unless value.nil?
+              # get the summary items
+              items_v = vl2[:value]
+              if value.empty? || !value.include?(items_v)
+                value << items_v
+                conflicts_with << kl2
+              end unless items_v.nil?
+              conflict = true if vl2[:conflict]
+              conflicts_with = conflicts_with + vl2[:conflicts_with]
+              conflict_message = conflict_message + vl2[:conflict_message]
             end
           end
           if action == 'get_summary'
-            values&.compact!&.uniq!
-            vl1[:summary] = values.count > 1 ?
-                                {value: values, conflict: true, conflicts_with: columns, conflict_message: 'Both columns contains a value for this'} :
-                                {value: values.first, conflict: false, conflicts_with: [], conflict_message: nil}
-
+            if value.count > 1
+              conflict_message.unshift('Some of the file values are conflicting')
+              conflict = true
+            else
+              value = value.first
+            end
+            vl1[:summary] = {value: value, conflict: conflict, conflicts_with: conflicts_with.uniq, conflict_message: conflict_message.uniq}
           end
         end
       else
@@ -101,47 +114,29 @@ class Circuitdata::FileComparer
     end
   end
 
-  def get_row_summary
-    binding.pry
-    @rows.each do |k, v|
-      v.eacd
-    end
-  end
-
-  def process_check_results(check_results, types)
-    # values = {} # to hold the values to be returned
-    # validation_error = check_results[:errors][:capabilities]
-    types.each do |type|
-      case type
-        when 'profile_restricted'
-          type_error = check_results[:errors][:restricted]
-        when 'profile_enforced'
-          type_error = check_results[:errors][:enforced]
-        when 'capabilities'
-          type_error = check_results[:errors][:capabilities]
-        else
-          type_error = {}
+  def get_validation_summary(validation, column)
+    summary = {}
+    if validation[:error]
+      summary[:master_conflicts] ||= []
+      summary[:master_conflicts] << column
+      summary[:conflicts], summary[:rows] = true, {}
+      validation[:errors].each do |type, errors| # validation, restricted, enforced, capabilities
+        errors.each do |k, v|
+          folders_stack = k.split('/')
+          folder, spec = folders_stack[5], folders_stack[6]
+          summary[:rows][folder.to_sym] ||= {}
+          spec_message = summary[:rows][folder.to_sym][spec.to_sym] || []
+          summary[:rows][folder.to_sym][spec.to_sym] = spec_message+v
+        end if errors.any?
       end
-      error_key = type_error.keys.first
-      folders_stack = error_key.split('/')
-      # process this
-      folders_stack
     end
+    summary
   end
 
   def get_l1_hash(columns)
     l1_hash = {}
     columns.each{|c| l1_hash[c]={} }
     l1_hash
-  end
-
-  def get_row_content(column, v, value)
-    # column can be summary, pruduct1, ..
-    # puts "VALUE: #{value}"
-    # v[:value] = 8
-    # v[:conflict] = false
-    # v[:conflicts_with] = []
-    # v[:conflict_message] = nil
   end
 
   def valid_product?(products_array)

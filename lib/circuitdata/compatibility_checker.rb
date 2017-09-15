@@ -6,10 +6,8 @@ class Circuitdata::CompatibilityChecker
     @product_file = product_file
     @check_file = check_file
     @validate_origins = validate_origins
-    blank_content = get_file_content([], [])
     # Final hash
-    # the content bit is not needed, we already have products array and types for checking
-    @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}, content: {file1: blank_content, file2: blank_content}}
+    @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}}
   end
 
   def start_check
@@ -18,22 +16,16 @@ class Circuitdata::CompatibilityChecker
     return @fh if @fh[:error]
     @fh[:error], @fh[:message], @fh[:errors][:validation] = Circuitdata.validate(product_data)
     return @fh if @fh[:error]
-    f1_products, f1_types = Circuitdata.get_data_summary(product_data)
-    @fh[:content][:file1] = get_file_content(f1_products, f1_types)
     if @check_file.present?
       @fh[:error], @fh[:message], check_data = Circuitdata.read_json(@check_file)
       return @fh if @fh[:error]
       @fh[:error], @fh[:message], @fh[:errors][:validation] = Circuitdata.validate(check_data)
       return @fh if @fh[:error]
-
-      # Compare the content
-      f2_products, f2_types = Circuitdata.get_data_summary(check_data)
-      @fh[:content][:file2] = get_file_content(f2_products,f2_types)
-
-      # perform advanced comparisons
+      f2_types = Circuitdata.get_data_summary(check_data)[1]
+      # read the schema
       schema_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
       restricted_schema = enforced_schema = capability_schema = Circuitdata.read_json(schema_path)[2]
-      # restricted_schema = enforced_schema = capability_schema = get_json_schema
+      # Compare the content
       perform_comparison(product_data, check_data, restricted_schema, 'restricted') if f2_types.include? 'profile_restricted'
       perform_comparison(product_data, check_data, enforced_schema, 'enforced') if f2_types.include? 'profile_enforced'
       perform_comparison(product_data, check_data, capability_schema, 'capabilities') if f2_types.include? 'capabilities'
@@ -101,6 +93,9 @@ class Circuitdata::CompatibilityChecker
       if validation_errors.any?
         @fh[:error] = true
         @fh[:message] = 'The product to check did not meet the requirements'
+
+        # format the errors well here
+
         validation_errors.each do |error|
           error_array = []
           begin
@@ -118,16 +113,5 @@ class Circuitdata::CompatibilityChecker
       @fh[:error] = true
       @fh[:message] = "Something was wrong with the submitted `#{type}` schema" # enforced_schema
     end
-  end
-
-  def get_file_content(products, types)
-    {
-      products: products.count,
-      stackup: types.include?('stackup'),
-      profile_defaults: types.include?('profile_defaults'),
-      profile_restricted: types.include?('profile_restricted'),
-      profile_enforced: types.include?('profile_enforced'),
-      capabilities: types.include?('capabilities')
-    }
   end
 end
