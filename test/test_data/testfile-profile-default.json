@@ -10,21 +10,14 @@
       "defaults": {
         "printed_circuits_fabrication_data": {
           "version": "0.6",
-          "rigid_conductive_layer": {
-            "copper_foil_roughness": "L"
-          },
-          "flexible_conductive_layer": {
-            "copper_foil_roughness": "L"
-          },
-          "board": {
-            "thickness": 1.2
+          "legend": {
+            "color": "white"
           },
           "array": {
+            "fiducials_number": 3,
+            "fiducials_shape": "circle",
+            "breakaway_method": "routing",
             "mouse_bites": true
-          },
-          "hard_gold_edge_connectors": {
-            "present": true,
-            "thickness": "1.27"
           }
         }
       }
