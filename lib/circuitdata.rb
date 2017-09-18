@@ -101,10 +101,15 @@ module Circuitdata
   def self.test
     product1 = File.join(File.dirname(__FILE__), '../test/test_data/test_product1.json')
     product2 = File.join(File.dirname(__FILE__), '../test/test_data/test_product2.json')
-    # profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-restricted.json')
-    profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
+    profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-restricted.json')
     profile_enforced = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
 
+    # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
+    puts "Testing compatibility_checker:"
+    puts Circuitdata.compatibility_checker(product2, profile_enforced, true)
+    puts "\n"
+    # THEN TEST THE COMPARE FILES:
+    puts "Testing file comparison"
     file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced}
     Circuitdata.compare_files(file_hash, true)
   end
