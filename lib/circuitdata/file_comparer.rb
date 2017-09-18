@@ -92,7 +92,21 @@ class Circuitdata::FileComparer
               if value.empty? || !value.include?(items_v)
                 value << items_v
                 conflicts_with << kl2
-                value_cols << kl2 if kl2 != @fh[:master_column]
+                # value_cols << kl2 if kl2 != @fh[:master_column]
+
+                if kl2 != @fh[:master_column]
+                  value_cols << kl2
+                  # update this specific iteration
+                  vl2[:conflict] = true
+                  vl2[:conflicts_with] = vl2[:conflicts_with] << @fh[:master_column]
+                  vl2[:conflict_message] = vl2[:conflict_message] << 'value conflicts with product1'
+                  # update the master row
+                  master_row = @rows.dig(k, kl1, @fh[:master_column])
+                  master_row[:conflicts_with] = master_row[:conflicts_with] << kl2
+                  master_row[:conflict] = true
+                  master_row[:conflict_message] = master_row[:conflict_message] << "#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}"
+                end
+                # Add errors to the specific rows items
               end unless items_v.nil?
               conflict = true if vl2[:conflict]
               conflicts_with = conflicts_with + vl2[:conflicts_with]
