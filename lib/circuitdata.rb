@@ -14,6 +14,7 @@ module Circuitdata
 
     products = wrapper&.dig(:products)
     product_names = products.nil? ? [] : products.keys# this will return all the product names
+    types << 'product' if product_names.any?
     # loop through the products
     products.each do |k, v|
       if v&.dig(:stackup, :specification_level) == 'specified' && !v&.dig(:stackup, :specification_level, :specified).nil?
