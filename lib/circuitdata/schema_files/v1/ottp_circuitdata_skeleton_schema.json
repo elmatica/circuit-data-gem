@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+//  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "additionalProperties": false,
   "required": ["open_trade_transfer_package"],
@@ -12,7 +12,10 @@
           "pattern": "^1.0$"
         },
         "information": {
-          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {}
+          // "$ref": "ottp_schema_definitions.json#/definitions/information"
         },
         "products": {
           "type": "object",

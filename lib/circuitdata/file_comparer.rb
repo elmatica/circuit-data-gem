@@ -55,7 +55,7 @@ class Circuitdata::FileComparer
           end
         end
         # Initialize the rows format - for all default profile items
-        @default_column, file_v = @nh.select{|k, v| v[:types].include?('profile_defaults')}.first # this should only be a single file
+        @default_column, file_v = @nh.select{|k, v| v[:types].include?("profile_defaults")}.first # this should only be a single file
         data = file_v[:data]
         product_hash = data.dig(:open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data)
         init_row_format(product_hash)

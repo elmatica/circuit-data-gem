@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json",
+//  "$schema": "http://json-schema.org/draft-04/schema#",
+//  "id": "http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json",
   "type": "object",
   "additionalProperties": false,
   "required": ["open_trade_transfer_package"],
@@ -14,7 +14,7 @@
           "pattern": "^1.0$"
         },
         "information": {
-          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+          "$ref": "ottp_schema_definitions.json#/definitions/information"
         },
         "products": {
           "type": "object",
