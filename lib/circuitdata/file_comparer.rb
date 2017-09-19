@@ -55,7 +55,7 @@ class Circuitdata::FileComparer
           end
         end
         # Initialize the rows format - for all default profile items
-        @default_column, file_v = @nh.select{|k, v| v[:types].include?("profile_defaults")}.first # this should only be a single file
+        @default_column, file_v = @nh.select{|k, v| v[:types].include?('profile_defaults')}.first # this should only be a single file
         data = file_v[:data]
         product_hash = data.dig(:open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data)
         init_row_format(product_hash)
@@ -71,8 +71,9 @@ class Circuitdata::FileComparer
         @master_column = column
         process_row_hash('get_summary')
       end
-      # process_row_hash('populate_defaults')
+      process_row_hash('populate_defaults')
     end
+
     @fh[:columns] = @columns.unshift(:summary)
     @fh[:rows] = @rows
     @fh
@@ -118,6 +119,8 @@ class Circuitdata::FileComparer
                 # get the summary items
                 if kl2 != :summary
                   items_v = vl2[:value]
+                  master_value = vl1.dig(@master_column, :value)
+                  # dont test if the @master_column value is also nil
                   if value.empty? || !value.include?(items_v)
                     value << items_v
                     conflicts_with << kl2
@@ -135,7 +138,7 @@ class Circuitdata::FileComparer
                       # get a customized error message here
                       master_row[:conflict_message] = (master_row[:conflict_message] << customize_conflict_message(col_type, @master_column, kl2)).uniq
                     end
-                  end unless items_v.nil?
+                  end unless items_v.nil? || master_value.nil?
                   conflict = true if vl2[:conflict]
                   conflicts_with = conflicts_with + vl2[:conflicts_with]
                   conflict_message = conflict_message + vl2[:conflict_message]
