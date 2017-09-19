@@ -15,35 +15,15 @@ class CircuitdataTest < Minitest::Test
     fail_capabilities = File.join(File.dirname(__FILE__), 'test_data/fail_capabilities.json')
 
     # RESULTS - should be updated to match the updated format
-    fail_blank_data = {:error=>true, :message=>"Could not read the file",
-                       :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                       :content=>{:file1=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}}}
-    pass_product_rst = {:error=>false, :message=>"",
-                        :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                        :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}}}
-    fail_product_rst = {:error=>true, :message=>"Could not validate the file against the CircuitData json schema",
-                        :errors=>{:validation=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data"=>["The property '#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data' contains additional properties [\"final_finsh\"] outside of the schema when none are allowed in schema http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json"]}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                        :content=>{:file1=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}}}
-    pass_restricted_rst = {:error=>false, :message=>"",
-                           :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                           :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>true, :profile_enforced=>false, :capabilities=>false}}}
-    fail_restricted_rst = {:error=>true, :message=>"The product to check did not meet the requirements",
-                           :errors=>{:validation=>{}, :restricted=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/legend/color"=>["of type string matched the disallowed schema"]}, :enforced=>{}, :capabilities=>{}},
-                           :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>true, :profile_enforced=>false, :capabilities=>false}}}
-    pass_enforced_rst = {:error=>false, :message=>"",
-                         :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                         :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>true, :capabilities=>false}}}
-    fail_enforced_rst = {:error=>true,
-                         :message=>"The product to check did not meet the requirements",
-                         :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/legend/color"=>["value \"white\" did not match one of the following values: yellow"]}, :capabilities=>{}},
-                         :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>true, :capabilities=>false}}}
-    pass_capabilities_rst = {:error=>false, :message=>"",
-                             :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}},
-                             :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>true}}}
-    fail_capabilities_rst = {:error=>true,
-                             :message=>"The product to check did not meet the requirements",
-                             :errors=> {:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}},
-                             :content=>{:file1=>{:products=>1, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>false}, :file2=>{:products=>0, :stackup=>false, :profile_defaults=>false, :profile_restricted=>false, :profile_enforced=>false, :capabilities=>true}}}
+    fail_blank_data = {:error=>true, :message=>"Could not read the file", :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    pass_product_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    fail_product_rst = {:error=>true, :message=>"Could not validate the file against the CircuitData json schema", :errors=>{:validation=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data"=>["The property '#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data' contains additional properties [\"final_finsh\"] outside of the schema when none are allowed in schema http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json"]}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    pass_restricted_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    fail_restricted_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=>{:validation=>{}, :restricted=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/legend/color"=>["of type string matched the disallowed schema"]}, :enforced=>{}, :capabilities=>{}}}
+    pass_enforced_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    fail_enforced_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/legend/color"=>["value \"white\" did not match one of the following values: yellow"]}, :capabilities=>{}}}
+    pass_capabilities_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
+    fail_capabilities_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=> {:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}}}
 
     # TEST WITH NON-EXISTING FILE
     assert_equal fail_blank_data, Circuitdata.compatibility_checker(wrong_path)

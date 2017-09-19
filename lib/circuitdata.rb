@@ -52,40 +52,35 @@ module Circuitdata
 
   def self.validate(content)
     require 'json-schema'
-
-    # schema_path = File.join(File.dirname(__FILE__), 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json')
-    # schema = File.read(schema_path)
-    $jsonschema_v1 = 'http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json'
-
-    error = false
-    message = ""
-    validationserrors = {}
+    error, message, validations_errors = false, nil, {}
+    schema = File.join(File.dirname(__FILE__), 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json')
+    # schema = 'http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json'
 
     begin
-      validated = JSON::Validator.fully_validate($jsonschema_v1, content, :errors_as_objects => true)
+      validated = JSON::Validator.fully_validate(schema, content, :errors_as_objects => true)
     rescue JSON::Schema::ReadFailed
-      errors = true
-      message = "Could not read the schema #{$jsonschema_v1}"
+      error = true
+      message = "Could not read the validating schema"
     rescue JSON::Schema::SchemaError
-      errors = true
-      message = "Something was wrong with the schema #{$jsonschema_v1}"
+      error = true
+      message = "There is something was wrong with the validating schema"
     end
-    unless errors
+    unless error
       if validated.count > 0
         error = true
         message = "Could not validate the file against the CircuitData json schema"
-        validated.each do |valerror|
-          validationserrors[valerror[:fragment]] = [] unless validationserrors.has_key? valerror[:fragment]
+        validated.each do |val_error|
+          validations_errors[val_error[:fragment]] = [] unless validations_errors.has_key? val_error[:fragment]
           begin
-            keep = valerror[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures[1]
+            keep = val_error[:message].match("^(The\\sproperty\\s\\'[\\s\\S]*\\'\\s)([\\s\\S]*)(\\sin\\sschema\\sfile[\\s\\S]*)$").captures[1]
           rescue
-            keep = valerror[:message]
+            keep = val_error[:message]
           end
-          validationserrors[valerror[:fragment]] << keep
+          validations_errors[val_error[:fragment]] << keep
         end
       end
     end
-    return error, message, validationserrors
+    return error, message, validations_errors
   end
 
   def self.compare_files(file_hash, validate_origins=false)
@@ -99,11 +94,17 @@ module Circuitdata
   end
 
   def self.test
+    fail_product = File.join(File.dirname(__FILE__), '../test/test_data/fail_product.json')
     product1 = File.join(File.dirname(__FILE__), '../test/test_data/test_product1.json')
     product2 = File.join(File.dirname(__FILE__), '../test/test_data/test_product2.json')
     profile_restricted = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-restricted.json')
     profile_enforced = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
     profile_default = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-default.json')
+
+    # TEST WITH NON SCHEMA COMPATIBLE JSON
+    # puts 'testing validation with non schema compatible json'
+    # puts Circuitdata.compatibility_checker(fail_product)
+    # puts "\n"
 
     # # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
     # puts "Testing compatibility_checker:"
