@@ -5,6 +5,7 @@ class Circuitdata::FileComparer
     @rows = {}
     @nh = {} # a new_hash to combine all the data
     @columns = []
+    @default_column = nil
     # Final hash
     @fh = {error: false, message: nil, conflict: false, product_name: nil, columns: nil, master_column: nil, rows: nil}
   end
@@ -36,6 +37,7 @@ class Circuitdata::FileComparer
       @columns = @nh.keys
       # generate summary insert into rows for each array
       master_json = @nh.dig(@fh[:master_column], :data)
+
       @nh.each do |file_k, file_v|
         products, data = file_v[:products], file_v[:data]
         check_results = Circuitdata.compatibility_checker(master_json, data, false)
@@ -43,27 +45,44 @@ class Circuitdata::FileComparer
         # initialize the rows format
         product_hash = data.dig(:open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data)
         if products.any?
-          product_hash.each do |k, v|
-            if v.is_a?(Hash)
-              @rows[k] ||= {}
-              v.each do |kl1, vl1|
-                @rows[k][kl1] ||= get_l1_hash(@columns)
-              end
-            else
-              @rows[k] ||= []
-              # if array functionality eg Holes
-            end if ['Hash', 'Array'].include?(v.class.name)
-          end
+          init_row_format(product_hash)
         end
       end
+      # Initialize the items inside the default profile
+      # loop only once, then save the file_k variable into a variable to be used to track the default
+      @default_column, file_v = @nh.select{|k, v| v[:types].include?("profile_defaults")}.first # this should only be a single file
+      # binding.pry
+      # @nh.select{|k, v| v[:types].include?("profile_defaults")}.each do |file_k, file_v|
+      data = file_v[:data]
+      product_hash = data.dig(:open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data)
+      init_row_format(product_hash)
+      # end
+
+      # binding.pry
 
       # populate the row hash
       process_row_hash('populate')
       process_row_hash('get_summary')
+      process_row_hash('populate_defaults')
     end
     @fh[:columns] = @columns.unshift(:summary)
     @fh[:rows] = @rows
     @fh
+  end
+
+  def init_row_format(product_hash)
+    product_hash.each do |k, v|
+      if v.is_a?(Hash)
+        # binding.pry
+        @rows[k] ||= {}
+        v.each do |kl1, vl1|
+          @rows[k][kl1] ||= get_l1_hash(@columns)
+        end
+      else
+        @rows[k] ||= []
+        # if array functionality eg Holes
+      end if ['Hash', 'Array'].include?(v.class.name)
+    end
   end
 
   def process_row_hash(action)
@@ -73,54 +92,66 @@ class Circuitdata::FileComparer
           value, conflict, conflicts_with, conflict_message, value_cols = [], false, [], [], []
           vl1.each do |kl2, vl2| # the specification column level - call the function from here
             conflicts = @nh.dig(kl2, :conflicts)
-            if action == 'populate'
-              check = conflicts.any? && conflicts.dig(:rows, k, kl1).present?
-              vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
-              vl2[:conflict] = check
-              vl2[:conflicts_with] = check ? [@fh[:master_column]] : []
-              vl2[:conflict_message] = check ? conflicts.dig(:rows, k, kl1) : []
-              # update master_column conflicts with
-              if check
-                master_row = @rows.dig(k, kl1, @fh[:master_column])
-                master_row[:conflicts_with] = master_row[:conflicts_with] + conflicts.dig(:master_conflicts)
-                master_row[:conflict] = true
-                master_row[:conflict_message] = (master_row[:conflict_message] + vl2[:conflict_message]).uniq
-              end
-            else
-              # get the summary items
-              items_v = vl2[:value]
-              if value.empty? || !value.include?(items_v)
-                value << items_v
-                conflicts_with << kl2
-                # value_cols << kl2 if kl2 != @fh[:master_column]
-
-                if kl2 != @fh[:master_column]
-                  value_cols << kl2
-                  # update this specific iteration
-                  vl2[:conflict] = true
-                  vl2[:conflicts_with] = vl2[:conflicts_with] << @fh[:master_column]
-                  vl2[:conflict_message] = vl2[:conflict_message] << 'value conflicts with product1'
-                  # update the master row
+            case action
+              when 'populate'
+                check = conflicts.any? && conflicts.dig(:rows, k, kl1).present?
+                vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
+                vl2[:conflict] = check
+                vl2[:conflicts_with] = check ? [@fh[:master_column]] : []
+                vl2[:conflict_message] = check ? conflicts.dig(:rows, k, kl1) : []
+                # update master_column conflicts with
+                if check
                   master_row = @rows.dig(k, kl1, @fh[:master_column])
-                  master_row[:conflicts_with] = master_row[:conflicts_with] << kl2
+                  master_row[:conflicts_with] = master_row[:conflicts_with] + conflicts.dig(:master_conflicts)
                   master_row[:conflict] = true
-                  master_row[:conflict_message] = master_row[:conflict_message] << "#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}"
+                  master_row[:conflict_message] = (master_row[:conflict_message] + vl2[:conflict_message]).uniq
                 end
-                # Add errors to the specific rows items
-              end unless items_v.nil?
-              conflict = true if vl2[:conflict]
-              conflicts_with = conflicts_with + vl2[:conflicts_with]
-              conflict_message = conflict_message + vl2[:conflict_message]
+              when 'get_summary'
+                # get the summary items
+                items_v = vl2[:value]
+                if value.empty? || !value.include?(items_v)
+                  value << items_v
+                  conflicts_with << kl2
+                  # jump the default column
+                  if kl2 != @fh[:master_column] # Add errors to the specific rows items
+                    value_cols << kl2
+                    # update this specific iteration
+                    vl2[:conflict] = true
+                    vl2[:conflicts_with] = vl2[:conflicts_with] << @fh[:master_column]
+                    vl2[:conflict_message] = vl2[:conflict_message] << 'value conflicts with product1'
+                    # update the master row
+                    master_row = @rows.dig(k, kl1, @fh[:master_column])
+                    master_row[:conflicts_with] = master_row[:conflicts_with] << kl2
+                    master_row[:conflict] = true
+                    master_row[:conflict_message] = master_row[:conflict_message] << "#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}"
+                  end
+                end unless items_v.nil?
+                conflict = true if vl2[:conflict]
+                conflicts_with = conflicts_with + vl2[:conflicts_with]
+                conflict_message = conflict_message + vl2[:conflict_message]
+              when 'populate_defaults'
+                if kl2 == @default_column
+                  vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data, k, kl1)
+                  vl2[:conflict] = false
+                  vl2[:conflicts_with] = []
+                  vl2[:conflict_message] = []
+                end
             end
           end
+          case action
+            when 'get_summary'
+              if value.count > 1
+                conflict_message.unshift("#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}")
+                conflict = true
+              else
+                value = value.first
+              end
+              vl1[:summary] = {value: value, conflict: conflict, conflicts_with: conflicts_with.uniq, conflict_message: conflict_message.uniq}
+            when 'populate_defaults'
+              # if all the values are blank, use the default value
+              vl1[:summary][:value] ||= vl1.dig(@default_column, :value)
+          end
           if action == 'get_summary'
-            if value.count > 1
-              conflict_message.unshift("#{@fh[:master_column]} value conflicts with values from: #{value_cols.to_sentence}")
-              conflict = true
-            else
-              value = value.first
-            end
-            vl1[:summary] = {value: value, conflict: conflict, conflicts_with: conflicts_with.uniq, conflict_message: conflict_message.uniq}
           end
           @fh[:conflict] = true if conflict
         end

@@ -21,7 +21,6 @@ module Circuitdata
       end
     end unless products.nil?
 
-    # return (product_names.uniq rescue []), types
     return product_names, types
   end
 
@@ -105,10 +104,11 @@ module Circuitdata
     profile_enforced = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-enforced.json')
     profile_default = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-default.json')
 
-    # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
-    puts "Testing compatibility_checker:"
-    puts Circuitdata.compatibility_checker(product2, profile_enforced, true)
-    puts "\n"
+    # # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
+    # puts "Testing compatibility_checker:"
+    # puts Circuitdata.compatibility_checker(product2, profile_default, true)
+    # puts "\n"
+
     # THEN TEST THE COMPARE FILES:
     puts "Testing file comparison"
     file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default}
