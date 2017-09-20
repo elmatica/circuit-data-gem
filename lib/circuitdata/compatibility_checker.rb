@@ -45,12 +45,10 @@ class Circuitdata::CompatibilityChecker
       else
         check_hash = {}
     end
-    # binding.pry
 
+    common_hash = schema.dig(:properties, :open_trade_transfer_package, :properties, :products, :patternProperties, :'^(?!generic$).*', :properties, :printed_circuits_fabrication_data, :properties)
     check_hash.each do |k, v|
       v.each do |kl1, vl1| # level 1
-        common_hash = schema.dig(:properties, :open_trade_transfer_package, :properties, :products, :patternProperties, :'^(?!generic$).*', :properties, :printed_circuits_fabrication_data, :properties)
-        # binding.pry
         common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
         common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
 
@@ -86,6 +84,7 @@ class Circuitdata::CompatibilityChecker
         common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
         common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
       end if v.is_a? Hash
+      common_hash[k.to_sym][:additionalProperties] = false if v.is_a? Hash
     end
 
     # perform validations
@@ -95,8 +94,6 @@ class Circuitdata::CompatibilityChecker
       if validation_errors.any?
         @fh[:error] = true
         @fh[:message] = 'The product to check did not meet the requirements'
-
-        # format the errors well here
 
         validation_errors.each do |error|
           error_array = []

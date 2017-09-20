@@ -7,8 +7,10 @@ class Circuitdata::FileComparer
     @columns = []
     @default_column = nil
     @master_column = nil
+    @not_allowed = []
+
     # Final hash
-    @fh = {error: false, message: nil, conflict: false, product_name: nil, columns: nil, master_column: nil, rows: nil}
+    @fh = {error: false, message: nil, conflict: false, product_name: nil, columns: nil, rows: nil}
   end
 
   def compare
@@ -56,9 +58,11 @@ class Circuitdata::FileComparer
         end
         # Initialize the rows format - for all default profile items
         @default_column, file_v = @nh.select{|k, v| v[:types].include?("profile_defaults")}.first # this should only be a single file
-        data = file_v[:data]
-        product_hash = data.dig(:open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data)
-        init_row_format(product_hash)
+        if @default_column.present?
+          data = file_v[:data]
+          product_hash = data.dig(:open_trade_transfer_package, :profiles, :defaults, :printed_circuits_fabrication_data)
+          init_row_format(product_hash)
+        end
       end
 
       # populate the @rows
@@ -95,6 +99,7 @@ class Circuitdata::FileComparer
 
   def process_row_hash(action)
     @rows.each do |k, v| # product elements level
+
       if v.is_a?(Hash)
         v.each do |kl1, vl1| # specification level
           value, conflict, conflicts_with, conflict_message = [], false, [], []
@@ -102,16 +107,22 @@ class Circuitdata::FileComparer
             conflicts = @nh.dig(kl2, :conflicts, @master_column)
             case action
               when 'populate'
-                check = conflicts.any? && conflicts.dig(:rows, k, kl1).present?
+                conflict = conflicts.dig(:rows, k, kl1)
+                check = conflicts.any? && conflict.present?
                 vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
                 vl2[:conflict] = check unless vl2[:conflict] # update only when the status is false
-                vl2[:conflicts_with] = check ? vl2[:conflicts_with] << @master_column : []
-                vl2[:conflict_message] = check ? vl2[:conflict_message] + conflicts&.dig(:rows, k, kl1) : []
+                vl2[:conflicts_with] ||= []
+                vl2[:conflicts_with] = check ? (vl2[:conflicts_with] << @master_column).uniq : []
+                vl2[:conflict_message] ||= []
+                vl2[:conflict_message] = check ? (vl2[:conflict_message] + conflict).uniq : []
+
+                # Why is enforced the only one showing conflicts
+                # binding.pry if check && kl2 == :capability
 
                 # update master_column conflicts with
                 if check
                   master_row = @rows.dig(k, kl1, @master_column)
-                  master_row[:conflicts_with] = master_row[:conflicts_with] + conflicts.dig(:master_conflicts)
+                  master_row[:conflicts_with] = (master_row[:conflicts_with] + conflicts.dig(:master_conflicts)).uniq
                   master_row[:conflict] = true
                   master_row[:conflict_message] = (master_row[:conflict_message] + vl2[:conflict_message]).uniq
                 end
@@ -169,6 +180,7 @@ class Circuitdata::FileComparer
           @fh[:conflict] = true if conflict
         end
       else
+
         # if array functionality eg Holes
       end
     end
@@ -212,13 +224,44 @@ class Circuitdata::FileComparer
         errors.each do |k, v|
           folders_stack = k.split('/')
           folder, spec = folders_stack[5], folders_stack[6]
-          summary[:rows][folder.to_sym] ||= {}
-          spec_message = summary[:rows][folder.to_sym][spec.to_sym] || []
-          summary[:rows][folder.to_sym][spec.to_sym] = spec_message+v
+          if folder.nil?
+            get_other_conflicts(summary[:rows], v, 'l1')
+          else
+            summary[:rows][folder.to_sym] ||= {}
+            if spec.nil?
+              get_other_conflicts(summary[:rows][folder.to_sym], v, 'l2')
+            else
+              summary[:rows][folder.to_sym][spec.to_sym] ||= []
+              # spec_message = summary[:rows][folder.to_sym][spec.to_sym] || []
+              summary[:rows][folder.to_sym][spec.to_sym] = summary[:rows][folder.to_sym][spec.to_sym] + v
+            end
+          end
         end if errors.any?
       end
     end
     summary
+  end
+
+  def get_other_conflicts(hash, v, level)
+    hash[:not_allowed] ||= []
+    hash[:messages] ||= []
+    not_allowed, messages = [], []
+    if v.is_a? Array
+      # get items that are not allowed
+      msg = v.select{|e| e.include?('contains additional properties [')}.first
+      not_allowed = eval(msg[/properties(.*?)outside/m, 1]) rescue []
+      messages << "#{not_allowed.to_sentence} are not allowed" if not_allowed.any?
+      # get other conflicts
+      messages = messages + v.select{|e| !e.include?('contains additional properties [')}
+    end
+    if not_allowed.any? && level == 'l2'
+      not_allowed.each do |spec|
+        hash[spec.to_sym] ||= []
+        hash[spec.to_sym] = hash[spec.to_sym] << "#{spec} is not a allowed element"
+      end
+    end
+    hash[:not_allowed] = (hash[:not_allowed] + not_allowed).uniq
+    hash[:messages] = (hash[:messages] + messages).uniq
   end
 
   def get_l1_hash(columns)

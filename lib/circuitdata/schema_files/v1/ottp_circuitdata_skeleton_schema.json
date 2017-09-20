@@ -12,10 +12,8 @@
           "pattern": "^1.0$"
         },
         "information": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {}
-          // "$ref": "ottp_schema_definitions.json#/definitions/information"
+          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+          // "$ref": "circuitdata/schema_files/v1/ottp_schema_definitions.json#/definitions/information"
         },
         "products": {
           "type": "object",
