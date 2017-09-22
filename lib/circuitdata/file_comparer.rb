@@ -111,14 +111,8 @@ class Circuitdata::FileComparer
                 check = conflicts.any? && conflict.present?
                 vl2[:value] = @nh.dig(kl2, :data, :open_trade_transfer_package, :products, @fh[:product_name].to_sym, :printed_circuits_fabrication_data, k, kl1)
                 vl2[:conflict] = check unless vl2[:conflict] # update only when the status is false
-                vl2[:conflicts_with] ||= []
-                vl2[:conflicts_with] = check ? (vl2[:conflicts_with] << @master_column).uniq : []
-                vl2[:conflict_message] ||= []
-                vl2[:conflict_message] = check ? (vl2[:conflict_message] + conflict).uniq : []
-
-                # Why is enforced the only one showing conflicts
-                # binding.pry if check && kl2 == :capability
-
+                vl2[:conflicts_with] = check ? ((vl2[:conflicts_with] || []) << @master_column).uniq : vl2[:conflicts_with] || []
+                vl2[:conflict_message] = check ? ((vl2[:conflict_message] || []) + conflict).uniq : vl2[:conflict_message] || []
                 # update master_column conflicts with
                 if check
                   master_row = @rows.dig(k, kl1, @master_column)
@@ -180,7 +174,6 @@ class Circuitdata::FileComparer
           @fh[:conflict] = true if conflict
         end
       else
-
         # if array functionality eg Holes
       end
     end
@@ -232,7 +225,6 @@ class Circuitdata::FileComparer
               get_other_conflicts(summary[:rows][folder.to_sym], v, 'l2')
             else
               summary[:rows][folder.to_sym][spec.to_sym] ||= []
-              # spec_message = summary[:rows][folder.to_sym][spec.to_sym] || []
               summary[:rows][folder.to_sym][spec.to_sym] = summary[:rows][folder.to_sym][spec.to_sym] + v
             end
           end

@@ -13,7 +13,7 @@ module Circuitdata
     types << 'capabilities' unless wrapper&.dig(:capabilities).nil?
 
     products = wrapper&.dig(:products)
-    product_names = products.nil? ? [] : products.keys# this will return all the product names
+    product_names = products.nil? ? [] : products.keys # this will return all the product names
     types << 'product' if product_names.any?
     # loop through the products
     products.each do |k, v|
@@ -88,8 +88,8 @@ module Circuitdata
     comparer.compare
   end
 
-  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false)
-    checker = CompatibilityChecker.new(product_file, check_file, validate_origins)
+  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false, format_conflicts=false)
+    checker = CompatibilityChecker.new(product_file, check_file, validate_origins, format_conflicts)
     checker.start_check
   end
 
@@ -101,11 +101,6 @@ module Circuitdata
     profile_default = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-default.json')
     capabilities = File.join(File.dirname(__FILE__), '../test/test_data/testfile-capability.json')
 
-    # TEST WITH NON SCHEMA COMPATIBLE JSON
-    # puts 'testing validation with non schema compatible json'
-    # puts Circuitdata.compatibility_checker(fail_product)
-    # puts "\n"
-
     # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
     puts "\nTesting compatibility_checker: - the capabilities"
     puts Circuitdata.compatibility_checker(product1, capabilities)
@@ -113,8 +108,8 @@ module Circuitdata
 
     # THEN TEST THE COMPARE FILES:
     puts "Testing file comparison"
-    # file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default, capability: capabilities}
-    file_hash = {product1: product1, product2: product2, restricted: profile_restricted, capability: capabilities}
+    file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default, capability: capabilities}
+    # file_hash = {product1: product1, product2: product2, restricted: profile_restricted, capability: capabilities}
     # file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default}
     # file_hash = {product1: product1, capability: capabilities}
     Circuitdata.compare_files(file_hash, true)
