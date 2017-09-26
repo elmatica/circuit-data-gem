@@ -88,8 +88,8 @@ module Circuitdata
     comparer.compare
   end
 
-  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false, format_conflicts=false)
-    checker = CompatibilityChecker.new(product_file, check_file, validate_origins, format_conflicts)
+  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false)
+    checker = CompatibilityChecker.new(product_file, check_file, validate_origins)
     checker.start_check
   end
 

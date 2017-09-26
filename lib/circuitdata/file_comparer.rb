@@ -7,8 +7,6 @@ class Circuitdata::FileComparer
     @columns = []
     @default_column = nil
     @master_column = nil
-    @not_allowed = []
-
     # Final hash
     @fh = {error: false, message: nil, conflict: false, product_name: nil, columns: nil, rows: nil}
   end
