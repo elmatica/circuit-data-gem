@@ -101,17 +101,9 @@ module Circuitdata
     profile_default = File.join(File.dirname(__FILE__), '../test/test_data/testfile-profile-default.json')
     capabilities = File.join(File.dirname(__FILE__), '../test/test_data/testfile-capability.json')
 
-    # TEST THE COMPATIBILITY CHECKER FUNCTION FIRST:
-    puts "\nTesting compatibility_checker: - the capabilities"
-    puts Circuitdata.compatibility_checker(product1, capabilities)
-    puts "\n"
-
     # THEN TEST THE COMPARE FILES:
     puts "Testing file comparison"
     file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default, capability: capabilities}
-    # file_hash = {product1: product1, product2: product2, restricted: profile_restricted, capability: capabilities}
-    # file_hash = {product1: product1, product2: product2, restricted: profile_restricted, enforced: profile_enforced, default: profile_default}
-    # file_hash = {product1: product1, capability: capabilities}
     Circuitdata.compare_files(file_hash, true)
   end
 end

@@ -73,7 +73,7 @@ class Circuitdata::CompatibilityChecker
                   new_hash = eval("{:enum => #{enum}}")
               end
             end
-          when 'Numeric' # This is a normal string
+          when 'Numeric', 'Float' # This is a normal string
             case type
               when 'restricted'
                 new_hash = {:not => {:allOf => [{:minimum => vl1.to_f},{:maximum => vl1.to_f}]}}
@@ -84,7 +84,8 @@ class Circuitdata::CompatibilityChecker
         common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
         common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
       end if v.is_a? Hash
-      common_hash[k.to_sym][:additionalProperties] = false if v.is_a? Hash
+
+      common_hash[k.to_sym][:additionalProperties] = false if (v.is_a?(Hash) && type == 'capabilities')
     end
 
     # perform validations
@@ -102,11 +103,6 @@ class Circuitdata::CompatibilityChecker
           rescue
             error_array << error[:message]
           end
-
-          if @format_conflicts
-
-          end
-
           @fh[:errors][type.to_sym][error[:fragment]] = error_array
         end
       end

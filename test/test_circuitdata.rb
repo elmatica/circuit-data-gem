@@ -14,7 +14,6 @@ class CircuitdataTest < Minitest::Test
     pass_capabilities = File.join(File.dirname(__FILE__), 'test_data/pass_capabilities.json')
     fail_capabilities = File.join(File.dirname(__FILE__), 'test_data/fail_capabilities.json')
 
-    # RESULTS - should be updated to match the updated format
     fail_blank_data = {:error=>true, :message=>"Could not read the file", :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
     pass_product_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
     fail_product_rst = {:error=>true, :message=>"Could not validate the file against the CircuitData json schema", :errors=>{:validation=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data"=>["contains additional properties [\"final_finsh\"] outside of the schema when none are allowed"]}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
@@ -23,7 +22,7 @@ class CircuitdataTest < Minitest::Test
     pass_enforced_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
     fail_enforced_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/legend/color"=>["value \"white\" did not match one of the following values: yellow"]}, :capabilities=>{}}}
     pass_capabilities_rst = {:error=>false, :message=>nil, :errors=>{:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{}}}
-    fail_capabilities_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=> {:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"]}}}
+    fail_capabilities_rst = {:error=>true, :message=>"The product to check did not meet the requirements", :errors=> {:validation=>{}, :restricted=>{}, :enforced=>{}, :capabilities=>{"#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer/count"=>["did not have a minimum value of 10, inclusively"], "#/open_trade_transfer_package/products/testproduct/printed_circuits_fabrication_data/rigid_conductive_layer"=>["contains additional properties [\"minimum_external_track_width\", \"minimum_external_spacing_width\", \"external_base_copper_thickness\", \"copper_coverage_average\", \"copper_foil_roughness\"] outside of the schema when none are allowed"]}}}
 
     # TEST WITH NON-EXISTING FILE
     assert_equal fail_blank_data, Circuitdata.compatibility_checker(wrong_path)
