@@ -1,12 +1,11 @@
 class Circuitdata::CompatibilityChecker
-  def initialize(product_file, check_file, validate_origins, format_conflicts)
+  def initialize(product_file, check_file, validate_origins)
     require 'json'
     require 'json-schema'
 
     @product_file = product_file
     @check_file = check_file
     @validate_origins = validate_origins
-    @format_conflicts = format_conflicts
     # Final hash
     @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}}
   end
