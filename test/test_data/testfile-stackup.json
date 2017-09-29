@@ -14,6 +14,11 @@
             "specification_level": "specified",
             "file_name": "test.json",
             "specified": {
+              "sections": {
+                "rigid1": 1,
+                "flex1": 2,
+                "rigid2": 3
+              },
               "rigid_conductive_layer": {
                 "minimum_external_track_width": 0.14,
                 "minimum_external_spacing_width": 0.14,

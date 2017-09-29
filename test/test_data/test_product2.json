@@ -6,6 +6,7 @@
         "printed_circuits_fabrication_data": {
           "version": "0.6",
           "rigid_conductive_layer": {
+            "count": 30,
             "minimum_external_track_width": 0.15,
             "copper_foil_roughness": "V"
           }
