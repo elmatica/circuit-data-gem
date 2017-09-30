@@ -11,6 +11,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     json-schema (2.8.0)
       addressable (>= 2.4)
+    minitest (5.10.3)
     public_suffix (3.0.0)
     rake (12.1.0)
 
@@ -19,6 +20,7 @@ PLATFORMS
 
 DEPENDENCIES
   circuitdata!
+  minitest (~> 5.10)
   rake (~> 12.1)
 
 BUNDLED WITH
