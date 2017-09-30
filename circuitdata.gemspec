@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency "json-schema", "~> 2.8"
   s.add_development_dependency "rake", "~> 12.1"
   s.add_development_dependency "minitest", "~> 5.10"
+  s.add_development_dependency "activesupport", ">= 4.2"
 end
