@@ -94,6 +94,16 @@ module Circuitdata
     Dereferencer.dereference(schema.schema, File.dirname(SCHEMA_FULL_PATH))
   end
 
+  def self.profile_schema
+    schema = dereferenced_schema
+    ottp = schema.dig(
+      "properties",
+      "open_trade_transfer_package",
+    )
+    ottp["properties"] = ottp["properties"].slice("profiles")
+    schema
+  end
+
   def self.compare_files(file_hash, validate_origins=false)
     comparer = FileComparer.new(file_hash, validate_origins)
     comparer.compare

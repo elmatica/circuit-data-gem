@@ -1,8 +1,6 @@
 module Circuitdata
   class Dereferencer
 
-    @parent_path
-
     def self.dereference(schema, base_path)
       d = new(base_path)
       d.start(schema)
@@ -10,7 +8,6 @@ module Circuitdata
 
     def initialize(base_path)
       @base_path = base_path
-      @parent_path = []
     end
 
     def start(schema)
