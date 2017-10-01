@@ -43,4 +43,11 @@ class CircuitdataTest < Minitest::Test
     # TEST WITH CAPABILITY PROFILE AND FAIL
     assert_equal fail_capabilities_rst, Circuitdata.compatibility_checker(pass_product, fail_capabilities)
   end
+
+  def test_dereferenced_schema
+    result = Circuitdata.dereferenced_schema
+
+    # Check that there are no $refs left in the result
+    assert_equal false, JSON.generate(result).include?('$ref')
+  end
 end

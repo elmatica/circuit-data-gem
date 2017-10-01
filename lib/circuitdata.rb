@@ -5,6 +5,7 @@ module Circuitdata
   require_relative './circuitdata/file_comparer'
   require_relative './circuitdata/compatibility_checker'
   require_relative './circuitdata/dereferencer'
+  require_relative './circuitdata/profile'
 
   SCHEMA_PATH = 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json'
   SCHEMA_FULL_PATH = File.join(__dir__, SCHEMA_PATH)
@@ -58,7 +59,7 @@ module Circuitdata
     error, message, validations_errors = false, nil, {}
 
     begin
-      validated = JSON::Validator.fully_validate(self.schema, content, :errors_as_objects => true)
+      validated = JSON::Validator.fully_validate(SCHEMA_FULL_PATH, content, :errors_as_objects => true)
     rescue JSON::Schema::ReadFailed
       error = true
       message = "Could not read the validating schema"
@@ -85,23 +86,16 @@ module Circuitdata
   end
 
   def self.schema
-    JSON::Schema::Reader.new.read(
-      SCHEMA_FULL_PATH
+    JSON.parse(
+      File.read(SCHEMA_FULL_PATH)
     )
   end
 
   def self.dereferenced_schema
-    Dereferencer.dereference(schema.schema, File.dirname(SCHEMA_FULL_PATH))
-  end
-
-  def self.profile_schema
-    schema = dereferenced_schema
-    ottp = schema.dig(
-      "properties",
-      "open_trade_transfer_package",
+    Dereferencer.dereference(
+      schema,
+      File.dirname(Circuitdata::SCHEMA_FULL_PATH)
     )
-    ottp["properties"] = ottp["properties"].slice("profiles")
-    schema
   end
 
   def self.compare_files(file_hash, validate_origins=false)
