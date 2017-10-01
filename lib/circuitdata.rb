@@ -1,8 +1,8 @@
 module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
   require 'active_support/all'
-  require 'circuitdata/file_comparer'
-  require 'circuitdata/compatibility_checker'
+  require_relative './circuitdata/file_comparer'
+  require_relative './circuitdata/compatibility_checker'
 
   def self.get_data_summary(data)
     types = []
