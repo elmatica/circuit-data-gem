@@ -1,8 +1,13 @@
 module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
   require 'active_support/all'
+  require 'json-schema'
   require_relative './circuitdata/file_comparer'
   require_relative './circuitdata/compatibility_checker'
+  require_relative './circuitdata/dereferencer'
+
+  SCHEMA_PATH = 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json'
+  SCHEMA_FULL_PATH = File.join(__dir__, SCHEMA_PATH)
 
   def self.get_data_summary(data)
     types = []
@@ -26,7 +31,6 @@ module Circuitdata
   end
 
   def self.read_json(file)
-    require 'json'
     error, message, data = false, nil, nil
 
     if file.is_a? Hash
@@ -51,13 +55,10 @@ module Circuitdata
   end
 
   def self.validate(content)
-    require 'json-schema'
     error, message, validations_errors = false, nil, {}
-    schema = File.join(File.dirname(__FILE__), 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json')
-    # schema = 'http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json'
 
     begin
-      validated = JSON::Validator.fully_validate(schema, content, :errors_as_objects => true)
+      validated = JSON::Validator.fully_validate(self.schema, content, :errors_as_objects => true)
     rescue JSON::Schema::ReadFailed
       error = true
       message = "Could not read the validating schema"
@@ -81,6 +82,16 @@ module Circuitdata
       end
     end
     return error, message, validations_errors
+  end
+
+  def self.schema
+    JSON::Schema::Reader.new.read(
+      SCHEMA_FULL_PATH
+    )
+  end
+
+  def self.dereferenced_schema
+    Dereferencer.dereference(schema.schema, File.dirname(SCHEMA_FULL_PATH))
   end
 
   def self.compare_files(file_hash, validate_origins=false)
