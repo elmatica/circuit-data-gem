@@ -387,7 +387,7 @@
         "accept_equivalent": {
           "type": "boolean",
           "uom": null,
-          "description": "If alternative to DuPontâ„¢ KaptonÂ® HN general-purpose film can be used"
+          "description": "If alternative to DuPont™ Kapton® HN general-purpose film can be used"
         },
         "top": {
           "type": "boolean",
