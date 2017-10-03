@@ -65,4 +65,8 @@ class CircuitdataProfileSchemaTest < Minitest::Test
       assert_equal exp.first, result.first
     end
   end
+
+  def test_profile_questions_no_stub
+    refute_equal nil, Circuitdata::Profile.questions
+  end
 end

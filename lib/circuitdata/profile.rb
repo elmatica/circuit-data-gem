@@ -53,6 +53,8 @@ module Circuitdata
     end
 
     def self.extract_questions_for_category(question_type, category, category_schema, path)
+      # Ignore question arrays for now.
+      return if category_schema[:type] == "array"
       category_questions = category[:questions]
 
       category_schema[:properties].each do |question_code, descriptor|
