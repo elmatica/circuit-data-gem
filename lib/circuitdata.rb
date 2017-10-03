@@ -87,7 +87,8 @@ module Circuitdata
 
   def self.schema
     JSON.parse(
-      File.read(SCHEMA_FULL_PATH)
+      File.read(SCHEMA_FULL_PATH),
+      symbolize_names: true
     )
   end
 

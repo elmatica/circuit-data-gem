@@ -3,10 +3,10 @@ module Circuitdata
     def self.schema
       schema = Circuitdata.dereferenced_schema
       ottp = schema.dig(
-        "properties",
-        "open_trade_transfer_package",
+        :properties,
+        :open_trade_transfer_package,
       )
-      ottp["properties"] = ottp["properties"].slice("profiles")
+      ottp[:properties] = ottp[:properties].slice(:profiles)
       schema
     end
 

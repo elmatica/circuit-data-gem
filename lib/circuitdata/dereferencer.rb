@@ -41,15 +41,15 @@ module Circuitdata
       h.each_pair do |k,v|
         if v.is_a?(Hash)
           res = hash_iterator(v)
-          if res["$ref"]
-            h[k] = res["$ref"]
+          if res[:"$ref"]
+            h[k] = res[:"$ref"]
           else
             h[k] = res
           end
         elsif v.is_a?(Array)
           h[k] = array_iterator(v)
         else
-          if k == "$ref"
+          if k == :"$ref"
             ref_schema = get_ref(v)
             return hash_iterator(ref_schema)
           else
