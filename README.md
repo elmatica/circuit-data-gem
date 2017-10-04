@@ -26,7 +26,6 @@ require 'circuitdata'
 
 ### Commands
 
-
 #### `Circuitdata.compatibility_checker`
 
 Test one file against the schema
@@ -84,7 +83,6 @@ Circuitdata.compatibility_checker( 'testfile-product.json', 'testfile-profile-re
 }
 
 ```
-
 
 #### `Circuitdata.compare_files`
 
@@ -146,5 +144,41 @@ Run a test with several files against each other and get a complete list of valu
 }
 ```
 
+#### `Circuitdata.dereferenced_schema`
+
+This returns the JSON schema used internally to validate the Circuit Data information. It
+returns the schema without any usage of `$ref` so that it can be utilized without any knowledge of the internal paths.
+
+#### `Circuitdata::Profile.schema`
+
+Returns a subset of the Circuit Data schema that relates to profiles. This is a schema without any `$ref`s.
+#### `Circuitdata::Profile.questions`
+Returns a list of grouped questions that can be used for populating an input interface related to profiles.
+
+Example output:
+```ruby
+[
+  {
+    id: :rigid_conductive_layer,
+    name: 'Rigid conductive layer',
+    questions: [
+      {
+        code: :copper_foil_roughness,
+        name: 'Copper foil roughness',
+        defaults: {
+          descriptor: {
+            type: "string",
+            enum: ["S", "L", "V"],
+            uom: ["um"],
+            description: "The roughness of the copper foil."
+          },
+          path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
+        }
+      },
+    ]
+  }
+  # ...
+]
+```
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
