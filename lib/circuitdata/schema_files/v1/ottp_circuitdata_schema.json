@@ -1,6 +1,5 @@
 {
-  // "$schema": "http://json-schema.org/draft-04/schema#",
-  // "id": "http://schema.circuitdata.org/v1/ottp_circuitdata_schema.json",
+ "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "additionalProperties": false,
   "required": ["open_trade_transfer_package"],
