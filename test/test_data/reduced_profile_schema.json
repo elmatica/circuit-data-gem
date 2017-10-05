@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["open_trade_transfer_package"],
+  "properties": {
+    "open_trade_transfer_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profiles": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "defaults": {
+              "type": "object",
+              "required": ["printed_circuits_fabrication_data"],
+              "properties": {
+                "printed_circuits_fabrication_data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["version"],
+                  "properties": {
+                    "version": { "type": "string", "pattern": "^0.6$" },
+                    "rigid_conductive_layer": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "copper_foil_roughness": {
+                          "type": "string",
+                          "enum": ["S", "L", "V"],
+                          "uom": ["um"],
+                          "description": "The roughness of the copper foil."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "enforced": {
+              "type": "object",
+              "required": ["printed_circuits_fabrication_data"],
+              "properties": {
+                "printed_circuits_fabrication_data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["version"],
+                  "properties": {
+                    "version": { "type": "string", "pattern": "^0.6$" },
+                    "flexible_conductive_layer": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "copper_foil_roughness": {
+                          "type": "string",
+                          "enum": ["S", "L", "V"],
+                          "uom": ["um"],
+                          "description": "The roughness of the copper foil."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
