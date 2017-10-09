@@ -75,7 +75,7 @@ class CircuitdataProfileSchemaTest < Minitest::Test
         defaults = question[:defaults]
         enforced = question[:enforced]
         both_present = !(defaults.nil? || enforced.nil? )
-        if both_present && defaults != enforced
+        if both_present && defaults[:descriptor] != enforced[:descriptor]
           non_matching_defaults_paths << defaults[:path]
         end
       end
