@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'circuitdata'
+require_relative '../lib/circuitdata'
 
 class CircuitdataProfileSchemaTest < Minitest::Test
   def test_profile_schema
