@@ -6,6 +6,7 @@ module Circuitdata
   require_relative './circuitdata/compatibility_checker'
   require_relative './circuitdata/dereferencer'
   require_relative './circuitdata/profile'
+  require_relative './circuitdata/tools'
 
   SCHEMA_PATH = 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json'
   SCHEMA_FULL_PATH = File.join(__dir__, SCHEMA_PATH)
@@ -107,6 +108,13 @@ module Circuitdata
   def self.compatibility_checker(product_file, check_file=nil, validate_origins=false)
     checker = CompatibilityChecker.new(product_file, check_file, validate_origins)
     checker.start_check
+  end
+
+  def self.create_documentation()
+    docu = Tools.new()
+    ra = docu.create_structure
+    puts ra
+    #docu.create_documentation(ra)
   end
 
   def self.test
