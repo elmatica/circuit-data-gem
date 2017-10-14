@@ -68,7 +68,7 @@ module Circuitdata
           category_questions << question
         end
         schema = descriptor.dup
-        question[:description] = schema.delete(:description)
+        question[:description] = schema.delete(:description) || question[:description]
         question[question_type] = {
           schema: schema,
           path: json_pointer(path + [question_code])
