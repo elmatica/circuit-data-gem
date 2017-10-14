@@ -67,6 +67,20 @@ class CircuitdataProfileSchemaTest < Minitest::Test
   end
 
   def test_profile_questions_no_stub
-    refute_equal nil, Circuitdata::Profile.questions
+    question_sections = Circuitdata::Profile.questions
+    non_matching_defaults_paths = []
+
+    question_sections.each do |section|
+      section[:questions].each do |question|
+        defaults = question[:defaults]
+        enforced = question[:enforced]
+        both_present = !(defaults.nil? || enforced.nil? )
+        if both_present && defaults[:descriptor] != enforced[:descriptor]
+          non_matching_defaults_paths << defaults[:path]
+        end
+      end
+    end
+
+    assert_equal [], non_matching_defaults_paths
   end
 end

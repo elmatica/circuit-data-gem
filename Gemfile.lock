@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    circuitdata (0.5.1)
+    circuitdata (0.6.0)
       json-schema (~> 2.8)
 
 GEM
