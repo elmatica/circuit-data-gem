@@ -62,12 +62,15 @@ module Circuitdata
         if question.nil?
           question = {
             code: question_code,
-            name: question_code.to_s.humanize
+            name: question_code.to_s.humanize,
+            description: ''
           }
           category_questions << question
         end
+        schema = descriptor.dup
+        question[:description] = schema.delete(:description)
         question[question_type] = {
-          descriptor: descriptor,
+          schema: schema,
           path: json_pointer(path + [question_code])
         }
       end

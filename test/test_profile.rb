@@ -26,12 +26,12 @@ class CircuitdataProfileSchemaTest < Minitest::Test
           {
             code: :copper_foil_roughness,
             name: 'Copper foil roughness',
+            description: "The roughness of the copper foil.",
             defaults: {
-              descriptor: {
+              schema: {
                 type: "string",
                 enum: ["S", "L", "V"],
                 uom: ["um"],
-                description: "The roughness of the copper foil."
               },
               path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
             }
@@ -45,12 +45,12 @@ class CircuitdataProfileSchemaTest < Minitest::Test
           {
             code: :copper_foil_roughness,
             name: 'Copper foil roughness',
+            description: "The roughness of the copper foil.",
             enforced: {
-              descriptor: {
+              schema: {
                 type: "string",
                 enum: ["S", "L", "V"],
                 uom: ["um"],
-                description: "The roughness of the copper foil."
               },
               path: "/open_trade_transfer_package/profiles/enforced/printed_circuits_fabrication_data/flexible_conductive_layer/copper_foil_roughness"
             }
