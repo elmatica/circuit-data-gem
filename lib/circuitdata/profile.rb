@@ -61,6 +61,7 @@ module Circuitdata
         question = category_questions.find {|question| question[:code] == question_code }
         if question.nil?
           question = {
+            id: "#{category[:id]}_#{question_code}",
             code: question_code,
             name: question_code.to_s.humanize,
             description: ''

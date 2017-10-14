@@ -24,6 +24,7 @@ class CircuitdataProfileSchemaTest < Minitest::Test
         name: 'Rigid conductive layer',
         questions: [
           {
+            id: 'rigid_conductive_layer_copper_foil_roughness',
             code: :copper_foil_roughness,
             name: 'Copper foil roughness',
             description: "The roughness of the copper foil.",
