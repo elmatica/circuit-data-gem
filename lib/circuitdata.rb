@@ -113,8 +113,7 @@ module Circuitdata
   def self.create_documentation()
     docu = Tools.new()
     ra = docu.create_structure
-    puts ra
-    #docu.create_documentation(ra)
+    docu.create_documentation(ra)
   end
 
   def self.test
