@@ -121,7 +121,7 @@ class Circuitdata::Tools
     end
     @ra[:structured][:elements].sort.to_h
     @ra[:structured][:elements].delete(:version)
-
+    @ra[:structured][:elements][:stackup].delete(:specified)
     return @ra
   end
 
