@@ -70,8 +70,7 @@ class Circuitdata::CompatibilityChecker
               vl1.split(',').each {|enumvalue| enum << enumvalue.strip}
               case type
                 when 'restricted'
-                  new_hash = {:not => {:anyOf => [{ :enum => ''}]}}
-                  new_hash[:not][:anyOf][0][:enum] = enum
+                  new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
                 else
                   new_hash = eval("{:enum => #{enum}}")
               end
@@ -82,6 +81,13 @@ class Circuitdata::CompatibilityChecker
                 new_hash = {:not => {:allOf => [{:minimum => vl1.to_f},{:maximum => vl1.to_f}]}}
               else
                 new_hash = eval("{:enum => [#{vl1.to_s}]}")
+            end
+          when 'Array'
+            case type
+            when 'restricted'
+              new_hash = {:not => {:anyOf => [{ :enum => vl1 }]}}
+            else
+              new_hash = {:enum => vl1}
             end
         end
         common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash

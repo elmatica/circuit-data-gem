@@ -13,7 +13,43 @@
           "pattern": "^1.0$"
         },
         "information": {
-          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "company": {
+              "type": "string",
+              "description": "The company who owns the information in the file"
+            },
+            "person": {
+              "type": "string",
+              "description": "The person responsible for the information in the file"
+            },
+            "editor_software": {
+              "type": "string",
+              "description": "The software that has generated the file"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of the creation of the file, in RFC 3339 date-time format"
+            },
+            "updated": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of the last update of the file, in RFC 3339 date-time format"
+            },
+            "project": {
+              "type": "string",
+              "description": "The name of the project included in the file"
+            },
+            "version": {
+              "type": "number",
+              "description": "The name of the project included in the file"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
         },
         "products": {
           "type": "object",
@@ -3684,24 +3720,6 @@
                       "aliases": "selective hard gold",
                       "name": "Selective plated pads",
                       "description": "Selective plated pads"
-                    },
-                    "hard_gold_edge_connectors": {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "properties": {
-                        "present": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_edge_connectors/present"
-                        },
-                        "thickness": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_gold_edge_connectors/thickness"
-                        },
-                        "thickness_other": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_gold_edge_connectors/thickness_other"
-                        }
-                      },
-                      "aliases": "gold fingers",
-                      "name": "Hard Gold Edge Connectors",
-                      "description": "Edge connectors made with hard gold"
                     },
                     "markings": {
                       "type": "object",

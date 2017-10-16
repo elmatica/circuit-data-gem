@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    circuitdata (0.6.0)
+    circuitdata (0.6.1)
       json-schema (~> 2.8)
 
 GEM
@@ -28,7 +28,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (>= 4.2)
+  activesupport (~> 4.2)
   circuitdata!
   minitest (~> 5.10)
   rake (~> 12.1)

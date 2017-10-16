@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'circuitdata'
+require_relative '../lib/circuitdata'
 
 class CircuitdataProfileSchemaTest < Minitest::Test
   def test_profile_schema
@@ -24,44 +24,34 @@ class CircuitdataProfileSchemaTest < Minitest::Test
         name: 'Rigid conductive layer',
         questions: [
           {
+            id: 'rigid_conductive_layer_copper_foil_roughness',
             code: :copper_foil_roughness,
             name: 'Copper foil roughness',
+            description: "The roughness of the copper foil.",
             defaults: {
-              descriptor: {
+              schema: {
                 type: "string",
                 enum: ["S", "L", "V"],
                 uom: ["um"],
-                description: "The roughness of the copper foil."
               },
               path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
-            }
-          },
-        ]
-      },
-      {
-        id: :flexible_conductive_layer,
-        name: 'Flexible conductive layer',
-        questions: [
-          {
-            code: :copper_foil_roughness,
-            name: 'Copper foil roughness',
+            },
             enforced: {
-              descriptor: {
+              schema: {
                 type: "string",
                 enum: ["S", "L", "V"],
                 uom: ["um"],
-                description: "The roughness of the copper foil."
               },
-              path: "/open_trade_transfer_package/profiles/enforced/printed_circuits_fabrication_data/flexible_conductive_layer/copper_foil_roughness"
+              path: "/open_trade_transfer_package/profiles/enforced/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
             }
-          }
+          },
         ]
       }
     ]
 
     Circuitdata::Profile.stub(:schema, reduced_profile_schema) do
       result = Circuitdata::Profile.questions
-      assert_same 2, result.length
+      assert_same 1, result.length
       assert_equal exp.first, result.first
     end
   end
