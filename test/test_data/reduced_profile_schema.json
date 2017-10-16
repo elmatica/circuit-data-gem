@@ -47,7 +47,7 @@
                   "required": ["version"],
                   "properties": {
                     "version": { "type": "string", "pattern": "^0.6$" },
-                    "flexible_conductive_layer": {
+                    "rigid_conductive_layer": {
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {

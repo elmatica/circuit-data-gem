@@ -21,14 +21,14 @@ module Circuitdata
     def read_file(file_path)
       full_path = File.expand_path(file_path, base_path)
       file = File.read(full_path)
-      JSON.parse(file)
+      JSON.parse(file, symbolize_names: true)
     end
 
     def get_ref(ref)
       file_path, pointer = ref.split('#')
       data = read_file(file_path)
       pointer_parts = pointer.split('/').reject(&:blank?)
-      result = data.dig(*pointer_parts)
+      result = data.dig(*pointer_parts.map(&:to_sym))
       if result.nil?
         fail "Unable to dereference ref=#{ref}"
       end
