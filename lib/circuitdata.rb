@@ -113,6 +113,7 @@ module Circuitdata
   def self.create_documentation()
     docu = Tools.new()
     ra = docu.create_structure
+    #File.write('utils_README.md', docu.create_documentation(ra))
     docu.create_documentation(ra)
   end
 

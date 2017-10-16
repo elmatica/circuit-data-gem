@@ -8,24 +8,29 @@ class Circuitdata::Tools
 
   def update_ra(type, key, value)
     parsed_elements = Circuitdata.read_json(@definitions_path)[2]
-    unless @ra[:structured].has_key? key
-      @ra[:structured][key] = {
+    unless @ra[:structured][:elements].has_key? key
+      @ra[:structured][:elements][key] = {
         :type => value[:type],
         :elements => {},
         :name => nil,
         :description => nil,
         :aliases => nil
       }
-      @ra[:structured][key][:name] = value[:name] if value.has_key? :name
-      @ra[:structured][key][:description] = value[:decription] if value.has_key? :decription
+      @ra[:structured][:elements][key][:name] = value[:descriptive_name] if value.has_key? :descriptive_name
+      @ra[:structured][:elements][key][:description] = value[:description] if value.has_key? :description
       if value.has_key? :aliases
-        @ra[:structured][key][:aliases] = value[:aliases] unless value[:aliases] == ""
+        @ra[:structured][:elements][key][:aliases] = value[:aliases] unless value[:aliases] == ""
       end
     end
-    if value.has_key? :properties
-      value[:properties].each do |skey, svalue|
-        unless @ra[:structured][key][:elements].has_key? skey
-          @ra[:structured][key][:elements][skey] = {
+    if value[:type] == "array"
+      subelement = value[:items]
+    else
+      subelement = value
+    end
+    if subelement.has_key? :properties
+      subelement[:properties].each do |skey, svalue|
+        unless @ra[:structured][:elements][key][:elements].has_key? skey
+          @ra[:structured][:elements][key][:elements][skey] = {
             :in_product_generic => false,
             :in_product_stackup => false,
             :in_profile_default => false,
@@ -38,9 +43,7 @@ class Circuitdata::Tools
             :description => nil,
             :uom => nil,
             :minimum => nil,
-            :maximum => nil,
-            :in_profile_restricted_regex => nil,
-            :in_capabilities_regex => nil
+            :maximum => nil
           }
           if svalue.has_key? :$ref
             elements = svalue[:$ref].split('/')
@@ -58,43 +61,43 @@ class Circuitdata::Tools
           end
           unless element.nil?
             if element.has_key? :type
-              @ra[:structured][key][:elements][skey][:type] = element[:type]
+              @ra[:structured][:elements][key][:elements][skey][:type] = element[:type]
               if element[:type] == "array"
                 if element.has_key? :items and element[:items].has_key? :type
-                  @ra[:structured][key][:elements][skey][:arrayitems] == element[:items][:type]
+                  @ra[:structured][:elements][key][:elements][skey][:arrayitems] == element[:items][:type]
                 end
               end
             end
-            @ra[:structured][key][:elements][skey][:enum] = element[:enum] if element.has_key? :enum
-            @ra[:structured][key][:elements][skey][:description] = element[:description] if element.has_key? :description
-            @ra[:structured][key][:elements][skey][:uom] = element[:uom] if element.has_key? :uom
-            @ra[:structured][key][:elements][skey][:minimum] = element[:minimum] if element.has_key? :minimum
-            @ra[:structured][key][:elements][skey][:maximum] = element[:maximum] if element.has_key? :maximum
+            @ra[:structured][:elements][key][:elements][skey][:enum] = element[:enum] if element.has_key? :enum
+            @ra[:structured][:elements][key][:elements][skey][:description] = element[:description] if element.has_key? :description
+            @ra[:structured][:elements][key][:elements][skey][:uom] = element[:uom] if element.has_key? :uom
+            @ra[:structured][:elements][key][:elements][skey][:minimum] = element[:minimum] if element.has_key? :minimum
+            @ra[:structured][:elements][key][:elements][skey][:maximum] = element[:maximum] if element.has_key? :maximum
           end
         else
           if [:in_profile_restricted, :in_capabilities].include? type
-            case @ra[:structured][key][:elements][skey][:type]
+            case @ra[:structured][:elements][key][:elements][skey][:type]
             when *["number", "integer", "boolean", "string"]
-              @ra[:structured][key][:elements][skey][:type] = "number" if @ra[:structured][key][:elements][skey][:type] == "integer"
-              unless ( svalue.has_key? :type and svalue[:type] == "array" ) and ( svalue.has_key? :items and svalue[:items].has_key? :type and svalue[:items][:type] == @ra[:structured][key][:elements][skey][:type])
-                (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][key][:elements][skey][:type]}, wrong check"
+              @ra[:structured][:elements][key][:elements][skey][:type] = "number" if @ra[:structured][:elements][key][:elements][skey][:type] == "integer"
+              unless ( svalue.has_key? :type and svalue[:type] == "array" ) and ( svalue.has_key? :items and svalue[:items].has_key? :type and svalue[:items][:type] == @ra[:structured][:elements][key][:elements][skey][:type])
+                (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][:elements][key][:elements][skey][:type]}, wrong check"
               end
             when "array"
               unless svalue.has_key? :type and svalue[:type] == "array"
-                (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][key][:elements][skey][:type]}, wrong check"
+                (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][:elements][key][:elements][skey][:type]}, wrong check"
               end
             else
-              puts "unknown type #{@ra[:structured][key][:elements][skey][:type]} in #{key}, #{skey}"
+              puts "unknown type #{@ra[:structured][:elements][key][:elements][skey][:type]} in #{key}, #{skey} when doing #{type}"
             end
           end
         end
-        @ra[:structured][key][:elements][skey][type] = true
+        @ra[:structured][:elements][key][:elements][skey][type] = true
       end
     end
   end
 
   def create_structure
-    @ra[:structured] = {}
+    @ra[:structured] = {:elements => {}, :custom => {}}
     @ra[:errors] = {:in_profile_restricted => {}, :in_capabilities => {}}
     parsed_schema = Circuitdata.read_json(@schema_path)[2]
     parsed_schema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties]["^(?!generic$).*".to_sym][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
@@ -116,61 +119,56 @@ class Circuitdata::Tools
     parsed_schema[:properties][:open_trade_transfer_package][:properties][:capabilities][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
       self.update_ra(:in_capabilities, key, value)
     end
-    @ra[:structured].sort.to_h
-    @ra[:structured].delete(:version)
+    @ra[:structured][:elements].sort.to_h
+    @ra[:structured][:elements].delete(:version)
+
     return @ra
   end
 
   def create_documentation(ra)
-    ra[:documentation] = "## Elements and tags\n"
-    ra[:structured].each do |element_key, element_value|
-      ra[:documentation] += "[#{element_key}](##{element_key.to_s.downcase.tr(" ", "-")})\n"
+    ra[:documentation] = "## Elements and tags\n====================\n\n"
+    ra[:structured][:elements].each do |element_key, element_value|
+      ra[:documentation] += "### #{element_key} [link](##{element_key.to_s.downcase.tr(" ", "-")})\n"
       element_value[:elements].each do |e_key, e_value|
         ra[:documentation] += "* #{e_key}\n"
       end
       ra[:documentation] += "\n"
     end
-    ra[:structured].each do |element_key, element_value|
+    ra[:structured][:elements].each do |element_key, element_value|
       ra[:documentation] += "### #{element_key}\n"
-      ra[:documentation] += "Name: #{element_value[:name]}\n" unless element_value[:name].nil?
-      ra[:documentation] += "Aliases: #{element_value[:aliases]}\n" unless element_value[:aliases].nil?
+      ra[:documentation] += "Name: #{element_value[:descriptive_name]}\n\n" unless element_value[:descriptive_name].nil?
+      ra[:documentation] += "Aliases: #{element_value[:aliases]}\n\n" unless element_value[:aliases].nil?
       ra[:documentation] += "#{element_value[:description]}\n" unless element_value[:description].nil?
       ra[:documentation] += "\n"
+      if element_value[:type] == "array"
+        ra[:documentation] += "**You must specify this as en array when used in a generic product description or a stackup, but as a single object when used in any of the other parts.**\n\n"
+      end
       element_value[:elements].each do |e_key, e_value|
         ra[:documentation] += "#### #{e_key}\n"
-        ra[:documentation] += "Aliases: #{e_value[:aliases]}\n" unless e_value[:aliases].nil?
-        ra[:documentation] += "#{e_value[:description]}\n" unless e_value[:description].nil?
-        ra[:documentation] += "Unit of Measure: #{e_value[:uom][0]}\n" unless e_value[:uom].nil?
-        unless e_value[:type].nil?
-          if e_value[:type] == "array"
-            if e_value[:arrayitems].nil?
-              ra[:documentation] += "Type: #{e_value[:type].capitalize} of unknown type\n"
-            else
-              ra[:documentation] += "Type: #{e_value[:type].capitalize} of #{e_value[:arrayitems].capitalize}\n"
-            end
-          else
-            ra[:documentation] += "Type: #{e_value[:type].capitalize}\n"
-          end
-        end
+        ra[:documentation] += "Aliases: #{e_value[:aliases]}\n\n" unless e_value[:aliases].nil?
+        ra[:documentation] += "#{e_value[:description]}\n\n" unless e_value[:description].nil?
+        ra[:documentation] += "Unit of Measure: #{e_value[:uom][0]}\n\n" unless e_value[:uom].nil?
         if e_value.has_key? :enum and not e_value[:enum].nil?
           ra[:documentation] += "Use one of these values:\n"
           e_value[:enum].each do |ev|
             ra[:documentation] += "* #{ev}\n"
           end
+          ra[:documentation] += "\n"
         end
-        ra[:documentation] += "Use in:\n"
-        e_value[:in_product_generic] ? ra[:documentation] += "* *Generic product section: Allowed*\n" :  ra[:documentation] += "* *Generic product section: Disallowed*\n"
-        e_value[:in_product_stackup] ? ra[:documentation] += "* *Stackup product section: Allowed*\n" :  ra[:documentation] += "* *Gtackup product section: Disallowed*\n"
-        e_value[:in_profile_default] ? ra[:documentation] += "* *Profile defaults section: Allowed*\n" :  ra[:documentation] += "* *Profile defaults section: Disallowed*\n"
-        e_value[:in_profile_enforced] ? ra[:documentation] += "* *Profile enforced section: Allowed*\n" :  ra[:documentation] += "* *Profile enforced section: Disallowed*\n"
-        e_value[:in_profile_restricted] ? ra[:documentation] += "* *Profile restricted section: Allowed*\n" :  ra[:documentation] += "* *Profile restricted section: Disallowed*\n"
-        ra[:documentation] += "*  - Value in restricted section must match regex #{e_value[:in_profile_restricted_regex]}\n" unless e_value[:in_profile_restricted_regex].nil?
-        e_value[:in_capabilities] ? ra[:documentation] += "* *Capabilites section: Allowed*\n" :  ra[:documentation] += "* *Capabilities section: Disallowed*\n"
-        ra[:documentation] += "*  - Value in capabilites section must match regex #{e_value[:in_capabilities_regex]}\n" unless e_value[:in_capabilities_regex].nil?
+        ra[:documentation] += "|  | Generic product | Stackup | Profile defaults | Profile enforced | Profile restricted | Capabilities |\n"
+        ra[:documentation] += "|-:|:---------------:|:-------:|:----------------:|:----------------:|:------------------:|:------------:|\n| **Use in:** | "
+        [e_value[:in_product_generic], e_value[:in_product_stackup], e_value[:in_profile_default], e_value[:in_profile_enforced], e_value[:in_profile_restricted], e_value[:in_capabilities]].each do |part|
+          part.nil? ? ra[:documentation] += "Disallowed | " : ra[:documentation] += "Allowed | "
+        end
+        ra[:documentation] += "\n|**Format:** | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | Array of #{e_value[:type]}s | Array of #{e_value[:type]}s |\n"
+        if e_value[:enum].nil? and e_value[:type] == "number"
+          ra[:documentation] += "|**Min value:** | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | Each item: #{e_value[:minimum]} | Each item: #{e_value[:minimum]} |\n" unless e_value[:minimum].nil?
+          ra[:documentation] += "|**Max value:** | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | Each item  : #{e_value[:maximum]} | Each item: #{e_value[:maximum]} |\n" unless e_value[:maximum].nil?
+        end
         ra[:documentation] += "\n"
       end
     end
-    puts ra[:documentation]
+    return ra[:documentation]
   end
 
 end
