@@ -960,7 +960,7 @@
         "odb": {
           "type": "integer",
           "uom": null,
-          "description": " Information in a ODB++ file."
+          "description": "Information in a ODB++ file."
         },
         "gerber": {
           "type": "integer",
