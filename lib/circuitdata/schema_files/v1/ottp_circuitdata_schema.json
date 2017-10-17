@@ -1923,65 +1923,58 @@
                       "properties": {
                         "count": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_internal_track_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_external_track_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_internal_spacing_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_external_spacing_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "external_base_copper_thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "internal_base_copper_thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "copper_foil_roughness": {
@@ -2006,56 +1999,50 @@
                       "properties": {
                         "minimum_internal_track_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_external_track_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_internal_spacing_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "minimum_external_spacing_width": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "external_base_copper_thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "internal_base_copper_thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "copper_foil_roughness": {
@@ -2221,11 +2208,10 @@
                       "properties": {
                         "size": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "placement": {
@@ -2250,11 +2236,10 @@
                       "properties": {
                         "total_thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "top": {
@@ -2286,11 +2271,10 @@
                       "properties": {
                         "heating_operations": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "top": {
@@ -2492,29 +2476,26 @@
                       "properties": {
                         "size_x": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "size_y": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "thickness": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         }
                       }
@@ -2525,110 +2506,98 @@
                       "properties": {
                         "size_x": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "size_y": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "boards_x": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "boards_y": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "boards_total": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "border_left": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "border_right": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "border_top": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "border_bottom": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "board_spacing_x": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "board_spacing_y": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "fiducials_size": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "fiducials_shape": {
@@ -2654,20 +2623,18 @@
                         },
                         "tooling_holes_number": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "tooling_holes_size": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "x_outs_allowed": {
@@ -2679,11 +2646,10 @@
                         },
                         "x_outs_max_percentage_on_array": {
                           "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
                           "items": {
-                            "type": "number",
-                            "uniqueItems": true,
-                            "minItems": 2,
-                            "maxItems": 2
+                            "type": "number"
                           }
                         },
                         "transplant_board_allowed": {
@@ -3855,65 +3821,54 @@
                   "properties": {
                     "count": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_internal_track_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_external_track_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_internal_spacing_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_external_spacing_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "external_base_copper_thickness": {
                       "type": "array",
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "internal_base_copper_thickness": {
                       "type": "array",
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "copper_foil_roughness": {
@@ -3932,11 +3887,10 @@
                     },
                     "copper_coverage_average": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     }
                   }
@@ -3947,65 +3901,54 @@
                   "properties": {
                     "count": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_internal_track_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_external_track_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_internal_spacing_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "minimum_external_spacing_width": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "external_base_copper_thickness": {
                       "type": "array",
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "internal_base_copper_thickness": {
                       "type": "array",
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "copper_foil_roughness": {
@@ -4024,11 +3967,10 @@
                     },
                     "copper_coverage_average": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     }
                   }
@@ -4048,110 +3990,98 @@
                       },
                       "thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "gold_thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "gold_thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "silver_thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "silver_thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "paladium_thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "paladium_thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "tin_thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "tin_thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "nickel_thickness_min": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "nickel_thickness_max": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       }
                     }
@@ -4217,20 +4147,18 @@
                       },
                       "min_thickness": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "max_thickness": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "material": {
@@ -4297,11 +4225,10 @@
                   "properties": {
                     "size": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "placement": {
@@ -4313,11 +4240,10 @@
                     },
                     "thickness": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "material": {
@@ -4335,11 +4261,10 @@
                   "properties": {
                     "total_thickness": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "top": {
@@ -4371,11 +4296,10 @@
                   "properties": {
                     "heating_operations": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "top": {
@@ -4577,29 +4501,26 @@
                   "properties": {
                     "size_x": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "size_y": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "thickness": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     }
                   }
@@ -4734,20 +4655,18 @@
                     },
                     "thickness_other": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "area": {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "type": "number",
-                        "uniqueItems": true,
-                        "minItems": 2,
-                        "maxItems": 2
+                        "type": "number"
                       }
                     },
                     "layers": {
@@ -5070,11 +4989,10 @@
                     "properties": {
                       "number": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "type": {
@@ -5093,38 +5011,34 @@
                       },
                       "size": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "layer_start": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "layer_stop": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "depth": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "number",
-                          "uniqueItems": true,
-                          "minItems": 2,
-                          "maxItems": 2
+                          "type": "number"
                         }
                       },
                       "method": {

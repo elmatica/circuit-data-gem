@@ -55,48 +55,36 @@ class Circuitdata::CompatibilityChecker
         common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
         common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
 
-        case vl1.class.name
-          when 'String'
-            if vl1.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$") #This is a value range
-              from, too = vl1.match("^(\\d*|\\d*.\\d*)\\.\\.\\.(\\d*|\\d*.\\d*)$").captures
-              case type
-                when 'restricted'
-                  new_hash = {:not => {:allOf => [{:minimum => from.to_f},{:maximum => too.to_f}]}}
-                else
-                  new_hash = eval("{:minimum => #{from}, :maximum => #{too}}")
-              end
-            else # This is a normal string - check for commas
-              enum = []
-              vl1.split(',').each {|enumvalue| enum << enumvalue.strip}
-              case type
-                when 'restricted'
-                  new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
-                else
-                  new_hash = eval("{:enum => #{enum}}")
-              end
+        enum = []
+        case type
+          when 'restricted'
+            case vl1[0].class.name
+            when 'String', 'Boolean'
+              vl1.each {|enumvalue| enum << enumvalue.strip}
+              new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
+            when 'Numeric', 'Float'
+              #vl1.each {|enumvalue| enum << enumvalue}
+              new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
             end
-          when 'Numeric', 'Float' # This is a normal string
-            case type
-              when 'restricted'
-                new_hash = {:not => {:allOf => [{:minimum => vl1.to_f},{:maximum => vl1.to_f}]}}
-              else
-                new_hash = eval("{:enum => [#{vl1.to_s}]}")
-            end
-          when 'Array'
-            case type
-            when 'restricted'
-              new_hash = {:not => {:anyOf => [{ :enum => vl1 }]}}
-            else
-              new_hash = {:enum => vl1}
+          when 'enforced'
+            enum << vl1
+            new_hash = eval("{:enum => #{enum}}")
+          when 'capabilities'
+            case vl1[1].class.name
+            when 'String', 'Boolean'
+              vl1.each {|enumvalue| enum << enumvalue.strip}
+              new_hash = {:anyOf => [{ :enum => enum }]}
+            when 'Numeric', 'Float'
+              vl1.each {|enumvalue| enum << enumvalue.strip}
+              new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
             end
         end
         common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
-        common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
+        #common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
       end if v.is_a? Hash
 
       common_hash[k.to_sym][:additionalProperties] = false if (v.is_a?(Hash) && type == 'capabilities')
     end
-
     # perform validations
     begin
       validation_errors = JSON::Validator.fully_validate(schema.to_json, product_data, :errors_as_objects => true)
