@@ -10,8 +10,17 @@
       "restricted": {
         "printed_circuits_fabrication_data": {
           "version": "0.6",
+          "rigid_conductive_layer": {
+            "copper_foil_roughness": ["S","L"]
+          },
+          "flexible_conductive_layer": {
+            "copper_foil_roughness": ["S","L"]
+          },
+          "peelable_mask": {
+            "heating_operations": [10, 20]
+          },
           "legend": {
-            "color": ["yellow", "grey"]
+            "color": ["yellow"]
           }
         }
       }

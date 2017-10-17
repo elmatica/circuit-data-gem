@@ -40,6 +40,7 @@ class Circuitdata::Tools
             :type => nil,
             :arrayitems => nil,
             :enum => nil,
+            :enum_description => nil,
             :description => nil,
             :uom => nil,
             :minimum => nil,
@@ -68,7 +69,10 @@ class Circuitdata::Tools
                 end
               end
             end
-            @ra[:structured][:elements][key][:elements][skey][:enum] = element[:enum] if element.has_key? :enum
+            if element.has_key? :enum
+              @ra[:structured][:elements][key][:elements][skey][:enum] = element[:enum]
+              @ra[:structured][:elements][key][:elements][skey][:enum_description] = element[:enum_description] if element.has_key? :enum_description
+            end
             @ra[:structured][:elements][key][:elements][skey][:description] = element[:description] if element.has_key? :description
             @ra[:structured][:elements][key][:elements][skey][:uom] = element[:uom] if element.has_key? :uom
             @ra[:structured][:elements][key][:elements][skey][:minimum] = element[:minimum] if element.has_key? :minimum
@@ -126,7 +130,7 @@ class Circuitdata::Tools
   end
 
   def create_documentation(ra)
-    ra[:documentation] = "## Elements and tags\n====================\n\n"
+    ra[:documentation] = "## Elements and tags\n"
     ra[:structured][:elements].each do |element_key, element_value|
       ra[:documentation] += "### #{element_key} [link](##{element_key.to_s.downcase.tr(" ", "-")})\n"
       element_value[:elements].each do |e_key, e_value|
@@ -141,7 +145,7 @@ class Circuitdata::Tools
       ra[:documentation] += "#{element_value[:description]}\n" unless element_value[:description].nil?
       ra[:documentation] += "\n"
       if element_value[:type] == "array"
-        ra[:documentation] += "**You must specify this as en array when used in a generic product description or a stackup, but as a single object when used in any of the other parts.**\n\n"
+        ra[:documentation] += "**You must specify this as en array when used in a generic product description or a stackup, but as a object when used in any of the other parts. Read more [here](#elements-that-are-both-arrays-and-objects)**\n\n"
       end
       element_value[:elements].each do |e_key, e_value|
         ra[:documentation] += "#### #{e_key}\n"
@@ -151,7 +155,12 @@ class Circuitdata::Tools
         if e_value.has_key? :enum and not e_value[:enum].nil?
           ra[:documentation] += "Use one of these values:\n"
           e_value[:enum].each do |ev|
-            ra[:documentation] += "* #{ev}\n"
+            ra[:documentation] += "* #{ev}"
+            if e_value.has_key? :enum_description and not e_value[:enum_description].nil? and e_value[:enum_description].has_key? ev.to_sym and not e_value[:enum_description][ev.to_sym].nil?
+              ra[:documentation] += " (#{e_value[:enum_description][ev.to_sym]})\n"
+            else
+              ra[:documentation] += "\n"
+            end
           end
           ra[:documentation] += "\n"
         end
