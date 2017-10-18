@@ -12,7 +12,7 @@
           "version": "0.6",
           "rigid_conductive_layer": {
             "count": 8,
-            "minimum_external_track_width": 0.14,
+            "minimum_external_track_width": 0.16,
             "minimum_external_spacing_width": 0.14,
             "external_base_copper_thickness": 17.1,
             "copper_coverage_average": 18.55,

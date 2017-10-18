@@ -1963,16 +1963,12 @@
                         },
                         "external_base_copper_thickness": {
                           "type": "array",
-                          "minItems": 2,
-                          "maxItems": 2,
                           "items": {
                             "type": "number"
                           }
                         },
                         "internal_base_copper_thickness": {
                           "type": "array",
-                          "minItems": 2,
-                          "maxItems": 2,
                           "items": {
                             "type": "number"
                           }
@@ -4128,66 +4124,62 @@
                 "soldermask": {
                   "type": "object",
                   "properties": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "color": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "uniqueItems": true
-                        }
-                      },
-                      "finish": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "uniqueItems": true
-                        }
-                      },
-                      "min_thickness": {
-                        "type": "array",
-                        "minItems": 2,
-                        "maxItems": 2,
-                        "items": {
-                          "type": "number"
-                        }
-                      },
-                      "max_thickness": {
-                        "type": "array",
-                        "minItems": 2,
-                        "maxItems": 2,
-                        "items": {
-                          "type": "number"
-                        }
-                      },
-                      "material": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "uniqueItems": true
-                        }
-                      },
-                      "top": {
-                        "type": "array",
-                        "items": {
-                          "type": "boolean",
-                          "uniqueItems": true
-                        }
-                      },
-                      "bottom": {
-                        "type": "array",
-                        "items": {
-                          "type": "boolean",
-                          "uniqueItems": true
-                        }
-                      },
-                      "allow_touchups": {
-                        "type": "array",
-                        "items": {
-                          "type": "boolean",
-                          "uniqueItems": true
-                        }
+                    "color": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "uniqueItems": true
+                      }
+                    },
+                    "finish": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "uniqueItems": true
+                      }
+                    },
+                    "min_thickness": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "max_thickness": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "material": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "uniqueItems": true
+                      }
+                    },
+                    "top": {
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
+                    },
+                    "bottom": {
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
+                    },
+                    "allow_touchups": {
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
                       }
                     }
                   }

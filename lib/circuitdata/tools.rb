@@ -48,10 +48,12 @@ class Circuitdata::Tools
           }
           if svalue.has_key? :$ref
             elements = svalue[:$ref].split('/')
-            if elements.length < 5
+            if elements.length == 4
               element = parsed_elements[elements[1].to_sym][elements[2].to_sym][elements[3].to_sym]
-            else
+            elsif elements.length == 5
               element = parsed_elements[elements[1].to_sym][elements[2].to_sym][elements[3].to_sym][elements[4].to_sym]
+            else
+              element = parsed_elements[elements[1].to_sym][elements[2].to_sym][elements[3].to_sym][elements[4].to_sym][elements[5].to_sym]
             end
           else
             element = nil
@@ -80,6 +82,9 @@ class Circuitdata::Tools
           end
         else
           if [:in_profile_restricted, :in_capabilities].include? type
+            if @ra[:structured][:elements][key][:elements][skey][:type].nil?
+              @ra[:structured][:elements][key][:elements][skey][:type] = svalue[:type] unless ['array', 'object'].include? svalue[:type]
+            end
             case @ra[:structured][:elements][key][:elements][skey][:type]
             when *["number", "integer", "boolean", "string"]
               @ra[:structured][:elements][key][:elements][skey][:type] = "number" if @ra[:structured][:elements][key][:elements][skey][:type] == "integer"

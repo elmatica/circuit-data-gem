@@ -38,6 +38,10 @@ class Circuitdata::CompatibilityChecker
   end
 
   def perform_comparison(product_data, check_data, schema, type)
+
+    docu = Circuitdata::Tools.new()
+    ra = docu.create_structure
+
     case type
       when 'restricted'
         check_hash = check_data.dig(:open_trade_transfer_package, :profiles, :restricted, :printed_circuits_fabrication_data)
@@ -53,7 +57,7 @@ class Circuitdata::CompatibilityChecker
     check_hash.each do |k, v|
       v.each do |kl1, vl1| # level 1
         common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
-        common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
+        #common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
 
         enum = []
         case type
@@ -63,8 +67,12 @@ class Circuitdata::CompatibilityChecker
               vl1.each {|enumvalue| enum << enumvalue.strip}
               new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
             when 'Numeric', 'Float'
-              #vl1.each {|enumvalue| enum << enumvalue}
-              new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
+              if ra.dig(:structured, :elements, k.to_sym, :elements, kl1.to_sym, :enum).nil?
+                new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
+              else
+                vl1.each {|enumvalue| enum << enumvalue}
+                new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
+              end
             end
           when 'enforced'
             enum << vl1
