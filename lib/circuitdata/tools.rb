@@ -7,6 +7,12 @@ class Circuitdata::Tools
   end
 
   def update_ra(type, key, value)
+    if key == :materials
+      update_ra(type, :dielectric, value[:properties][:patternProperties]["^(?!generic_dielectric$).*".to_sym])
+      update_ra(type, :soldermask, value[:properties][:patternProperties]["^(?!generic_soldermask$).*".to_sym])
+      update_ra(type, :stiffener, value[:properties][:patternProperties]["^(?!generic_stiffener$).*".to_sym])
+      return
+    end
     parsed_elements = Circuitdata.read_json(@definitions_path)[2]
     unless @ra[:structured][:elements].has_key? key
       @ra[:structured][:elements][key] = {
@@ -36,6 +42,7 @@ class Circuitdata::Tools
             :in_profile_default => false,
             :in_profile_enforced => false,
             :in_profile_restricted => false,
+            :in_custom => false,
             :in_capabilities => false,
             :type => nil,
             :arrayitems => nil,
@@ -91,12 +98,16 @@ class Circuitdata::Tools
               unless ( svalue.has_key? :type and svalue[:type] == "array" ) and ( svalue.has_key? :items and svalue[:items].has_key? :type and svalue[:items][:type] == @ra[:structured][:elements][key][:elements][skey][:type])
                 (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][:elements][key][:elements][skey][:type]}, wrong check"
               end
+              if type == :in_profile_restricted and not @ra[:structured][:elements][key][:elements][skey][:enum].nil? and svalue.has_key? :minItems
+                puts
+                (@ra[:errors][type][key] ||= {})[skey] = "Error in profile restricted where enum is not considered"
+              end
             when "array"
               unless svalue.has_key? :type and svalue[:type] == "array"
                 (@ra[:errors][type][key] ||= {})[skey] = "Type is #{@ra[:structured][:elements][key][:elements][skey][:type]}, wrong check"
               end
             else
-              puts "unknown type #{@ra[:structured][:elements][key][:elements][skey][:type]} in #{key}, #{skey} when doing #{type}"
+              (@ra[:errors][type][key] ||= {})[skey] = "Unknown type #{@ra[:structured][:elements][key][:elements][skey][:type]} in #{key}, #{skey} when doing #{type}"
             end
           end
         end
@@ -109,9 +120,11 @@ class Circuitdata::Tools
     @ra[:structured] = {:elements => {}, :custom => {}}
     @ra[:errors] = {:in_profile_restricted => {}, :in_capabilities => {}}
     parsed_schema = Circuitdata.read_json(@schema_path)[2]
+    # Go through all products
     parsed_schema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties]["^(?!generic$).*".to_sym][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
       self.update_ra(:in_product_generic, key, value)
     end
+    # Go through all profiles
     ["defaults", "restricted", "enforced"].each do |sym|
       parsed_schema[:properties][:open_trade_transfer_package][:properties][:profiles][:properties][sym.to_sym][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
         case sym
@@ -125,9 +138,15 @@ class Circuitdata::Tools
         self.update_ra(t, key, value)
       end
     end
+    # Go through all capabilities
     parsed_schema[:properties][:open_trade_transfer_package][:properties][:capabilities][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
       self.update_ra(:in_capabilities, key, value)
     end
+    # Go through all custom
+    parsed_schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties].each do |key, value|
+      self.update_ra(:in_custom, key, value)
+    end
+
     @ra[:structured][:elements].sort.to_h
     @ra[:structured][:elements].delete(:version)
     @ra[:structured][:elements][:stackup].delete(:specified)
@@ -169,15 +188,15 @@ class Circuitdata::Tools
           end
           ra[:documentation] += "\n"
         end
-        ra[:documentation] += "|  | Generic product | Stackup | Profile defaults | Profile enforced | Profile restricted | Capabilities |\n"
-        ra[:documentation] += "|-:|:---------------:|:-------:|:----------------:|:----------------:|:------------------:|:------------:|\n| **Use in:** | "
-        [e_value[:in_product_generic], e_value[:in_product_stackup], e_value[:in_profile_default], e_value[:in_profile_enforced], e_value[:in_profile_restricted], e_value[:in_capabilities]].each do |part|
-          part.nil? ? ra[:documentation] += "Disallowed | " : ra[:documentation] += "Allowed | "
+        ra[:documentation] += "|  | Generic product | Stackup | Profile defaults | Profile enforced | Profile restricted | Capabilities | Custom |\n"
+        ra[:documentation] += "|-:|:---------------:|:-------:|:----------------:|:----------------:|:------------------:|:------------:|:------:|\n| **Use in:** | "
+        [:in_product_generic, :in_product_stackup, :in_profile_default, :in_profile_enforced, :in_profile_restricted, :in_capabilities, :in_custom].each do |part|
+          e_value[part] ? ra[:documentation] += "Allowed | " : ra[:documentation] += "Disallowed | "
         end
-        ra[:documentation] += "\n|**Format:** | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | Array of #{e_value[:type]}s | Array of #{e_value[:type]}s |\n"
+        ra[:documentation] += "\n|**Format:** | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | #{e_value[:type]} | Array of #{e_value[:type]}s | Array of #{e_value[:type]}s | Array of #{e_value[:type]}s |\n"
         if e_value[:enum].nil? and e_value[:type] == "number"
-          ra[:documentation] += "|**Min value:** | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | Each item: #{e_value[:minimum]} | Each item: #{e_value[:minimum]} |\n" unless e_value[:minimum].nil?
-          ra[:documentation] += "|**Max value:** | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | Each item  : #{e_value[:maximum]} | Each item: #{e_value[:maximum]} |\n" unless e_value[:maximum].nil?
+          ra[:documentation] += "|**Min value:** | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | #{e_value[:minimum]} | Each item: #{e_value[:minimum]} | Each item: #{e_value[:minimum]} | Each item: #{e_value[:minimum]} |\n" unless e_value[:minimum].nil?
+          ra[:documentation] += "|**Max value:** | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | #{e_value[:maximum]} | Each item  : #{e_value[:maximum]} | Each item: #{e_value[:maximum]} | Each item: #{e_value[:maximum]} |\n" unless e_value[:maximum].nil?
         end
         ra[:documentation] += "\n"
       end

@@ -2027,16 +2027,12 @@
                         },
                         "external_base_copper_thickness": {
                           "type": "array",
-                          "minItems": 2,
-                          "maxItems": 2,
                           "items": {
                             "type": "number"
                           }
                         },
                         "internal_base_copper_thickness": {
                           "type": "array",
-                          "minItems": 2,
-                          "maxItems": 2,
                           "items": {
                             "type": "number"
                           }
@@ -2077,46 +2073,102 @@
                       "type": "object",
                       "properties": {
                         "ipc_4101_sheet": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4101_sheet"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "ipc_4103_sheet": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4103_sheet"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "ipc_4204_sheet": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4204_sheet"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "tg_min": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_min"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "tg_range_from": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_from"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "tg_range_to": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_to"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "td_min": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_min"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "td_range_from": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_range_to"
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "uniqueItems": true
+                          }
                         },
                         "halogen_free": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/halogen_free"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         },
                         "rw_en45545_2_2013": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nf_f_16_101"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         },
                         "rw_uni_cei_11170_3": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_uni_cei_11170_3"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         },
                         "rw_nfpa_130": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nfpa_130"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         },
                         "ul": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ul"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         },
                         "accept_equivalent": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/accept_equivalent"
+                          "type": "array",
+                          "items": {
+                            "type": "boolean",
+                            "uniqueItems": true
+                          }
                         }
                       }
                     },
@@ -4087,37 +4139,81 @@
                   "type": "object",
                   "properties": {
                     "ipc_4101_sheet": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4101_sheet"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "ipc_4103_sheet": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4103_sheet"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "ipc_4204_sheet": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4204_sheet"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "tg_range_from": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_from"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "tg_range_to": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_to"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "td_range_from": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_range_to"
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "uniqueItems": true
+                      }
                     },
                     "halogen_free": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/halogen_free"
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
                     },
                     "rw_en45545_2_2013": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nf_f_16_101"
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
                     },
                     "rw_uni_cei_11170_3": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_uni_cei_11170_3"
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
                     },
                     "rw_nfpa_130": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nfpa_130"
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
                     },
                     "ul": {
-                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ul"
+                      "type": "array",
+                      "items": {
+                        "type": "boolean",
+                        "uniqueItems": true
+                      }
                     }
                   }
                 },
@@ -5042,8 +5138,10 @@
                       },
                       "minimum_designed_annular_ring": {
                         "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
                         "items": {
-                          "type": "string",
+                          "type": "number",
                           "uniqueItems": true
                         }
                       },
