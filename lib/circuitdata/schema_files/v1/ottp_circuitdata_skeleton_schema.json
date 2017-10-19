@@ -47,6 +47,46 @@
               }
             }
           }
+        },
+        "custom": {
+          "properties": {
+            "colors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {}
+              }
+            }            ,
+            "materials": {
+              "properties": {
+                "printed_circuits_fabrication_data": {
+                  "properties": {
+                    "dielectrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "soldermasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "stiffeners": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

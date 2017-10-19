@@ -16,6 +16,9 @@
           "flexible_conductive_layer": {
             "copper_foil_roughness": ["S","L"]
           },
+          "dielectric": {
+            "ul": [false]
+          },
           "peelable_mask": {
             "heating_operations": [10, 20]
           },

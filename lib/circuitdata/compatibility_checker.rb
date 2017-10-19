@@ -56,15 +56,23 @@ class Circuitdata::CompatibilityChecker
     common_hash = schema.dig(:properties, :open_trade_transfer_package, :properties, :products, :patternProperties, :'^(?!generic$).*', :properties, :printed_circuits_fabrication_data, :properties)
     check_hash.each do |k, v|
       v.each do |kl1, vl1| # level 1
-        common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
-        #common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
-
+        unless [:dielectric, :soldermask, :stiffener].include? k.to_sym
+          common_hash[k.to_sym]||= {:type => 'object', :properties => {}}
+          #common_hash[:stackup][:properties][:specified][:properties][k.to_sym] ||= {:type => 'object', :properties => {}}
+        end
         enum = []
+        required = []
         case type
           when 'restricted'
             case vl1[0].class.name
-            when 'String', 'Boolean'
+            when 'String'
               vl1.each {|enumvalue| enum << enumvalue.strip}
+              new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
+            when 'Boolean', 'FalseClass', 'TrueClass'
+              vl1.each do |enumvalue|
+                required << kl1.to_s if enumvalue == false
+                enum << enumvalue
+              end
               new_hash = {:not => {:anyOf => [{ :enum => enum }]}}
             when 'Numeric', 'Float'
               if ra.dig(:structured, :elements, k.to_sym, :elements, kl1.to_sym, :enum).nil?
@@ -79,15 +87,35 @@ class Circuitdata::CompatibilityChecker
             new_hash = eval("{:enum => #{enum}}")
           when 'capabilities'
             case vl1[1].class.name
-            when 'String', 'Boolean'
+            when 'String'
               vl1.each {|enumvalue| enum << enumvalue.strip}
+              new_hash = {:anyOf => [{ :enum => enum }]}
+            when 'Boolean', 'FalseClass', 'TrueClass'
+              vl1.each do |enumvalue|
+                required << kl1.to_s if enumvalue == true
+                enum << enumvalue
+              end
               new_hash = {:anyOf => [{ :enum => enum }]}
             when 'Numeric', 'Float'
               vl1.each {|enumvalue| enum << enumvalue.strip}
               new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
             end
         end
-        common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
+        case k.to_sym
+        when :dielectric
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:dielectrics][:items][:properties][kl1.to_sym] = new_hash
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:dielectrics][:items][:required] = required
+        when :soldermask
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:soldermasks][:items][:properties][kl1.to_sym] = new_hash
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:soldermasks][:items][:required] = required
+        when :stiffener
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:stiffeners][:items][:properties][kl1.to_sym] = new_hash
+          schema[:properties][:open_trade_transfer_package][:properties][:custom][:properties][:materials][:properties][:printed_circuits_fabrication_data][:properties][:stiffeners][:items][:required] = required
+        else
+          common_hash[k.to_sym][:properties][kl1.to_sym] = new_hash
+          common_hash[k.to_sym][:required] = required
+        end
+        #common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
         #common_hash[:stackup][:properties][:specified][:properties][k.to_sym][:properties][kl1.to_sym] = new_hash
       end if v.is_a? Hash
 

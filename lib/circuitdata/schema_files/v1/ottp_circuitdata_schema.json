@@ -5245,148 +5245,128 @@
                     "soldermasks": {
                       "type": "array",
                       "items": {
-                        "generic_soldermask": {
-                          "type": "object",
-                          "properties": {},
-                          "id": "generic_soldermask",
-                          "description": "this should validate any element under generic_soldermask to be valid"
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [],
+                        "properties": {
+                          "material": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/material"
+                          },
+                          "manufacturer": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/manufacturer"
+                          },
+                          "ipc_sm_840_class": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/ipc_sm_840_class"
+                          },
+                          "link": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/link"
+                          },
+                          "accept_equivalent": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/accept_equivalent"
+                          }
                         }
                       }
                     },
                     "dielectrics": {
                       "type": "array",
                       "items": {
-                        "generic_dielectric": {
-                          "type": "object",
-                          "properties": {},
-                          "id": "generic_dielectric",
-                          "description": "this should validate any element under generic_dielectric to be valid"
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [],
+                        "properties": {
+                          "name": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/name"
+                          },
+                          "manufacturer": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/manufacturer"
+                          },
+                          "ipc_4101_sheet": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4101_sheet"
+                          },
+                          "ipc_4103_sheet": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4103_sheet"
+                          },
+                          "ipc_4204_sheet": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4204_sheet"
+                          },
+                          "tg_min": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_min"
+                          },
+                          "tg_range_from": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_from"
+                          },
+                          "tg_range_to": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_to"
+                          },
+                          "td_min": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_min"
+                          },
+                          "td_range_from": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_range_to"
+                          },
+                          "halogen_free": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/halogen_free"
+                          },
+                          "rw_en45545_2_2013": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nf_f_16_101"
+                          },
+                          "rw_uni_cei_11170_3": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_uni_cei_11170_3"
+                          },
+                          "rw_nfpa_130": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nfpa_130"
+                          },
+                          "ul": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ul"
+                          },
+                          "link": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/link"
+                          },
+                          "accept_equivalent": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/accept_equivalent"
+                          }
                         }
                       }
                     },
                     "stiffeners": {
                       "type": "array",
                       "items": {
-                        "generic_stiffener": {
-                          "type": "object",
-                          "properties": {},
-                          "id": "generic_stiffener",
-                          "description": "this should validate any element under generic_stiffener to be valid"
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [],
+                        "properties": {
+                          "manufacturer": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/manufacturer"
+                          },
+                          "descriptive_name": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/descriptive_name"
+                          },
+                          "link": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/link"
+                          },
+                          "accept_equivalent": {
+                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/accept_equivalent"
+                          }
                         }
-                      }
-                    }
-                  }
-                },
-                "patternProperties": {
-                  "^(?!generic_dielectric$).*": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": ["version"],
-                    "properties": {
-                      "manufacturer": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/manufacturer"
-                      },
-                      "ipc_4101_sheet": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4101_sheet"
-                      },
-                      "ipc_4103_sheet": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4103_sheet"
-                      },
-                      "ipc_4204_sheet": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ipc_4204_sheet"
-                      },
-                      "tg_min": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_min"
-                      },
-                      "tg_range_from": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_from"
-                      },
-                      "tg_range_to": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/tg_range_to"
-                      },
-                      "td_min": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_min"
-                      },
-                      "td_range_from": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/td_range_to"
-                      },
-                      "halogen_free": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/halogen_free"
-                      },
-                      "rw_en45545_2_2013": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nf_f_16_101"
-                      },
-                      "rw_uni_cei_11170_3": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_uni_cei_11170_3"
-                      },
-                      "rw_nfpa_130": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/rw_nfpa_130"
-                      },
-                      "ul": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/ul"
-                      },
-                      "link": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/link"
-                      },
-                      "accept_equivalent": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/dielectrics/properties/accept_equivalent"
-                      }
-                    }
-                  },
-                  "^(?!generic_soldermask$).*": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": ["version"],
-                    "properties": {
-                      "manufacturer": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/manufacturer"
-                      },
-                      "ipc_sm_840_class": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/ipc_sm_840_class"
-                      },
-                      "link": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/link"
-                      },
-                      "accept_equivalent": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/accept_equivalent"
-                      }
-                    }
-                  },
-                  "^(?!generic_stiffener$).*": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": ["version"],
-                    "properties": {
-                      "manufacturer": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/manufacturer"
-                      },
-                      "descriptive_name": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/descriptive_name"
-                      },
-                      "link": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/link"
-                      },
-                      "accept_equivalent": {
-                        "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/stiffeners/properties/accept_equivalent"
                       }
                     }
                   }
                 }
               }
-            }
-          },
-          "additional_requirements": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["printed_circuits_fabrication_data"],
-            "properties": {
-              "printed_circuits_fabrication_data": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": ["version"],
-                "properties": {
-                  "version": {
-                    "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/version"
+            },
+            "additional_requirements": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["printed_circuits_fabrication_data"],
+              "properties": {
+                "printed_circuits_fabrication_data": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["version"],
+                  "properties": {
+                    "version": {
+                      "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/version"
+                    }
                   }
                 }
               }

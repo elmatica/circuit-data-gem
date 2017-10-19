@@ -15,6 +15,9 @@
           },
           "legend": {
             "color": ["white"]
+          },
+          "dielectric": {
+            "ul": [false]
           }
         }
       }

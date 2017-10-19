@@ -8,9 +8,9 @@ class Circuitdata::Tools
 
   def update_ra(type, key, value)
     if key == :materials
-      update_ra(type, :dielectric, value[:properties][:patternProperties]["^(?!generic_dielectric$).*".to_sym])
-      update_ra(type, :soldermask, value[:properties][:patternProperties]["^(?!generic_soldermask$).*".to_sym])
-      update_ra(type, :stiffener, value[:properties][:patternProperties]["^(?!generic_stiffener$).*".to_sym])
+      update_ra(type, :dielectric, value[:properties][:printed_circuits_fabrication_data][:properties][:dielectrics])
+      update_ra(type, :soldermask, value[:properties][:printed_circuits_fabrication_data][:properties][:soldermasks])
+      update_ra(type, :stiffener, value[:properties][:printed_circuits_fabrication_data][:properties][:stiffeners])
       return
     end
     parsed_elements = Circuitdata.read_json(@definitions_path)[2]

@@ -42,10 +42,10 @@
       "materials": {
         "printed_circuits_fabrication_data": {
           "version": "0.6",
-          "dielectics": [
+          "dielectrics": [
             {
-            "name": "FR-4"
-
+            "name": "FR-4",
+            "ul": false
             }
           ]
         }
