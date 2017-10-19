@@ -7,11 +7,11 @@ require "circuitdata/version"
 Gem::Specification.new do |s|
   s.name        = "circuitdata"
   s.version     = Circuitdata::VERSION
-  s.authors     = ["Andreas Lydersen"]
+  s.authors     = ["Andreas Lydersen", "Maximilian Brosnahan", "Benjamin Mwendwa"]
   s.email       = ["andreas.lydersen@ntty.com"]
   s.homepage    = "http://circuitdata.org"
-  s.summary     = "This gem allows you to do basic test and comparison of JSON files agains the CircuitData JSON schema"
-  s.description = "This gem allows you to do basic test and comparison of JSON files agains the CircuitData JSON schema"
+  s.summary     = "Basic test and comparison of JSON files agains the CircuitData JSON schema and each other"
+  s.description = "This gem provides you with functions to work with the CricuitData language. Run files against the schema, check their compatibility agains each other compare multiple files to find conflicts."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
