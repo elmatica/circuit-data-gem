@@ -13,7 +13,7 @@
           "pattern": "^1.0$"
         },
         "information": {
-          "$ref": "https://raw.githubusercontent.com/elmatica/Open-Trade-Transfer-Package/master/v1/ottp_schema_definitions.json#/definitions/information"
+          "$ref": "ottp_schema_definitions.json#/definitions/information"
         },
         "products": {
           "type": "object",
@@ -3624,7 +3624,7 @@
                       "additionalProperties": false,
                       "properties": {
                         "present": {
-                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_edge_connectors/present"
+                          "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_gold_edge_connectors/present"
                         },
                         "thickness": {
                           "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/elements/hard_gold_edge_connectors/thickness"
@@ -5249,9 +5249,9 @@
                         "additionalProperties": false,
                         "required": [],
                         "properties": {
-                          "material": {
-                            "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/material"
-                          },
+                          // "material": {
+                          //   "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/material"
+                          // },
                           "manufacturer": {
                             "$ref": "ottp_circuitdata_schema_definitions.json#/definitions/custom/soldermasks/properties/manufacturer"
                           },
