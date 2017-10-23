@@ -86,7 +86,7 @@ class Circuitdata::CompatibilityChecker
             enum << vl1
             new_hash = eval("{:enum => #{enum}}")
           when 'capabilities'
-            case vl1[1].class.name
+            case vl1[0].class.name
             when 'String'
               vl1.each {|enumvalue| enum << enumvalue.strip}
               new_hash = {:anyOf => [{ :enum => enum }]}
@@ -96,9 +96,19 @@ class Circuitdata::CompatibilityChecker
                 enum << enumvalue
               end
               new_hash = {:anyOf => [{ :enum => enum }]}
-            when 'Numeric', 'Float'
+            when 'Numeric'
               vl1.each {|enumvalue| enum << enumvalue.strip}
               new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
+            when 'Integer', 'Float'
+              if vl1.length == 1
+                new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[0] }]}
+              elsif vl1.length == 2
+                new_hash = {:anyOf => [{ :minimum => vl1[0], :maximum => vl1[1] }]}
+              else
+                fail StandardError, "Unhandled array length=#{vl1.length} key=#{kl1}"
+              end
+            else
+              fail StandardError, "Unhandled type=#{vl1[1].class.name} key=#{kl1}"
             end
         end
         case k.to_sym

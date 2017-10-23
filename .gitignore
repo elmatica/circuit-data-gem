@@ -4,7 +4,7 @@ pkg/
 .DS_Store
 test/.DS_Store
 circuitdata-*.gem
-
+Gemfile.lock
 
 # Rubymine files
 .idea/
