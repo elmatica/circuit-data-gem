@@ -70,6 +70,13 @@ module Circuitdata
         end
         schema = descriptor.dup
         question[:description] = schema.delete(:description) || question[:description]
+
+        if question_type == :restricted && question[:defaults]
+          unless schema[:items][:type] == 'number'
+            schema[:items] = question[:defaults][:schema]
+          end
+        end
+
         question[question_type] = {
           schema: schema,
           path: json_pointer(path + [question_code])

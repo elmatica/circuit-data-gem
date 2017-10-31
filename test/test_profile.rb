@@ -17,6 +17,10 @@ class CircuitdataProfileSchemaTest < Minitest::Test
     read_json_test_file('reduced_profile_schema.json')
   end
 
+  def reduced_profile_schema_with_restriction
+    read_json_test_file('reduced_profile_schema_with_restriction.json')
+  end
+
   def test_profile_questions
     exp = [
       {
@@ -51,6 +55,49 @@ class CircuitdataProfileSchemaTest < Minitest::Test
     ]
 
     Circuitdata::Profile.stub(:schema, reduced_profile_schema) do
+      result = Circuitdata::Profile.questions
+      assert_same 1, result.length
+      assert_equal exp.first, result.first
+    end
+  end
+
+  def test_profile_questions_fix_missing_restriction_info
+    exp = [
+      {
+        id: :rigid_conductive_layer,
+        name: 'Rigid conductive layer',
+        questions: [
+          {
+            id: 'rigid_conductive_layer_copper_foil_roughness',
+            code: :copper_foil_roughness,
+            name: 'Copper foil roughness',
+            description: "The roughness of the copper foil.",
+            uom: ["um"],
+            defaults: {
+              schema: {
+                type: "string",
+                enum: ["S", "L", "V"],
+                uom: ["um"],
+              },
+              path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
+            },
+            restricted: {
+              schema: {
+                type: "array",
+                items: {
+                  type: "string",
+                  enum: ["S", "L", "V"],
+                  uom: ["um"],
+                }
+              },
+              path: "/open_trade_transfer_package/profiles/restricted/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
+            }
+          },
+        ]
+      }
+    ]
+
+    Circuitdata::Profile.stub(:schema, reduced_profile_schema_with_restriction) do
       result = Circuitdata::Profile.questions
       assert_same 1, result.length
       assert_equal exp.first, result.first
