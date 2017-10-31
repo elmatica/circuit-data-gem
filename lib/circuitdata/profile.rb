@@ -74,6 +74,7 @@ module Circuitdata
           schema: schema,
           path: json_pointer(path + [question_code])
         }
+        question[:uom] ||= schema[:uom]
       end
     end
 

@@ -28,6 +28,7 @@ class CircuitdataProfileSchemaTest < Minitest::Test
             code: :copper_foil_roughness,
             name: 'Copper foil roughness',
             description: "The roughness of the copper foil.",
+            uom: ["um"],
             defaults: {
               schema: {
                 type: "string",
