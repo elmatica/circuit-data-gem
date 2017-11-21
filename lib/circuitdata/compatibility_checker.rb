@@ -26,7 +26,7 @@ class Circuitdata::CompatibilityChecker
       # read the schema
       schema_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
       schema = JSON.parse(File.read(schema_path), symbolize_names: true)
-      deref_schema = Circuitdata::Dereferencer.dereference(schema, File.dirname(Circuitdata::SCHEMA_FULL_PATH))
+      deref_schema = Circuitdata::Dereferencer.dereference(schema, File.dirname(schema_path))
       restricted_schema = enforced_schema = capability_schema = deref_schema
       # Compare the content
       perform_comparison(product_data, check_data, restricted_schema, 'restricted') if f2_types.include? 'profile_restricted'

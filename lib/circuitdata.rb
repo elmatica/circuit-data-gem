@@ -56,11 +56,11 @@ module Circuitdata
     return error, message, data
   end
 
-  def self.validate(content)
+  def self.validate(content, schema_file_path: SCHEMA_FULL_PATH)
     error, message, validations_errors = false, nil, {}
 
     begin
-      validated = JSON::Validator.fully_validate(SCHEMA_FULL_PATH, content, :errors_as_objects => true)
+      validated = JSON::Validator.fully_validate(schema_file_path, content, :errors_as_objects => true)
     rescue JSON::Schema::ReadFailed
       error = true
       message = "Could not read the validating schema"
@@ -86,17 +86,17 @@ module Circuitdata
     return error, message, validations_errors
   end
 
-  def self.schema
+  def self.schema(schema_file_path: SCHEMA_FULL_PATH)
     JSON.parse(
-      File.read(SCHEMA_FULL_PATH),
+      File.read(schema_file_path),
       symbolize_names: true
     )
   end
 
-  def self.dereferenced_schema
+  def self.dereferenced_schema(schema_file_path: SCHEMA_FULL_PATH)
     Dereferencer.dereference(
-      schema,
-      File.dirname(Circuitdata::SCHEMA_FULL_PATH)
+      schema(schema_file_path: schema_file_path),
+      File.dirname(schema_file_path)
     )
   end
 
