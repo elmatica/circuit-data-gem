@@ -1,8 +1,8 @@
+require 'json'
 class Circuitdata::Tools
-  def initialize()
-    require 'json'
-    @schema_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_schema.json')
-    @definitions_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_schema_definitions.json')
+  def initialize(schema, definitions)
+    @schema = schema
+    @definitions = definitions
     @ra = {}
   end
 
@@ -13,7 +13,7 @@ class Circuitdata::Tools
       update_ra(type, :stiffener, value[:properties][:printed_circuits_fabrication_data][:properties][:stiffeners])
       return
     end
-    parsed_elements = Circuitdata.read_json(@definitions_path)[2]
+    parsed_elements = @definitions
     unless @ra[:structured][:elements].has_key? key
       @ra[:structured][:elements][key] = {
         :type => value[:type],
@@ -119,7 +119,7 @@ class Circuitdata::Tools
   def create_structure
     @ra[:structured] = {:elements => {}, :custom => {}}
     @ra[:errors] = {:in_profile_restricted => {}, :in_capabilities => {}}
-    parsed_schema = Circuitdata.read_json(@schema_path)[2]
+    parsed_schema = @schema
     # Go through all products
     parsed_schema[:properties][:open_trade_transfer_package][:properties][:products][:patternProperties]["^(?!generic$).*".to_sym][:properties][:printed_circuits_fabrication_data][:properties].each do |key, value|
       self.update_ra(:in_product_generic, key, value)

@@ -1,11 +1,15 @@
 class Circuitdata::CompatibilityChecker
-  def initialize(product_file, check_file, validate_origins)
+  SCHEMA_FILE_PATH = File.join(__dir__, 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
+
+  def initialize(product_file, check_file, validate_origins, docu, schema_path = SCHEMA_FILE_PATH)
     require 'json'
     require 'json-schema'
 
     @product_file = product_file
     @check_file = check_file
     @validate_origins = validate_origins
+    @schema_path = schema_path
+    @docu = docu
     # Final hash
     @fh = {error: false, message: nil, errors: {validation: {}, restricted: {}, enforced: {}, capabilities: {}}}
   end
@@ -24,9 +28,8 @@ class Circuitdata::CompatibilityChecker
       f2_types = Circuitdata.get_data_summary(check_data)[1]
 
       # read the schema
-      schema_path = File.join(File.dirname(__FILE__), 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
-      schema = JSON.parse(File.read(schema_path), symbolize_names: true)
-      deref_schema = Circuitdata::Dereferencer.dereference(schema, File.dirname(schema_path))
+      schema = JSON.parse(File.read(@schema_path), symbolize_names: true)
+      deref_schema = Circuitdata::Dereferencer.dereference(schema, File.dirname(@schema_path))
       restricted_schema = enforced_schema = capability_schema = deref_schema
       # Compare the content
       perform_comparison(product_data, check_data, restricted_schema, 'restricted') if f2_types.include? 'profile_restricted'
@@ -38,9 +41,7 @@ class Circuitdata::CompatibilityChecker
   end
 
   def perform_comparison(product_data, check_data, schema, type)
-
-    docu = Circuitdata::Tools.new()
-    ra = docu.create_structure
+    ra = @docu.create_structure
 
     case type
       when 'restricted'

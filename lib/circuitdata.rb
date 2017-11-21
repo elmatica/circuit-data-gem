@@ -8,8 +8,11 @@ module Circuitdata
   require_relative './circuitdata/profile'
   require_relative './circuitdata/tools'
 
-  SCHEMA_PATH = 'circuitdata/schema_files/v1/ottp_circuitdata_schema.json'
-  SCHEMA_FULL_PATH = File.join(__dir__, SCHEMA_PATH)
+  SCHEMA_BASE_PATH = File.join(__dir__, 'circuitdata/schema_files/v1')
+  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, 'ottp_circuitdata_schema.json')
+  DEFINITIONS_FULL_PATH = File.join(
+    SCHEMA_BASE_PATH, 'ottp_circuitdata_schema_definitions.json'
+  )
 
   def self.get_data_summary(data)
     types = []
@@ -30,6 +33,12 @@ module Circuitdata
     end unless products.nil?
 
     return product_names, types
+  end
+
+  def self.read_json!(file)
+    error, message, data = read_json(file)
+    fail StandardError, message if error
+    data
   end
 
   def self.read_json(file)
@@ -105,13 +114,18 @@ module Circuitdata
     comparer.compare
   end
 
-  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false)
-    checker = CompatibilityChecker.new(product_file, check_file, validate_origins)
+  def self.compatibility_checker(product_file, check_file=nil, validate_origins=false, schema_file_path: SCHEMA_FULL_PATH, definitions_file_path: DEFINITIONS_FULL_PATH)
+    schema = read_json!(schema_file_path)
+    definitions = read_json!(definitions_file_path)
+    docu = Tools.new(schema, definitions)
+    checker = CompatibilityChecker.new(product_file, check_file, validate_origins, docu)
     checker.start_check
   end
 
-  def self.create_documentation()
-    docu = Tools.new()
+  def self.create_documentation(schema_file_path: SCHEMA_FULL_PATH, definitions_file_path: DEFINITIONS_FULL_PATH)
+    schema = read_json!(schema_file_path)
+    definitions = read_json!(definitions_file_path)
+    docu = Tools.new(schema, definitions)
     ra = docu.create_structure
     docu.create_documentation(ra)
   end
