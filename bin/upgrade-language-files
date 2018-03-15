@@ -1,0 +1,14 @@
+#!/bin/bash
+
+local_dir="lib/circuitdata/schema_files/v1"
+remote_base_url="https://raw.githubusercontent.com/CircuitData/CircuitData-Language/master/schema/v1"
+files="ottp_circuitdata_schema
+ottp_circuitdata_schema_generics
+ottp_circuitdata_schema_materials
+ottp_circuitdata_schema_products
+ottp_circuitdata_schema_profiles_and_capabilities"
+
+for file in $files; do
+  echo "$file"
+  curl "$remote_base_url/$file.json" > "$local_dir/$file.json"
+done
