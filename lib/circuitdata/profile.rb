@@ -53,7 +53,7 @@ module Circuitdata
         id: "#{category[:id]}_#{question_id}",
         code: question_id,
         name: question_id.to_s.humanize,
-        description: '',
+        description: "",
       }
       category_questions << question
 
@@ -63,7 +63,7 @@ module Circuitdata
 
         question[question_type] = {
           schema: schema,
-          path: json_pointer(path + [question_id], question_type),
+          path: json_pointer(path + [category[:id], question_id], question_type),
         }
         question[:uom] ||= schema[:uom]
       end
@@ -71,8 +71,8 @@ module Circuitdata
 
     def self.json_pointer(path_parts, type)
       ([""] + path_parts - [:properties, :patternProperties])
-        .join('/')
-        .sub('^(?!typeofprofile$).*', type.to_s)
+        .join("/")
+        .sub("^(?!typeofprofile$).*", type.to_s)
     end
   end
 end

@@ -20,16 +20,16 @@ class CircuitdataProfileSchemaTest < Minitest::Test
           :schema => {
             :type => "integer",
           },
-          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/count",
+          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/sections/count",
         },
         :uom => nil,
         :required => {
           :schema => {:type => "integer"},
-          :path => "/open_trade_transfer_package/profiles/required/circuitdata/count",
+          :path => "/open_trade_transfer_package/profiles/required/circuitdata/sections/count",
         },
         :forbidden => {
           :schema => {:type => "integer"},
-          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/count",
+          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/sections/count",
         },
       },
         {
@@ -39,16 +39,16 @@ class CircuitdataProfileSchemaTest < Minitest::Test
         :description => "",
         :defaults => {
           :schema => {:type => "number"},
-          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/mm2",
+          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/sections/mm2",
         },
         :uom => nil,
         :required => {
           :schema => {:type => "number"},
-          :path => "/open_trade_transfer_package/profiles/required/circuitdata/mm2",
+          :path => "/open_trade_transfer_package/profiles/required/circuitdata/sections/mm2",
         },
         :forbidden => {
           :schema => {:type => "number"},
-          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/mm2",
+          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/sections/mm2",
         },
       },
       ],
