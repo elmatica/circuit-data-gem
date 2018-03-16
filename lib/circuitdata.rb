@@ -109,8 +109,8 @@ module Circuitdata
     )
   end
 
-  def self.compare_files(file_hash, validate_origins=false)
-    comparer = FileComparer.new(file_hash, validate_origins)
+  def self.compare_files(file_hash)
+    comparer = FileComparer.new(file_hash)
     comparer.compare
   end
 

@@ -1,13 +1,12 @@
 class Circuitdata::CompatibilityChecker
   SCHEMA_FILE_PATH = File.join(__dir__, 'schema_files/v1/ottp_circuitdata_skeleton_schema.json')
 
-  def initialize(product_file, check_file, validate_origins, docu, schema_path = SCHEMA_FILE_PATH)
+  def initialize(product_file, check_file, docu, schema_path = SCHEMA_FILE_PATH)
     require 'json'
     require 'json-schema'
 
     @product_file = product_file
     @check_file = check_file
-    @validate_origins = validate_origins
     @schema_path = schema_path
     @docu = docu
     # Final hash

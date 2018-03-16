@@ -1,7 +1,6 @@
 class Circuitdata::FileComparer
-  def initialize(file_hash, validate_origins)
+  def initialize(file_hash)
     @file_hash = file_hash
-    @validate_origins = validate_origins
     @rows = {}
     @nh = {} # a new_hash to combine all the data
     @columns = []
