@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Circuitdata
   class Dereferencer
 
@@ -19,8 +21,12 @@ module Circuitdata
     attr_reader :base_path
 
     def read_file(file_path)
-      full_path = File.expand_path(file_path, base_path)
-      file = File.read(full_path)
+      if file_path.start_with?('https://')
+        file = get_remote_file(file_path)
+      else
+        full_path = File.expand_path(file_path, base_path)
+        file = File.read(full_path)
+      end
       JSON.parse(file, symbolize_names: true)
     end
 
@@ -35,6 +41,17 @@ module Circuitdata
       result
     end
 
+    def get_remote_file(url_str)
+      url = URI.parse(url_str)
+      req = Net::HTTP::Get.new(url.to_s)
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      res = http.request(req)
+      if res.code != "200"
+        raise StandardError.new("Expected 200 status got #{res.code.inspect} for #{url_str}")
+      end
+      res.body
+    end
 
     def hash_iterator(h)
       h = h.clone
