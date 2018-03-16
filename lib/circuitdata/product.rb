@@ -26,6 +26,13 @@ module Circuitdata
       @data ||= setup_basic_data
     end
 
+    def question_answer(path)
+      return nil if path.empty?
+      path = path.map(&:to_sym)
+      value = product_data.dig(*path)
+      value
+    end
+
     private
 
     def product_data_path
