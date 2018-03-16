@@ -6,102 +6,60 @@ class CircuitdataProfileSchemaTest < Minitest::Test
     refute_equal nil, Circuitdata::Profile.schema
   end
 
-  def read_json_test_file(name)
-    JSON.parse(
-      File.read(File.join(__dir__, 'test_data/', name)),
-      symbolize_names: true
-    )
-  end
-
-  def reduced_profile_schema
-    read_json_test_file('reduced_profile_schema.json')
-  end
-
-  def reduced_profile_schema_with_restriction
-    read_json_test_file('reduced_profile_schema_with_restriction.json')
-  end
-
   def test_profile_questions
-    exp = [
-      {
-        id: :rigid_conductive_layer,
-        name: 'Rigid conductive layer',
-        questions: [
-          {
-            id: 'rigid_conductive_layer_copper_foil_roughness',
-            code: :copper_foil_roughness,
-            name: 'Copper foil roughness',
-            description: "The roughness of the copper foil.",
-            uom: ["um"],
-            defaults: {
-              schema: {
-                type: "string",
-                enum: ["S", "L", "V"],
-                uom: ["um"],
-              },
-              path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
-            },
-            enforced: {
-              schema: {
-                type: "string",
-                enum: ["S", "L", "V"],
-                uom: ["um"],
-              },
-              path: "/open_trade_transfer_package/profiles/enforced/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
-            }
+    exp = {
+      :id => :sections,
+      :name => "Sections",
+      :questions => [
+        {
+        :id => "sections_count",
+        :code => :count,
+        :name => "Count",
+        :description => "",
+        :defaults => {
+          :schema => {
+            :type => "integer",
           },
-        ]
-      }
-    ]
+          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/count",
+        },
+        :uom => nil,
+        :required => {
+          :schema => {:type => "integer"},
+          :path => "/open_trade_transfer_package/profiles/required/circuitdata/count",
+        },
+        :forbidden => {
+          :schema => {:type => "integer"},
+          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/count",
+        },
+      },
+        {
+        :id => "sections_mm2",
+        :code => :mm2,
+        :name => "Mm2",
+        :description => "",
+        :defaults => {
+          :schema => {:type => "number"},
+          :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/mm2",
+        },
+        :uom => nil,
+        :required => {
+          :schema => {:type => "number"},
+          :path => "/open_trade_transfer_package/profiles/required/circuitdata/mm2",
+        },
+        :forbidden => {
+          :schema => {:type => "number"},
+          :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/mm2",
+        },
+      },
+      ],
+    }
 
-    Circuitdata::Profile.stub(:schema, reduced_profile_schema) do
-      result = Circuitdata::Profile.questions
-      assert_same 1, result.length
-      assert_equal exp.first, result.first
-    end
-  end
-
-  def test_profile_questions_fix_missing_restriction_info
-    exp = [
-      {
-        id: :rigid_conductive_layer,
-        name: 'Rigid conductive layer',
-        questions: [
-          {
-            id: 'rigid_conductive_layer_copper_foil_roughness',
-            code: :copper_foil_roughness,
-            name: 'Copper foil roughness',
-            description: "The roughness of the copper foil.",
-            uom: ["um"],
-            defaults: {
-              schema: {
-                type: "string",
-                enum: ["S", "L", "V"],
-                uom: ["um"],
-              },
-              path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
-            },
-            restricted: {
-              schema: {
-                type: "array",
-                items: {
-                  type: "string",
-                  enum: ["S", "L", "V"],
-                  uom: ["um"],
-                }
-              },
-              path: "/open_trade_transfer_package/profiles/restricted/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
-            }
-          },
-        ]
-      }
-    ]
-
-    Circuitdata::Profile.stub(:schema, reduced_profile_schema_with_restriction) do
-      result = Circuitdata::Profile.questions
-      assert_same 1, result.length
-      assert_equal exp.first, result.first
-    end
+    result = Circuitdata::Profile.questions.first
+    assert_equal exp.except(:questions), result.except(:questions)
+    e_qs = exp.fetch(:questions)
+    r_qs = result.fetch(:questions)
+    assert_equal e_qs.first, r_qs.first
+    assert_equal e_qs.second, r_qs.second
   end
 
   def test_profile_questions_no_stub
@@ -112,7 +70,7 @@ class CircuitdataProfileSchemaTest < Minitest::Test
       section[:questions].each do |question|
         defaults = question[:defaults]
         enforced = question[:enforced]
-        both_present = !(defaults.nil? || enforced.nil? )
+        both_present = !(defaults.nil? || enforced.nil?)
         if both_present && defaults[:descriptor] != enforced[:descriptor]
           non_matching_defaults_paths << defaults[:path]
         end
