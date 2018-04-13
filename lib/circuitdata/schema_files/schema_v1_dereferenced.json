@@ -1,0 +1,3249 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "open_trade_transfer_package"
+  ],
+  "properties": {
+    "open_trade_transfer_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "information": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "company": {
+              "type": "string",
+              "description": "The company who owns the information in the file"
+            },
+            "person": {
+              "type": "string",
+              "description": "The person responsible for the information in the file"
+            },
+            "editor_software": {
+              "type": "string",
+              "description": "The software that has generated the file"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of the creation of the file, in RFC 3339 date-time format"
+            },
+            "updated": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of the last update of the file, in RFC 3339 date-time format"
+            },
+            "project": {
+              "type": "string",
+              "description": "The name of the project included in the file"
+            },
+            "version": {
+              "type": "number",
+              "description": "The name of the project included in the file"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "products": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "generic": {
+              "type": "object",
+              "properties": {
+              },
+              "id": "generic",
+              "description": "this should validate any element under generic to be valid"
+            }
+          },
+          "patternProperties": {
+            "^(?!generic$).*": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "circuitdata"
+              ],
+              "properties": {
+                "circuitdata": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 2
+                    },
+                    "sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "in_x",
+                          "in_y",
+                          "mm2"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "in_x": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "in_y": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "mm2": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "layers": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "order",
+                          "name",
+                          "function",
+                          "sections",
+                          "materials"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "order": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "function": {
+                            "type": "string",
+                            "enum": [
+                              "none",
+                              "conductive",
+                              "dielectric",
+                              "soldermask",
+                              "stiffener",
+                              "plating",
+                              "adhesive",
+                              "thermal",
+                              "legend",
+                              "final_finish",
+                              "peelable_tape",
+                              "peelable_mask",
+                              "hard_gold"
+                            ]
+                          },
+                          "flexible": {
+                            "type": "boolean"
+                          },
+                          "sections": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "materials": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "thickness": {
+                            "type": "number"
+                          },
+                          "tolerance_minus": {
+                            "type": "number"
+                          },
+                          "tolerance_plus": {
+                            "type": "number"
+                          },
+                          "sub_material_thickness": {
+                            "type": "object",
+                            "patternProperties": {
+                              "^.*": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "minimum_thickness": {
+                                    "type": "number"
+                                  },
+                                  "maximum_thickness": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "coverage": {
+                            "type": "number"
+                          },
+                          "layer_attributes": {
+                            "minimum_track_width": {
+                              "type": "number"
+                            },
+                            "minimum_spacing_width": {
+                              "type": "number"
+                            },
+                            "conductive_function": {
+                              "type": "string",
+                              "enum": [
+                                "signal",
+                                "plane",
+                                "mixed"
+                              ]
+                            },
+                            "polarity": {
+                              "type": "string",
+                              "enum": [
+                                "positive",
+                                "negative"
+                              ]
+                            },
+                            "color": {
+                              "type": "string"
+                            },
+                            "allow_touchups": {
+                              "type": "boolean"
+                            },
+                            "placement": {
+                              "type": "string",
+                              "enum": [
+                                "selective_pads",
+                                "edge_connectors"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "processes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "function": {
+                            "type": "string",
+                            "enum": [
+                              "edge_bevelling",
+                              "depth_routing",
+                              "counterboring",
+                              "countersink",
+                              "punching",
+                              "plating",
+                              "plated_edges",
+                              "plated_slots",
+                              "coin_attachment",
+                              "holes"
+                            ]
+                          },
+                          "function_attributes": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "number_of_holes": {
+                                "type": "integer"
+                              },
+                              "hole_type": {
+                                "type": "string",
+                                "enum": [
+                                  "through",
+                                  "blind",
+                                  "buried",
+                                  "back_drill",
+                                  "via"
+                                ]
+                              },
+                              "plated": {
+                                "type": "boolean"
+                              },
+                              "finished_size": {
+                                "type": "number"
+                              },
+                              "layer_start": {
+                                "type": "string"
+                              },
+                              "layer_stop": {
+                                "type": "string"
+                              },
+                              "depth": {
+                                "type": "number"
+                              },
+                              "method": {
+                                "type": "string",
+                                "enum": [
+                                  "routing",
+                                  "drilling",
+                                  "laser"
+                                ]
+                              },
+                              "minimum_designed_annular_ring": {
+                                "type": "number"
+                              },
+                              "press_fit": {
+                                "type": "boolean"
+                              },
+                              "copper_filled": {
+                                "type": "boolean"
+                              },
+                              "staggered": {
+                                "type": "boolean"
+                              },
+                              "stacked": {
+                                "type": "boolean"
+                              },
+                              "alivh": {
+                                "type": "boolean"
+                              },
+                              "castellated": {
+                                "type": "boolean"
+                              },
+                              "protection": {
+                                "type": "string",
+                                "enum": [
+                                  "1",
+                                  "2",
+                                  "3",
+                                  "4a",
+                                  "4b",
+                                  "5",
+                                  "6a",
+                                  "6b"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "metrics": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "board": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "size_x": {
+                              "type": "number"
+                            },
+                            "size_y": {
+                              "type": "number"
+                            },
+                            "breakaway_method": {
+                              "type": "string",
+                              "enum": [
+                                "routing",
+                                "punching"
+                              ]
+                            },
+                            "thickness": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "array": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "size_x": {
+                              "type": "number"
+                            },
+                            "size_y": {
+                              "type": "number"
+                            },
+                            "boards_x": {
+                              "type": "integer"
+                            },
+                            "boards_y": {
+                              "type": "integer"
+                            },
+                            "boards_total": {
+                              "type": "integer"
+                            },
+                            "border_left": {
+                              "type": "number"
+                            },
+                            "border_right": {
+                              "type": "number"
+                            },
+                            "border_top": {
+                              "type": "number"
+                            },
+                            "border_bottom": {
+                              "type": "number"
+                            },
+                            "board_spacing_x": {
+                              "type": "number"
+                            },
+                            "board_spacing_y": {
+                              "type": "number"
+                            },
+                            "fiducials_number": {
+                              "type": "integer"
+                            },
+                            "fiducials_size": {
+                              "type": "number"
+                            },
+                            "fiducials_shape": {
+                              "type": "string",
+                              "enum": [
+                                "donut",
+                                "circle",
+                                "plus",
+                                "diamond"
+                              ]
+                            },
+                            "breakaway_method": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "routing",
+                                  "scoring",
+                                  "punching",
+                                  "v_cut",
+                                  "v_grove",
+                                  "jump_scoring"
+                                ]
+                              }
+                            },
+                            "mouse_bites": {
+                              "type": "boolean"
+                            },
+                            "tooling_holes_number": {
+                              "type": "integer"
+                            },
+                            "tooling_holes_size": {
+                              "type": "number"
+                            },
+                            "x_outs_allowed": {
+                              "type": "boolean"
+                            },
+                            "x_outs_max_percentage_on_array": {
+                              "type": "number"
+                            },
+                            "transplant_board_allowed": {
+                              "type": "boolean"
+                            },
+                            "weight": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "logistical": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "inner_packaging": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "ipc_1601_section_4_2_2_type": {
+                              "type": "string",
+                              "enum": [
+                                "a",
+                                "b",
+                                "c",
+                                "d"
+                              ]
+                            },
+                            "hic": {
+                              "type": "boolean"
+                            },
+                            "esd": {
+                              "type": "boolean"
+                            },
+                            "desiccant": {
+                              "type": "boolean"
+                            },
+                            "vacuum": {
+                              "type": "boolean"
+                            },
+                            "maximum_number_of_arrays": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "configuration": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "stackup": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "locked": {
+                              "type": "boolean"
+                            },
+                            "ordered_outer_layers": {
+                              "type": "boolean"
+                            },
+                            "ordered_inner_layers": {
+                              "type": "boolean"
+                            },
+                            "file_name": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "markings": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "layers": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "date_code": {
+                              "type": "string"
+                            },
+                            "manufacturer_identification": {
+                              "type": "boolean"
+                            },
+                            "standards": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "serial_number": {
+                              "type": "boolean"
+                            },
+                            "serial_number_format": {
+                              "type": "string"
+                            },
+                            "serial_number_start": {
+                              "type": "integer"
+                            },
+                            "serial_number_increase_by": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "standards": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "comply_with": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "ul",
+                                  "c_ul",
+                                  "rohs",
+                                  "ul94",
+                                  "iec_61249-2-21",
+                                  "esa",
+                                  "itar",
+                                  "dfars",
+                                  "mil_prf_55110",
+                                  "mil_prf_50884",
+                                  "mil_prf_31032",
+                                  "as9100",
+                                  "nadcap",
+                                  "rw_en45545_2_2013",
+                                  "rw_nf_f_16_101",
+                                  "rw_uni_cei_11170_3",
+                                  "rw_nfpa_130"
+                                ]
+                              }
+                            },
+                            "ipc_6010_class": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 3
+                            },
+                            "ipc_6010_compliance_level": {
+                              "type": "string",
+                              "enum": [
+                                "full",
+                                "factory_standard",
+                                "aabus"
+                              ]
+                            },
+                            "ipc_6010_copper_plating_thickness_level": {
+                              "type": "integer",
+                              "minimum": 2,
+                              "maximum": 3
+                            },
+                            "ipc_6010_annular_ring_level": {
+                              "type": "integer",
+                              "minimum": 2,
+                              "maximum": 3
+                            },
+                            "ipc_6010_conductor_spacing_level": {
+                              "type": "integer",
+                              "minimum": 2,
+                              "maximum": 3
+                            },
+                            "ipc_6010_conductor_width_level": {
+                              "type": "integer",
+                              "minimum": 2,
+                              "maximum": 3
+                            },
+                            "ipc_6012_class": {
+                              "type": "string",
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "3A",
+                                "3M",
+                                "3S"
+                              ]
+                            },
+                            "ipc_6013_class": {
+                              "type": "string",
+                              "enum": [
+                                "1",
+                                "2",
+                                "3"
+                              ]
+                            },
+                            "ipc_6018": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "testing": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "netlist": {
+                              "type": "boolean"
+                            },
+                            "allow_generate_netlist": {
+                              "type": "boolean"
+                            },
+                            "hipot": {
+                              "type": "boolean"
+                            },
+                            "4_wire": {
+                              "type": "boolean"
+                            },
+                            "ist": {
+                              "type": "boolean"
+                            },
+                            "impedance": {
+                              "type": "string",
+                              "enum": [
+                                "controlled",
+                                "calculated",
+                                "follow_stackup"
+                              ]
+                            }
+                          }
+                        },
+                        "country_of_origin": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "iso_3166_1_alpha_3": {
+                              "type": "string"
+                            },
+                            "iso_3166_1_alpha_2": {
+                              "type": "string"
+                            },
+                            "nato_member": {
+                              "type": "boolean"
+                            },
+                            "eu_member": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "allowed_modifications": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "dead_pad_removal": {
+                              "type": "boolean"
+                            },
+                            "add_copper_balancing": {
+                              "type": "boolean"
+                            },
+                            "add_copper_balancing_on_array": {
+                              "type": "boolean"
+                            },
+                            "add_tear_drops": {
+                              "type": "boolean"
+                            },
+                            "resize_vias": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "profiles": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "typeofprofile": {
+              "type": "object",
+              "properties": {
+              },
+              "id": "typeofprofile"
+            }
+          },
+          "patternProperties": {
+            "^(?!typeofprofile$).*": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "circuitdata"
+              ],
+              "properties": {
+                "circuitdata": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "version"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 2
+                    },
+                    "sections": {
+                      "type": "object",
+                      "required": [
+
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "mm2": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "layers": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "genericfunction": {
+                          "type": "object",
+                          "properties": {
+                          },
+                          "id": "genericfunction",
+                          "description": "this should validate any element under generic to be valid"
+                        }
+                      },
+                      "patternProperties": {
+                        "^(?!genericfunction$).*": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "flexible": {
+                              "type": "object",
+                              "properties": {
+                                "anyflexibility": {
+                                  "type": "object",
+                                  "properties": {
+                                  },
+                                  "id": "anyflexibility",
+                                  "description": "this should validate any element under anyflexibility to be valid"
+                                }
+                              },
+                              "patternProperties": {
+                                "^(?!anyflexibility$).*": {
+                                  "type": "object",
+                                  "required": [
+                                    "material"
+                                  ],
+                                  "properties": {
+                                    "material": {
+                                      "type": "object",
+                                      "properties": {
+                                        "anymaterial": {
+                                          "type": "object",
+                                          "properties": {
+                                          },
+                                          "id": "anymaterial"
+                                        }
+                                      },
+                                      "patternProperties": {
+                                        "^(?!anymaterial$).*": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "properties": {
+                                            "count": {
+                                              "type": "integer"
+                                            },
+                                            "thickness": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "tolerance_minus": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "tolerance_pluss": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "minimum_track_width": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "minimum_spacing_width": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "function": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "polarity": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "color": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "allow_touchups": {
+                                              "type": "boolean"
+                                            },
+                                            "heating_operations": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "placement": {
+                                              "type": "object",
+                                              "required": [
+                                                "value_type",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "reverse": {
+                                                  "type": "boolean"
+                                                },
+                                                "value_type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "boolean",
+                                                    "range_of_integers",
+                                                    "range_of_numbers",
+                                                    "list_of_strings",
+                                                    "string"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "processes": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "genericprocessfunction": {
+                          "type": "object",
+                          "properties": {
+                          },
+                          "id": "genericprocessfunction",
+                          "description": "this should validate any element under generic to be valid"
+                        }
+                      },
+                      "patternProperties": {
+                        "^(?!genericprocessfunction$).*": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "hole_type": {
+                              "type": "object",
+                              "properties": {
+                                "anyholetype": {
+                                  "type": "object",
+                                  "properties": {
+                                  },
+                                  "id": "anyholetype",
+                                  "description": "this should validate any element under anyholetype to be valid"
+                                }
+                              },
+                              "patternProperties": {
+                                "^(?!anyholetype$).*": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+
+                                  ],
+                                  "properties": {
+                                    "plated": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "tool_size": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depth": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "method": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "minimum_designed_annular_ring": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "press_fit": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "copper_filled": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "staggered": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "stacked": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "alivh": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "castellated": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "protection": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "metrics": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "board": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "size_x": {
+                              "type": "number"
+                            },
+                            "size_y": {
+                              "type": "number"
+                            },
+                            "breakaway_method": {
+                              "type": "string",
+                              "enum": [
+                                "routing",
+                                "punching"
+                              ]
+                            },
+                            "thickness": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "array": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "size_x": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "size_y": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "boards_x": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "boards_y": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "boards_total": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "border_left": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "border_right": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "border_top": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "border_bottom": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "board_spacing_x": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "board_spacing_y": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "fiducials_number": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "fiducials_size": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "fiducials_shape": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "breakaway_method": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "mouse_bites": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "tooling_holes_number": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "tooling_holes_size": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "x_outs_allowed": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "x_outs_max_percentage_on_array": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "transplant_board_allowed": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "logistical": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "inner_packaging": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "ipc_1601_section_4_2_2_type": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "hic": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "esd": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "dessicant": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "vacuum": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "maximum_number_of_arrays": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "configuration": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "markings": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "layers": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "date_code": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "manufacturer_identification": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "serial_number": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "serial_number_format": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "standards": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "comply_with": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_class": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_compliance_level": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_copper_plating_thickness_level": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_annular_ring_level": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_conductor_spacing_level": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6010_conductor_width_level": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6012_class": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6013_class": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ipc_6018": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "testing": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "netlist": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "allow_generate_netlist": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "hipot": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "4_wire": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ist": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "impedance": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "country_of_origin": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "iso_3166_1_alpha_3": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "iso_3166_1_alpha_2": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "nato_member": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "eu_member": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "allowed_modifications": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "dead_pad_removal": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "add_copper_balancing": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "add_copper_balancing_on_array": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "add_tear_drops": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "resize_vias": {
+                              "type": "object",
+                              "required": [
+                                "value_type",
+                                "value"
+                              ],
+                              "properties": {
+                                "reverse": {
+                                  "type": "boolean"
+                                },
+                                "value_type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "boolean",
+                                    "range_of_integers",
+                                    "range_of_numbers",
+                                    "list_of_strings",
+                                    "string"
+                                  ]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "custom": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "materials": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "circuitdata"
+              ],
+              "properties": {
+                "circuitdata": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "genericmaterial": {
+                      "type": "object",
+                      "properties": {
+                      },
+                      "id": "genericmaterial",
+                      "description": "this should validate any element under generic to be valid"
+                    }
+                  },
+                  "patternProperties": {
+                    "^(?!genericmaterial$).*": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "version": {
+                          "type": "number",
+                          "minimum": 1,
+                          "maximum": 2
+                        },
+                        "circuitdata_material_db_id": {
+                          "type": "string"
+                        },
+                        "function": {
+                          "type": "string",
+                          "enum": [
+                            "conductive",
+                            "dielectric",
+                            "soldermask",
+                            "stiffener",
+                            "final_finish"
+                          ]
+                        },
+                        "group": {
+                          "type": "string",
+                          "enum": [
+                            "FR1",
+                            "FR2",
+                            "FR3",
+                            "FR4",
+                            "FR5",
+                            "G-10",
+                            "G-11",
+                            "CEM-1",
+                            "CEM-2",
+                            "CEM-3",
+                            "CEM-4",
+                            "CEM-5",
+                            "ceramic",
+                            "polyimide",
+                            "aramid",
+                            "acrylic",
+                            "LCP",
+                            "PEN",
+                            "PET",
+                            "LPISM",
+                            "DFISM",
+                            "LDISM",
+                            "stainless_steel",
+                            "copper",
+                            "aluminum",
+                            "silver",
+                            "gold",
+                            "carbon",
+                            "silver_platinum",
+                            "silver_paladium",
+                            "gold_platinum",
+                            "platinum",
+                            "c_bare_copper",
+                            "isn",
+                            "iag",
+                            "enig",
+                            "enepig",
+                            "osp",
+                            "ht_osp",
+                            "g",
+                            "GS",
+                            "t_fused",
+                            "tlu_unfused",
+                            "dig",
+                            "gwb-1_ultrasonic",
+                            "gwb-2-thermosonic",
+                            "s_hasl",
+                            "b1_lfhasl"
+                          ]
+                        },
+                        "manufacturer": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "flexible": {
+                          "type": "boolean"
+                        },
+                        "link": {
+                          "type": "string"
+                        },
+                        "remark": {
+                          "type": "string"
+                        },
+                        "accept_equivalent": {
+                          "type": "boolean"
+                        },
+                        "ul94": {
+                          "type": "string",
+                          "enum": [
+                            "v-0",
+                            "v-1",
+                            "hb"
+                          ]
+                        },
+                        "attributes": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "ipc_slash_sheet": {
+                              "type": "integer"
+                            },
+                            "tg_min": {
+                              "type": "integer"
+                            },
+                            "td_min": {
+                              "type": "integer"
+                            },
+                            "resin": {
+                              "type": "string",
+                              "enum": [
+                                "epoxy",
+                                "bt",
+                                "cyanate_ester",
+                                "phenolic",
+                                "polyester",
+                                "polyimide",
+                                "ppe",
+                                "hydrocarbon",
+                                "ptfe",
+                                "thermoplastic"
+                              ]
+                            },
+                            "resin_content": {
+                              "type": "number"
+                            },
+                            "flame_retardent": {
+                              "type": "string",
+                              "enum": [
+                                "phosphor",
+                                "red_phosphor",
+                                "bromine",
+                                "chlorine",
+                                "antimony_oxide",
+                                "rohs_compliant_bromine"
+                              ]
+                            },
+                            "woven_reinforcement": {
+                              "type": "boolean"
+                            },
+                            "filler": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "ceramic",
+                                  "kaolin",
+                                  "organic",
+                                  "inorganic",
+                                  "glass"
+                                ]
+                              }
+                            },
+                            "reinforcement": {
+                              "type": "string",
+                              "enum": [
+                                "e-glass",
+                                "s-glass",
+                                "ne-glass",
+                                "l-glass",
+                                "quartz",
+                                "aramid",
+                                "paper"
+                              ]
+                            },
+                            "thickness": {
+                              "type": "number"
+                            },
+                            "dk": {
+                              "type": "number"
+                            },
+                            "cti": {
+                              "type": "number"
+                            },
+                            "frequency": {
+                              "type": "number"
+                            },
+                            "df": {
+                              "type": "number"
+                            },
+                            "t260": {
+                              "type": "number"
+                            },
+                            "t280": {
+                              "type": "number"
+                            },
+                            "t300": {
+                              "type": "number"
+                            },
+                            "mot": {
+                              "type": "number"
+                            },
+                            "z_cte": {
+                              "type": "number"
+                            },
+                            "z_cte_before_tg": {
+                              "type": "number"
+                            },
+                            "z_cte_after_tg": {
+                              "type": "number"
+                            },
+                            "dielectric_breakdown": {
+                              "type": "number"
+                            },
+                            "water_absorption": {
+                              "type": "number"
+                            },
+                            "thermal_conductivity": {
+                              "type": "number"
+                            },
+                            "volume_resistivity": {
+                              "type": "number"
+                            },
+                            "electric_strength": {
+                              "type": "number"
+                            },
+                            "foil_roughness": {
+                              "type": "string",
+                              "enum": [
+                                "L",
+                                "S",
+                                "V"
+                              ]
+                            },
+                            "ipc_sm_840_class": {
+                              "type": "string",
+                              "enum": [
+                                "T",
+                                "H",
+                                "TF",
+                                "HF"
+                              ]
+                            },
+                            "finish": {
+                              "type": "string",
+                              "enum": [
+                                "matte",
+                                "glossy",
+                                "semi_glossy"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "colors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value_type": {
+                    "type": "string",
+                    "enum": [
+                      "hex",
+                      "rgb",
+                      "cmyk",
+                      "name"
+                    ]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "aliases": "",
+                "name": "any_name",
+                "description": "Colors can be defined by hex, rgb, cmyk or name. Name of the color present here can be references in the other elements"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

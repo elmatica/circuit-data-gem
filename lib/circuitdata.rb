@@ -1,15 +1,15 @@
 module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
-  require 'active_support/all'
-  require 'json-schema'
-  require_relative './circuitdata/file_comparer'
-  require_relative './circuitdata/compatibility_checker'
-  require_relative './circuitdata/dereferencer'
-  require_relative './circuitdata/profile'
-  require_relative './circuitdata/tools'
+  require "active_support/all"
+  require "json-schema"
+  require_relative "./circuitdata/file_comparer"
+  require_relative "./circuitdata/compatibility_checker"
+  require_relative "./circuitdata/dereferencer"
+  require_relative "./circuitdata/profile"
+  require_relative "./circuitdata/tools"
 
-  SCHEMA_BASE_PATH = File.join(__dir__, 'circuitdata/schema_files/v1')
-  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, 'ottp_circuitdata_schema.json')
+  SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
+  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "ottp_circuitdata_schema.json")
   DEFINITIONS_FULL_PATH = File.join(
     SCHEMA_BASE_PATH, 'ottp_circuitdata_schema_definitions.json'
   )
