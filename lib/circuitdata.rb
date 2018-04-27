@@ -7,6 +7,8 @@ module Circuitdata
   require_relative "./circuitdata/dereferencer"
   require_relative "./circuitdata/profile"
   require_relative "./circuitdata/tools"
+  require_relative "./circuitdata/schema"
+  require_relative "./circuitdata/product"
 
   SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
   SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "ottp_circuitdata_schema.json")
