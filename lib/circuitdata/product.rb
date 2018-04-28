@@ -6,7 +6,7 @@ module Circuitdata
         products: {}
       }
     }
-    attr_accessor :id, :name, :data
+    attr_accessor :id, :name
 
     def initialize(id:, name:, data:)
       @id = id
