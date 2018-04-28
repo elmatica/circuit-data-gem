@@ -6,6 +6,9 @@ class CircuitdataProductTest < CircuitdataTest
     product = Circuitdata::Product.new(id: '1', name: 'empty_product', data: nil)
 
     assert_hash_eql expected_data, product.data
+    validator = Circuitdata::Validator.new(product.data)
+    validator.valid?
+    assert_hash_eql [], validator.errors
   end
 
   def test_setting_product_data
