@@ -203,39 +203,43 @@
                             "type": "number"
                           },
                           "layer_attributes": {
-                            "minimum_track_width": {
-                              "type": "number"
-                            },
-                            "minimum_spacing_width": {
-                              "type": "number"
-                            },
-                            "conductive_function": {
-                              "type": "string",
-                              "enum": [
-                                "signal",
-                                "plane",
-                                "mixed"
-                              ]
-                            },
-                            "polarity": {
-                              "type": "string",
-                              "enum": [
-                                "positive",
-                                "negative"
-                              ]
-                            },
-                            "color": {
-                              "type": "string"
-                            },
-                            "allow_touchups": {
-                              "type": "boolean"
-                            },
-                            "placement": {
-                              "type": "string",
-                              "enum": [
-                                "selective_pads",
-                                "edge_connectors"
-                              ]
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "minimum_track_width": {
+                                "type": "number"
+                              },
+                              "minimum_spacing_width": {
+                                "type": "number"
+                              },
+                              "conductive_function": {
+                                "type": "string",
+                                "enum": [
+                                  "signal",
+                                  "plane",
+                                  "mixed"
+                                ]
+                              },
+                              "polarity": {
+                                "type": "string",
+                                "enum": [
+                                  "positive",
+                                  "negative"
+                                ]
+                              },
+                              "color": {
+                                "type": "string"
+                              },
+                              "allow_touchups": {
+                                "type": "boolean"
+                              },
+                              "placement": {
+                                "type": "string",
+                                "enum": [
+                                  "selective_pads",
+                                  "edge_connectors"
+                                ]
+                              }
                             }
                           }
                         }
@@ -279,9 +283,6 @@
                                   "via"
                                 ]
                               },
-                              "plated": {
-                                "type": "boolean"
-                              },
                               "finished_size": {
                                 "type": "number"
                               },
@@ -308,7 +309,21 @@
                               "press_fit": {
                                 "type": "boolean"
                               },
-                              "copper_filled": {
+                              "plated": {
+                                "type": "boolean"
+                              },
+                              "capped": {
+                                "type": "boolean"
+                              },
+                              "filled": {
+                                "type": "string",
+                                "enum": [
+                                  "copper",
+                                  "resin",
+                                  "soldermask"
+                                ]
+                              },
+                              "covered": {
                                 "type": "boolean"
                               },
                               "staggered": {
@@ -322,19 +337,6 @@
                               },
                               "castellated": {
                                 "type": "boolean"
-                              },
-                              "protection": {
-                                "type": "string",
-                                "enum": [
-                                  "1",
-                                  "2",
-                                  "3",
-                                  "4a",
-                                  "4b",
-                                  "5",
-                                  "6a",
-                                  "6b"
-                                ]
                               }
                             }
                           }
@@ -1114,31 +1116,6 @@
 
                                   ],
                                   "properties": {
-                                    "plated": {
-                                      "type": "object",
-                                      "required": [
-                                        "value_type",
-                                        "value"
-                                      ],
-                                      "properties": {
-                                        "reverse": {
-                                          "type": "boolean"
-                                        },
-                                        "value_type": {
-                                          "type": "string",
-                                          "enum": [
-                                            "boolean",
-                                            "range_of_integers",
-                                            "range_of_numbers",
-                                            "list_of_strings",
-                                            "string"
-                                          ]
-                                        },
-                                        "value": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
                                     "tool_size": {
                                       "type": "object",
                                       "required": [
@@ -1264,7 +1241,82 @@
                                         }
                                       }
                                     },
-                                    "copper_filled": {
+                                    "plated": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "capped": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "filled": {
+                                      "type": "object",
+                                      "required": [
+                                        "value_type",
+                                        "value"
+                                      ],
+                                      "properties": {
+                                        "reverse": {
+                                          "type": "boolean"
+                                        },
+                                        "value_type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "boolean",
+                                            "range_of_integers",
+                                            "range_of_numbers",
+                                            "list_of_strings",
+                                            "string"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "covered": {
                                       "type": "object",
                                       "required": [
                                         "value_type",
@@ -1365,31 +1417,6 @@
                                       }
                                     },
                                     "castellated": {
-                                      "type": "object",
-                                      "required": [
-                                        "value_type",
-                                        "value"
-                                      ],
-                                      "properties": {
-                                        "reverse": {
-                                          "type": "boolean"
-                                        },
-                                        "value_type": {
-                                          "type": "string",
-                                          "enum": [
-                                            "boolean",
-                                            "range_of_integers",
-                                            "range_of_numbers",
-                                            "list_of_strings",
-                                            "string"
-                                          ]
-                                        },
-                                        "value": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "protection": {
                                       "type": "object",
                                       "required": [
                                         "value_type",
