@@ -3,7 +3,12 @@ module Circuitdata
     BASIC_PRODUCT_STRUCTURE = {
       open_trade_transfer_package: {
         version: SCHEMA_VERSION,
-        products: {}
+        products: {},
+        custom: {
+          materials: {
+            circuitdata: {}
+          }
+        }
       }
     }
     attr_accessor :id, :name
@@ -22,6 +27,14 @@ module Circuitdata
       product_data.merge!(new_data)
     end
 
+    def materials_data
+      data.dig(*materials_data_path)
+    end
+
+    def materials_data=(new_data)
+      materials_data.merge!(new_data)
+    end
+
     def data
       @data ||= setup_basic_data
     end
@@ -37,6 +50,10 @@ module Circuitdata
 
     def product_data_path
       [:open_trade_transfer_package, :products, name.to_sym, :circuitdata]
+    end
+
+    def materials_data_path
+      [:open_trade_transfer_package, :custom, :materials, :circuitdata]
     end
 
     def setup_basic_data

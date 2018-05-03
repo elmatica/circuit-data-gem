@@ -8,6 +8,11 @@
           "test": "something"
         }
       }
+    },
+    "custom": {
+      "materials": {
+        "circuitdata": {}
+      }
     }
   }
 }
