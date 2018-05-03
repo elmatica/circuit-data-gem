@@ -19,6 +19,6 @@ done
 echo "----> Downloaded!"
 
 echo "----> Building offline schema!"
-ruby -r./lib/circuitdata -e "puts JSON.pretty_generate(Circuitdata.dereferenced_schema)" > "$local_dir/../schema_v1_dereferenced.json"
+ruby -r./lib/circuitdata -e "puts JSON.pretty_generate(Circuitdata.dereferenced_schema(schema_file_path: Circuitdata::SCHEMA_BASE_PATH + '/ottp_circuitdata_schema.json'))" > "$local_dir/../schema_v1_dereferenced.json"
 
 echo "----> Done!"
