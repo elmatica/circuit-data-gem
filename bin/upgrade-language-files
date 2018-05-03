@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+local_dir="lib/circuitdata/schema_files/v1"
+remote_base_url="https://raw.githubusercontent.com/CircuitData/CircuitData-Language/master/schema/v1"
+files="ottp_circuitdata_schema
+ottp_circuitdata_schema_generics
+ottp_circuitdata_schema_materials
+ottp_circuitdata_schema_products
+ottp_circuitdata_schema_profiles_and_capabilities"
+
+echo "----> Downloading latest language files"
+for file in $files; do
+  echo "$file"
+  curl "$remote_base_url/$file.json" > "$local_dir/$file.json"
+done
+
+echo "----> Downloaded!"
+
+echo "----> Building offline schema!"
+ruby -r./lib/circuitdata -e "puts JSON.pretty_generate(Circuitdata.dereferenced_schema(schema_file_path: Circuitdata::SCHEMA_BASE_PATH + '/ottp_circuitdata_schema.json'))" > "$local_dir/../schema_v1_dereferenced.json"
+
+echo "----> Done!"
