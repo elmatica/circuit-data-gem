@@ -11,7 +11,7 @@ module Circuitdata
   require_relative "./circuitdata/validator"
 
   SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
-  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "ottp_circuitdata_schema.json")
+  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "..", "schema_v1_dereferenced.json")
   DEFINITIONS_FULL_PATH = File.join(
     SCHEMA_BASE_PATH, "ottp_circuitdata_schema_definitions.json"
   )
