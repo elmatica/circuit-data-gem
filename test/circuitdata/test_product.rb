@@ -26,4 +26,10 @@ class CircuitdataProductTest < CircuitdataTest
     product = Circuitdata::Product.new(id: '1', name: 'test', data: example_data)
     assert_equal 6, product.layers.count
   end
+
+  def test_getting_all_products_from_a_file
+    example_data = json_fixture(:multiple_products)
+    products = Circuitdata::Product.from_data(example_data)
+    assert_equal 2, products.count
+  end
 end

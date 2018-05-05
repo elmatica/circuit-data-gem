@@ -11,7 +11,14 @@ module Circuitdata
         }
       }
     }
+    BASE_PATH = [:open_trade_transfer_package, :products]
     attr_accessor :id, :name
+
+    def self.from_data(data)
+      data.dig(*BASE_PATH).map do |k|
+        self.new(id: k, name: k, data: data)
+      end
+    end
 
     def initialize(id:, name:, data:)
       @id = id
