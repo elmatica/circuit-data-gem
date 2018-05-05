@@ -3,7 +3,7 @@ require_relative "../circuitdata_test"
 class CircuitdataProductTest < CircuitdataTest
   def test_empty_product
     expected_data = json_fixture(:empty_product)
-    product = Circuitdata::Product.new(id: '1', name: 'empty_product', data: nil)
+    product = Circuitdata::Product.new(id: 'empty_product', data: nil)
 
     assert_hash_eql expected_data, product.data
     validator = Circuitdata::Validator.new(product.data)
@@ -13,7 +13,7 @@ class CircuitdataProductTest < CircuitdataTest
 
   def test_setting_product_data
     expected_data = json_fixture(:setting_product_data)
-    product = Circuitdata::Product.new(id: '1', name: 'empty_product', data: nil)
+    product = Circuitdata::Product.new(id: 'empty_product', data: nil)
 
     product.product_data = {
       test: "something"
@@ -23,7 +23,7 @@ class CircuitdataProductTest < CircuitdataTest
 
   def test_getting_layers
     example_data = json_fixture(:example_product)
-    product = Circuitdata::Product.new(id: '1', name: 'test', data: example_data)
+    product = Circuitdata::Product.new(id: 'test', data: example_data)
     assert_equal 6, product.layers.count
   end
 
@@ -33,11 +33,11 @@ class CircuitdataProductTest < CircuitdataTest
     assert_equal 2, products.count
   end
 
-  def test_rename_product
+  def test_update_product_id
     example_data = json_fixture(:example_product)
-    product = Circuitdata::Product.new(id: '1', name: 'test', data: example_data)
-    product.rename('another_test')
-    assert_equal 'another_test', product.name
+    product = Circuitdata::Product.new(id: 'test', data: example_data)
+    product.update_id('another_test')
+    assert_equal 'another_test', product.id
     assert_equal false, product.product_data.nil?
   end
 end
