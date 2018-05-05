@@ -32,4 +32,12 @@ class CircuitdataProductTest < CircuitdataTest
     products = Circuitdata::Product.from_data(example_data)
     assert_equal 2, products.count
   end
+
+  def test_rename_product
+    example_data = json_fixture(:example_product)
+    product = Circuitdata::Product.new(id: '1', name: 'test', data: example_data)
+    product.rename('another_test')
+    assert_equal 'another_test', product.name
+    assert_equal false, product.product_data.nil?
+  end
 end

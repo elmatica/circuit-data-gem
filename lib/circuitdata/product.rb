@@ -26,6 +26,16 @@ module Circuitdata
       @data = data
     end
 
+    def rename(new_name)
+      product_map = data.dig(*BASE_PATH)
+      current_data = product_data
+      product_map.delete(name.to_sym)
+      product_map[new_name.to_sym] = {
+        circuitdata: current_data
+      }
+      @name = new_name
+    end
+
     def product_data
       data.dig(*product_data_path)
     end
