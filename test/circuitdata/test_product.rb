@@ -20,4 +20,10 @@ class CircuitdataProductTest < CircuitdataTest
     }
     assert_hash_eql expected_data, product.data
   end
+
+  def test_getting_layers
+    example_data = json_fixture(:example_product)
+    product = Circuitdata::Product.new(id: '1', name: 'test', data: example_data)
+    assert_equal 6, product.layers.count
+  end
 end

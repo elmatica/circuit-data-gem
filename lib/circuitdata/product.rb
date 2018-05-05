@@ -46,6 +46,10 @@ module Circuitdata
       value
     end
 
+    def layers
+      product_data.fetch(:layers)
+    end
+
     private
 
     def product_data_path
