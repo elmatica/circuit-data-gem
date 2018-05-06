@@ -11,12 +11,28 @@ module Circuitdata
         }
       }
     }
-    attr_accessor :id, :name
+    BASE_PATH = [:open_trade_transfer_package, :products]
+    attr_accessor :id
 
-    def initialize(id:, name:, data:)
+    def self.from_data(data)
+      data.dig(*BASE_PATH).map do |k|
+        self.new(id: k, data: data)
+      end
+    end
+
+    def initialize(id:, data:)
       @id = id
-      @name = name
       @data = data
+    end
+
+    def update_id(new_id)
+      product_map = data.dig(*BASE_PATH)
+      current_data = product_data
+      product_map.delete(id.to_sym)
+      product_map[new_id.to_sym] = {
+        circuitdata: current_data
+      }
+      @id = new_id
     end
 
     def product_data
@@ -46,10 +62,14 @@ module Circuitdata
       value
     end
 
+    def layers
+      product_data.fetch(:layers)
+    end
+
     private
 
     def product_data_path
-      [:open_trade_transfer_package, :products, name.to_sym, :circuitdata]
+      [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end
 
     def materials_data_path
@@ -58,7 +78,7 @@ module Circuitdata
 
     def setup_basic_data
       new_data = BASIC_PRODUCT_STRUCTURE.deep_dup
-      new_data.dig(:open_trade_transfer_package, :products)[name.to_sym] = {
+      new_data.dig(:open_trade_transfer_package, :products)[id.to_sym] = {
         circuitdata: {
           version: SCHEMA_VERSION
         }

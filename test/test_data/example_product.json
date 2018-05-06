@@ -1,0 +1,85 @@
+{
+  "open_trade_transfer_package": {
+    "version": 1.0,
+    "products": {
+      "test": {
+        "circuitdata": {
+          "version": 1.0,
+          "layers": [
+            {
+              "order": 0,
+              "function": "legend",
+              "name": "doc4",
+              "sections": ["rigid1"],
+              "materials": ["doc4"]
+            },
+            {
+              "order": 1,
+              "function": "soldermask",
+              "name": "doc3",
+              "sections": ["rigid1"],
+              "materials": ["doc3"]
+            },{
+              "order": 2,
+              "function": "conductive",
+              "name": "Top",
+              "sections": ["rigid1"],
+              "materials": ["Top"]
+            },{
+              "order": 3,
+              "function": "conductive",
+              "name": "Bot",
+              "sections": ["rigid1"],
+              "materials": ["Bot"]
+            },{
+              "order": 4,
+              "function": "soldermask",
+              "name": "doc",
+              "sections": ["rigid1"],
+              "materials": ["doc"]
+            },{
+              "order": 5,
+              "function": "legend",
+              "name": "doc1",
+              "sections": ["rigid1"],
+              "materials": ["doc1"]
+            }
+          ],
+          "sections": [
+            {
+              "name": "rigid1",
+              "in_x": [1],
+              "in_y": [1],
+              "mm2": 1670
+            }
+          ],
+          "processes": []
+        }
+      }
+    },
+    "custom": {
+      "materials": {
+        "circuitdata": {
+          "doc4": {
+            "name": "doc4"
+          },
+          "doc1": {
+            "name": "doc1"
+          },
+          "doc3": {
+            "name": "doc3"
+          },
+          "doc":  {
+            "name": "doc"
+          },
+          "Top": {
+            "name": "Top"
+          },
+          "Bot":{
+            "name": "Bot"
+          }
+        }
+      }
+    }
+  }
+}

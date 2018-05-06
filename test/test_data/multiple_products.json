@@ -1,0 +1,22 @@
+{
+  "open_trade_transfer_package": {
+    "version": 1.0,
+    "products": {
+      "empty_product": {
+        "circuitdata": {
+          "version": 1.0
+        }
+      },
+      "empty_product_2": {
+        "circuitdata": {
+          "version": 1.0
+        }
+      }
+    },
+    "custom": {
+      "materials": {
+        "circuitdata": {}
+      }
+    }
+  }
+}
