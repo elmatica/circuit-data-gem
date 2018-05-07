@@ -26,11 +26,9 @@ module Circuitdata
     end
 
     def self.questions_for_type(type)
-      schema = Circuitdata.dereferenced_schema
       pointer_path = TYPE_PATH.fetch(type)
-      types_schema = schema.dig(*pointer_path)
       result = []
-      types_schema.each do |category_id, category_schema|
+      type_schema(type).each do |category_id, category_schema|
         next if category_id == :version
         category = {
           id: category_id,
@@ -74,6 +72,22 @@ module Circuitdata
       ([""] + path_parts - [:properties, :patternProperties])
         .join("/")
         .sub("^(?!typeofprofile$).*", type.to_s)
+    end
+
+    def self.layer_kinds
+      product_schema = type_schema(:products)
+      product_schema.dig(:layers, :items, :properties, :function, :enum)
+    end
+
+    def self.process_kinds
+      product_schema = type_schema(:products)
+      product_schema.dig(:processes, :items, :properties, :function, :enum)
+    end
+
+    def self.type_schema(type)
+      schema = Circuitdata.dereferenced_schema
+      pointer_path = TYPE_PATH.fetch(type)
+      schema.dig(*pointer_path)
     end
   end
 end
