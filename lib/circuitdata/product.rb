@@ -15,7 +15,7 @@ module Circuitdata
     attr_accessor :id
 
     def self.from_data(data)
-      data.dig(*BASE_PATH).map do |k|
+      data.dig(*BASE_PATH).keys.map do |k|
         self.new(id: k, data: data)
       end
     end

@@ -31,6 +31,7 @@ class CircuitdataProductTest < CircuitdataTest
     example_data = json_fixture(:multiple_products)
     products = Circuitdata::Product.from_data(example_data)
     assert_equal 2, products.count
+    assert_equal [:empty_product, :empty_product_2], products.map(&:id)
   end
 
   def test_update_product_id
