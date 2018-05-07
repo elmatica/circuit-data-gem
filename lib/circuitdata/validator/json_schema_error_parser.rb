@@ -31,6 +31,8 @@ module Circuitdata
             matches = message.match(/contains additional properties (\[.*\]) outside/)
             additional_properties = JSON.parse(matches[1])
             return { additional_properties: additional_properties, problem: 'additional_properties' }
+          when 'Enum'
+            return { problem: 'not_in_enum' }
           end
         end
       end

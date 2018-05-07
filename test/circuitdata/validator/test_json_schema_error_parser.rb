@@ -25,6 +25,14 @@ class CircuitdataValidatorJsonSchemaErrorParserTest < CircuitdataTest
     assert_equal([{:source_path=>"/", :field=>nil, :additional_properties=>["test"], :problem=>"additional_properties"}], errors)
   end
 
+  def test_enum
+    errors = generate_errors_and_translate(
+      {test: "coffee"},
+      {type: "object", properties:{test: {type: "string", enum: ["tea"]}}}
+    )
+    assert_equal([{:source_path=>"/test", :field=>"test", :problem=>"not_in_enum"}], errors)
+  end
+
   def generate_errors_and_translate(data, schema)
     errors = JSON::Validator.fully_validate(
       schema, data, errors_as_objects: true
