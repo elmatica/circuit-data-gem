@@ -53,7 +53,30 @@
               "mm2": 1670
             }
           ],
-          "processes": []
+          "processes": [
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 106,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 0.305,
+                "layer_start": "Top",
+                "layer_stop": "Bot"
+              }
+            },
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 4,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 2.007,
+                "layer_start": "Top",
+                "layer_stop": "Bot"
+              }
+            }
+          ]
         }
       }
     },
