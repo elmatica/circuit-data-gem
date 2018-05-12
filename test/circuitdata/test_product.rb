@@ -41,4 +41,16 @@ class CircuitdataProductTest < CircuitdataTest
     assert_equal 'another_test', product.id
     assert_equal false, product.product_data.nil?
   end
+
+  def test_getting_processes
+    example_data = json_fixture(:example_product)
+    product = Circuitdata::Product.new(id: 'test', data: example_data)
+    assert_equal 2, product.processes.count
+  end
+
+  def test_getting_sections
+    example_data = json_fixture(:example_product)
+    product = Circuitdata::Product.new(id: 'test', data: example_data)
+    assert_equal 1, product.sections.count
+  end
 end

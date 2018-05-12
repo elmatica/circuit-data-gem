@@ -66,6 +66,14 @@ module Circuitdata
       product_data.fetch(:layers)
     end
 
+    def processes
+      product_data.fetch(:processes)
+    end
+
+    def sections
+      product_data.fetch(:sections)
+    end
+
     private
 
     def product_data_path

@@ -19,25 +19,29 @@
               "name": "doc3",
               "sections": ["rigid1"],
               "materials": ["doc3"]
-            },{
+            },
+            {
               "order": 2,
               "function": "conductive",
               "name": "Top",
               "sections": ["rigid1"],
               "materials": ["Top"]
-            },{
+            },
+            {
               "order": 3,
               "function": "conductive",
               "name": "Bot",
               "sections": ["rigid1"],
               "materials": ["Bot"]
-            },{
+            },
+            {
               "order": 4,
               "function": "soldermask",
               "name": "doc",
               "sections": ["rigid1"],
               "materials": ["doc"]
-            },{
+            },
+            {
               "order": 5,
               "function": "legend",
               "name": "doc1",
@@ -53,7 +57,30 @@
               "mm2": 1670
             }
           ],
-          "processes": []
+          "processes": [
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 106,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 305.0,
+                "layer_start": "Top",
+                "layer_stop": "Bot"
+              }
+            },
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 4,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 2007.0,
+                "layer_start": "Top",
+                "layer_stop": "Bot"
+              }
+            }
+          ]
         }
       }
     },
@@ -69,13 +96,13 @@
           "doc3": {
             "name": "doc3"
           },
-          "doc":  {
+          "doc": {
             "name": "doc"
           },
           "Top": {
             "name": "Top"
           },
-          "Bot":{
+          "Bot": {
             "name": "Bot"
           }
         }
