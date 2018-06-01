@@ -6,13 +6,13 @@ module Circuitdata
       :properties,
     ]
     TYPE_PATH = {
-      profiles: BASE_PATH + [:profiles] + [:patternProperties,
-                                           :"^(?!typeofprofile$).*",
+      profiles: BASE_PATH + [:profiles] + [:properties,
+                                           :enforced,
                                            :properties,
                                            :circuitdata,
                                            :properties],
       products: BASE_PATH + [:products] + [:patternProperties,
-                                           :"^(?!generic$).*",
+                                           :".*",
                                            :properties,
                                            :circuitdata,
                                            :properties],
@@ -71,7 +71,7 @@ module Circuitdata
     def self.json_pointer(path_parts, type)
       ([""] + path_parts - [:properties, :patternProperties])
         .join("/")
-        .sub("^(?!typeofprofile$).*", type.to_s)
+        .sub("enforced", type.to_s)
     end
 
     def self.layer_kinds

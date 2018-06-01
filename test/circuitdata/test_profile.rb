@@ -54,8 +54,8 @@ class CircuitdataProfileSchemaTest < CircuitdataTest
     assert_hash_eql exp.except(:questions), result.except(:questions)
     e_qs = exp.fetch(:questions)
     r_qs = result.fetch(:questions)
-    assert_equal e_qs.first, r_qs.first
-    assert_equal e_qs.second, r_qs.second
+    assert_hash_eql e_qs.first, r_qs.first
+    assert_hash_eql e_qs.second, r_qs.second
   end
 
   def test_profile_questions_no_stub
