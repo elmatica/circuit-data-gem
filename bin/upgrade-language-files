@@ -1,24 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env ruby
+require "byebug"
+require_relative "../lib/circuitdata"
 
-set -e
+local_dir = "lib/circuitdata/schema_files/v1"
+org = "CircuitData"
+branch = "master"
+remote_base_url = "https://raw.githubusercontent.com/#{org}/CircuitData-Language/#{branch}/schema/v1"
+files = %w(
+  ottp_circuitdata_schema
+  ottp_circuitdata_schema_generics
+  ottp_circuitdata_schema_materials
+  ottp_circuitdata_schema_products
+  ottp_circuitdata_schema_profiles_and_capabilities
+)
 
-local_dir="lib/circuitdata/schema_files/v1"
-remote_base_url="https://raw.githubusercontent.com/CircuitData/CircuitData-Language/master/schema/v1"
-files="ottp_circuitdata_schema
-ottp_circuitdata_schema_generics
-ottp_circuitdata_schema_materials
-ottp_circuitdata_schema_products
-ottp_circuitdata_schema_profiles_and_capabilities"
+puts "----> Downloading latest language files"
+files.each do |file|
+  puts "#{file}"
+  remote_url = "#{remote_base_url}/#{file}.json"
+  puts remote_url
+  `curl "#{remote_url}" > "#{local_dir}/#{file}.json"`
+  exit $? if $? != 0
+end
 
-echo "----> Downloading latest language files"
-for file in $files; do
-  echo "$file"
-  curl "$remote_base_url/$file.json" > "$local_dir/$file.json"
-done
+puts "----> Downloaded!"
 
-echo "----> Downloaded!"
+puts "----> Building offline schema!"
+new_data = JSON.pretty_generate(
+  Circuitdata.dereferenced_schema(
+    schema_file_path: Circuitdata::SCHEMA_BASE_PATH + "/ottp_circuitdata_schema.json",
+  )
+)
 
-echo "----> Building offline schema!"
-ruby -r./lib/circuitdata -e "puts JSON.pretty_generate(Circuitdata.dereferenced_schema(schema_file_path: Circuitdata::SCHEMA_BASE_PATH + '/ottp_circuitdata_schema.json'))" > "$local_dir/../schema_v1_dereferenced.json"
+File.open("#{local_dir}/../schema_v1_dereferenced.json", "w") do |f|
+  f.write(new_data)
+end
 
-echo "----> Done!"
+puts "----> Done!"
