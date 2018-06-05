@@ -123,7 +123,8 @@
                 "plated": true,
                 "finished_size": 305.0,
                 "layer_start": "Top",
-                "layer_stop": "Bot"
+                "layer_stop": "Bot",
+                "minimum_designed_annular_ring": 125.0
               }
             },
             {
@@ -137,7 +138,20 @@
                 "layer_stop": "Bot"
               }
             }
-          ]
+          ],
+          "metrics": {
+            "board": {
+              "size_x": 40.0,
+              "size_y": 40.0,
+              "thickness": 1.620
+            },
+            "array": {
+              "size_x": 400.0,
+              "size_y": 350.0,
+              "boards_x": 9,
+              "boards_y": 8
+            }
+          }
         }
       }
     },
@@ -148,7 +162,10 @@
             "name": "CB100"
           },
           "HY-UVH900": {
-            "name": "HY-UVH900"
+            "name": "HY-UVH900",
+            "attributes": {
+              "finish": "matte"
+            }
           },
           "copper": {
             "name": "copper"

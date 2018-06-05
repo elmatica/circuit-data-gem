@@ -74,6 +74,10 @@ module Circuitdata
       product_data.fetch(:sections, [])
     end
 
+    def metrics
+      product_data.fetch(:metrics, {})
+    end
+
     private
 
     def product_data_path
