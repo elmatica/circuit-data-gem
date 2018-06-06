@@ -8,7 +8,7 @@ module Circuitdata
         :number_of_conductive_layers,
         :minimum_track,
         :minimum_spacing,
-        :final_finish,
+        :final_finishes,
         :base_copper_thickness
       ],
       panel: [
@@ -29,7 +29,7 @@ module Circuitdata
       solder_mask: [
         :solder_mask_sides,
         :solder_mask_materials,
-        :solder_mask_finish,
+        :solder_mask_finishes,
         :solder_mask_colors
       ],
       legend: [
@@ -46,11 +46,9 @@ module Circuitdata
       SUMMARY_FIELDS.each do |key, section|
         d[key] = {}
         section.each do |node|
-          if self.respond_to?(node, true)
-            # Only add value it  != nil
-            if method(node).call
-              d[key][node] = method(node).call
-            end
+          # Only add value it  != nil
+          if method(node).call
+            d[key][node] = send(node)
           end
         end
       end
@@ -65,25 +63,20 @@ module Circuitdata
     end
 
     def board_area
-      # if size is present, use that
-      if @product.metrics.key?(:array)
-        if @product.metrics[:array].key?(:size_x)
-          if @product.metrics[:array].key?(:size_y)
-            return @product.metrics[:array][:size_x]*@product.metrics[:array][:size_y]
-          end
-        end
-      end
       # try adding up all sections
       sizes = @product.sections.map{|section| section[:mm2]}
-      sizes.inject(:+)
+      sizes.sum(nil)
     end
+
     # mapping
     def base_materials
-      #puts @product.pretty_inspect
-      materials = @product.sections.map{ |section| section[:name]}
-      if materials.length > 0
-        return materials
-      end
+      dielectrics = @product.layers.select{ |layer| layer[:function] == "dielectric"}
+      return nil if dielectrics.length == 0
+      flexes = dielectrics.map{|d| d.dig(:flexible)}.compact.uniq
+      return "Flexible" if flexes.length == 1 && flexes.first == true
+      return "Rigid" if flexes.length == 1 && flexes.first == false
+      return "Rigid Flex" if flexes.length == 2
+      return "Unknown" # dielectric is present, but does not have flex info.
     end
 
     # Return number of conductive layers
@@ -94,33 +87,17 @@ module Circuitdata
     end
 
     def minimum_track
-      min = 1000
-      conductive_layers.each do |layer|
-        if layer.key?(:layer_attributes)
-          if layer[:layer_attributes].key?(:minimum_track_width)
-            min = [min, layer[:layer_attributes][:minimum_track_width]].min
-          end
-        end
-      end
-      return min unless min == 1000
+      conductive_layers.map { |layer| layer[:layer_attributes][:minimum_track_width] if layer.key?(:layer_attributes)}.compact.min
     end
 
     def minimum_spacing
-      min = 1000
-      conductive_layers.each do |layer|
-        if layer.key?(:layer_attributes)
-          if layer[:layer_attributes].key?(:minimum_spacing_width)
-            min = [min, layer[:layer_attributes][:minimum_spacing_width]].min
-          end
-        end
-      end
-      return min unless min == 1000
+      conductive_layers.map { |layer| layer[:layer_attributes][:minimum_spacing_width] if layer.key?(:layer_attributes)}.compact.min
     end
 
-    def final_finish
-      materials = @product.layers.select{ |layer| layer[:function] == "final_finish"}.map{|layer| layer[:materials]}
+    def final_finishes
+      materials = @product.layers.select{ |layer| layer[:function] == "final_finish"}.flat_map{|layer| layer[:materials]}
       if materials.length > 0
-        return materials.first.first
+        return materials.uniq
       end
     end
 
@@ -169,7 +146,8 @@ module Circuitdata
     end
 
     def number_of_holes
-      @product.processes.map{ |process| process[:function_attributes][:number_of_holes]}.inject(:+)
+      #@product.processes.dig(:function_attributes, :number_of_holes).compact.inject(:+)
+      @product.processes.map{ |process| process.dig(:function_attributes, :number_of_holes)}.compact.inject(:+)
     end
 
     def holes_density
@@ -182,11 +160,11 @@ module Circuitdata
     end
 
     def min_annular_ring
-      @product.processes.map{ |process| process[:function_attributes][:minimum_designed_annular_ring]}.compact.min
+      @product.processes.map{ |process| process.dig(:function_attributes, :minimum_designed_annular_ring)}.compact.min
     end
 
     def min_through_hole_size
-      @product.processes.map{ |process| process[:function_attributes][:finished_size]}.min
+      @product.processes.map{ |process| process.dig(:function_attributes,:finished_size)}.compact.min
     end
 
     def max_aspect_ratio
@@ -203,7 +181,7 @@ module Circuitdata
       nr_masks = @product.layers.select{ |layer| layer[:function] == "soldermask"}.length
       return "One side" if nr_masks == 1
       return "Both" if nr_masks == 2
-      "None"
+      return "None" if @product.layers.length > 0
     end
 
     def solder_mask_materials
@@ -212,17 +190,18 @@ module Circuitdata
       return materials if materials.length > 0
     end
 
-    def solder_mask_finish
-      layer = @product.layers.select{ |layer| layer[:function] == "soldermask"}.first
-      if !layer.nil?
+    def solder_mask_finishes
+      soldermasks = @product.layers.select{ |layer| layer[:function] == "soldermask"}
+      finishes = soldermasks.map do |layer|
         material_name = layer[:materials].first
         material = @product.materials_data[material_name.to_sym]
         if !material.nil?
           if material.key?(:attributes)
-            return material[:attributes][:finish]
+            material[:attributes][:finish]
           end
         end
       end
+      return finishes.compact.uniq if finishes.compact.length > 0
     end
 
     def solder_mask_colors

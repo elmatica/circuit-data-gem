@@ -8,9 +8,7 @@ class CircuitdataSummaryTest < CircuitdataTest
       standards: {},
       packaging: {},
       holes: {},
-      solder_mask: {
-        solder_mask_sides: "None"
-      },
+      solder_mask: {},
       legend: {}
     }
     product = Circuitdata::Product.new(id: 'test', data: nil)
@@ -21,7 +19,6 @@ class CircuitdataSummaryTest < CircuitdataTest
   def test_example_product
     expected_data = {
       general: {
-        :base_materials => ["rigid1"],
         :number_of_conductive_layers => 2
       },
       panel: {},
@@ -49,11 +46,11 @@ class CircuitdataSummaryTest < CircuitdataTest
   def test_full_product
     expected_data = {
       general: {
-        :base_materials => ["rigid1"],
+        :base_materials => "Rigid",
         :number_of_conductive_layers => 2,
         :minimum_track => 0.2,
         :minimum_spacing => 0.2,
-        :final_finish => "ENIG",
+        :final_finishes => ["ENIG"],
         :base_copper_thickness => 35
       },
       panel: {
@@ -66,7 +63,7 @@ class CircuitdataSummaryTest < CircuitdataTest
       packaging: {},
       holes: {
         :number_of_holes => 110,
-        :holes_density => 7.8,
+        :holes_density => 687.5,
         :min_annular_ring => 125.0,
         :min_through_hole_size=>305.0,
         :max_aspect_ratio => 5.31
@@ -74,7 +71,7 @@ class CircuitdataSummaryTest < CircuitdataTest
       solder_mask: {
         :solder_mask_sides => "Both",
         :solder_mask_materials => ["HY-UVH900"],
-        :solder_mask_finish => "matte",
+        :solder_mask_finishes => ["matte"],
         :solder_mask_colors => ["green"]
       },
       legend: {
