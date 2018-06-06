@@ -13,7 +13,7 @@ class CircuitdataSummaryTest < CircuitdataTest
       },
       legend: {}
     }
-    product = Circuitdata::Product.new(id: 'empty_product', data: nil)
+    product = Circuitdata::Product.new(id: 'test', data: nil)
     summary = Circuitdata::Summary.new(product)
     assert_hash_eql expected_data, summary.data
   end

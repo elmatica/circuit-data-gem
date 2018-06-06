@@ -79,6 +79,7 @@ module Circuitdata
     end
     # mapping
     def base_materials
+      #puts @product.pretty_inspect
       materials = @product.sections.map{ |section| section[:name]}
       if materials.length > 0
         return materials

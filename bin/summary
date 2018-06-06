@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'byebug'
+require 'pp'
+require 'terminal-table'
+require_relative '../lib/circuitdata'
+
+file_path = ARGV.first
+if file_path.nil?
+  $stderr.puts "Error: Missing file_name\n\nUsage: validate-file file_name"
+  exit 1
+end
+
+data = JSON.parse(File.read(file_path), symbolize_names: true)
+product = Circuitdata::Product.from_data(data).first
+summary = Circuitdata::Summary.new(product)
+
+summary.data.each do |header, section|
+  puts Terminal::Table.new :rows => section, :title => header, :style => {:width => 80}
+end
+
+#$stderr.puts "File is not valid!"
+#$stderr.puts validator.errors.pretty_inspect
