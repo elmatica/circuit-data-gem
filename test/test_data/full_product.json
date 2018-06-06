@@ -1,0 +1,185 @@
+{
+  "open_trade_transfer_package": {
+    "version": 1.0,
+    "products": {
+      "test": {
+        "circuitdata": {
+          "version": 1.0,
+          "layers": [
+            {
+              "order": 0,
+              "function": "legend",
+              "name": "legend-top",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["CB100"],
+              "thickness": 15,
+              "layer_attributes": {
+                "color": "white"
+              }
+            },
+            {
+              "order": 1,
+              "function": "soldermask",
+              "name": "solder-mask-top",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["HY-UVH900"],
+              "thickness": 10,
+              "layer_attributes": {
+                "color": "green"
+              }
+            },
+            {
+              "order": 2,
+              "function": "final_finish",
+              "name": "finish-enig-top",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["ENIG"]
+            },
+            {
+              "order": 3,
+              "function": "conductive",
+              "name": "Top",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["copper"],
+              "thickness": 35,
+              "layer_attributes": {
+                "minimum_track_width": 0.2,
+                "minimum_spacing_width": 0.2
+              }
+            },
+            {
+              "order": 4,
+              "function": "dielectric",
+              "name": "core",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["FR4"],
+              "thickness": 1550
+            },
+            {
+              "order": 5,
+              "function": "conductive",
+              "name": "Bot",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["copper"],
+              "thickness": 35,
+              "layer_attributes": {
+                "minimum_track_width": 0.2,
+                "minimum_spacing_width": 0.2
+              }
+            },
+            {
+              "order": 6,
+              "function": "final_finish",
+              "name": "finish-enig-bot",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["ENIG"]
+            },
+            {
+              "order": 7,
+              "function": "soldermask",
+              "name": "solder-mask-bot",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["HY-UVH900"],
+              "thickness": 10,
+              "layer_attributes": {
+                "color": "green"
+              }
+            },
+            {
+              "order": 8,
+              "function": "legend",
+              "name": "legend-bottom",
+              "flexible": false,
+              "sections": ["rigid1"],
+              "materials": ["CB100"],
+              "thickness": 15,
+              "layer_attributes": {
+                "color": "white"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "name": "rigid1",
+              "in_x": [1],
+              "in_y": [1],
+              "mm2": 1600
+            }
+          ],
+          "processes": [
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 106,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 305.0,
+                "layer_start": "Top",
+                "layer_stop": "Bot",
+                "minimum_designed_annular_ring": 125.0
+              }
+            },
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 4,
+                "hole_type": "through",
+                "plated": true,
+                "finished_size": 2007.0,
+                "layer_start": "Top",
+                "layer_stop": "Bot"
+              }
+            },{
+              "function": "holes"
+            }
+          ],
+          "metrics": {
+            "board": {
+              "size_x": 40.0,
+              "size_y": 40.0,
+              "thickness": 1.620
+            },
+            "array": {
+              "size_x": 400.0,
+              "size_y": 350.0,
+              "boards_x": 9,
+              "boards_y": 8
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "materials": {
+        "circuitdata": {
+          "CB100": {
+            "name": "CB100"
+          },
+          "HY-UVH900": {
+            "name": "HY-UVH900",
+            "attributes": {
+              "finish": "matte"
+            }
+          },
+          "copper": {
+            "name": "copper"
+          },
+          "FR4": {
+            "name": "FR4"
+          },
+          "ENIG": {
+            "name": "ENIG"
+          }
+        }
+      }
+    }
+  }
+}

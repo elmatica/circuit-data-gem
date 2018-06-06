@@ -63,15 +63,19 @@ module Circuitdata
     end
 
     def layers
-      product_data.fetch(:layers)
+      product_data.fetch(:layers, [])
     end
 
     def processes
-      product_data.fetch(:processes)
+      product_data.fetch(:processes, [])
     end
 
     def sections
-      product_data.fetch(:sections)
+      product_data.fetch(:sections, [])
+    end
+
+    def metrics
+      product_data.fetch(:metrics, {})
     end
 
     private
