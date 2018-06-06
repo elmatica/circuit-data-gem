@@ -53,4 +53,15 @@ class CircuitdataProductTest < CircuitdataTest
     product = Circuitdata::Product.new(id: 'test', data: example_data)
     assert_equal 1, product.sections.count
   end
+
+  def test_question_answer
+    product = Circuitdata::Product.new(id: 'empty_product', data: nil)
+    product.set_question_answer(:sections, 0, :name, "main_rigid")
+    expected_data = [
+      {
+        "name": "main_rigid"
+      }
+    ]
+    assert_equal expected_data, product.sections
+  end
 end
