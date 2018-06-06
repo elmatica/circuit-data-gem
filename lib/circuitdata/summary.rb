@@ -59,7 +59,7 @@ module Circuitdata
 
     # helper functions
     def conductive_layers
-      @product.layers.select{ |layer| layer[:function] == "conductive"}
+      layers_with_function("conductive")
     end
 
     def board_area
@@ -68,13 +68,17 @@ module Circuitdata
       sizes.sum(nil)
     end
 
+    def layers_with_function(func)
+      @product.layers.select{ |layer| layer[:function] == func}
+    end
+
     # mapping
     def base_materials
-      dielectrics = @product.layers.select{ |layer| layer[:function] == "dielectric"}
+      dielectrics = layers_with_function("dielectric")
       return nil if dielectrics.length == 0
       flexes = dielectrics.map{|d| d.dig(:flexible)}.compact.uniq
-      return "Flexible" if flexes.length == 1 && flexes.first == true
-      return "Rigid" if flexes.length == 1 && flexes.first == false
+      return "Flexible" if flexes === [true]
+      return "Rigid" if flexes === [false]
       return "Rigid Flex" if flexes.length == 2
       return "Unknown" # dielectric is present, but does not have flex info.
     end
@@ -87,15 +91,15 @@ module Circuitdata
     end
 
     def minimum_track
-      conductive_layers.map { |layer| layer[:layer_attributes][:minimum_track_width] if layer.key?(:layer_attributes)}.compact.min
+      conductive_layers.map { |layer| layer.dig(:layer_attributes, :minimum_track_width)}.compact.min
     end
 
     def minimum_spacing
-      conductive_layers.map { |layer| layer[:layer_attributes][:minimum_spacing_width] if layer.key?(:layer_attributes)}.compact.min
+      conductive_layers.map { |layer| layer.dig(:layer_attributes, :minimum_spacing_width)}.compact.min
     end
 
     def final_finishes
-      materials = @product.layers.select{ |layer| layer[:function] == "final_finish"}.flat_map{|layer| layer[:materials]}
+      materials = layers_with_function("final_finish").flat_map{|layer| layer[:materials]}
       if materials.length > 0
         return materials.uniq
       end
@@ -106,43 +110,32 @@ module Circuitdata
     end
 
     def board_outline
-      if @product.metrics.key?(:board)
-        if @product.metrics[:board].key?(:size_x)
-          if @product.metrics[:board].key?(:size_y)
-            return @product.metrics[:board][:size_x].to_s+" x "+@product.metrics[:board][:size_y].to_s+" mm"
-          end
-        end
-      end
+      array = @product.metrics.fetch(:board, {})
+      size_x = array[:size_x]
+      size_y = array[:size_y]
+      return size_x.to_s+" x "+size_y.to_s+" mm" if size_x && size_y
     end
 
     def final_thickness
-      if @product.metrics.key?(:board)
-        if @product.metrics[:board].key?(:thickness)
-          return @product.metrics[:board][:thickness]
-        end
-      end
+      @product.metrics.dig(:board, :thickness)
     end
 
     def panel_size
-      if @product.metrics.key?(:array)
-        if @product.metrics[:array].key?(:size_x)
-          if @product.metrics[:array].key?(:size_y)
-            x = BigDecimal(@product.metrics[:array][:size_x].to_s)
-            y = BigDecimal(@product.metrics[:array][:size_y].to_s)
-            return x.truncate(1).to_s+" x "+y.truncate(1).to_s+" mm"
-          end
-        end
+      array = @product.metrics.fetch(:array, {})
+      size_x = array[:size_x]
+      size_y = array[:size_y]
+      if size_x && size_y
+        x = BigDecimal(size_x.to_s)
+        y = BigDecimal(size_y.to_s)
+        return x.truncate(1).to_s+" x "+y.truncate(1).to_s+" mm"
       end
     end
 
     def pcbs_in_array
-      if @product.metrics.key?(:array)
-        if @product.metrics[:array].key?(:boards_x)
-          if @product.metrics[:array].key?(:boards_y)
-            return @product.metrics[:array][:boards_x]*@product.metrics[:array][:boards_y]
-          end
-        end
-      end
+      array = @product.metrics.fetch(:array, {})
+      boards_x = array[:boards_x]
+      boards_y = array[:boards_y]
+      return boards_x*boards_y if boards_x && boards_y
     end
 
     def number_of_holes
@@ -178,20 +171,20 @@ module Circuitdata
     end
 
     def solder_mask_sides
-      nr_masks = @product.layers.select{ |layer| layer[:function] == "soldermask"}.length
+      nr_masks = layers_with_function("soldermask").length
       return "One side" if nr_masks == 1
       return "Both" if nr_masks == 2
       return "None" if @product.layers.length > 0
     end
 
     def solder_mask_materials
-      layers = @product.layers.select{ |layer| layer[:function] == "soldermask"}
+      layers = layers_with_function("soldermask")
       materials = layers.map{|layer| layer[:materials]}.flatten.uniq
       return materials if materials.length > 0
     end
 
     def solder_mask_finishes
-      soldermasks = @product.layers.select{ |layer| layer[:function] == "soldermask"}
+      soldermasks = layers_with_function("soldermask")
       finishes = soldermasks.map do |layer|
         material_name = layer[:materials].first
         material = @product.materials_data[material_name.to_sym]
@@ -205,7 +198,7 @@ module Circuitdata
     end
 
     def solder_mask_colors
-      masks =  @product.layers.select{ |layer| layer[:function] == "soldermask"}
+      masks =  layers_with_function("soldermask")
       colors = []
       masks.each do |mask|
         if mask.key?(:layer_attributes)
@@ -216,7 +209,7 @@ module Circuitdata
     end
 
     def legend_materials
-      materials = @product.layers.select{ |layer| layer[:function] == "legend"}.map{ |material| material[:materials][0]}
+      materials = layers_with_function("legend").map{ |material| material[:materials][0]}
       if materials.length > 0
         return materials.uniq
       end
