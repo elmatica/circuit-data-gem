@@ -17,6 +17,3 @@ summary = Circuitdata::Summary.new(product)
 summary.data.each do |header, section|
   puts Terminal::Table.new :rows => section, :title => header, :style => {:width => 80}
 end
-
-#$stderr.puts "File is not valid!"
-#$stderr.puts validator.errors.pretty_inspect
