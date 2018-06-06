@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.3"
   s.add_dependency "json-schema", "~> 2.8"
   s.add_dependency "activesupport", "~> 5.1"
+  s.add_dependency "terminal-table", "~> 1.8.0"
   s.add_development_dependency "rake", "~> 12.3"
   s.add_development_dependency "minitest", "~> 5.11"
   s.add_development_dependency "byebug", "~> 10.0"

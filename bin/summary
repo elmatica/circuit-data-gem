@@ -6,7 +6,7 @@ require_relative '../lib/circuitdata'
 
 file_path = ARGV.first
 if file_path.nil?
-  $stderr.puts "Error: Missing file_name\n\nUsage: validate-file file_name"
+  $stderr.puts "Error: Missing file_name\n\nUsage: summary file_name"
   exit 1
 end
 
