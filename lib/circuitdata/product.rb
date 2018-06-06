@@ -62,6 +62,10 @@ module Circuitdata
       value
     end
 
+    def set_question_answer(*path, value)
+      Bury.bury(product_data, *path, value)
+    end
+
     def layers
       product_data.fetch(:layers, [])
     end

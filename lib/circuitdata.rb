@@ -10,6 +10,7 @@ module Circuitdata
   require_relative "./circuitdata/product"
   require_relative "./circuitdata/validator"
   require_relative "./circuitdata/summary"
+  require_relative "./circuitdata/bury/bury"
 
   SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
   SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "..", "schema_v1_dereferenced.json")
