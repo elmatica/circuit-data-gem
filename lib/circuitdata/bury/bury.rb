@@ -9,7 +9,7 @@ module Circuitdata
           end
           current_data = current_data[part]
         end
-        if value.present?
+        if !value.nil?
           current_data[path.last] = value
         else
           current_data.delete(path.last)
