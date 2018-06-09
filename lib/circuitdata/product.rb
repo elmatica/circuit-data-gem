@@ -51,6 +51,10 @@ module Circuitdata
       materials_data.merge!(new_data)
     end
 
+    def data=(new_data)
+      @data = new_data
+    end
+
     def data
       @data ||= setup_basic_data
     end
