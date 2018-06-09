@@ -67,6 +67,7 @@ module Circuitdata
     end
 
     def set_question_answer(*path, value)
+      return if value.nil? && question_answer(path).nil?
       Bury.bury(product_data, *path, value)
     end
 
