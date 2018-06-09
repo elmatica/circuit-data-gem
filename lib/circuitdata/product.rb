@@ -6,10 +6,10 @@ module Circuitdata
         products: {},
         custom: {
           materials: {
-            circuitdata: {}
-          }
-        }
-      }
+            circuitdata: {},
+          },
+        },
+      },
     }
     BASE_PATH = [:open_trade_transfer_package, :products]
     attr_accessor :id
@@ -30,7 +30,7 @@ module Circuitdata
       current_data = product_data
       product_map.delete(id.to_sym)
       product_map[new_id.to_sym] = {
-        circuitdata: current_data
+        circuitdata: current_data,
       }
       @id = new_id
     end
@@ -51,6 +51,10 @@ module Circuitdata
       materials_data.merge!(new_data)
     end
 
+    def data=(new_data)
+      @data = new_data
+    end
+
     def data
       @data ||= setup_basic_data
     end
@@ -63,6 +67,7 @@ module Circuitdata
     end
 
     def set_question_answer(*path, value)
+      return if value.nil? && question_answer(path).nil?
       Bury.bury(product_data, *path, value)
     end
 
@@ -96,8 +101,8 @@ module Circuitdata
       new_data = BASIC_PRODUCT_STRUCTURE.deep_dup
       new_data.dig(:open_trade_transfer_package, :products)[id.to_sym] = {
         circuitdata: {
-          version: SCHEMA_VERSION
-        }
+          version: SCHEMA_VERSION,
+        },
       }
       new_data
     end
