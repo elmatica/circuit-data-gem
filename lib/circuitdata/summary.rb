@@ -47,8 +47,9 @@ module Circuitdata
         d[key] = {}
         section.each do |node|
           # Only add value it  != nil
-          if method(node).call
-            d[key][node] = send(node)
+          value = send(node)
+          unless value.nil?
+            d[key][node] = value
           end
         end
       end
@@ -187,14 +188,15 @@ module Circuitdata
       soldermasks = layers_with_function("soldermask")
       finishes = soldermasks.map do |layer|
         material_name = layer[:materials].first
+        next if material_name.nil?
         material = @product.materials_data[material_name.to_sym]
         if !material.nil?
           if material.key?(:attributes)
             material[:attributes][:finish]
           end
         end
-      end
-      return finishes.compact.uniq if finishes.compact.length > 0
+      end.compact.uniq
+      return finishes if finishes.length > 0
     end
 
     def solder_mask_colors
