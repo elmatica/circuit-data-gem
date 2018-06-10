@@ -47,8 +47,9 @@ module Circuitdata
         d[key] = {}
         section.each do |node|
           # Only add value it  != nil
-          if method(node).call
-            d[key][node] = send(node)
+          value = send(node)
+          unless value.nil?
+            d[key][node] = value
           end
         end
       end
