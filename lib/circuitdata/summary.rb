@@ -46,8 +46,8 @@ module Circuitdata
       SUMMARY_FIELDS.each do |key, section|
         d[key] = {}
         section.each do |node|
-          # Only add value it  != nil
           value = send(node)
+          # Only add value if != nil
           unless value.nil?
             d[key][node] = value
           end
@@ -100,7 +100,7 @@ module Circuitdata
     end
 
     def final_finishes
-      materials = layers_with_function("final_finish").flat_map{|layer| layer[:materials]}
+      materials = layers_with_function("final_finish").flat_map { |layer| layer[:materials] }.compact
       if materials.length > 0
         return materials.uniq
       end
@@ -140,16 +140,13 @@ module Circuitdata
     end
 
     def number_of_holes
-      #@product.processes.dig(:function_attributes, :number_of_holes).compact.inject(:+)
-      @product.processes.map{ |process| process.dig(:function_attributes, :number_of_holes)}.compact.inject(:+)
+      @product.processes.map { |process| process.dig(:function_attributes, :number_of_holes) }.compact.inject(:+)
     end
 
     def holes_density
-      if !board_area.nil?
-        if !number_of_holes.nil?
-          dm2 = board_area/10000.0
-          return BigDecimal(number_of_holes.to_d/dm2.to_f).truncate(1).to_s.to_f
-        end
+      if !board_area.nil? && !number_of_holes.nil?
+        dm2 = board_area / 10000.0
+        return BigDecimal(number_of_holes.to_d / dm2.to_f).truncate(1).to_s.to_f
       end
     end
 
@@ -180,20 +177,18 @@ module Circuitdata
 
     def solder_mask_materials
       layers = layers_with_function("soldermask")
-      materials = layers.map{|layer| layer[:materials]}.flatten.uniq
+      materials = layers.flat_map { |layer| layer[:materials] }.compact.uniq
       return materials if materials.length > 0
     end
 
     def solder_mask_finishes
       soldermasks = layers_with_function("soldermask")
       finishes = soldermasks.map do |layer|
-        material_name = layer[:materials].first
+        material_name = layer.dig(:materials, 0)
         next if material_name.nil?
         material = @product.materials_data[material_name.to_sym]
         if !material.nil?
-          if material.key?(:attributes)
-            material[:attributes][:finish]
-          end
+          material.dig(:attributes, :finish)
         end
       end.compact.uniq
       return finishes if finishes.length > 0
@@ -211,7 +206,9 @@ module Circuitdata
     end
 
     def legend_materials
-      materials = layers_with_function("legend").map{ |material| material[:materials][0]}
+      materials = layers_with_function("legend")
+        .map { |material| material.dig(:materials, 0) }
+        .compact
       if materials.length > 0
         return materials.uniq
       end
