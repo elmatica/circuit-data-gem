@@ -1,15 +1,15 @@
 module Circuitdata
-  class Validator
+  class JsonValidator
     class JsonSchemaErrorParser
-      class<<self
+      class << self
         def translate(error)
           additional_data = extract_data(error[:message], error[:failed_attribute])
           fail "Unhandled error: #{error.inspect}" if additional_data.nil?
 
-          path = error[:fragment].gsub('#', '')
+          path = error[:fragment].gsub("#", "")
           {
             source_path: path,
-            field: path.split('/').last,
+            field: path.split("/").last,
           }.merge(additional_data)
         end
 
@@ -20,19 +20,19 @@ module Circuitdata
             if !field
               fail "Unable to extract field from #{message.inspect}"
             end
-            return { field: field, problem: 'required_property_missing' }
+            return {field: field, problem: "required_property_missing"}
           when "TypeV4"
             if message.include?("did not match the following type")
               matches = message.match(/of type (\S*) did not match the following type: (\S*)/)
               actual, expected = matches[1..2]
-              return { actual: actual, expected: expected, problem: 'type_mismatch' }
+              return {actual: actual, expected: expected, problem: "type_mismatch"}
             end
-          when 'AdditionalProperties'
+          when "AdditionalProperties"
             matches = message.match(/contains additional properties (\[.*\]) outside/)
             additional_properties = JSON.parse(matches[1])
-            return { additional_properties: additional_properties, problem: 'additional_properties' }
-          when 'Enum'
-            return { problem: 'not_in_enum' }
+            return {additional_properties: additional_properties, problem: "additional_properties"}
+          when "Enum"
+            return {problem: "not_in_enum"}
           end
         end
       end

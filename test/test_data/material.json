@@ -1,0 +1,22 @@
+{
+  "version": 1.0,
+  "name": "KB7150C",
+  "circuitdata_material_db_id": "86242e86-d1ba-4627-838f-a17bec07db30",
+  "function": "dielectric",
+  "group": "CEM-3",
+  "flexible": false,
+  "ul94": "v-0",
+  "manufacturer": "Kingboard",
+  "attributes": {
+    "ipc_slash_sheet": 12,
+    "dk": 4.5,
+    "cti": 0,
+    "df": 0.02,
+    "t260": 5,
+    "t280": 20,
+    "mot": 130,
+    "z_cte_before_tg": 55.0,
+    "z_cte_after_tg": 410.0,
+    "water_absorption": 0.2
+  }
+}

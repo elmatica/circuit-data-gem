@@ -9,6 +9,8 @@ module Circuitdata
   require_relative "./circuitdata/schema"
   require_relative "./circuitdata/product"
   require_relative "./circuitdata/validator"
+  require_relative "./circuitdata/json_validator"
+  require_relative "./circuitdata/material_validator"
   require_relative "./circuitdata/summary"
   require_relative "./circuitdata/bury/bury"
 
