@@ -1,0 +1,251 @@
+{
+  "circuitdata_version": "1.0",
+  "name": "KB7150C",
+  "verified": null,
+  "id": "86242e86-d1ba-4627-838f-a17bec07db30",
+  "source": "COMMODITY.LIVE",
+  "source_id": "1911a615-53f5-412f-a252-519a86df0504",
+  "function": "dielectric",
+  "group": "CEM-3",
+  "flexible": false,
+  "additional": null,
+  "link": null,
+  "remark": null,
+  "ul_94": "v-0",
+  "accept_equivalent": null,
+  "manufacturer": {
+    "name": "Kingboard",
+    "verified": false,
+    "description": "Created from Material DB spreadsheet",
+    "location": null,
+    "ul": null,
+    "ul_c": null
+  },
+  "material_attributes": [
+    {
+      "name": "ipc_slash_sheet",
+      "material_attribute_values": [
+        {
+          "value": "12",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "tg_min",
+      "material_attribute_values": [
+        {
+          "value": "NA",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "td_min",
+      "material_attribute_values": [
+        {
+          "value": "NA",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "resin",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "resin_content",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "woven_reinforcement",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "filler",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "reinforcement",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "thickness",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "dk",
+      "material_attribute_values": [
+        {
+          "value": "4.5",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "cti",
+      "material_attribute_values": [
+        {
+          "value": "0",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "frequency",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "df",
+      "material_attribute_values": [
+        {
+          "value": "0.020",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "t260",
+      "material_attribute_values": [
+        {
+          "value": "5",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "t280",
+      "material_attribute_values": [
+        {
+          "value": "20",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "t300",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "mot",
+      "material_attribute_values": [
+        {
+          "value": "130",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "z_cte",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "z_cte_before_tg",
+      "material_attribute_values": [
+        {
+          "value": "55.0",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "z_cte_after_tg",
+      "material_attribute_values": [
+        {
+          "value": "410.0",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "dielectric_breakdown",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "water_absorption",
+      "material_attribute_values": [
+        {
+          "value": "0.20",
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "thermal_conductivity",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "electric_strength",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    },
+    {
+      "name": "foil_roughness",
+      "material_attribute_values": [
+        {
+          "value": null,
+          "value_type": null
+        }
+      ]
+    }
+  ]
+}
