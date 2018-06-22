@@ -40,7 +40,8 @@ module Circuitdata
     end
 
     def product_data=(new_data)
-      product_data.merge!(new_data)
+      Bury.bury(data, *product_data_path, new_data)
+      product_data.merge!(version: SCHEMA_VERSION)
     end
 
     def materials_data
@@ -48,7 +49,7 @@ module Circuitdata
     end
 
     def materials_data=(new_data)
-      materials_data.merge!(new_data)
+      Bury.bury(data, *materials_data_path, new_data)
     end
 
     def data=(new_data)
