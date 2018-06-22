@@ -27,7 +27,7 @@ class CircuitdataValidatorTest < CircuitdataTest
       field: "nato_member",
       problem: "type_mismatch",
       expected: "boolean",
-      actual: "string"
+      actual: "string",
     }]
     assert_hash_eql expected_errors, validator.errors
   end
