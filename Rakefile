@@ -1,6 +1,5 @@
-desc "Run tests"
-task :test do
-  Dir.glob('./test/**/test_*.rb').each { |file| require file }
-end
+require "rspec/core/rake_task"
 
-task :default => :test
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
