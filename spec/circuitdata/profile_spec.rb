@@ -63,6 +63,11 @@ RSpec.describe Circuitdata::Profile do
         expect(r_qs.first).to eql(e_qs.first)
         expect(r_qs.second).to eql(e_qs.second)
       end
+
+      it "does not have any nested objects" do
+        result = JSON.generate(subject.questions)
+        expect(result).not_to include('"type":"object"')
+      end
     end
   end
 end
