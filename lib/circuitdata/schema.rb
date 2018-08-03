@@ -38,7 +38,7 @@ module Circuitdata
     def self.build_category(category_id, category_schema, pointer_path)
       category = {
         id: category_id,
-        name: category_id.to_s.humanize,
+        name: name_from_id(category_id),
         questions: [],
         array?: category_schema[:type] == "array",
       }
@@ -61,14 +61,15 @@ module Circuitdata
 
     def self.add_questions_to_category(category, question_id, question_schema, path)
       category_questions = category[:questions]
+      id = :"#{category.fetch(:id)}/#{question_id}"
 
       if question_schema.fetch(:type) == "object"
-        category_questions << build_category(question_id, question_schema, path)
+        category_questions << build_category(id, question_schema, path)
         return
       end
 
       question = {
-        id: "#{category[:id]}_#{question_id}",
+        id: id,
         code: question_id,
         name: question_id.to_s.humanize,
         description: "",
@@ -107,6 +108,10 @@ module Circuitdata
       schema = Circuitdata.dereferenced_schema
       pointer_path = TYPE_PATH.fetch(type)
       schema.dig(*pointer_path)
+    end
+
+    def self.name_from_id(id)
+      id.to_s.split("/").last.humanize
     end
   end
 end

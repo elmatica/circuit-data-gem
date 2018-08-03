@@ -12,7 +12,7 @@ RSpec.describe Circuitdata::Profile do
           :array? => false,
           :questions => [
             {
-              :id => "sections_count",
+              :id => :"sections/count",
               :code => :count,
               :name => "Count",
               :description => "",
@@ -33,7 +33,7 @@ RSpec.describe Circuitdata::Profile do
               },
             },
             {
-              :id => "sections_mm2",
+              :id => :"sections/mm2",
               :code => :mm2,
               :name => "Mm2",
               :description => "",
