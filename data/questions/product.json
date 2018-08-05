@@ -1,0 +1,3362 @@
+[
+  {
+    "id": "sections",
+    "name": "Sections",
+    "questions": [
+      {
+        "id": "sections/name",
+        "code": "name",
+        "name": "Name",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/name"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/name"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/name"
+        }
+      },
+      {
+        "id": "sections/in_x",
+        "code": "in_x",
+        "name": "In x",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_x"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_x"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_x"
+        }
+      },
+      {
+        "id": "sections/in_y",
+        "code": "in_y",
+        "name": "In y",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_y"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_y"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_y"
+        }
+      },
+      {
+        "id": "sections/mm2",
+        "code": "mm2",
+        "name": "Mm2",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
+        }
+      }
+    ],
+    "array?": true
+  },
+  {
+    "id": "layers",
+    "name": "Layers",
+    "questions": [
+      {
+        "id": "layers/order",
+        "code": "order",
+        "name": "Order",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "integer"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/order"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "integer"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/order"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "integer"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/order"
+        }
+      },
+      {
+        "id": "layers/name",
+        "code": "name",
+        "name": "Name",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/name"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/name"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "string"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/name"
+        }
+      },
+      {
+        "id": "layers/function",
+        "code": "function",
+        "name": "Function",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "none",
+              "conductive",
+              "dielectric",
+              "soldermask",
+              "stiffener",
+              "plating",
+              "adhesive",
+              "thermal",
+              "legend",
+              "final_finish",
+              "peelable_tape",
+              "peelable_mask",
+              "hard_gold"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/function"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "none",
+              "conductive",
+              "dielectric",
+              "soldermask",
+              "stiffener",
+              "plating",
+              "adhesive",
+              "thermal",
+              "legend",
+              "final_finish",
+              "peelable_tape",
+              "peelable_mask",
+              "hard_gold"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/function"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "none",
+              "conductive",
+              "dielectric",
+              "soldermask",
+              "stiffener",
+              "plating",
+              "adhesive",
+              "thermal",
+              "legend",
+              "final_finish",
+              "peelable_tape",
+              "peelable_mask",
+              "hard_gold"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/function"
+        }
+      },
+      {
+        "id": "layers/flexible",
+        "code": "flexible",
+        "name": "Flexible",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "boolean"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/flexible"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "boolean"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/flexible"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "boolean"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/flexible"
+        }
+      },
+      {
+        "id": "layers/sections",
+        "code": "sections",
+        "name": "Sections",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sections"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sections"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sections"
+        }
+      },
+      {
+        "id": "layers/materials",
+        "code": "materials",
+        "name": "Materials",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/materials"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/materials"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/materials"
+        }
+      },
+      {
+        "id": "layers/thickness",
+        "code": "thickness",
+        "name": "Thickness",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
+        }
+      },
+      {
+        "id": "layers/tolerance_minus",
+        "code": "tolerance_minus",
+        "name": "Tolerance minus",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
+        }
+      },
+      {
+        "id": "layers/tolerance_plus",
+        "code": "tolerance_plus",
+        "name": "Tolerance plus",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
+        }
+      },
+      {
+        "id": "layers/sub_material_thickness",
+        "name": "Sub material thickness",
+        "questions": [
+          {
+            "id": "layers/sub_material_thickness/^.*",
+            "name": "^.*",
+            "questions": [
+              {
+                "id": "layers/sub_material_thickness/^.*/minimum_thickness",
+                "code": "minimum_thickness",
+                "name": "Minimum thickness",
+                "description": "",
+                "defaults": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/minimum_thickness"
+                },
+                "uom": null,
+                "required": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/minimum_thickness"
+                },
+                "forbidden": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/minimum_thickness"
+                }
+              },
+              {
+                "id": "layers/sub_material_thickness/^.*/maximum_thickness",
+                "code": "maximum_thickness",
+                "name": "Maximum thickness",
+                "description": "",
+                "defaults": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/maximum_thickness"
+                },
+                "uom": null,
+                "required": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/maximum_thickness"
+                },
+                "forbidden": {
+                  "schema": {
+                    "type": "number"
+                  },
+                  "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/maximum_thickness"
+                }
+              }
+            ],
+            "array?": false
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "layers/coverage",
+        "code": "coverage",
+        "name": "Coverage",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/coverage"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/coverage"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "number"
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/coverage"
+        }
+      },
+      {
+        "id": "layers/layer_attributes",
+        "name": "Layer attributes",
+        "questions": [
+          {
+            "id": "layers/layer_attributes/minimum_track_width",
+            "code": "minimum_track_width",
+            "name": "Minimum track width",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/minimum_spacing_width",
+            "code": "minimum_spacing_width",
+            "name": "Minimum spacing width",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/conductive_function",
+            "code": "conductive_function",
+            "name": "Conductive function",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "signal",
+                  "plane",
+                  "mixed"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/conductive_function"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "signal",
+                  "plane",
+                  "mixed"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/conductive_function"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "signal",
+                  "plane",
+                  "mixed"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/conductive_function"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/polarity",
+            "code": "polarity",
+            "name": "Polarity",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "positive",
+                  "negative"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/polarity"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "positive",
+                  "negative"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/polarity"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "positive",
+                  "negative"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/polarity"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/color",
+            "code": "color",
+            "name": "Color",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/color"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/color"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/color"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/allow_touchups",
+            "code": "allow_touchups",
+            "name": "Allow touchups",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/allow_touchups"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/allow_touchups"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/allow_touchups"
+            }
+          },
+          {
+            "id": "layers/layer_attributes/placement",
+            "code": "placement",
+            "name": "Placement",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "selective_pads",
+                  "edge_connectors"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/placement"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "selective_pads",
+                  "edge_connectors"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/placement"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "selective_pads",
+                  "edge_connectors"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/placement"
+            }
+          }
+        ],
+        "array?": false
+      }
+    ],
+    "array?": true
+  },
+  {
+    "id": "processes",
+    "name": "Processes",
+    "questions": [
+      {
+        "id": "processes/function",
+        "code": "function",
+        "name": "Function",
+        "description": "",
+        "defaults": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "edge_bevelling",
+              "depth_routing",
+              "counterboring",
+              "countersink",
+              "punching",
+              "plating",
+              "plated_edges",
+              "plated_slots",
+              "coin_attachment",
+              "holes"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function"
+        },
+        "uom": null,
+        "required": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "edge_bevelling",
+              "depth_routing",
+              "counterboring",
+              "countersink",
+              "punching",
+              "plating",
+              "plated_edges",
+              "plated_slots",
+              "coin_attachment",
+              "holes"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function"
+        },
+        "forbidden": {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "edge_bevelling",
+              "depth_routing",
+              "counterboring",
+              "countersink",
+              "punching",
+              "plating",
+              "plated_edges",
+              "plated_slots",
+              "coin_attachment",
+              "holes"
+            ]
+          },
+          "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function"
+        }
+      },
+      {
+        "id": "processes/function_attributes",
+        "name": "Function attributes",
+        "questions": [
+          {
+            "id": "processes/function_attributes/number_of_holes",
+            "code": "number_of_holes",
+            "name": "Number of holes",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/number_of_holes"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/number_of_holes"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/number_of_holes"
+            }
+          },
+          {
+            "id": "processes/function_attributes/hole_type",
+            "code": "hole_type",
+            "name": "Hole type",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "through",
+                  "blind",
+                  "buried",
+                  "back_drill",
+                  "via"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/hole_type"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "through",
+                  "blind",
+                  "buried",
+                  "back_drill",
+                  "via"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/hole_type"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "through",
+                  "blind",
+                  "buried",
+                  "back_drill",
+                  "via"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/hole_type"
+            }
+          },
+          {
+            "id": "processes/function_attributes/finished_size",
+            "code": "finished_size",
+            "name": "Finished size",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
+            }
+          },
+          {
+            "id": "processes/function_attributes/layer_start",
+            "code": "layer_start",
+            "name": "Layer start",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
+            }
+          },
+          {
+            "id": "processes/function_attributes/layer_stop",
+            "code": "layer_stop",
+            "name": "Layer stop",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
+            }
+          },
+          {
+            "id": "processes/function_attributes/depth",
+            "code": "depth",
+            "name": "Depth",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
+            }
+          },
+          {
+            "id": "processes/function_attributes/method",
+            "code": "method",
+            "name": "Method",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "drilling",
+                  "laser"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/method"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "drilling",
+                  "laser"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/method"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "drilling",
+                  "laser"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/method"
+            }
+          },
+          {
+            "id": "processes/function_attributes/minimum_designed_annular_ring",
+            "code": "minimum_designed_annular_ring",
+            "name": "Minimum designed annular ring",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
+            }
+          },
+          {
+            "id": "processes/function_attributes/press_fit",
+            "code": "press_fit",
+            "name": "Press fit",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/press_fit"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/press_fit"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/press_fit"
+            }
+          },
+          {
+            "id": "processes/function_attributes/plated",
+            "code": "plated",
+            "name": "Plated",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/plated"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/plated"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/plated"
+            }
+          },
+          {
+            "id": "processes/function_attributes/capped",
+            "code": "capped",
+            "name": "Capped",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/capped"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/capped"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/capped"
+            }
+          },
+          {
+            "id": "processes/function_attributes/filled",
+            "code": "filled",
+            "name": "Filled",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "copper",
+                  "resin",
+                  "soldermask"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/filled"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "copper",
+                  "resin",
+                  "soldermask"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/filled"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "copper",
+                  "resin",
+                  "soldermask"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/filled"
+            }
+          },
+          {
+            "id": "processes/function_attributes/covered",
+            "code": "covered",
+            "name": "Covered",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/covered"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/covered"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/covered"
+            }
+          },
+          {
+            "id": "processes/function_attributes/staggered",
+            "code": "staggered",
+            "name": "Staggered",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/staggered"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/staggered"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/staggered"
+            }
+          },
+          {
+            "id": "processes/function_attributes/stacked",
+            "code": "stacked",
+            "name": "Stacked",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/stacked"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/stacked"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/stacked"
+            }
+          },
+          {
+            "id": "processes/function_attributes/alivh",
+            "code": "alivh",
+            "name": "Alivh",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/alivh"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/alivh"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/alivh"
+            }
+          },
+          {
+            "id": "processes/function_attributes/castellated",
+            "code": "castellated",
+            "name": "Castellated",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/castellated"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/castellated"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/castellated"
+            }
+          }
+        ],
+        "array?": false
+      }
+    ],
+    "array?": true
+  },
+  {
+    "id": "metrics",
+    "name": "Metrics",
+    "questions": [
+      {
+        "id": "metrics/board",
+        "name": "Board",
+        "questions": [
+          {
+            "id": "metrics/board/size_x",
+            "code": "size_x",
+            "name": "Size x",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
+            }
+          },
+          {
+            "id": "metrics/board/size_y",
+            "code": "size_y",
+            "name": "Size y",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
+            }
+          },
+          {
+            "id": "metrics/board/breakaway_method",
+            "code": "breakaway_method",
+            "name": "Breakaway method",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "punching"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "punching"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "routing",
+                  "punching"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
+            }
+          },
+          {
+            "id": "metrics/board/thickness",
+            "code": "thickness",
+            "name": "Thickness",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "metrics/array",
+        "name": "Array",
+        "questions": [
+          {
+            "id": "metrics/array/size_x",
+            "code": "size_x",
+            "name": "Size x",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
+            }
+          },
+          {
+            "id": "metrics/array/size_y",
+            "code": "size_y",
+            "name": "Size y",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
+            }
+          },
+          {
+            "id": "metrics/array/boards_x",
+            "code": "boards_x",
+            "name": "Boards x",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_x"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_x"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_x"
+            }
+          },
+          {
+            "id": "metrics/array/boards_y",
+            "code": "boards_y",
+            "name": "Boards y",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_y"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_y"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_y"
+            }
+          },
+          {
+            "id": "metrics/array/boards_total",
+            "code": "boards_total",
+            "name": "Boards total",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_total"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_total"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_total"
+            }
+          },
+          {
+            "id": "metrics/array/border_left",
+            "code": "border_left",
+            "name": "Border left",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
+            }
+          },
+          {
+            "id": "metrics/array/border_right",
+            "code": "border_right",
+            "name": "Border right",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
+            }
+          },
+          {
+            "id": "metrics/array/border_top",
+            "code": "border_top",
+            "name": "Border top",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
+            }
+          },
+          {
+            "id": "metrics/array/border_bottom",
+            "code": "border_bottom",
+            "name": "Border bottom",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
+            }
+          },
+          {
+            "id": "metrics/array/board_spacing_x",
+            "code": "board_spacing_x",
+            "name": "Board spacing x",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
+            }
+          },
+          {
+            "id": "metrics/array/board_spacing_y",
+            "code": "board_spacing_y",
+            "name": "Board spacing y",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
+            }
+          },
+          {
+            "id": "metrics/array/fiducials_number",
+            "code": "fiducials_number",
+            "name": "Fiducials number",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_number"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_number"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_number"
+            }
+          },
+          {
+            "id": "metrics/array/fiducials_size",
+            "code": "fiducials_size",
+            "name": "Fiducials size",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
+            }
+          },
+          {
+            "id": "metrics/array/fiducials_shape",
+            "code": "fiducials_shape",
+            "name": "Fiducials shape",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "donut",
+                  "circle",
+                  "plus",
+                  "diamond"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_shape"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "donut",
+                  "circle",
+                  "plus",
+                  "diamond"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_shape"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "donut",
+                  "circle",
+                  "plus",
+                  "diamond"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_shape"
+            }
+          },
+          {
+            "id": "metrics/array/breakaway_method",
+            "code": "breakaway_method",
+            "name": "Breakaway method",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "routing",
+                    "scoring",
+                    "punching",
+                    "v_cut",
+                    "v_grove",
+                    "jump_scoring"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/breakaway_method"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "routing",
+                    "scoring",
+                    "punching",
+                    "v_cut",
+                    "v_grove",
+                    "jump_scoring"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/breakaway_method"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "routing",
+                    "scoring",
+                    "punching",
+                    "v_cut",
+                    "v_grove",
+                    "jump_scoring"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/breakaway_method"
+            }
+          },
+          {
+            "id": "metrics/array/mouse_bites",
+            "code": "mouse_bites",
+            "name": "Mouse bites",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/mouse_bites"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/mouse_bites"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/mouse_bites"
+            }
+          },
+          {
+            "id": "metrics/array/tooling_holes_number",
+            "code": "tooling_holes_number",
+            "name": "Tooling holes number",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_number"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_number"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_number"
+            }
+          },
+          {
+            "id": "metrics/array/tooling_holes_size",
+            "code": "tooling_holes_size",
+            "name": "Tooling holes size",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
+            }
+          },
+          {
+            "id": "metrics/array/x_outs_allowed",
+            "code": "x_outs_allowed",
+            "name": "X outs allowed",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_allowed"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_allowed"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_allowed"
+            }
+          },
+          {
+            "id": "metrics/array/x_outs_max_percentage_on_array",
+            "code": "x_outs_max_percentage_on_array",
+            "name": "X outs max percentage on array",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_max_percentage_on_array"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_max_percentage_on_array"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_max_percentage_on_array"
+            }
+          },
+          {
+            "id": "metrics/array/transplant_board_allowed",
+            "code": "transplant_board_allowed",
+            "name": "Transplant board allowed",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/transplant_board_allowed"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/transplant_board_allowed"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/transplant_board_allowed"
+            }
+          },
+          {
+            "id": "metrics/array/weight",
+            "code": "weight",
+            "name": "Weight",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "number"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
+            }
+          }
+        ],
+        "array?": false
+      }
+    ],
+    "array?": false
+  },
+  {
+    "id": "logistical",
+    "name": "Logistical",
+    "questions": [
+      {
+        "id": "logistical/inner_packaging",
+        "name": "Inner packaging",
+        "questions": [
+          {
+            "id": "logistical/inner_packaging/ipc_1601_section_4_2_2_type",
+            "code": "ipc_1601_section_4_2_2_type",
+            "name": "Ipc 1601 section 4 2 2 type",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "a",
+                  "b",
+                  "c",
+                  "d"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/ipc_1601_section_4_2_2_type"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "a",
+                  "b",
+                  "c",
+                  "d"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/ipc_1601_section_4_2_2_type"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "a",
+                  "b",
+                  "c",
+                  "d"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/ipc_1601_section_4_2_2_type"
+            }
+          },
+          {
+            "id": "logistical/inner_packaging/hic",
+            "code": "hic",
+            "name": "Hic",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/hic"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/hic"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/hic"
+            }
+          },
+          {
+            "id": "logistical/inner_packaging/esd",
+            "code": "esd",
+            "name": "Esd",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/esd"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/esd"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/esd"
+            }
+          },
+          {
+            "id": "logistical/inner_packaging/desiccant",
+            "code": "desiccant",
+            "name": "Desiccant",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/desiccant"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/desiccant"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/desiccant"
+            }
+          },
+          {
+            "id": "logistical/inner_packaging/vacuum",
+            "code": "vacuum",
+            "name": "Vacuum",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/vacuum"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/vacuum"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/vacuum"
+            }
+          },
+          {
+            "id": "logistical/inner_packaging/maximum_number_of_arrays",
+            "code": "maximum_number_of_arrays",
+            "name": "Maximum number of arrays",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/maximum_number_of_arrays"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/maximum_number_of_arrays"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/maximum_number_of_arrays"
+            }
+          }
+        ],
+        "array?": false
+      }
+    ],
+    "array?": false
+  },
+  {
+    "id": "configuration",
+    "name": "Configuration",
+    "questions": [
+      {
+        "id": "configuration/stackup",
+        "name": "Stackup",
+        "questions": [
+          {
+            "id": "configuration/stackup/locked",
+            "code": "locked",
+            "name": "Locked",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"
+            }
+          },
+          {
+            "id": "configuration/stackup/ordered_outer_layers",
+            "code": "ordered_outer_layers",
+            "name": "Ordered outer layers",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_outer_layers"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_outer_layers"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_outer_layers"
+            }
+          },
+          {
+            "id": "configuration/stackup/ordered_inner_layers",
+            "code": "ordered_inner_layers",
+            "name": "Ordered inner layers",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_inner_layers"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_inner_layers"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_inner_layers"
+            }
+          },
+          {
+            "id": "configuration/stackup/file_name",
+            "code": "file_name",
+            "name": "File name",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/file_name"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/file_name"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/file_name"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "configuration/markings",
+        "name": "Markings",
+        "questions": [
+          {
+            "id": "configuration/markings/layers",
+            "code": "layers",
+            "name": "Layers",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
+            }
+          },
+          {
+            "id": "configuration/markings/date_code",
+            "code": "date_code",
+            "name": "Date code",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/date_code"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/date_code"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/date_code"
+            }
+          },
+          {
+            "id": "configuration/markings/manufacturer_identification",
+            "code": "manufacturer_identification",
+            "name": "Manufacturer identification",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/manufacturer_identification"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/manufacturer_identification"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/manufacturer_identification"
+            }
+          },
+          {
+            "id": "configuration/markings/standards",
+            "code": "standards",
+            "name": "Standards",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/standards"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/standards"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/standards"
+            }
+          },
+          {
+            "id": "configuration/markings/serial_number",
+            "code": "serial_number",
+            "name": "Serial number",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number"
+            }
+          },
+          {
+            "id": "configuration/markings/serial_number_format",
+            "code": "serial_number_format",
+            "name": "Serial number format",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_format"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_format"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_format"
+            }
+          },
+          {
+            "id": "configuration/markings/serial_number_start",
+            "code": "serial_number_start",
+            "name": "Serial number start",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_start"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_start"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_start"
+            }
+          },
+          {
+            "id": "configuration/markings/serial_number_increase_by",
+            "code": "serial_number_increase_by",
+            "name": "Serial number increase by",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_increase_by"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_increase_by"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_increase_by"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "configuration/standards",
+        "name": "Standards",
+        "questions": [
+          {
+            "id": "configuration/standards/comply_with",
+            "code": "comply_with",
+            "name": "Comply with",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ul",
+                    "c_ul",
+                    "rohs",
+                    "ul94",
+                    "iec_61249-2-21",
+                    "esa",
+                    "itar",
+                    "dfars",
+                    "mil_prf_55110",
+                    "mil_prf_50884",
+                    "mil_prf_31032",
+                    "as9100",
+                    "nadcap",
+                    "rw_en45545_2_2013",
+                    "rw_nf_f_16_101",
+                    "rw_uni_cei_11170_3",
+                    "rw_nfpa_130"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/comply_with"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ul",
+                    "c_ul",
+                    "rohs",
+                    "ul94",
+                    "iec_61249-2-21",
+                    "esa",
+                    "itar",
+                    "dfars",
+                    "mil_prf_55110",
+                    "mil_prf_50884",
+                    "mil_prf_31032",
+                    "as9100",
+                    "nadcap",
+                    "rw_en45545_2_2013",
+                    "rw_nf_f_16_101",
+                    "rw_uni_cei_11170_3",
+                    "rw_nfpa_130"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/comply_with"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ul",
+                    "c_ul",
+                    "rohs",
+                    "ul94",
+                    "iec_61249-2-21",
+                    "esa",
+                    "itar",
+                    "dfars",
+                    "mil_prf_55110",
+                    "mil_prf_50884",
+                    "mil_prf_31032",
+                    "as9100",
+                    "nadcap",
+                    "rw_en45545_2_2013",
+                    "rw_nf_f_16_101",
+                    "rw_uni_cei_11170_3",
+                    "rw_nfpa_130"
+                  ]
+                }
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/comply_with"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_class",
+            "code": "ipc_6010_class",
+            "name": "Ipc 6010 class",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_compliance_level",
+            "code": "ipc_6010_compliance_level",
+            "name": "Ipc 6010 compliance level",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_copper_plating_thickness_level",
+            "code": "ipc_6010_copper_plating_thickness_level",
+            "name": "Ipc 6010 copper plating thickness level",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_annular_ring_level",
+            "code": "ipc_6010_annular_ring_level",
+            "name": "Ipc 6010 annular ring level",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_conductor_spacing_level",
+            "code": "ipc_6010_conductor_spacing_level",
+            "name": "Ipc 6010 conductor spacing level",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6010_conductor_width_level",
+            "code": "ipc_6010_conductor_width_level",
+            "name": "Ipc 6010 conductor width level",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6012_class",
+            "code": "ipc_6012_class",
+            "name": "Ipc 6012 class",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "3A",
+                  "3M",
+                  "3S"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_class"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "3A",
+                  "3M",
+                  "3S"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_class"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "3A",
+                  "3M",
+                  "3S"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6013_class",
+            "code": "ipc_6013_class",
+            "name": "Ipc 6013 class",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_class"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_class"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6018",
+            "code": "ipc_6018",
+            "name": "Ipc 6018",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "configuration/testing",
+        "name": "Testing",
+        "questions": [
+          {
+            "id": "configuration/testing/netlist",
+            "code": "netlist",
+            "name": "Netlist",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/netlist"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/netlist"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/netlist"
+            }
+          },
+          {
+            "id": "configuration/testing/allow_generate_netlist",
+            "code": "allow_generate_netlist",
+            "name": "Allow generate netlist",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/allow_generate_netlist"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/allow_generate_netlist"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/allow_generate_netlist"
+            }
+          },
+          {
+            "id": "configuration/testing/hipot",
+            "code": "hipot",
+            "name": "Hipot",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/hipot"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/hipot"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/hipot"
+            }
+          },
+          {
+            "id": "configuration/testing/4_wire",
+            "code": "4_wire",
+            "name": "4 wire",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/4_wire"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/4_wire"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/4_wire"
+            }
+          },
+          {
+            "id": "configuration/testing/ist",
+            "code": "ist",
+            "name": "Ist",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/ist"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/ist"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/ist"
+            }
+          },
+          {
+            "id": "configuration/testing/impedance",
+            "code": "impedance",
+            "name": "Impedance",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "controlled",
+                  "calculated",
+                  "follow_stackup"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "controlled",
+                  "calculated",
+                  "follow_stackup"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "controlled",
+                  "calculated",
+                  "follow_stackup"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "configuration/country_of_origin",
+        "name": "Country of origin",
+        "questions": [
+          {
+            "id": "configuration/country_of_origin/iso_3166_1_alpha_3",
+            "code": "iso_3166_1_alpha_3",
+            "name": "Iso 3166 1 alpha 3",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_3"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_3"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_3"
+            }
+          },
+          {
+            "id": "configuration/country_of_origin/iso_3166_1_alpha_2",
+            "code": "iso_3166_1_alpha_2",
+            "name": "Iso 3166 1 alpha 2",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_2"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_2"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "string"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_2"
+            }
+          },
+          {
+            "id": "configuration/country_of_origin/nato_member",
+            "code": "nato_member",
+            "name": "Nato member",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/nato_member"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/nato_member"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/nato_member"
+            }
+          },
+          {
+            "id": "configuration/country_of_origin/eu_member",
+            "code": "eu_member",
+            "name": "Eu member",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/eu_member"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/eu_member"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/eu_member"
+            }
+          }
+        ],
+        "array?": false
+      },
+      {
+        "id": "configuration/allowed_modifications",
+        "name": "Allowed modifications",
+        "questions": [
+          {
+            "id": "configuration/allowed_modifications/dead_pad_removal",
+            "code": "dead_pad_removal",
+            "name": "Dead pad removal",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+            }
+          },
+          {
+            "id": "configuration/allowed_modifications/add_copper_balancing",
+            "code": "add_copper_balancing",
+            "name": "Add copper balancing",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing"
+            }
+          },
+          {
+            "id": "configuration/allowed_modifications/add_copper_balancing_on_array",
+            "code": "add_copper_balancing_on_array",
+            "name": "Add copper balancing on array",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing_on_array"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing_on_array"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing_on_array"
+            }
+          },
+          {
+            "id": "configuration/allowed_modifications/add_tear_drops",
+            "code": "add_tear_drops",
+            "name": "Add tear drops",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_tear_drops"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_tear_drops"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_tear_drops"
+            }
+          },
+          {
+            "id": "configuration/allowed_modifications/resize_vias",
+            "code": "resize_vias",
+            "name": "Resize vias",
+            "description": "",
+            "defaults": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/resize_vias"
+            },
+            "uom": null,
+            "required": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/resize_vias"
+            },
+            "forbidden": {
+              "schema": {
+                "type": "boolean"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/resize_vias"
+            }
+          }
+        ],
+        "array?": false
+      }
+    ],
+    "array?": false
+  }
+]

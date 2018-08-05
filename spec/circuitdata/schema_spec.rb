@@ -22,8 +22,8 @@ RSpec.describe Circuitdata::Schema do
   describe ".product_questions" do
     let(:section_count_question) {
       {
-        :id => :"sections/name",
-        :code => :name,
+        :id => "sections/name",
+        :code => "name",
         :name => "Name",
         :description => "",
         :defaults => {
@@ -47,7 +47,7 @@ RSpec.describe Circuitdata::Schema do
     it "generates the correct structure for sections" do
       section_question = subject.product_questions.first
       expect(section_question).to include(
-        :id => :sections,
+        :id => "sections",
         :name => "Sections",
         :array? => true,
       )
@@ -56,24 +56,44 @@ RSpec.describe Circuitdata::Schema do
     end
 
     it "generates the correct structure for configuration" do
-      config_question = subject.product_questions.find { |question| question[:id] == :configuration }
+      config_question = subject.product_questions.find { |question| question[:id] == "configuration" }
       expect(config_question).to include(
-        :id => :configuration,
+        :id => "configuration",
         :name => "Configuration",
         :array? => false,
       )
       stackup_question = config_question[:questions].first
       expect(stackup_question).to include(
-        :id => :"configuration/stackup",
+        :id => "configuration/stackup",
         :name => "Stackup",
       )
       locked_question = stackup_question[:questions].first
       expect(locked_question).to include(
-        id: :"configuration/stackup/locked",
-        code: :locked,
+        id: "configuration/stackup/locked",
+        code: "locked",
         name: "Locked",
         defaults: {:schema => {:type => "boolean"}, :path => "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"},
       )
+    end
+
+    it "generates the same result with and without caching" do
+      uncached = JSON.parse(
+        JSON.generate(subject.product_questions(cached: false)),
+        symbolize_names: true,
+      )
+      cached = subject.product_questions
+      expect(cached).to eql(uncached)
+    end
+  end
+
+  describe ".profile_questions" do
+    it "generates the same result with and without caching" do
+      uncached = JSON.parse(
+        JSON.generate(subject.profile_questions(cached: false)),
+        symbolize_names: true,
+      )
+      cached = subject.profile_questions
+      expect(cached).to eql(uncached)
     end
   end
 end
