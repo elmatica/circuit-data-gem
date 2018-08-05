@@ -7,13 +7,13 @@ RSpec.describe Circuitdata::Profile do
     context "question matches expected structure" do
       let(:expected_structure) {
         {
-          :id => :sections,
+          :id => "sections",
           :name => "Sections",
           :array? => false,
           :questions => [
             {
-              :id => :"sections/count",
-              :code => :count,
+              :id => "sections/count",
+              :code => "count",
               :name => "Count",
               :description => "",
               :defaults => {
@@ -33,8 +33,8 @@ RSpec.describe Circuitdata::Profile do
               },
             },
             {
-              :id => :"sections/mm2",
-              :code => :mm2,
+              :id => "sections/mm2",
+              :code => "mm2",
               :name => "Mm2",
               :description => "",
               :defaults => {

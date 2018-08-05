@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "./lib/circuitdata"
+
+cache_folder_path = File.expand_path(File.join(__dir__, "..", "data", "questions"))
+
+{
+  profile: Circuitdata::Profile.questions,
+  product: Circuitdata::Schema.product_questions,
+}.each do |name, data|
+  file_path = File.join(cache_folder_path, "#{name}.json")
+  file = File.open(file_path, "w")
+  file.write(JSON.pretty_generate(data))
+  file.close
+end

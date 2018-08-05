@@ -1,5 +1,6 @@
 module Circuitdata
   class Schema
+    CACHE_PATH = File.expand_path(File.join(__dir__, "..", "..", "data"))
     BASE_PATH = [
       :properties,
       :open_trade_transfer_package,
@@ -17,12 +18,12 @@ module Circuitdata
                                            :circuitdata,
                                            :properties],
     }
-    def self.product_questions
-      questions_for_type(:products)
+    def self.product_questions(cached: true)
+      cached ? cached(:questions, :product) : questions_for_type(:products)
     end
 
-    def self.profile_questions
-      questions_for_type(:profiles)
+    def self.profile_questions(cached: true)
+      cached ? cached(:questions, :profile) : questions_for_type(:profiles)
     end
 
     def self.questions_for_type(type)
@@ -112,6 +113,11 @@ module Circuitdata
 
     def self.name_from_id(id)
       id.to_s.split("/").last.humanize
+    end
+
+    def self.cached(*path)
+      file_path = File.join(CACHE_PATH, *path.map(&:to_s)) + ".json"
+      JSON.parse(File.read(file_path), symbolize_names: true)
     end
   end
 end
