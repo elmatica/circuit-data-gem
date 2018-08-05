@@ -1,6 +1,7 @@
 module Circuitdata
   class Schema
     CACHE_PATH = File.expand_path(File.join(__dir__, "..", "..", "data"))
+    CACHE = {}
     BASE_PATH = [
       :properties,
       :open_trade_transfer_package,
@@ -117,7 +118,8 @@ module Circuitdata
 
     def self.cached(*path)
       file_path = File.join(CACHE_PATH, *path.map(&:to_s)) + ".json"
-      JSON.parse(File.read(file_path), symbolize_names: true)
+
+      CACHE[file_path] ||= JSON.parse(File.read(file_path), symbolize_names: true)
     end
   end
 end
