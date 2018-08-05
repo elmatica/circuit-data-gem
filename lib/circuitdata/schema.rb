@@ -30,26 +30,46 @@ module Circuitdata
       result = []
       type_schema(type).each do |category_id, category_schema|
         next if category_id == :version
-        category = {
-          id: category_id,
-          name: category_id.to_s.humanize,
-          questions: [],
-          array?: category_schema[:type] == "array",
-        }
-        result << category
-        prop_path = [:properties]
-        prop_path.unshift(:items) if category[:array?]
-        category_schema.dig(*prop_path).each do |question_id, question_schema|
-          add_questions_to_category(category, question_id, question_schema, pointer_path)
-        end
+        result << build_category(category_id, category_schema, pointer_path)
       end
       result
     end
 
+    def self.build_category(category_id, category_schema, pointer_path)
+      category = {
+        id: category_id,
+        name: name_from_id(category_id),
+        questions: [],
+        array?: category_schema[:type] == "array",
+      }
+      if category_schema.has_key?(:properties)
+        prop_path = [:properties]
+      elsif category_schema.has_key?(:patternProperties)
+        prop_path = [:patternProperties]
+      elsif category_schema.fetch(:type) == "array"
+        prop_path = [:items, :properties]
+      else
+        raise "Unknown type"
+      end
+
+      questions = category_schema.dig(*prop_path)
+      questions.each do |question_id, question_schema|
+        add_questions_to_category(category, question_id, question_schema, pointer_path)
+      end
+      category
+    end
+
     def self.add_questions_to_category(category, question_id, question_schema, path)
       category_questions = category[:questions]
+      id = :"#{category.fetch(:id)}/#{question_id}"
+
+      if question_schema.fetch(:type) == "object"
+        category_questions << build_category(id, question_schema, path)
+        return
+      end
+
       question = {
-        id: "#{category[:id]}_#{question_id}",
+        id: id,
         code: question_id,
         name: question_id.to_s.humanize,
         description: "",
@@ -88,6 +108,10 @@ module Circuitdata
       schema = Circuitdata.dereferenced_schema
       pointer_path = TYPE_PATH.fetch(type)
       schema.dig(*pointer_path)
+    end
+
+    def self.name_from_id(id)
+      id.to_s.split("/").last.humanize
     end
   end
 end

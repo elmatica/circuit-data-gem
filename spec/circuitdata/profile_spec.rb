@@ -12,7 +12,7 @@ RSpec.describe Circuitdata::Profile do
           :array? => false,
           :questions => [
             {
-              :id => "sections_count",
+              :id => :"sections/count",
               :code => :count,
               :name => "Count",
               :description => "",
@@ -33,7 +33,7 @@ RSpec.describe Circuitdata::Profile do
               },
             },
             {
-              :id => "sections_mm2",
+              :id => :"sections/mm2",
               :code => :mm2,
               :name => "Mm2",
               :description => "",
@@ -62,6 +62,11 @@ RSpec.describe Circuitdata::Profile do
         r_qs = result.fetch(:questions)
         expect(r_qs.first).to eql(e_qs.first)
         expect(r_qs.second).to eql(e_qs.second)
+      end
+
+      it "does not have any nested objects" do
+        result = JSON.generate(subject.questions)
+        expect(result).not_to include('"type":"object"')
       end
     end
   end
