@@ -1,0 +1,22 @@
+{
+  "open_trade_transfer_package": {
+    "version": 1.0,
+    "profiles": {
+      "enforced": {
+        "circuitdata": {
+          "version": 1.0
+        }
+      },
+      "restricted": {
+        "circuitdata": {
+          "version": 1.0
+        }
+      },
+      "default": {
+        "circuitdata": {
+          "version": 1.0
+        }
+      }
+    }
+  }
+}
