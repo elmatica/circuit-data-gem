@@ -59,7 +59,7 @@ Example output:
             uom: ["um"],
             description: "The roughness of the copper foil."
           },
-          path: "/open_trade_transfer_package/profiles/defaults/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
+          path: "/open_trade_transfer_package/profiles/default/printed_circuits_fabrication_data/rigid_conductive_layer/copper_foil_roughness"
         }
       },
     ]
