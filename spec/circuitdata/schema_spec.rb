@@ -26,18 +26,18 @@ RSpec.describe Circuitdata::Schema do
         :code => "name",
         :name => "Name",
         :description => "",
-        :defaults => {
+        :default => {
           :schema => {
             :type => "string",
           },
           :path => "/open_trade_transfer_package/products/.*/circuitdata/sections/name",
         },
         :uom => nil,
-        :required => {
+        :enforced => {
           :schema => {:type => "string"},
           :path => "/open_trade_transfer_package/products/.*/circuitdata/sections/name",
         },
-        :forbidden => {
+        :restricted => {
           :schema => {:type => "string"},
           :path => "/open_trade_transfer_package/products/.*/circuitdata/sections/name",
         },
@@ -72,7 +72,7 @@ RSpec.describe Circuitdata::Schema do
         id: "configuration/stackup/locked",
         code: "locked",
         name: "Locked",
-        defaults: {:schema => {:type => "boolean"}, :path => "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"},
+        default: {:schema => {:type => "boolean"}, :path => "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"},
       )
     end
 
@@ -94,6 +94,72 @@ RSpec.describe Circuitdata::Schema do
       )
       cached = subject.profile_questions
       expect(cached).to eql(uncached)
+    end
+
+    context "question matches expected structure" do
+      let(:expected_structure) {
+        {
+          :id => "sections",
+          :name => "Sections",
+          :array? => false,
+          :questions => [
+            {
+              :id => "sections/count",
+              :code => "count",
+              :name => "Count",
+              :description => "",
+              :default => {
+                :schema => {
+                  :type => "integer",
+                },
+                :path => "/open_trade_transfer_package/profiles/default/circuitdata/sections/count",
+              },
+              :uom => nil,
+              :enforced => {
+                :schema => {:type => "integer"},
+                :path => "/open_trade_transfer_package/profiles/enforced/circuitdata/sections/count",
+              },
+              :restricted => {
+                :schema => {:type => "integer"},
+                :path => "/open_trade_transfer_package/profiles/restricted/circuitdata/sections/count",
+              },
+            },
+            {
+              :id => "sections/mm2",
+              :code => "mm2",
+              :name => "Mm2",
+              :description => "",
+              :default => {
+                :schema => {:type => "number"},
+                :path => "/open_trade_transfer_package/profiles/default/circuitdata/sections/mm2",
+              },
+              :uom => nil,
+              :enforced => {
+                :schema => {:type => "number"},
+                :path => "/open_trade_transfer_package/profiles/enforced/circuitdata/sections/mm2",
+              },
+              :restricted => {
+                :schema => {:type => "number"},
+                :path => "/open_trade_transfer_package/profiles/restricted/circuitdata/sections/mm2",
+              },
+            },
+          ],
+        }
+      }
+
+      it "returns the correct structure" do
+        result = subject.profile_questions.first
+        expect(result.except(:questions)).to eql(expected_structure.except(:questions))
+        e_qs = expected_structure.fetch(:questions)
+        r_qs = result.fetch(:questions)
+        expect(r_qs.first).to eql(e_qs.first)
+        expect(r_qs.second).to eql(e_qs.second)
+      end
+
+      it "does not have any nested objects" do
+        result = JSON.generate(subject.profile_questions)
+        expect(result).not_to include('"type":"object"')
+      end
     end
   end
 end

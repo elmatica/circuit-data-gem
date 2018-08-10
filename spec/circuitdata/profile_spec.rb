@@ -1,73 +1,50 @@
 require "spec_helper"
 
 RSpec.describe Circuitdata::Profile do
-  subject { described_class }
+  subject { described_class.new(data: data) }
+  let(:data) { nil }
 
-  describe ".questions" do
-    context "question matches expected structure" do
-      let(:expected_structure) {
-        {
-          :id => "sections",
-          :name => "Sections",
-          :array? => false,
-          :questions => [
-            {
-              :id => "sections/count",
-              :code => "count",
-              :name => "Count",
-              :description => "",
-              :defaults => {
-                :schema => {
-                  :type => "integer",
-                },
-                :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/sections/count",
-              },
-              :uom => nil,
-              :required => {
-                :schema => {:type => "integer"},
-                :path => "/open_trade_transfer_package/profiles/required/circuitdata/sections/count",
-              },
-              :forbidden => {
-                :schema => {:type => "integer"},
-                :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/sections/count",
-              },
-            },
-            {
-              :id => "sections/mm2",
-              :code => "mm2",
-              :name => "Mm2",
-              :description => "",
-              :defaults => {
-                :schema => {:type => "number"},
-                :path => "/open_trade_transfer_package/profiles/defaults/circuitdata/sections/mm2",
-              },
-              :uom => nil,
-              :required => {
-                :schema => {:type => "number"},
-                :path => "/open_trade_transfer_package/profiles/required/circuitdata/sections/mm2",
-              },
-              :forbidden => {
-                :schema => {:type => "number"},
-                :path => "/open_trade_transfer_package/profiles/forbidden/circuitdata/sections/mm2",
-              },
-            },
-          ],
-        }
-      }
+  describe "profile initialization" do
+    let(:expected_result) { json_fixture(:empty_profile) }
 
-      it "returns the correct structure" do
-        result = subject.questions.first
-        expect(result.except(:questions)).to eql(expected_structure.except(:questions))
-        e_qs = expected_structure.fetch(:questions)
-        r_qs = result.fetch(:questions)
-        expect(r_qs.first).to eql(e_qs.first)
-        expect(r_qs.second).to eql(e_qs.second)
+    it "creates a valid empty profile" do
+      expect(subject.data).to eql(expected_result)
+
+      validator = Circuitdata::Validator.new(subject.data)
+      expect(validator).to be_valid
+    end
+  end
+
+  describe "#set_question_answer" do
+    let(:path) { ["default", "circuitdata", "sections", "count"] }
+
+    context "value is not nil" do
+      it "sets the value to the correct path" do
+        subject.set_question_answer(path, 1234)
+
+        set_value = subject.data.dig(:open_trade_transfer_package, :profiles, :default, :circuitdata, :sections, :count)
+        expect(set_value).to eql(1234)
+        validator = Circuitdata::Validator.new(subject.data)
+        expect(validator).to be_valid
       end
+    end
 
-      it "does not have any nested objects" do
-        result = JSON.generate(subject.questions)
-        expect(result).not_to include('"type":"object"')
+    context "value is nil" do
+      it "does not set the value" do
+        subject.set_question_answer(path, nil)
+
+        expect(subject.data).to eql(Circuitdata::Profile::BASIC_PROFILE_STRUCTURE)
       end
+    end
+  end
+
+  describe "#question_answer" do
+    before do
+      subject.profile_data[:default][:something] = "pizza"
+    end
+
+    it "returns the value at a specific path" do
+      expect(subject.question_answer(["default", "something"])).to eql("pizza")
     end
   end
 end

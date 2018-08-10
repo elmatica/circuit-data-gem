@@ -78,7 +78,7 @@ module Circuitdata
       }
       category_questions << question
 
-      [:defaults, :required, :forbidden].each do |question_type|
+      [:default, :enforced, :restricted].each do |question_type|
         schema = question_schema.dup
         question[:description] = schema.delete(:description) || question[:description]
 

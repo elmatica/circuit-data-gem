@@ -8,20 +8,20 @@
         "code": "name",
         "name": "Name",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "string"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/name"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "string"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/name"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "string"
           },
@@ -33,7 +33,7 @@
         "code": "in_x",
         "name": "In x",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "array",
             "items": {
@@ -43,7 +43,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_x"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "array",
             "items": {
@@ -52,7 +52,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_x"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "array",
             "items": {
@@ -67,7 +67,7 @@
         "code": "in_y",
         "name": "In y",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "array",
             "items": {
@@ -77,7 +77,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_y"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "array",
             "items": {
@@ -86,7 +86,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/in_y"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "array",
             "items": {
@@ -101,20 +101,20 @@
         "code": "mm2",
         "name": "Mm2",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "number"
           },
@@ -133,20 +133,20 @@
         "code": "order",
         "name": "Order",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "integer"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/order"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "integer"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/order"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "integer"
           },
@@ -158,20 +158,20 @@
         "code": "name",
         "name": "Name",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "string"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/name"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "string"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/name"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "string"
           },
@@ -183,7 +183,7 @@
         "code": "function",
         "name": "Function",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "string",
             "enum": [
@@ -205,7 +205,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/function"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "string",
             "enum": [
@@ -226,7 +226,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/function"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "string",
             "enum": [
@@ -253,20 +253,20 @@
         "code": "flexible",
         "name": "Flexible",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "boolean"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/flexible"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "boolean"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/flexible"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "boolean"
           },
@@ -278,7 +278,7 @@
         "code": "sections",
         "name": "Sections",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -289,7 +289,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sections"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -299,7 +299,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sections"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -315,7 +315,7 @@
         "code": "materials",
         "name": "Materials",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -326,7 +326,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/materials"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -336,7 +336,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/materials"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "array",
             "uniqueItems": true,
@@ -352,20 +352,20 @@
         "code": "thickness",
         "name": "Thickness",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "number"
           },
@@ -377,20 +377,20 @@
         "code": "tolerance_minus",
         "name": "Tolerance minus",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "number"
           },
@@ -402,20 +402,20 @@
         "code": "tolerance_plus",
         "name": "Tolerance plus",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "number"
           },
@@ -435,20 +435,20 @@
                 "code": "minimum_thickness",
                 "name": "Minimum thickness",
                 "description": "",
-                "defaults": {
+                "default": {
                   "schema": {
                     "type": "number"
                   },
                   "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/minimum_thickness"
                 },
                 "uom": null,
-                "required": {
+                "enforced": {
                   "schema": {
                     "type": "number"
                   },
                   "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/minimum_thickness"
                 },
-                "forbidden": {
+                "restricted": {
                   "schema": {
                     "type": "number"
                   },
@@ -460,20 +460,20 @@
                 "code": "maximum_thickness",
                 "name": "Maximum thickness",
                 "description": "",
-                "defaults": {
+                "default": {
                   "schema": {
                     "type": "number"
                   },
                   "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/maximum_thickness"
                 },
                 "uom": null,
-                "required": {
+                "enforced": {
                   "schema": {
                     "type": "number"
                   },
                   "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/sub_material_thickness/^.*/maximum_thickness"
                 },
-                "forbidden": {
+                "restricted": {
                   "schema": {
                     "type": "number"
                   },
@@ -491,20 +491,20 @@
         "code": "coverage",
         "name": "Coverage",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/coverage"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/coverage"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "number"
           },
@@ -520,20 +520,20 @@
             "code": "minimum_track_width",
             "name": "Minimum track width",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -545,20 +545,20 @@
             "code": "minimum_spacing_width",
             "name": "Minimum spacing width",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -570,7 +570,7 @@
             "code": "conductive_function",
             "name": "Conductive function",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -582,7 +582,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/conductive_function"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -593,7 +593,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/conductive_function"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -610,7 +610,7 @@
             "code": "polarity",
             "name": "Polarity",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -621,7 +621,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/polarity"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -631,7 +631,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/polarity"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -647,20 +647,20 @@
             "code": "color",
             "name": "Color",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/color"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/color"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -672,20 +672,20 @@
             "code": "allow_touchups",
             "name": "Allow touchups",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/allow_touchups"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/allow_touchups"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -697,7 +697,7 @@
             "code": "placement",
             "name": "Placement",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -708,7 +708,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/placement"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -718,7 +718,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/placement"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -744,7 +744,7 @@
         "code": "function",
         "name": "Function",
         "description": "",
-        "defaults": {
+        "default": {
           "schema": {
             "type": "string",
             "enum": [
@@ -763,7 +763,7 @@
           "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function"
         },
         "uom": null,
-        "required": {
+        "enforced": {
           "schema": {
             "type": "string",
             "enum": [
@@ -781,7 +781,7 @@
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function"
         },
-        "forbidden": {
+        "restricted": {
           "schema": {
             "type": "string",
             "enum": [
@@ -809,20 +809,20 @@
             "code": "number_of_holes",
             "name": "Number of holes",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/number_of_holes"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/number_of_holes"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -834,7 +834,7 @@
             "code": "hole_type",
             "name": "Hole type",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -848,7 +848,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/hole_type"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -861,7 +861,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/hole_type"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -880,20 +880,20 @@
             "code": "finished_size",
             "name": "Finished size",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -905,20 +905,20 @@
             "code": "layer_start",
             "name": "Layer start",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -930,20 +930,20 @@
             "code": "layer_stop",
             "name": "Layer stop",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -955,20 +955,20 @@
             "code": "depth",
             "name": "Depth",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -980,7 +980,7 @@
             "code": "method",
             "name": "Method",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -992,7 +992,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/method"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1003,7 +1003,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/method"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1020,20 +1020,20 @@
             "code": "minimum_designed_annular_ring",
             "name": "Minimum designed annular ring",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1045,20 +1045,20 @@
             "code": "press_fit",
             "name": "Press fit",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/press_fit"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/press_fit"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1070,20 +1070,20 @@
             "code": "plated",
             "name": "Plated",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/plated"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/plated"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1095,20 +1095,20 @@
             "code": "capped",
             "name": "Capped",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/capped"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/capped"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1120,7 +1120,7 @@
             "code": "filled",
             "name": "Filled",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1132,7 +1132,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/filled"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1143,7 +1143,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/filled"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1160,20 +1160,20 @@
             "code": "covered",
             "name": "Covered",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/covered"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/covered"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1185,20 +1185,20 @@
             "code": "staggered",
             "name": "Staggered",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/staggered"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/staggered"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1210,20 +1210,20 @@
             "code": "stacked",
             "name": "Stacked",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/stacked"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/stacked"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1235,20 +1235,20 @@
             "code": "alivh",
             "name": "Alivh",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/alivh"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/alivh"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1260,20 +1260,20 @@
             "code": "castellated",
             "name": "Castellated",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/castellated"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/castellated"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1299,20 +1299,20 @@
             "code": "size_x",
             "name": "Size x",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1324,20 +1324,20 @@
             "code": "size_y",
             "name": "Size y",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1349,7 +1349,7 @@
             "code": "breakaway_method",
             "name": "Breakaway method",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1360,7 +1360,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1370,7 +1370,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1386,20 +1386,20 @@
             "code": "thickness",
             "name": "Thickness",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1418,20 +1418,20 @@
             "code": "size_x",
             "name": "Size x",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1443,20 +1443,20 @@
             "code": "size_y",
             "name": "Size y",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1468,20 +1468,20 @@
             "code": "boards_x",
             "name": "Boards x",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_x"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_x"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -1493,20 +1493,20 @@
             "code": "boards_y",
             "name": "Boards y",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_y"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_y"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -1518,20 +1518,20 @@
             "code": "boards_total",
             "name": "Boards total",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_total"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/boards_total"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -1543,20 +1543,20 @@
             "code": "border_left",
             "name": "Border left",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1568,20 +1568,20 @@
             "code": "border_right",
             "name": "Border right",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1593,20 +1593,20 @@
             "code": "border_top",
             "name": "Border top",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1618,20 +1618,20 @@
             "code": "border_bottom",
             "name": "Border bottom",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1643,20 +1643,20 @@
             "code": "board_spacing_x",
             "name": "Board spacing x",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1668,20 +1668,20 @@
             "code": "board_spacing_y",
             "name": "Board spacing y",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1693,20 +1693,20 @@
             "code": "fiducials_number",
             "name": "Fiducials number",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_number"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_number"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -1718,20 +1718,20 @@
             "code": "fiducials_size",
             "name": "Fiducials size",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1743,7 +1743,7 @@
             "code": "fiducials_shape",
             "name": "Fiducials shape",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1756,7 +1756,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_shape"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1768,7 +1768,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_shape"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -1786,7 +1786,7 @@
             "code": "breakaway_method",
             "name": "Breakaway method",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -1804,7 +1804,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/breakaway_method"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -1821,7 +1821,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/breakaway_method"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -1844,20 +1844,20 @@
             "code": "mouse_bites",
             "name": "Mouse bites",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/mouse_bites"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/mouse_bites"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1869,20 +1869,20 @@
             "code": "tooling_holes_number",
             "name": "Tooling holes number",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_number"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_number"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -1894,20 +1894,20 @@
             "code": "tooling_holes_size",
             "name": "Tooling holes size",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1919,20 +1919,20 @@
             "code": "x_outs_allowed",
             "name": "X outs allowed",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_allowed"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_allowed"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1944,20 +1944,20 @@
             "code": "x_outs_max_percentage_on_array",
             "name": "X outs max percentage on array",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_max_percentage_on_array"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/x_outs_max_percentage_on_array"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -1969,20 +1969,20 @@
             "code": "transplant_board_allowed",
             "name": "Transplant board allowed",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/transplant_board_allowed"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/transplant_board_allowed"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -1994,20 +1994,20 @@
             "code": "weight",
             "name": "Weight",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "number"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "number"
               },
@@ -2033,7 +2033,7 @@
             "code": "ipc_1601_section_4_2_2_type",
             "name": "Ipc 1601 section 4 2 2 type",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2046,7 +2046,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/ipc_1601_section_4_2_2_type"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2058,7 +2058,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/ipc_1601_section_4_2_2_type"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2076,20 +2076,20 @@
             "code": "hic",
             "name": "Hic",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/hic"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/hic"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2101,20 +2101,20 @@
             "code": "esd",
             "name": "Esd",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/esd"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/esd"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2126,20 +2126,20 @@
             "code": "desiccant",
             "name": "Desiccant",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/desiccant"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/desiccant"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2151,20 +2151,20 @@
             "code": "vacuum",
             "name": "Vacuum",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/vacuum"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/vacuum"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2176,20 +2176,20 @@
             "code": "maximum_number_of_arrays",
             "name": "Maximum number of arrays",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/maximum_number_of_arrays"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/logistical/inner_packaging/maximum_number_of_arrays"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -2215,20 +2215,20 @@
             "code": "locked",
             "name": "Locked",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2240,20 +2240,20 @@
             "code": "ordered_outer_layers",
             "name": "Ordered outer layers",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_outer_layers"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_outer_layers"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2265,20 +2265,20 @@
             "code": "ordered_inner_layers",
             "name": "Ordered inner layers",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_inner_layers"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/ordered_inner_layers"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2290,20 +2290,20 @@
             "code": "file_name",
             "name": "File name",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/file_name"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/file_name"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -2322,7 +2322,7 @@
             "code": "layers",
             "name": "Layers",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2332,7 +2332,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2341,7 +2341,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2356,20 +2356,20 @@
             "code": "date_code",
             "name": "Date code",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/date_code"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/date_code"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -2381,20 +2381,20 @@
             "code": "manufacturer_identification",
             "name": "Manufacturer identification",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/manufacturer_identification"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/manufacturer_identification"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2406,7 +2406,7 @@
             "code": "standards",
             "name": "Standards",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2416,7 +2416,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/standards"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2425,7 +2425,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/standards"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2440,20 +2440,20 @@
             "code": "serial_number",
             "name": "Serial number",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2465,20 +2465,20 @@
             "code": "serial_number_format",
             "name": "Serial number format",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_format"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_format"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -2490,20 +2490,20 @@
             "code": "serial_number_start",
             "name": "Serial number start",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_start"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_start"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -2515,20 +2515,20 @@
             "code": "serial_number_increase_by",
             "name": "Serial number increase by",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_increase_by"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/serial_number_increase_by"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer"
               },
@@ -2547,7 +2547,7 @@
             "code": "comply_with",
             "name": "Comply with",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2576,7 +2576,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/comply_with"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2604,7 +2604,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/comply_with"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -2638,7 +2638,7 @@
             "code": "ipc_6010_class",
             "name": "Ipc 6010 class",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer",
                 "minimum": 1,
@@ -2647,7 +2647,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer",
                 "minimum": 1,
@@ -2655,7 +2655,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer",
                 "minimum": 1,
@@ -2669,7 +2669,7 @@
             "code": "ipc_6010_compliance_level",
             "name": "Ipc 6010 compliance level",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2681,7 +2681,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2692,7 +2692,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2709,7 +2709,7 @@
             "code": "ipc_6010_copper_plating_thickness_level",
             "name": "Ipc 6010 copper plating thickness level",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2718,7 +2718,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2726,7 +2726,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2740,7 +2740,7 @@
             "code": "ipc_6010_annular_ring_level",
             "name": "Ipc 6010 annular ring level",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2749,7 +2749,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2757,7 +2757,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2771,7 +2771,7 @@
             "code": "ipc_6010_conductor_spacing_level",
             "name": "Ipc 6010 conductor spacing level",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2780,7 +2780,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2788,7 +2788,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2802,7 +2802,7 @@
             "code": "ipc_6010_conductor_width_level",
             "name": "Ipc 6010 conductor width level",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2811,7 +2811,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2819,7 +2819,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "integer",
                 "minimum": 2,
@@ -2833,7 +2833,7 @@
             "code": "ipc_6012_class",
             "name": "Ipc 6012 class",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2848,7 +2848,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_class"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2862,7 +2862,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_class"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2882,7 +2882,7 @@
             "code": "ipc_6013_class",
             "name": "Ipc 6013 class",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2894,7 +2894,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_class"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2905,7 +2905,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_class"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -2922,20 +2922,20 @@
             "code": "ipc_6018",
             "name": "Ipc 6018",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2954,20 +2954,20 @@
             "code": "netlist",
             "name": "Netlist",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/netlist"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/netlist"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -2979,20 +2979,20 @@
             "code": "allow_generate_netlist",
             "name": "Allow generate netlist",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/allow_generate_netlist"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/allow_generate_netlist"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3004,20 +3004,20 @@
             "code": "hipot",
             "name": "Hipot",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/hipot"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/hipot"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3029,20 +3029,20 @@
             "code": "4_wire",
             "name": "4 wire",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/4_wire"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/4_wire"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3054,20 +3054,20 @@
             "code": "ist",
             "name": "Ist",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/ist"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/ist"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3079,7 +3079,7 @@
             "code": "impedance",
             "name": "Impedance",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -3091,7 +3091,7 @@
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -3102,7 +3102,7 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -3126,20 +3126,20 @@
             "code": "iso_3166_1_alpha_3",
             "name": "Iso 3166 1 alpha 3",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_3"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_3"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -3151,20 +3151,20 @@
             "code": "iso_3166_1_alpha_2",
             "name": "Iso 3166 1 alpha 2",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_2"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "string"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/iso_3166_1_alpha_2"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "string"
               },
@@ -3176,20 +3176,20 @@
             "code": "nato_member",
             "name": "Nato member",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/nato_member"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/nato_member"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3201,20 +3201,20 @@
             "code": "eu_member",
             "name": "Eu member",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/eu_member"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/country_of_origin/eu_member"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3233,20 +3233,20 @@
             "code": "dead_pad_removal",
             "name": "Dead pad removal",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3258,20 +3258,20 @@
             "code": "add_copper_balancing",
             "name": "Add copper balancing",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3283,20 +3283,20 @@
             "code": "add_copper_balancing_on_array",
             "name": "Add copper balancing on array",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing_on_array"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_copper_balancing_on_array"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3308,20 +3308,20 @@
             "code": "add_tear_drops",
             "name": "Add tear drops",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_tear_drops"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/add_tear_drops"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
@@ -3333,20 +3333,20 @@
             "code": "resize_vias",
             "name": "Resize vias",
             "description": "",
-            "defaults": {
+            "default": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/resize_vias"
             },
             "uom": null,
-            "required": {
+            "enforced": {
               "schema": {
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/resize_vias"
             },
-            "forbidden": {
+            "restricted": {
               "schema": {
                 "type": "boolean"
               },
