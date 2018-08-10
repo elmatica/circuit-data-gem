@@ -22,6 +22,21 @@ module Circuitdata
       @data ||= setup_basic_data
     end
 
+    def profile_data
+      data.dig(:open_trade_transfer_package, :profiles)
+    end
+
+    def question_answer(path)
+      path = path.map { |p| p.is_a?(String) ? p.to_sym : p }
+      profile_data.dig(*path)
+    end
+
+    def set_question_answer(path, value)
+      path = path.map { |p| p.is_a?(String) ? p.to_sym : p }
+      return if value.nil? && question_answer(path).nil?
+      Bury.bury(profile_data, *path, value)
+    end
+
     private
 
     def setup_basic_data
