@@ -87,14 +87,14 @@ RSpec.describe Circuitdata::Schema do
   end
 
   describe ".profile_questions" do
-    # it "generates the same result with and without caching" do
-    #   uncached = JSON.parse(
-    #     JSON.generate(subject.profile_questions(cached: false)),
-    #     symbolize_names: true,
-    #   )
-    #   cached = subject.profile_questions
-    #   expect(cached).to eql(uncached)
-    # end
+    it "generates the same result with and without caching" do
+      uncached = JSON.parse(
+        JSON.generate(subject.profile_questions(cached: false)),
+        symbolize_names: true,
+      )
+      cached = subject.profile_questions
+      expect(cached).to eql(uncached)
+    end
 
     context "question matches expected structure" do
       let(:expected_structure) {
