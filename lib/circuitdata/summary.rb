@@ -66,7 +66,7 @@ module Circuitdata
     def board_area
       # try adding up all sections
       sizes = @product.sections.map{|section| section[:mm2]}
-      sizes.sum(nil)
+      sizes.compact.inject(0, :+)
     end
 
     def layers_with_function(func)
