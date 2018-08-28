@@ -47,10 +47,7 @@ module Circuitdata
         d[key] = {}
         section.each do |node|
           value = send(node)
-          # Only add value if != nil
-          unless value.nil?
-            d[key][node] = value
-          end
+          d[key][node] = {value: value, empty: value.nil?}
         end
       end
       d
