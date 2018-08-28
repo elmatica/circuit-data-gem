@@ -15,7 +15,5 @@ product = Circuitdata::Product.from_data(data).first
 summary = Circuitdata::Summary.new(product)
 
 summary.data.each do |header, section|
-  if section != {}
-    puts Terminal::Table.new :rows => section, :title => header, :style => {:width => 80}
-  end
+  puts Terminal::Table.new :rows => section, :title => header, :style => {:width => 80}
 end
