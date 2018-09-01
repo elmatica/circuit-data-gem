@@ -26,8 +26,9 @@ module Circuitdata
         file = File.read(file_path)
       end
       JSON.parse(file, symbolize_names: true)
-    rescue
-      byebug
+    rescue => e
+      puts file_path
+      raise e
     end
 
     def dereferenced_read_file(file_path)

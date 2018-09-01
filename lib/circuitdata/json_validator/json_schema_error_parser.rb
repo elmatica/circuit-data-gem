@@ -4,7 +4,10 @@ module Circuitdata
       class << self
         def translate(error)
           additional_data = extract_data(error[:message], error[:failed_attribute])
-          fail "Unhandled error: #{error.inspect}" if additional_data.nil?
+          if additional_data.nil?
+            byebug
+            fail "Unhandled error: #{error.inspect}"
+          end
 
           path = error[:fragment].gsub("#", "")
           {

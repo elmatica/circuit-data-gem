@@ -8,7 +8,7 @@
   "ul94": "v-0",
   "manufacturer": "Kingboard",
   "attributes": {
-    "ipc_slash_sheet": 12,
+    "ipc_slash_sheet": [12],
     "dk": 4.5,
     "cti": 0,
     "df": 0.02,
