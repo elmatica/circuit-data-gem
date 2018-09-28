@@ -11,6 +11,14 @@ RSpec.describe Circuitdata::Validator do
     end
   end
 
+  context "full example" do
+    let(:data) { json_fixture(:full_product) }
+
+    it "should be valid" do
+      expect(subject).to be_valid
+    end
+  end
+
   context "product is invalid" do
     let(:data) { {} }
 
@@ -36,6 +44,35 @@ RSpec.describe Circuitdata::Validator do
         expected: "boolean",
         actual: "string",
       }])
+    end
+  end
+
+  context "function is invalid" do
+    let(:data) { json_fixture(:full_product) }
+
+    before do
+      data.dig(:open_trade_transfer_package, :products, :test, :circuitdata, :layers, 0)[:invalid] = "invalid yo"
+      data.dig(:open_trade_transfer_package, :products, :test, :circuitdata, :processes, 0)[:invalid] = "invalid yo"
+    end
+
+    it "should return useful errors" do
+      expect(subject).not_to be_valid
+      expect(subject.errors).to eql(
+        [
+          {
+            source_path: "/open_trade_transfer_package/products/test/circuitdata/layers/0/",
+            field: nil,
+            additional_properties: ["invalid"],
+            problem: "additional_properties",
+          },
+          {
+            source_path: "/open_trade_transfer_package/products/test/circuitdata/processes/0/",
+            field: nil,
+            additional_properties: ["invalid"],
+            problem: "additional_properties",
+          },
+        ]
+      )
     end
   end
 end

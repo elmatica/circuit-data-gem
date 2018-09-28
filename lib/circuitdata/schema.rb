@@ -45,18 +45,36 @@ module Circuitdata
         array?: category_schema[:type] == "array",
       }
       if category_schema.has_key?(:properties)
-        prop_path = [:properties]
+        questions = category_schema.fetch(:properties)
       elsif category_schema.has_key?(:patternProperties)
-        prop_path = [:patternProperties]
+        questions = category_schema.fetch(:patternProperties)
       elsif category_schema.fetch(:type) == "array"
-        prop_path = [:items, :properties]
+        questions = category_schema.fetch(:items)
+        if questions.has_key?(:oneOf)
+          questions = questions.fetch(:oneOf)
+          return one_of_category(category, questions, pointer_path)
+        elsif questions.has_key?(:properties)
+          questions = questions.fetch(:properties)
+        end
       else
         raise "Unknown type"
       end
 
-      questions = category_schema.dig(*prop_path)
       questions.each do |question_id, question_schema|
         add_questions_to_category(category, question_id, question_schema, pointer_path)
+      end
+      category
+    end
+
+    def self.one_of_category(category, questions, pointer_path)
+      category.delete(:questions)
+      category[:one_of] = questions.map do |question_set|
+        {
+          match_attributes: {
+            function: question_set.fetch(:properties).fetch(:function).fetch(:enum).first,
+          },
+          group: build_category(category.fetch(:id), question_set, pointer_path),
+        }
       end
       category
     end
@@ -98,12 +116,12 @@ module Circuitdata
 
     def self.layer_kinds
       product_schema = type_schema(:products)
-      product_schema.dig(:layers, :items, :properties, :function, :enum)
+      product_schema.dig(:layers, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
     end
 
     def self.process_kinds
       product_schema = type_schema(:products)
-      product_schema.dig(:processes, :items, :properties, :function, :enum)
+      product_schema.dig(:processes, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
     end
 
     def self.type_schema(type)

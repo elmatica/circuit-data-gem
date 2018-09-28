@@ -5,8 +5,8 @@ require "./lib/circuitdata"
 cache_folder_path = File.expand_path(File.join(__dir__, "..", "data", "questions"))
 
 {
-  profile: Circuitdata::Profile.questions,
-  product: Circuitdata::Schema.product_questions,
+  profile: Circuitdata::Schema.profile_questions(cached: false),
+  product: Circuitdata::Schema.product_questions(cached: false),
 }.each do |name, data|
   file_path = File.join(cache_folder_path, "#{name}.json")
   file = File.open(file_path, "w")
