@@ -103,19 +103,22 @@
         "description": "",
         "default": {
           "schema": {
+            "uom": "mm2",
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
         },
-        "uom": null,
+        "uom": "mm2",
         "enforced": {
           "schema": {
+            "uom": "mm2",
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
         },
         "restricted": {
           "schema": {
+            "uom": "mm2",
             "type": "number"
           },
           "path": "/open_trade_transfer_package/products/.*/circuitdata/sections/mm2"
@@ -510,20 +513,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -535,20 +541,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -560,20 +569,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -614,20 +626,23 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
                   },
-                  "uom": null,
+                  "uom": "μm",
                   "enforced": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_track_width"
                   }
@@ -639,20 +654,23 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
                   },
-                  "uom": null,
+                  "uom": "μm",
                   "enforced": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/layer_attributes/minimum_spacing_width"
                   }
@@ -964,20 +982,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -989,20 +1010,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -1014,20 +1038,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -1284,20 +1311,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -1309,20 +1339,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -1334,20 +1367,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -1636,20 +1672,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -1661,20 +1700,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -1686,20 +1728,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -1956,20 +2001,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -1981,20 +2029,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -2006,20 +2057,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -2251,20 +2305,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -2276,20 +2333,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -2301,20 +2361,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -2546,20 +2609,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -2571,20 +2637,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -2596,20 +2665,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -2866,20 +2938,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -2891,20 +2966,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -2916,20 +2994,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -3218,20 +3299,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -3243,20 +3327,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -3268,20 +3355,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -3577,20 +3667,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -3602,20 +3695,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -3627,20 +3723,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -3872,20 +3971,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -3897,20 +3999,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -3922,20 +4027,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -4199,20 +4307,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/thickness"
               }
@@ -4224,20 +4335,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_minus"
               }
@@ -4249,20 +4363,23 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
-              "uom": null,
+              "uom": "μm",
               "enforced": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               },
               "restricted": {
                 "schema": {
-                  "type": "number"
+                  "type": "number",
+                  "uom": "μm"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/tolerance_plus"
               }
@@ -5222,20 +5339,23 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
                   },
-                  "uom": null,
+                  "uom": "μm",
                   "enforced": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/finished_size"
                   }
@@ -5297,20 +5417,23 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
                   },
-                  "uom": null,
+                  "uom": "μm",
                   "enforced": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/depth"
                   }
@@ -5362,20 +5485,23 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
                   },
-                  "uom": null,
+                  "uom": "μm",
                   "enforced": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "number"
+                      "type": "number",
+                      "uom": "μm"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/minimum_designed_annular_ring"
                   }
@@ -5644,20 +5770,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_x"
             }
@@ -5669,20 +5798,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/size_y"
             }
@@ -5731,20 +5863,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/thickness"
             }
@@ -5763,20 +5898,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_x"
             }
@@ -5788,20 +5926,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/size_y"
             }
@@ -5888,20 +6029,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_left"
             }
@@ -5913,20 +6057,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_right"
             }
@@ -5938,20 +6085,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_top"
             }
@@ -5963,20 +6113,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/border_bottom"
             }
@@ -5988,20 +6141,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_x"
             }
@@ -6013,20 +6169,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/board_spacing_y"
             }
@@ -6063,20 +6222,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/fiducials_size"
             }
@@ -6239,20 +6401,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
             },
-            "uom": null,
+            "uom": "mm",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "mm"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/tooling_holes_size"
             }
@@ -6339,20 +6504,23 @@
             "description": "",
             "default": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "g"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
             },
-            "uom": null,
+            "uom": "g",
             "enforced": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "g"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
             },
             "restricted": {
               "schema": {
-                "type": "number"
+                "type": "number",
+                "uom": "g"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/array/weight"
             }
