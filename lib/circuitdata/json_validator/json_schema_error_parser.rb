@@ -5,7 +5,6 @@ module Circuitdata
         def translate(error)
           additional_data = extract_data(error[:message], error[:failed_attribute])
           if additional_data.nil?
-            byebug
             fail "Unhandled error: #{error.inspect}"
           end
 
@@ -36,6 +35,9 @@ module Circuitdata
             return {additional_properties: additional_properties, problem: "additional_properties"}
           when "Enum"
             return {problem: "not_in_enum"}
+          when "Pattern"
+            regex = message.match(/did not match the regex '(\S*)' /)[1]
+            return {problem: "pattern_mismatch", pattern: regex}
           end
         end
       end

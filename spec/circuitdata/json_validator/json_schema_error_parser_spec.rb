@@ -33,6 +33,14 @@ RSpec.describe Circuitdata::JsonValidator::JsonSchemaErrorParser do
     expect(errors).to eql([{:source_path => "/test", :field => "test", :problem => "not_in_enum"}])
   end
 
+  it 'handles patterns' do
+    errors = generate_errors_and_translate(
+      {test: "coffee"},
+      {type: "object", properties: {test: {type: "string", pattern: "^tea$"}}}
+    )
+    expect(errors).to eql([{:source_path => "/test", :field => "test", :problem => "pattern_mismatch", pattern: '^tea$'}])
+  end
+
   def generate_errors_and_translate(data, schema)
     errors = JSON::Validator.fully_validate(
       schema, data, errors_as_objects: true,
