@@ -8,6 +8,7 @@
           "layers": [
             {
               "order": 0,
+              "uuid": "04c09da8-f6f1-4308-8822-b77363d34f9d",
               "function": "legend",
               "name": "legend-top",
               "flexible": false,
@@ -20,6 +21,7 @@
             },
             {
               "order": 1,
+              "uuid": "1ee4a7ab-d348-4e82-b83d-441ff7a88abb",
               "function": "soldermask",
               "name": "solder-mask-top",
               "flexible": false,
@@ -32,6 +34,7 @@
             },
             {
               "order": 2,
+              "uuid": "b796b6a9-9101-4ea4-926e-9201681bf921",
               "function": "final_finish",
               "name": "finish-enig-top",
               "flexible": false,
@@ -40,6 +43,7 @@
             },
             {
               "order": 3,
+              "uuid": "4a4882b0-916f-4916-bd7a-9d0ef74b4d54",
               "function": "conductive",
               "name": "Top",
               "flexible": false,
@@ -53,6 +57,7 @@
             },
             {
               "order": 4,
+              "uuid": "2fd99f75-c585-48b1-9229-87e057ae2e1e",
               "function": "dielectric",
               "name": "core",
               "flexible": false,
@@ -62,6 +67,7 @@
             },
             {
               "order": 5,
+              "uuid": "62bc1e3b-5e9a-444b-9020-798b39c7f465",
               "function": "conductive",
               "name": "Bot",
               "flexible": false,
@@ -75,6 +81,7 @@
             },
             {
               "order": 6,
+              "uuid": "3ad86990-2bad-454c-b567-5b64192c0d5d",
               "function": "final_finish",
               "name": "finish-enig-bot",
               "flexible": false,
@@ -83,6 +90,7 @@
             },
             {
               "order": 7,
+              "uuid": "52543e76-01ce-483e-ba0f-dd3b1cbd69ff",
               "function": "soldermask",
               "name": "solder-mask-bot",
               "flexible": false,
@@ -95,6 +103,7 @@
             },
             {
               "order": 8,
+              "uuid": "aedbfae3-64c9-4ed6-9920-0c4d6066ef99",
               "function": "legend",
               "name": "legend-bottom",
               "flexible": false,
@@ -117,28 +126,31 @@
           "processes": [
             {
               "function": "holes",
+              "uuid": "b1eff74e-dabd-4116-a848-f58d4d33865f",
               "function_attributes": {
                 "number_of_holes": 106,
                 "hole_type": "through",
                 "plated": true,
                 "finished_size": 305.0,
-                "layer_start": "Top",
-                "layer_stop": "Bot",
+                "layer_start": "4a4882b0-916f-4916-bd7a-9d0ef74b4d54",
+                "layer_stop": "62bc1e3b-5e9a-444b-9020-798b39c7f465",
                 "minimum_designed_annular_ring": 125.0
               }
             },
             {
               "function": "holes",
+              "uuid": "32e90ad2-083a-481f-a274-961a06bf3081",
               "function_attributes": {
                 "number_of_holes": 4,
                 "hole_type": "through",
                 "plated": true,
                 "finished_size": 2007.0,
-                "layer_start": "Top",
-                "layer_stop": "Bot"
+                "layer_start": "4a4882b0-916f-4916-bd7a-9d0ef74b4d54",
+                "layer_stop": "62bc1e3b-5e9a-444b-9020-798b39c7f465"
               }
             },{
-              "function": "holes"
+              "function": "holes",
+              "uuid": "99e2a1b9-2348-4a20-a0be-6f66f7dcc4d3"
             }
           ],
           "metrics": {
