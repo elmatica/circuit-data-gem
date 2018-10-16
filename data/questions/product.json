@@ -172,20 +172,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -330,20 +336,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -799,20 +811,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -1128,20 +1146,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -1514,20 +1538,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -1818,20 +1848,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -2147,20 +2183,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -2451,20 +2493,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -2755,20 +2803,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -3116,20 +3170,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -3509,20 +3569,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -3813,20 +3879,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -4149,20 +4221,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -4497,20 +4575,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/layers/uuid"
               }
@@ -4637,20 +4721,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -4708,20 +4798,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -4779,20 +4875,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -4850,20 +4952,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -4921,20 +5029,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -4992,20 +5106,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -5063,20 +5183,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -5134,20 +5260,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -5205,20 +5337,26 @@
               "description": "",
               "default": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "uom": null,
               "enforced": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               },
               "restricted": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 },
                 "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/uuid"
               }
@@ -5367,20 +5505,26 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
                   },
                   "uom": null,
                   "enforced": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_start"
                   }
@@ -5392,20 +5536,26 @@
                   "description": "",
                   "default": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
                   },
                   "uom": null,
                   "enforced": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
                   },
                   "restricted": {
                     "schema": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "path": "/open_trade_transfer_package/products/.*/circuitdata/processes/function_attributes/layer_stop"
                   }
@@ -6837,7 +6987,9 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 }
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
@@ -6847,7 +6999,9 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 }
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
@@ -6856,7 +7010,9 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                 }
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/markings/layers"
