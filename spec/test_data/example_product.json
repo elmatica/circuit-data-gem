@@ -11,42 +11,48 @@
               "function": "legend",
               "name": "doc4",
               "sections": ["rigid1"],
-              "materials": ["doc4"]
+              "materials": ["doc4"],
+              "uuid": "a0816b4c-fdc9-45c2-a416-a4fc9f21f81a"
             },
             {
               "order": 1,
               "function": "soldermask",
               "name": "doc3",
               "sections": ["rigid1"],
-              "materials": ["doc3"]
+              "materials": ["doc3"],
+              "uuid": "a15e6c92-3c8e-47a9-b557-fd160b144682"
             },
             {
               "order": 2,
               "function": "conductive",
               "name": "Top",
               "sections": ["rigid1"],
-              "materials": ["Top"]
+              "materials": ["Top"],
+              "uuid": "a66f8243-d95c-48ab-ac8a-69f4d5afa535"
             },
             {
               "order": 3,
               "function": "conductive",
               "name": "Bot",
               "sections": ["rigid1"],
-              "materials": ["Bot"]
+              "materials": ["Bot"],
+              "uuid": "56171e41-f2cb-4d0a-9164-31ce23f793fa"
             },
             {
               "order": 4,
               "function": "soldermask",
               "name": "doc",
               "sections": ["rigid1"],
-              "materials": ["doc"]
+              "materials": ["doc"],
+              "uuid": "55548eae-69a8-400b-a532-5e7590374454"
             },
             {
               "order": 5,
               "function": "legend",
               "name": "doc1",
               "sections": ["rigid1"],
-              "materials": ["doc1"]
+              "materials": ["doc1"],
+              "uuid": "3043c295-18b2-4996-a39f-f257d7efee28"
             }
           ],
           "sections": [
@@ -65,8 +71,8 @@
                 "hole_type": "through",
                 "plated": true,
                 "finished_size": 305.0,
-                "layer_start": "Top",
-                "layer_stop": "Bot"
+                "layer_start": "a66f8243-d95c-48ab-ac8a-69f4d5afa535",
+                "layer_stop": "56171e41-f2cb-4d0a-9164-31ce23f793fa"
               }
             },
             {
@@ -76,8 +82,8 @@
                 "hole_type": "through",
                 "plated": true,
                 "finished_size": 2007.0,
-                "layer_start": "Top",
-                "layer_stop": "Bot"
+                "layer_start": "a66f8243-d95c-48ab-ac8a-69f4d5afa535",
+                "layer_stop": "56171e41-f2cb-4d0a-9164-31ce23f793fa"
               }
             }
           ]

@@ -10,7 +10,7 @@ if file_path.nil?
   exit 1
 end
 
-data = JSON.parse(File.read(file_path))
+data = JSON.parse(File.read(file_path), :symbolize_names => true)
 
 validator = Circuitdata::Validator.new(data)
 if validator.valid?
