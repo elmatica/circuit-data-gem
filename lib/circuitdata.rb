@@ -2,8 +2,8 @@ module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
 
   require "active_support/all"
-  require "json-schema"
   require_relative "./circuitdata/version"
+  require_relative "./circuitdata/json_schema"
   require_relative "./circuitdata/dereferencer"
   require_relative "./circuitdata/profile"
   require_relative "./circuitdata/schema"
