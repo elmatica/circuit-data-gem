@@ -15,7 +15,9 @@ module Circuitdata
     attr_accessor :id
 
     def self.from_data(data)
-      data.dig(*BASE_PATH).keys.map do |k|
+      products_hash = data.dig(*BASE_PATH)
+      return [] if products_hash.nil?
+      products_hash.keys.map do |k|
         self.new(id: k, data: data)
       end
     end
@@ -88,11 +90,11 @@ module Circuitdata
       product_data.fetch(:metrics, {})
     end
 
-    private
-
     def product_data_path
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end
+
+    private
 
     def materials_data_path
       [:open_trade_transfer_package, :custom, :materials, :circuitdata]
