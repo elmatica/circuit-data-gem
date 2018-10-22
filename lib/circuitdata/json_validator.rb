@@ -15,9 +15,7 @@ module Circuitdata
     private
 
     def self.convert_simple_errors(schema_errors)
-      schema_errors.map do |error|
-        JsonSchemaErrorParser.translate(error)
-      end
+      JsonSchemaErrorParser.translate_all(schema_errors)
     end
 
     def self.error_is_simple?(error)

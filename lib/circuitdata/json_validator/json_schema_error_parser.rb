@@ -2,6 +2,13 @@ module Circuitdata
   class JsonValidator
     class JsonSchemaErrorParser
       class << self
+        def translate_all(errors)
+          errors.map(&method(:translate)).reject do |error|
+            error[:problem] == "pattern_mismatch" &&
+              error[:pattern] == "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          end
+        end
+
         def translate(error)
           additional_data = extract_data(error[:message], error[:failed_attribute])
           if additional_data.nil?
@@ -38,6 +45,10 @@ module Circuitdata
           when "Pattern"
             regex = message.match(/did not match the regex '(\S*)' /)[1]
             return {problem: "pattern_mismatch", pattern: regex}
+          else
+            if message.match?(/is not a uuid/)
+              return {problem: "format_mismatch", expected: "uuid"}
+            end
           end
         end
       end

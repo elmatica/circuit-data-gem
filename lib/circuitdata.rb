@@ -2,8 +2,8 @@ module Circuitdata
   # SHOULD ONLY HOUSE COMMON FUNCTIONS ONLY
 
   require "active_support/all"
-  require "json-schema"
   require_relative "./circuitdata/version"
+  require_relative "./circuitdata/json_schema"
   require_relative "./circuitdata/dereferencer"
   require_relative "./circuitdata/profile"
   require_relative "./circuitdata/schema"
@@ -13,6 +13,7 @@ module Circuitdata
   require_relative "./circuitdata/material_validator"
   require_relative "./circuitdata/summary"
   require_relative "./circuitdata/bury/bury"
+  require_relative "./circuitdata/product_id_validator"
 
   SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
   SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "..", "schema_v1_dereferenced.json")
