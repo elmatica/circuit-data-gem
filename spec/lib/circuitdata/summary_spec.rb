@@ -8,14 +8,14 @@ RSpec.describe Circuitdata::Summary do
 
     it "generates an empty summary" do
       expect(subject.data).to eql({
-        :base_materials => "unknown",
-        :number_of_conductive_layers => "unknown",
-        :board_outline => "unknown",
-        :final_thickness => "unknown",
-        :minimum_track => "unknown",
-        :minimum_spacing => "unknown",
-        :min_through_hole_size => "unknown",
-        :max_aspect_ratio => "unknown"
+        :base_materials => nil,
+        :number_of_conductive_layers => nil,
+        :board_outline => nil,
+        :final_thickness => nil,
+        :minimum_track => nil,
+        :minimum_spacing => nil,
+        :min_through_hole_size => nil,
+        :max_aspect_ratio => nil
       })
     end
   end
@@ -25,14 +25,14 @@ RSpec.describe Circuitdata::Summary do
 
     it "generates a summary" do
       expect(subject.data).to eql({
-        :base_materials => "unknown",
+        :base_materials => nil,
         :number_of_conductive_layers => 2,
-        :board_outline => "unknown",
-        :final_thickness => "unknown",
-        :minimum_track => "unknown",
-        :minimum_spacing => "unknown",
+        :board_outline => nil,
+        :final_thickness => nil,
+        :minimum_track => nil,
+        :minimum_spacing => nil,
         :min_through_hole_size => 305.0,
-        :max_aspect_ratio => "unknown"
+        :max_aspect_ratio => nil
       })
     end
   end

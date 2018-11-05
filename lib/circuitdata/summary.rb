@@ -20,13 +20,7 @@ module Circuitdata
     def data
       d = {}
       SUMMARY_FIELDS.each do |key|
-        value = send(key)
-        # Only add value if != nil
-        if value.nil?
-          d[key] = "unknown"
-        else
-          d[key] = value
-        end
+        d[key] = send(key)
       end
       d
     end

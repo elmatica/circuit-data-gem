@@ -14,5 +14,5 @@ data = JSON.parse(File.read(file_path), symbolize_names: true)
 product = Circuitdata::Product.from_data(data).first
 summary = Circuitdata::Summary.new(product)
 
-
-puts Terminal::Table.new :rows => summary.data, :title => "Summary", :style => {:width => 80}
+data = summary.data.map { |k, value| [k, value ||= "Unknown"] }.to_h
+puts Terminal::Table.new :rows => data, :title => "Summary", :style => {:width => 80}
