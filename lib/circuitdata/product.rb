@@ -65,7 +65,7 @@ module Circuitdata
     def question_answer(path)
       return nil if path.empty?
       path = path.map { |p| p.is_a?(String) ? p.to_sym : p }
-      value = product_data.dig(*path)
+      value = Bury.dig(product_data, *path)
       value
     end
 
