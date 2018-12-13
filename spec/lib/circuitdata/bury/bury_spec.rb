@@ -33,6 +33,18 @@ RSpec.describe Circuitdata::Bury do
         "a" => [{"b" => "c", "d" => "chips"}],
       })
     end
+
+    it "raises an error if hash parent is not an array" do
+      path = ["a", {"b" => "c"}, "d"]
+      data = {"a" => {"b" => "c", "d" => "chips"}}
+
+      expect {
+        subject.bury(data, *path, value)
+      }.to raise_error(
+        Circuitdata::Bury::InvalidDataError,
+        'parent of {"b"=>"c"} is not an array'
+      )
+    end
   end
 
   describe ".dig" do

@@ -1,5 +1,7 @@
 module Circuitdata
   module Bury
+    class InvalidDataError < StandardError; end
+
     class << self
       def bury(data, *path, value)
         current_data = data
@@ -26,6 +28,9 @@ module Circuitdata
       private
 
       def find_matching_hash(data, partial_hash)
+        unless data.is_a?(Array)
+          fail InvalidDataError, "parent of #{partial_hash} is not an array"
+        end
         data.find do |el|
           partial_hash.all? { |k, v| el[k] == v }
         end
