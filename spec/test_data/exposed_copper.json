@@ -1,0 +1,150 @@
+{
+  "open_trade_transfer_package": {
+    "version": 1.0,
+    "products": {
+      "copper_coverage": {
+        "circuitdata": {
+          "layers": [
+            {
+              "function": "soldermask",
+              "uuid": "8a3e0908-bfc2-403f-82c8-dd9494aaa090",
+              "name": "soldermask-1",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "order": 0
+            },
+            {
+              "function": "final_finish",
+              "uuid": "7340c674-9a0e-4d7b-9dca-ec6d4a0d73b6",
+              "name": "final_finish-1",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "coverage": 5.0,
+              "order": 1
+            },
+            {
+              "function": "conductive",
+              "layer_attributes": {
+                "polarity": "positive",
+                "conductive_function": "signal"
+              },
+              "uuid": "7340c674-9a0e-4d7b-9dca-ec6d4a0d73b5",
+              "name": "conductive-1",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "coverage": 25.0,
+              "order": 2
+            },
+            {
+              "function": "dielectric",
+              "uuid": "87a38176-3360-41fb-b086-c77b34729be1",
+              "name": "dielectric-1",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "order": 3
+            },
+            {
+              "function": "conductive",
+              "layer_attributes": {
+                "polarity": "positive",
+                "conductive_function": "signal"
+              },
+              "uuid": "84b2410a-6b99-49f5-9f59-d4357bc73e43",
+              "name": "conductive-2",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "coverage": 25.0,
+              "order": 3
+            },
+            {
+              "function": "final_finish",
+              "uuid": "84b2410a-6b99-49f5-9f59-d4357bc73e44",
+              "name": "final_finish-2",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "coverage": 5.0,
+              "order": 4
+            },
+            {
+              "function": "soldermask",
+              "uuid": "40998ca5-d275-493f-984e-625daf7514b3",
+              "name": "soldermask-2",
+              "sections": [
+                "rigid1"
+              ],
+              "materials": [
+
+              ],
+              "order": 5
+            }
+          ],
+          "sections": [
+            {
+              "name": "rigid1",
+              "in_x": [
+                1
+              ],
+              "in_y": [
+                1
+              ],
+              "mm2": 10000
+            }
+          ],
+          "processes": [
+            {
+              "function": "holes",
+              "function_attributes": {
+                "number_of_holes": 2,
+                "plated": false,
+                "finished_size": 1999.0,
+                "layer_start": "7340c674-9a0e-4d7b-9dca-ec6d4a0d73b5",
+                "layer_stop": "84b2410a-6b99-49f5-9f59-d4357bc73e43",
+                "hole_type": "through",
+                "covered": false
+              },
+              "uuid": "909787fa-7106-4656-9086-a5186630ff79"
+            }
+          ],
+          "metrics": {
+            "board": {
+              "size_x": 100.0,
+              "size_y": 100.0,
+              "thickness": 1.6
+            }
+          },
+          "version": 1.0
+        }
+      }
+    },
+    "custom": {
+      "materials": {
+        "circuitdata": {
+        }
+      }
+    }
+  }
+}

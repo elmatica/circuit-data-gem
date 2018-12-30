@@ -90,6 +90,30 @@ module Circuitdata
       product_data.fetch(:metrics, {})
     end
 
+    def exposed_copper
+      ExposedArea.exposed_copper(product_data)
+    end
+
+    def copper_coverage
+      ExposedArea.copper_coverage(product_data)
+    end
+
+    def top_conductive
+      return nil if conductive_dielectric_layers.first.nil?
+      return nil if conductive_dielectric_layers.first[:function] != "conductive"
+      conductive_dielectric_layers.first
+    end
+
+    def bottom_conductive
+      return nil if conductive_dielectric_layers.last.nil?
+      return nil if conductive_dielectric_layers.last[:function] != "conductive"
+      conductive_dielectric_layers.last
+    end
+
+    def conductive_dielectric_layers
+      layers.select{ |layer| ["conductive", "dielectric"].include?(layer[:function]) }
+    end
+
     def product_data_path
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end

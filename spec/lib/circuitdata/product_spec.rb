@@ -77,6 +77,17 @@ RSpec.describe Circuitdata::Product do
     end
   end
 
+  describe "#get_exposed_copper" do
+    let(:id) { "copper_coverage" }
+    let(:data) { json_fixture(:exposed_copper) }
+    it "gets the exposed copper value" do
+      expect(subject.exposed_copper).to eql(5.0)
+    end
+    it "gets the copper coverage value" do
+      expect(subject.copper_coverage).to eql(25.0)
+    end
+  end
+
   describe ".from_data" do
     subject { described_class }
 
