@@ -116,12 +116,14 @@ module Circuitdata
 
     def self.layer_kinds
       product_schema = type_schema(:products)
-      product_schema.dig(:layers, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
+      kinds = product_schema.dig(:layers, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
+      kinds.sort
     end
 
     def self.process_kinds
       product_schema = type_schema(:products)
-      product_schema.dig(:processes, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
+      kinds = product_schema.dig(:processes, :items, :oneOf).map { |of| of.dig(:properties, :function, :enum).first }
+      kinds.sort
     end
 
     def self.type_schema(type)
