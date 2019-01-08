@@ -7,7 +7,8 @@ RSpec.describe Circuitdata::Schema do
     it "returns the layer kinds" do
       kinds = subject.layer_kinds
       expect(kinds).to be_a(Array)
-      expect(kinds.first).to eql("none")
+      expect(kinds.sort).to eql(kinds)
+      expect(kinds.first).to eql("adhesive")
     end
   end
 
@@ -15,7 +16,8 @@ RSpec.describe Circuitdata::Schema do
     it "returns the process kinds" do
       kinds = subject.process_kinds
       expect(kinds).to be_a(Array)
-      expect(kinds.first).to eql("edge_bevelling")
+      expect(kinds.sort).to eql(kinds)
+      expect(kinds.first).to eql("coin_attachment")
     end
   end
 
