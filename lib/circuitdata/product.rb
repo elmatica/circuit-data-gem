@@ -94,6 +94,10 @@ module Circuitdata
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end
 
+    def layer_name(uuid)
+      layers.find { |l| l[:uuid] == uuid }&.fetch(:name, nil)
+    end
+
     private
 
     def materials_data_path

@@ -88,4 +88,23 @@ RSpec.describe Circuitdata::Product do
       expect(products.map(&:id)).to eql([:empty_product, :empty_product_2])
     end
   end
+
+  describe ".layer_name" do
+    let(:data) { nil }
+
+    it "returns nil when the layer does not exist" do
+      expect(subject.layer_name("some-uuid")).to be(nil)
+    end
+
+    context "layers are present" do
+      before do
+        subject.set_question_answer(:layers, 0, :name, "Topping")
+        subject.set_question_answer(:layers, 0, :uuid, "some-uuid")
+      end
+
+      it "returns the layer name" do
+        expect(subject.layer_name("some-uuid")).to eql("Topping")
+      end
+    end
+  end
 end
