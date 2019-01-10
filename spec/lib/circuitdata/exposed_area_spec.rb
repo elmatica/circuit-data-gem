@@ -7,20 +7,22 @@ RSpec.describe Circuitdata::ExposedArea do
   describe "Exposed area calculation" do
     let(:id) { "copper_coverage" }
     let(:data) { json_fixture(:exposed_copper) }
+    let(:exposed_area_one_side) { 500.0 }
+    let(:exposed_area_total) { exposed_area_one_side * 2}
     it "gets the exposed copper value" do
-      expect(subject.exposed_copper).to eql(5.0)
-    end
-    it "gets the copper coverage value" do
-      expect(subject.copper_coverage).to eql(25.0)
+      expect(subject.exposed_copper_area).to eql(exposed_area_total)
     end
     context 'plated through holes are present' do
       before do
         product.processes.first[:function_attributes][:plated] = true
       end
 
-      it "includes through holes when present" do
+      it "calculates the barrel_area correctly" do
         expect(subject.barrel_area).to eql(20.09613988648319)
-        expect(subject.exposed_copper).to eql(5.0)
+      end
+
+      it "includes the barrel_area in the exposed_copper" do
+        expect(subject.exposed_copper_area).to eql(5.2)
       end
 
       it "is zero if number of holes is not present" do
@@ -45,10 +47,7 @@ RSpec.describe Circuitdata::ExposedArea do
     let(:id) { "empty_product" }
     let(:data) { nil }
     it "gets the exposed copper value" do
-      expect(subject.exposed_copper).to eql(nil)
-    end
-    it "gets the copper coverage value" do
-      expect(subject.copper_coverage).to eql(nil)
+      expect(subject.exposed_copper_area).to eql(nil)
     end
   end
 

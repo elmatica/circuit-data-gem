@@ -5,7 +5,7 @@ module Circuitdata
       @product = product
     end
 
-    def exposed_copper
+    def exposed_copper_area
       coverage = []
       unless top_final_finish.nil?
         if top_final_finish[:coverage].is_a? Numeric
@@ -20,25 +20,7 @@ module Circuitdata
       if coverage.empty?
         return nil
       end
-      coverage.reduce(:+) / coverage.size.to_f
-    end
-
-    def copper_coverage
-      coverage = []
-      unless top_conductive.nil?
-        if top_conductive[:coverage].is_a? Numeric
-          coverage << top_conductive[:coverage]
-        end
-      end
-      unless bottom_conductive.nil?
-        if bottom_conductive[:coverage].is_a? Numeric
-          coverage << bottom_conductive[:coverage]
-        end
-      end
-      if coverage.empty?
-        return nil
-      end
-      coverage.reduce(:+) / coverage.size.to_f
+      coverage.map{ |percent| percent/100.0*board_area}.sum
     end
 
     def barrel_area
@@ -62,6 +44,11 @@ module Circuitdata
       @product.question_answer([:metrics, :board, :thickness])
     end
 
+    def board_area
+      @product.question_answer([:metrics, :board, :size_x])*
+      @product.question_answer([:metrics, :board, :size_y])
+    end
+
     def plated_through_holes
       @product.processes
         .select{|process| process[:function] == "holes"}
@@ -73,22 +60,6 @@ module Circuitdata
 
     def layers
       @product.layers
-    end
-
-    def top_conductive
-      return nil if conductive_dielectric_layers.first.nil?
-      return nil if conductive_dielectric_layers.first[:function] != "conductive"
-      conductive_dielectric_layers.first
-    end
-
-    def bottom_conductive
-      return nil if conductive_dielectric_layers.last.nil?
-      return nil if conductive_dielectric_layers.last[:function] != "conductive"
-      conductive_dielectric_layers.last
-    end
-
-    def conductive_dielectric_layers
-      layers.select{ |layer| ["conductive", "dielectric"].include?(layer[:function]) }
     end
 
     def top_final_finish
