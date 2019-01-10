@@ -90,6 +90,14 @@ module Circuitdata
       product_data.fetch(:metrics, {})
     end
 
+    def exposed_copper
+      exposed_area.exposed_copper
+    end
+
+    def copper_coverage
+      exposed_area.copper_coverage
+    end
+
     def product_data_path
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end
@@ -99,6 +107,10 @@ module Circuitdata
     end
 
     private
+
+    def exposed_area
+      @exposed_area ||= ExposedArea.new(self)
+    end
 
     def materials_data_path
       [:open_trade_transfer_package, :custom, :materials, :circuitdata]
