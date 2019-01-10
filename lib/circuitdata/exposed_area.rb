@@ -1,19 +1,11 @@
 module Circuitdata
   class ExposedArea
 
-    def self.exposed_copper(data)
-      ExposedArea.new(data).get_exposed_copper
+    def initialize(product)
+      @product = product
     end
 
-    def self.copper_coverage(data)
-      ExposedArea.new(data).get_copper_coverage
-    end
-
-    def initialize(data)
-      @data = data
-    end
-
-    def get_exposed_copper
+    def exposed_copper
       coverage = []
       unless top_final_finish.nil?
         if top_final_finish[:coverage].is_a? Numeric
@@ -31,7 +23,7 @@ module Circuitdata
       coverage.reduce(:+) / coverage.size.to_f
     end
 
-    def get_copper_coverage
+    def copper_coverage
       coverage = []
       unless top_conductive.nil?
         if top_conductive[:coverage].is_a? Numeric
@@ -50,7 +42,7 @@ module Circuitdata
     end
 
     def layers
-      @data.fetch(:layers, [])
+      @product.layers
     end
 
     def top_conductive
