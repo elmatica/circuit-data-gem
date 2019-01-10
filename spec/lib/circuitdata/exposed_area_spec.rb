@@ -1,8 +1,8 @@
 require "spec_helper"
 
 RSpec.describe Circuitdata::ExposedArea do
-  subject { Circuitdata::ExposedArea.new(
-    product(id, data)) }
+  subject { Circuitdata::ExposedArea.new(product) }
+  let(:product) { build_product(id, data) }
 
   describe "Exposed area calculation" do
     let(:id) { "copper_coverage" }
@@ -13,6 +13,17 @@ RSpec.describe Circuitdata::ExposedArea do
     it "gets the copper coverage value" do
       expect(subject.copper_coverage).to eql(25.0)
     end
+    context 'plated through holes are present' do
+      before do
+        product.processes.first[:function_attributes][:plated] = true
+      end
+
+      it "includes through holes when present" do
+        expect(subject.barrel_area).to eql(20.09613988648319)
+        expect(subject.exposed_copper).to eql(5.0)
+      end
+    end
+
   end
 
   describe "When the data is nil" do
@@ -26,7 +37,7 @@ RSpec.describe Circuitdata::ExposedArea do
     end
   end
 
-  def product(id, data)
+  def build_product(id, data)
     Circuitdata::Product.new(id: id, data: data)
   end
 end

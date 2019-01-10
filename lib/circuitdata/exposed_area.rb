@@ -41,6 +41,33 @@ module Circuitdata
       coverage.reduce(:+) / coverage.size.to_f
     end
 
+    def barrel_area
+      plated_through_holes.map{ |hole|  sum_holes_area(hole)}.sum
+    end
+
+    private
+
+    def sum_holes_area(hole)
+      diameter = hole[:function_attributes][:finished_size]
+      number_of_holes = hole[:function_attributes][:number_of_holes]
+      hole_area(diameter)*number_of_holes
+    end
+
+    def hole_area(finished_size)
+      (finished_size/1000)*Math::PI*board_height
+    end
+
+    def board_height
+      @product.question_answer([:metrics, :board, :thickness])
+    end
+
+    def plated_through_holes
+      @product.processes
+        .select{|process| process[:function] == "holes"}
+        .select{|process| process[:function_attributes][:plated] == true}
+        .select{|process| process[:function_attributes][:hole_type] == "through"}
+    end
+
     def layers
       @product.layers
     end
