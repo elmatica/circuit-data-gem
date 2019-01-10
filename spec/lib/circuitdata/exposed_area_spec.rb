@@ -13,16 +13,18 @@ RSpec.describe Circuitdata::ExposedArea do
       expect(subject.exposed_copper_area).to eql(exposed_area_total)
     end
     context 'plated through holes are present' do
+      let(:hole_area) { 20.09613988648319 }
+
       before do
         product.processes.first[:function_attributes][:plated] = true
       end
 
       it "calculates the barrel_area correctly" do
-        expect(subject.barrel_area).to eql(20.09613988648319)
+        expect(subject.barrel_area).to eql(hole_area)
       end
 
       it "includes the barrel_area in the exposed_copper" do
-        expect(subject.exposed_copper_area).to eql(5.2)
+        expect(subject.exposed_copper_area).to eql(exposed_area_total + hole_area)
       end
 
       it "is zero if number of holes is not present" do
@@ -47,7 +49,7 @@ RSpec.describe Circuitdata::ExposedArea do
     let(:id) { "empty_product" }
     let(:data) { nil }
     it "gets the exposed copper value" do
-      expect(subject.exposed_copper_area).to eql(nil)
+      expect(subject.exposed_copper_area).to eql(0)
     end
   end
 

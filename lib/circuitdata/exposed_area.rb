@@ -6,6 +6,17 @@ module Circuitdata
     end
 
     def exposed_copper_area
+      exposed_layer_copper_area+barrel_area
+    end
+
+    def barrel_area
+      return 0 if board_thickness.nil?
+      plated_through_holes.map{ |hole|  sum_holes_area(hole)}.sum
+    end
+
+    private
+
+    def exposed_layer_copper_area
       coverage = []
       unless top_final_finish.nil?
         if top_final_finish[:coverage].is_a? Numeric
@@ -17,18 +28,8 @@ module Circuitdata
           coverage << bottom_final_finish[:coverage]
         end
       end
-      if coverage.empty?
-        return nil
-      end
       coverage.map{ |percent| percent/100.0*board_area}.sum
     end
-
-    def barrel_area
-      return 0 if board_thickness.nil?
-      plated_through_holes.map{ |hole|  sum_holes_area(hole)}.sum
-    end
-
-    private
 
     def sum_holes_area(hole)
       diameter = hole[:function_attributes][:finished_size]
