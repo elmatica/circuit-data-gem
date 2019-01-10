@@ -6,6 +6,7 @@ module Circuitdata
     end
 
     def exposed_copper_area
+      return nil if board_area.nil?
       exposed_layer_copper_area+barrel_area
     end
 
@@ -46,8 +47,10 @@ module Circuitdata
     end
 
     def board_area
-      @product.question_answer([:metrics, :board, :size_x])*
-      @product.question_answer([:metrics, :board, :size_y])
+      size_x = @product.question_answer([:metrics, :board, :size_x])
+      size_y = @product.question_answer([:metrics, :board, :size_y])
+      return nil unless (size_x.present? && size_y.present?)
+      size_x * size_y
     end
 
     def plated_through_holes

@@ -12,6 +12,17 @@ RSpec.describe Circuitdata::ExposedArea do
     it "gets the exposed copper value" do
       expect(subject.exposed_copper_area).to eql(exposed_area_total)
     end
+
+    it 'handles board size x not being present' do
+      product.set_question_answer(:metrics, :board, :size_x, nil)
+      expect(subject.exposed_copper_area).to eql(nil)
+    end
+
+    it 'handles board size y not being present' do
+      product.set_question_answer(:metrics, :board, :size_y, nil)
+      expect(subject.exposed_copper_area).to eql(nil)
+    end
+
     context 'plated through holes are present' do
       let(:hole_area) { 20.09613988648319 }
 
@@ -49,7 +60,7 @@ RSpec.describe Circuitdata::ExposedArea do
     let(:id) { "empty_product" }
     let(:data) { nil }
     it "gets the exposed copper value" do
-      expect(subject.exposed_copper_area).to eql(0)
+      expect(subject.exposed_copper_area).to eql(nil)
     end
   end
 
