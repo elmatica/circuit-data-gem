@@ -91,13 +91,9 @@ module Circuitdata
     end
 
     def exposed_copper
-      exposed_area.exposed_copper
+      exposed_area.exposed_copper_area
     end
-
-    def copper_coverage
-      exposed_area.copper_coverage
-    end
-
+    
     def product_data_path
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end
