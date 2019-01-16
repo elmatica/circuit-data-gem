@@ -47,10 +47,7 @@ module Circuitdata
     end
 
     def board_area
-      size_x = @product.question_answer([:metrics, :board, :size_x])
-      size_y = @product.question_answer([:metrics, :board, :size_y])
-      return nil unless (size_x.present? && size_y.present?)
-      size_x * size_y
+      @product.question_answer([:metrics, :board, :area])
     end
 
     def plated_through_holes
@@ -78,7 +75,7 @@ module Circuitdata
       conductive_final_finish_layers.last
     end
 
-    # we are using the knowlegde that at least one conductive layer must
+    # We are using the knowledge that at least one conductive layer must
     # be present to separate the top and bottom solder masks from each other.
     def conductive_final_finish_layers
       layers.select{ |layer| ["conductive", "final_finish"].include?(layer[:function]) }

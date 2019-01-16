@@ -133,7 +133,8 @@
             "board": {
               "size_x": 100.0,
               "size_y": 100.0,
-              "thickness": 1.6
+              "thickness": 1.6,
+              "area": 10000
             }
           },
           "version": 1.0

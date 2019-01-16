@@ -13,13 +13,8 @@ RSpec.describe Circuitdata::ExposedArea do
       expect(subject.exposed_copper_area).to eql(exposed_area_total)
     end
 
-    it 'handles board size x not being present' do
-      product.set_question_answer(:metrics, :board, :size_x, nil)
-      expect(subject.exposed_copper_area).to eql(nil)
-    end
-
-    it 'handles board size y not being present' do
-      product.set_question_answer(:metrics, :board, :size_y, nil)
+    it 'handles board area not being present' do
+      product.set_question_answer(:metrics, :board, :area, nil)
       expect(subject.exposed_copper_area).to eql(nil)
     end
 
