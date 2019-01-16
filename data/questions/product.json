@@ -6006,6 +6006,34 @@
             }
           },
           {
+            "id": "metrics/board/area",
+            "code": "area",
+            "name": "Area",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "number",
+                "uom": "mm"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
+            },
+            "uom": "mm",
+            "enforced": {
+              "schema": {
+                "type": "number",
+                "uom": "mm"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
+            },
+            "restricted": {
+              "schema": {
+                "type": "number",
+                "uom": "mm"
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
+            }
+          },
+          {
             "id": "metrics/board/breakaway_method",
             "code": "breakaway_method",
             "name": "Breakaway method",
