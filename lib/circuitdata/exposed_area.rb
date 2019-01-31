@@ -5,9 +5,9 @@ module Circuitdata
       @product = product
     end
 
-    def exposed_copper_area
+    def final_finish_total_area
       return nil if board_area.nil?
-      exposed_layer_copper_area+barrel_area
+      layer_final_finish_area+barrel_area
     end
 
     def barrel_area
@@ -17,18 +17,8 @@ module Circuitdata
 
     private
 
-    def exposed_layer_copper_area
-      coverage = []
-      unless top_final_finish.nil?
-        if top_final_finish[:coverage].is_a? Numeric
-          coverage << top_final_finish[:coverage]
-        end
-      end
-      unless bottom_final_finish.nil?
-        if bottom_final_finish[:coverage].is_a? Numeric
-          coverage << bottom_final_finish[:coverage]
-        end
-      end
+    def layer_final_finish_area
+      coverage = final_finish_layers.map{ |layer| layer[:coverage]}.compact
       coverage.map{ |percent| percent/100.0*board_area}.sum
     end
 
@@ -63,22 +53,8 @@ module Circuitdata
       @product.layers
     end
 
-    def top_final_finish
-      return nil if conductive_final_finish_layers.first.nil?
-      return nil if conductive_final_finish_layers.first[:function] != "final_finish"
-      conductive_final_finish_layers.first
-    end
-
-    def bottom_final_finish
-      return nil if conductive_final_finish_layers.last.nil?
-      return nil if conductive_final_finish_layers.last[:function] != "final_finish"
-      conductive_final_finish_layers.last
-    end
-
-    # We are using the knowledge that at least one conductive layer must
-    # be present to separate the top and bottom solder masks from each other.
-    def conductive_final_finish_layers
-      layers.select{ |layer| ["conductive", "final_finish"].include?(layer[:function]) }
+    def final_finish_layers
+      layers.select{ |layer| layer[:function] == "final_finish" }
     end
   end
 end

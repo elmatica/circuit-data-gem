@@ -4,18 +4,18 @@ RSpec.describe Circuitdata::ExposedArea do
   subject { Circuitdata::ExposedArea.new(product) }
   let(:product) { build_product(id, data) }
 
-  describe "Exposed area calculation" do
-    let(:id) { "copper_coverage" }
-    let(:data) { json_fixture(:exposed_copper) }
-    let(:exposed_area_one_side) { 500.0 }
-    let(:exposed_area_total) { exposed_area_one_side * 2}
-    it "gets the exposed copper value" do
-      expect(subject.exposed_copper_area).to eql(exposed_area_total)
+  describe "Final finish total area calculation" do
+    let(:id) { "final_finish_total_area" }
+    let(:data) { json_fixture(:final_finish_total_area) }
+    let(:final_finish_area_one_side) { 500.0 }
+    let(:final_finish_area_total) { final_finish_area_one_side * 2}
+    it "gets the final finish total area" do
+      expect(subject.final_finish_total_area).to eql(final_finish_area_total)
     end
 
     it 'handles board area not being present' do
       product.set_question_answer(:metrics, :board, :area, nil)
-      expect(subject.exposed_copper_area).to eql(nil)
+      expect(subject.final_finish_total_area).to eql(nil)
     end
 
     context 'plated through holes are present' do
@@ -29,8 +29,8 @@ RSpec.describe Circuitdata::ExposedArea do
         expect(subject.barrel_area).to eql(hole_area)
       end
 
-      it "includes the barrel_area in the exposed_copper" do
-        expect(subject.exposed_copper_area).to eql(exposed_area_total + hole_area)
+      it "includes the barrel_area in the final finish area total" do
+        expect(subject.final_finish_total_area).to eql(final_finish_area_total + hole_area)
       end
 
       it "is zero if number of holes is not present" do
@@ -54,8 +54,8 @@ RSpec.describe Circuitdata::ExposedArea do
   describe "When the data is nil" do
     let(:id) { "empty_product" }
     let(:data) { nil }
-    it "gets the exposed copper value" do
-      expect(subject.exposed_copper_area).to eql(nil)
+    it "gets the final finish total area" do
+      expect(subject.final_finish_total_area).to eql(nil)
     end
   end
 
