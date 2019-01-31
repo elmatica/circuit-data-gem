@@ -12,7 +12,7 @@ module Circuitdata
 
     def barrel_area
       return 0 if board_thickness.nil?
-      plated_through_holes.map{ |hole|  sum_holes_area(hole)}.sum
+      plated_holes.map{ |hole|  sum_holes_area(hole)}.sum
     end
 
     private
@@ -40,13 +40,24 @@ module Circuitdata
       @product.question_answer([:metrics, :board, :area])
     end
 
-    def plated_through_holes
+    def plated_holes
+      holes.select{ |process| requires_final_finish?(process) }
+        .select{ |process| has_necessary_data?(process) }
+    end
+
+    def requires_final_finish?(process)
+      process[:function_attributes][:plated] == true &&
+        process[:function_attributes][:covered] == false
+    end
+
+    def has_necessary_data?(process)
+      process[:function_attributes][:number_of_holes].present? &&
+        process[:function_attributes][:finished_size].present?
+    end
+
+    def holes
       @product.processes
         .select{|process| process[:function] == "holes"}
-        .select{|process| process[:function_attributes][:plated] == true}
-        .select{|process| process[:function_attributes][:hole_type] == "through"}
-        .select{|process| process[:function_attributes][:number_of_holes].present?}
-        .select{|process| process[:function_attributes][:finished_size].present?}
     end
 
     def layers

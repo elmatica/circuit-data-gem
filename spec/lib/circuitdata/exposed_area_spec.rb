@@ -49,6 +49,18 @@ RSpec.describe Circuitdata::ExposedArea do
       end
     end
 
+    context 'plated vias are present' do
+      let(:hole_area) { 20.09613988648319 }
+
+      before do
+        product.processes.first[:function_attributes][:plated] = true
+        product.processes.first[:function_attributes][:hole_type] = "via"
+      end
+
+      it "calculates the barrel_area correctly" do
+        expect(subject.barrel_area).to eql(hole_area)
+      end
+    end
   end
 
   describe "When the data is nil" do
