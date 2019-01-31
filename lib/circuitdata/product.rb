@@ -90,10 +90,10 @@ module Circuitdata
       product_data.fetch(:metrics, {})
     end
 
-    def exposed_copper
-      exposed_area.exposed_copper_area
+    def final_finish_total_area
+      exposed_area.final_finish_total_area
     end
-    
+
     def product_data_path
       [:open_trade_transfer_package, :products, id.to_sym, :circuitdata]
     end

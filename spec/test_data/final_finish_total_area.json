@@ -2,7 +2,7 @@
   "open_trade_transfer_package": {
     "version": 1.0,
     "products": {
-      "copper_coverage": {
+      "final_finish_total_area": {
         "circuitdata": {
           "layers": [
             {

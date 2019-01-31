@@ -54,12 +54,12 @@ RSpec.describe Circuitdata::Product do
     end
   end
 
-  describe "#exposed_copper_area" do
-    let(:id) { "copper_coverage" }
-    let(:data) { json_fixture(:exposed_copper) }
+  describe "#final_finish_total_area" do
+    let(:id) { "final_finish_total_area" }
+    let(:data) { json_fixture(:final_finish_total_area) }
 
-    it "returns the exposed copper area for the product" do
-      expect(subject.exposed_copper).to eql(1000.0)
+    it "returns the final finish total area for the product" do
+      expect(subject.final_finish_total_area).to eql(1000.0)
     end
   end
 

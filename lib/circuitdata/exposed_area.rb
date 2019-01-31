@@ -5,7 +5,7 @@ module Circuitdata
       @product = product
     end
 
-    def exposed_copper_area
+    def final_finish_total_area
       return nil if board_area.nil?
       exposed_layer_copper_area+barrel_area
     end
