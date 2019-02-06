@@ -6013,22 +6013,22 @@
             "default": {
               "schema": {
                 "type": "number",
-                "uom": "mm"
+                "uom": "mm2"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
             },
-            "uom": "mm",
+            "uom": "mm2",
             "enforced": {
               "schema": {
                 "type": "number",
-                "uom": "mm"
+                "uom": "mm2"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
             },
             "restricted": {
               "schema": {
                 "type": "number",
-                "uom": "mm"
+                "uom": "mm2"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/area"
             }
