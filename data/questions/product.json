@@ -6034,43 +6034,6 @@
             }
           },
           {
-            "id": "metrics/board/breakaway_method",
-            "code": "breakaway_method",
-            "name": "Breakaway method",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "routing",
-                  "punching"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "routing",
-                  "punching"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
-            },
-            "restricted": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "routing",
-                  "punching"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/metrics/board/breakaway_method"
-            }
-          },
-          {
             "id": "metrics/board/thickness",
             "code": "thickness",
             "name": "Thickness",
@@ -6514,8 +6477,6 @@
                     "routing",
                     "scoring",
                     "punching",
-                    "v_cut",
-                    "v_grove",
                     "jump_scoring"
                   ]
                 }
@@ -6532,8 +6493,6 @@
                     "routing",
                     "scoring",
                     "punching",
-                    "v_cut",
-                    "v_grove",
                     "jump_scoring"
                   ]
                 }
@@ -6549,8 +6508,6 @@
                     "routing",
                     "scoring",
                     "punching",
-                    "v_cut",
-                    "v_grove",
                     "jump_scoring"
                   ]
                 }
@@ -7284,10 +7241,9 @@
                 "items": {
                   "type": "string",
                   "enum": [
-                    "ul",
+                    "ul94",
                     "c_ul",
                     "rohs",
-                    "ul94",
                     "iec_61249-2-21",
                     "esa",
                     "itar",
@@ -7313,10 +7269,9 @@
                 "items": {
                   "type": "string",
                   "enum": [
-                    "ul",
+                    "ul94",
                     "c_ul",
                     "rohs",
-                    "ul94",
                     "iec_61249-2-21",
                     "esa",
                     "itar",
@@ -7341,10 +7296,9 @@
                 "items": {
                   "type": "string",
                   "enum": [
-                    "ul",
+                    "ul94",
                     "c_ul",
                     "rohs",
-                    "ul94",
                     "iec_61249-2-21",
                     "esa",
                     "itar",

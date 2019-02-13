@@ -17,8 +17,8 @@ module Circuitdata
   require_relative "./circuitdata/exposed_area"
   require_relative "./circuitdata/summary"
 
-  SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/v1")
-  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "..", "schema_v1_dereferenced.json")
+  SCHEMA_BASE_PATH = File.join(__dir__, "circuitdata/schema_files/current")
+  SCHEMA_FULL_PATH = File.join(SCHEMA_BASE_PATH, "..", "schema_current_dereferenced.json")
   DEFINITIONS_FULL_PATH = File.join(
     SCHEMA_BASE_PATH, "ottp_circuitdata_schema_definitions.json"
   )

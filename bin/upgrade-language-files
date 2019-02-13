@@ -2,10 +2,10 @@
 require "byebug"
 require_relative "../lib/circuitdata"
 
-local_dir = "lib/circuitdata/schema_files/v1"
+local_dir = "lib/circuitdata/schema_files/current"
 org = "CircuitData"
 branch = "master"
-remote_base_url = "https://raw.githubusercontent.com/#{org}/CircuitData-Language/#{branch}/schema/v1"
+remote_base_url = "https://raw.githubusercontent.com/#{org}/CircuitData-Language/#{branch}/schema/next"
 files = %w(
   ottp_circuitdata_schema
   ottp_circuitdata_schema_generics
@@ -32,7 +32,7 @@ new_data = JSON.pretty_generate(
   )
 )
 
-File.open("#{local_dir}/../schema_v1_dereferenced.json", "w") do |f|
+File.open("#{local_dir}/../schema_current_dereferenced.json", "w") do |f|
   f.write(new_data)
 end
 
