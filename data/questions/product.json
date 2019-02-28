@@ -7626,6 +7626,46 @@
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
             }
+          },
+          {
+            "id": "configuration/standards/ipc_a600_class",
+            "code": "ipc_a600_class",
+            "name": "Ipc a600 class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
+            }
           }
         ],
         "array?": false
