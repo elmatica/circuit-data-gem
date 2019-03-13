@@ -54,7 +54,8 @@ module Circuitdata
     end
 
     def min_through_hole_size
-      @product.processes.map{ |process| process.dig(:function_attributes,:finished_size)}.compact.min
+      @product.processes.select { |process| process.dig(:function_attributes, :hole_type) == "through" }
+        .map { |process| process.dig(:function_attributes, :finished_size) }.compact.min
     end
 
     def max_aspect_ratio

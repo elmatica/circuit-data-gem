@@ -47,4 +47,13 @@ RSpec.describe Circuitdata::Summary do
       expect(subject.max_aspect_ratio).to eql(5.31)
     end
   end
+
+  describe "#min_through_hole_size" do
+    let(:product) { Circuitdata::Product.new(id: "test", data: json_fixture(:example_product)) }
+
+    it "generates a summary" do
+      product.set_question_answer(:processes, 0, :function_attributes, :hole_type, "blind")
+      expect(subject.min_through_hole_size).to eql(2007.0)
+    end
+  end
 end
