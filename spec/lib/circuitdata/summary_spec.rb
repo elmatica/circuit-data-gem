@@ -7,16 +7,14 @@ RSpec.describe Circuitdata::Summary do
     let(:product) { Circuitdata::Product.new(id: "test", data: nil) }
 
     it "generates an empty summary" do
-      expect(subject.data).to eql({
-        :base_materials => nil,
-        :number_of_conductive_layers => nil,
-        :board_outline => nil,
-        :final_thickness => nil,
-        :minimum_track => nil,
-        :minimum_spacing => nil,
-        :min_through_hole_size => nil,
-        :max_aspect_ratio => nil
-      })
+      expect(subject.base_materials).to eql(nil)
+      expect(subject.number_of_conductive_layers).to eql(0)
+      expect(subject.board_outline).to eql(nil)
+      expect(subject.final_thickness).to eql(nil)
+      expect(subject.minimum_track).to eql(nil)
+      expect(subject.minimum_spacing).to eql(nil)
+      expect(subject.min_through_hole_size).to eql(nil)
+      expect(subject.max_aspect_ratio).to eql(nil)
     end
   end
 
@@ -24,16 +22,14 @@ RSpec.describe Circuitdata::Summary do
     let(:product) { Circuitdata::Product.new(id: "test", data: json_fixture(:example_product)) }
 
     it "generates a summary" do
-      expect(subject.data).to eql({
-        :base_materials => nil,
-        :number_of_conductive_layers => 2,
-        :board_outline => nil,
-        :final_thickness => nil,
-        :minimum_track => nil,
-        :minimum_spacing => nil,
-        :min_through_hole_size => 305.0,
-        :max_aspect_ratio => nil
-      })
+      expect(subject.base_materials).to eql(nil)
+      expect(subject.number_of_conductive_layers).to eql(2)
+      expect(subject.board_outline).to eql(nil)
+      expect(subject.final_thickness).to eql(nil)
+      expect(subject.minimum_track).to eql(nil)
+      expect(subject.minimum_spacing).to eql(nil)
+      expect(subject.min_through_hole_size).to eql(305.0)
+      expect(subject.max_aspect_ratio).to eql(nil)
     end
   end
 
@@ -41,16 +37,23 @@ RSpec.describe Circuitdata::Summary do
     let(:product) { Circuitdata::Product.new(id: "test", data: json_fixture(:full_product)) }
 
     it "generates a summary" do
-      expect(subject.data).to eql({
-        :base_materials => "Rigid",
-        :number_of_conductive_layers => 2,
-        :board_outline => "40.0 x 40.0 mm",
-        :final_thickness => 1.62,
-        :minimum_track => 0.2,
-        :minimum_spacing => 0.2,
-        :min_through_hole_size => 305.0,
-        :max_aspect_ratio => 5.31
-      })
+      expect(subject.base_materials).to eql("Rigid")
+      expect(subject.number_of_conductive_layers).to eql(2)
+      expect(subject.board_outline).to eql("40.0 x 40.0 mm")
+      expect(subject.final_thickness).to eql(1.62)
+      expect(subject.minimum_track).to eql(0.2)
+      expect(subject.minimum_spacing).to eql(0.2)
+      expect(subject.min_through_hole_size).to eql(305.0)
+      expect(subject.max_aspect_ratio).to eql(5.31)
+    end
+  end
+
+  describe "#min_through_hole_size" do
+    let(:product) { Circuitdata::Product.new(id: "test", data: json_fixture(:example_product)) }
+
+    it "generates a summary" do
+      product.set_question_answer(:processes, 0, :function_attributes, :hole_type, "blind")
+      expect(subject.min_through_hole_size).to eql(2007.0)
     end
   end
 end
