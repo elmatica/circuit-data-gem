@@ -7319,198 +7319,43 @@
             }
           },
           {
-            "id": "configuration/standards/ipc_6010_class",
-            "code": "ipc_6010_class",
-            "name": "Ipc 6010 class",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
-            },
-            "restricted": {
-              "schema": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_class"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_6010_compliance_level",
-            "code": "ipc_6010_compliance_level",
-            "name": "Ipc 6010 compliance level",
+            "id": "configuration/standards/ipc_a600_class",
+            "code": "ipc_a600_class",
+            "name": "Ipc a600 class",
             "description": "",
             "default": {
               "schema": {
                 "type": "string",
                 "enum": [
-                  "full",
-                  "factory_standard",
-                  "aabus"
+                  "1",
+                  "2",
+                  "3"
                 ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
             },
             "uom": null,
             "enforced": {
               "schema": {
                 "type": "string",
                 "enum": [
-                  "full",
-                  "factory_standard",
-                  "aabus"
+                  "1",
+                  "2",
+                  "3"
                 ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
             },
             "restricted": {
               "schema": {
                 "type": "string",
                 "enum": [
-                  "full",
-                  "factory_standard",
-                  "aabus"
+                  "1",
+                  "2",
+                  "3"
                 ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_compliance_level"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_6010_copper_plating_thickness_level",
-            "code": "ipc_6010_copper_plating_thickness_level",
-            "name": "Ipc 6010 copper plating thickness level",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
-            },
-            "restricted": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_copper_plating_thickness_level"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_6010_annular_ring_level",
-            "code": "ipc_6010_annular_ring_level",
-            "name": "Ipc 6010 annular ring level",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
-            },
-            "restricted": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_annular_ring_level"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_6010_conductor_spacing_level",
-            "code": "ipc_6010_conductor_spacing_level",
-            "name": "Ipc 6010 conductor spacing level",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
-            },
-            "restricted": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_spacing_level"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_6010_conductor_width_level",
-            "code": "ipc_6010_conductor_width_level",
-            "name": "Ipc 6010 conductor width level",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
-            },
-            "restricted": {
-              "schema": {
-                "type": "integer",
-                "minimum": 2,
-                "maximum": 3
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6010_conductor_width_level"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
             }
           },
           {
@@ -7563,6 +7408,194 @@
             }
           },
           {
+            "id": "configuration/standards/ipc_6012_compliance_class",
+            "code": "ipc_6012_compliance_class",
+            "name": "Ipc 6012 compliance class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_compliance_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_compliance_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_compliance_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6012_copper_plating_thickness_class",
+            "code": "ipc_6012_copper_plating_thickness_class",
+            "name": "Ipc 6012 copper plating thickness class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_copper_plating_thickness_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_copper_plating_thickness_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_copper_plating_thickness_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6012_annular_ring_class",
+            "code": "ipc_6012_annular_ring_class",
+            "name": "Ipc 6012 annular ring class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_annular_ring_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_annular_ring_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_annular_ring_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6012_conductor_spacing_class",
+            "code": "ipc_6012_conductor_spacing_class",
+            "name": "Ipc 6012 conductor spacing class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_spacing_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_spacing_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_spacing_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6012_conductor_width_class",
+            "code": "ipc_6012_conductor_width_class",
+            "name": "Ipc 6012 conductor width class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_width_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_width_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6012_conductor_width_class"
+            }
+          },
+          {
             "id": "configuration/standards/ipc_6013_class",
             "code": "ipc_6013_class",
             "name": "Ipc 6013 class",
@@ -7603,6 +7636,194 @@
             }
           },
           {
+            "id": "configuration/standards/ipc_6013_compliance_class",
+            "code": "ipc_6013_compliance_class",
+            "name": "Ipc 6013 compliance class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_compliance_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_compliance_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "factory_standard",
+                  "aabus"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_compliance_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6013_copper_plating_thickness_class",
+            "code": "ipc_6013_copper_plating_thickness_class",
+            "name": "Ipc 6013 copper plating thickness class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_copper_plating_thickness_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_copper_plating_thickness_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_copper_plating_thickness_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6013_annular_ring_class",
+            "code": "ipc_6013_annular_ring_class",
+            "name": "Ipc 6013 annular ring class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_annular_ring_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_annular_ring_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_annular_ring_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6013_conductor_spacing_class",
+            "code": "ipc_6013_conductor_spacing_class",
+            "name": "Ipc 6013 conductor spacing class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_spacing_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_spacing_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_spacing_class"
+            }
+          },
+          {
+            "id": "configuration/standards/ipc_6013_conductor_width_class",
+            "code": "ipc_6013_conductor_width_class",
+            "name": "Ipc 6013 conductor width class",
+            "description": "",
+            "default": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_width_class"
+            },
+            "uom": null,
+            "enforced": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_width_class"
+            },
+            "restricted": {
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "2",
+                  "3"
+                ]
+              },
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6013_conductor_width_class"
+            }
+          },
+          {
             "id": "configuration/standards/ipc_6018",
             "code": "ipc_6018",
             "name": "Ipc 6018",
@@ -7625,46 +7846,6 @@
                 "type": "boolean"
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_6018"
-            }
-          },
-          {
-            "id": "configuration/standards/ipc_a600_class",
-            "code": "ipc_a600_class",
-            "name": "Ipc a600 class",
-            "description": "",
-            "default": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "1",
-                  "2",
-                  "3"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
-            },
-            "uom": null,
-            "enforced": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "1",
-                  "2",
-                  "3"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
-            },
-            "restricted": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  "1",
-                  "2",
-                  "3"
-                ]
-              },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/standards/ipc_a600_class"
             }
           }
         ],
@@ -7810,7 +7991,8 @@
                 "enum": [
                   "controlled",
                   "calculated",
-                  "follow_stackup"
+                  "follow_stackup",
+                  "none"
                 ]
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
@@ -7822,7 +8004,8 @@
                 "enum": [
                   "controlled",
                   "calculated",
-                  "follow_stackup"
+                  "follow_stackup",
+                  "none"
                 ]
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
@@ -7833,7 +8016,8 @@
                 "enum": [
                   "controlled",
                   "calculated",
-                  "follow_stackup"
+                  "follow_stackup",
+                  "none"
                 ]
               },
               "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/testing/impedance"
@@ -7954,28 +8138,40 @@
         "name": "Allowed modifications",
         "questions": [
           {
-            "id": "configuration/allowed_modifications/dead_pad_removal",
-            "code": "dead_pad_removal",
-            "name": "Dead pad removal",
+            "id": "configuration/allowed_modifications/non_functional_pad_removal",
+            "code": "non_functional_pad_removal",
+            "name": "Non functional pad removal",
             "description": "",
             "default": {
               "schema": {
-                "type": "boolean"
+                "type": "string",
+                "enum": [
+                  "all",
+                  "via_only"
+                ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/non_functional_pad_removal"
             },
             "uom": null,
             "enforced": {
               "schema": {
-                "type": "boolean"
+                "type": "string",
+                "enum": [
+                  "all",
+                  "via_only"
+                ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/non_functional_pad_removal"
             },
             "restricted": {
               "schema": {
-                "type": "boolean"
+                "type": "string",
+                "enum": [
+                  "all",
+                  "via_only"
+                ]
               },
-              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/dead_pad_removal"
+              "path": "/open_trade_transfer_package/products/.*/circuitdata/configuration/allowed_modifications/non_functional_pad_removal"
             }
           },
           {
