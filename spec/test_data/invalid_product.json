@@ -1,10 +1,10 @@
 {
   "open_trade_transfer_package": {
-    "version": 1.0,
+    "version": 2.0,
     "products": {
       "test_product": {
         "circuitdata": {
-          "version": 1.0,
+          "version": 2.0,
           "configuration": {
             "country_of_origin": {
               "nato_member": "asd"
