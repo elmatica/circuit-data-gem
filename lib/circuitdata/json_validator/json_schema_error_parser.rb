@@ -29,25 +29,31 @@ module Circuitdata
             if !field
               fail "Unable to extract field from #{message.inspect}"
             end
-            return {field: field, problem: "required_property_missing"}
+            return { field: field, problem: "required_property_missing" }
           when "TypeV4"
             if message.include?("did not match the following type")
               matches = message.match(/of type (\S*) did not match the following type: (\S*)/)
               actual, expected = matches[1..2]
-              return {actual: actual, expected: expected, problem: "type_mismatch"}
+              return { actual: actual, expected: expected, problem: "type_mismatch" }
             end
           when "AdditionalProperties"
             matches = message.match(/contains additional properties (\[.*\]) outside/)
             additional_properties = JSON.parse(matches[1])
-            return {additional_properties: additional_properties, problem: "additional_properties"}
+            return { additional_properties: additional_properties, problem: "additional_properties" }
           when "Enum"
-            return {problem: "not_in_enum"}
+            return { problem: "not_in_enum" }
           when "Pattern"
             regex = message.match(/did not match the regex '(\S*)' /)[1]
-            return {problem: "pattern_mismatch", pattern: regex}
+            return { problem: "pattern_mismatch", pattern: regex }
+          when "Minimum"
+            min = message.match(/did not have a minimum value of ([0-9\.])+, /)[1]
+            return { problem: "min_not_met", expected: min }
+          when "Maximum"
+            min = message.match(/did not have a maximum value of ([0-9\.])+, /)[1]
+            return { problem: "max_exceeded", expected: min }
           else
             if message.match?(/is not a uuid/)
-              return {problem: "format_mismatch", expected: "uuid"}
+              return { problem: "format_mismatch", expected: "uuid" }
             end
           end
         end
