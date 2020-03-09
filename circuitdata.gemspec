@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json-schema", "2.8.0"
   s.add_dependency "activesupport", "> 5.1", "< 7"
   s.add_dependency "terminal-table", "~> 1.8.0"
-  s.add_development_dependency "rake", "~> 12.3"
+  s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.7"
   s.add_development_dependency "byebug", "~> 10.0"
   s.add_development_dependency "guard", "~> 2.14.2"
