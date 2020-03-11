@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "guard-rspec", "~> 4.7"
   s.add_development_dependency "hashdiff", "~> 0.3.7"
   s.add_development_dependency "rspec_junit_formatter", "~> 0.4.1"
+  s.add_development_dependency "rufo", "~> 0.12"
 end
