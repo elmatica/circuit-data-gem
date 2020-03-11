@@ -8,17 +8,17 @@ RSpec.describe Circuitdata::ExposedArea do
     let(:id) { "final_finish_total_area" }
     let(:data) { json_fixture(:final_finish_total_area) }
     let(:final_finish_area_one_side) { 500.0 }
-    let(:final_finish_area_total) { final_finish_area_one_side * 2}
+    let(:final_finish_area_total) { final_finish_area_one_side * 2 }
     it "gets the final finish total area" do
       expect(subject.final_finish_total_area).to eql(final_finish_area_total)
     end
 
-    it 'handles board area not being present' do
+    it "handles board area not being present" do
       product.set_question_answer(:metrics, :board, :area, nil)
       expect(subject.final_finish_total_area).to eql(nil)
     end
 
-    context 'plated through holes are present' do
+    context "plated through holes are present" do
       let(:hole_area) { 20.09613988648319 }
 
       before do
@@ -49,7 +49,7 @@ RSpec.describe Circuitdata::ExposedArea do
       end
     end
 
-    context 'plated vias are present' do
+    context "plated vias are present" do
       let(:hole_area) { 20.09613988648319 }
 
       before do

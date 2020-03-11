@@ -8,35 +8,35 @@ RSpec.describe Circuitdata::Bury do
 
     it "buries a simple list of strings" do
       path = ["a", "b"]
-      expect(subject.bury({}, *path, value)).to eql({"a" => {"b" => "pizza"}})
+      expect(subject.bury({}, *path, value)).to eql({ "a" => { "b" => "pizza" } })
     end
 
     it "buries a simple list of strings and integers" do
       path = ["a", "b", 0, "c"]
       expect(subject.bury({}, *path, value)).to eql({
-        "a" => {"b" => [{"c" => "pizza"}]},
+        "a" => { "b" => [{ "c" => "pizza" }] },
       })
     end
 
     it "buries a list with hashes" do
-      path = ["a", {"b" => "c"}, "d"]
+      path = ["a", { "b" => "c" }, "d"]
       expect(subject.bury({}, *path, value)).to eql({
-        "a" => [{"b" => "c", "d" => "pizza"}],
+        "a" => [{ "b" => "c", "d" => "pizza" }],
       })
     end
 
     it "updates an existing value with a list containing hashes" do
-      path = ["a", {"b" => "c"}, "d"]
+      path = ["a", { "b" => "c" }, "d"]
       result = subject.bury({}, *path, value)
 
       expect(subject.bury(result, *path, "chips")).to eql({
-        "a" => [{"b" => "c", "d" => "chips"}],
+        "a" => [{ "b" => "c", "d" => "chips" }],
       })
     end
 
     it "raises an error if hash parent is not an array" do
-      path = ["a", {"b" => "c"}, "d"]
-      data = {"a" => {"b" => "c", "d" => "chips"}}
+      path = ["a", { "b" => "c" }, "d"]
+      data = { "a" => { "b" => "c", "d" => "chips" } }
 
       expect {
         subject.bury(data, *path, value)
@@ -50,23 +50,23 @@ RSpec.describe Circuitdata::Bury do
   describe ".dig" do
     it "returns nil if not present" do
       path = ["a", "c"]
-      expect(subject.dig({"a" => {"b" => "pizza"}}, *path)).to eql(nil)
+      expect(subject.dig({ "a" => { "b" => "pizza" } }, *path)).to eql(nil)
     end
 
     it "returns value for string path" do
       path = ["a", "b"]
-      expect(subject.dig({"a" => {"b" => "pizza"}}, *path)).to eql("pizza")
+      expect(subject.dig({ "a" => { "b" => "pizza" } }, *path)).to eql("pizza")
     end
 
     it "returns value for path with list of strings and integers" do
-      data = {"a" => {"b" => [{"c" => "pizza"}]}}
+      data = { "a" => { "b" => [{ "c" => "pizza" }] } }
       path = ["a", "b", 0, "c"]
       expect(subject.dig(data, *path)).to eql("pizza")
     end
 
     it "returns value for path with hashes" do
-      data = {"a" => [{"b" => "c", "d" => "pizza"}]}
-      path = ["a", {"b" => "c"}, "d"]
+      data = { "a" => [{ "b" => "c", "d" => "pizza" }] }
+      path = ["a", { "b" => "c" }, "d"]
       expect(subject.dig(data, *path)).to eql("pizza")
     end
   end

@@ -36,11 +36,11 @@ RSpec.describe Circuitdata::Schema do
         },
         :uom => nil,
         :enforced => {
-          :schema => {:type => "string"},
+          :schema => { :type => "string" },
           :path => "/open_trade_transfer_package/products/.*/circuitdata/sections/name",
         },
         :restricted => {
-          :schema => {:type => "string"},
+          :schema => { :type => "string" },
           :path => "/open_trade_transfer_package/products/.*/circuitdata/sections/name",
         },
       }
@@ -74,7 +74,7 @@ RSpec.describe Circuitdata::Schema do
         id: "configuration/stackup/locked",
         code: "locked",
         name: "Locked",
-        default: {:schema => {:type => "boolean"}, :path => "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked"},
+        default: { :schema => { :type => "boolean" }, :path => "/open_trade_transfer_package/products/.*/circuitdata/configuration/stackup/locked" },
       )
     end
 
@@ -118,11 +118,11 @@ RSpec.describe Circuitdata::Schema do
               },
               :uom => nil,
               :enforced => {
-                :schema => {:type => "integer"},
+                :schema => { :type => "integer" },
                 :path => "/open_trade_transfer_package/profiles/enforced/circuitdata/sections/count",
               },
               :restricted => {
-                :schema => {:type => "integer"},
+                :schema => { :type => "integer" },
                 :path => "/open_trade_transfer_package/profiles/restricted/circuitdata/sections/count",
               },
             },
@@ -132,16 +132,16 @@ RSpec.describe Circuitdata::Schema do
               :name => "Mm2",
               :description => "",
               :default => {
-                :schema => {:type => "number"},
+                :schema => { :type => "number" },
                 :path => "/open_trade_transfer_package/profiles/default/circuitdata/sections/mm2",
               },
               :uom => nil,
               :enforced => {
-                :schema => {:type => "number"},
+                :schema => { :type => "number" },
                 :path => "/open_trade_transfer_package/profiles/enforced/circuitdata/sections/mm2",
               },
               :restricted => {
-                :schema => {:type => "number"},
+                :schema => { :type => "number" },
                 :path => "/open_trade_transfer_package/profiles/restricted/circuitdata/sections/mm2",
               },
             },
