@@ -4,9 +4,9 @@ module Circuitdata
       open_trade_transfer_package: {
         version: SCHEMA_VERSION,
         profiles: {
-          default: {circuitdata: {version: SCHEMA_VERSION}},
-          restricted: {circuitdata: {version: SCHEMA_VERSION}},
-          enforced: {circuitdata: {version: SCHEMA_VERSION}},
+          default: { circuitdata: { version: SCHEMA_VERSION } },
+          restricted: { circuitdata: { version: SCHEMA_VERSION } },
+          enforced: { circuitdata: { version: SCHEMA_VERSION } },
         },
       },
     }

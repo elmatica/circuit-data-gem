@@ -1,35 +1,34 @@
 module Circuitdata
   class ExposedArea
-
     def initialize(product)
       @product = product
     end
 
     def final_finish_total_area
       return nil if board_area.nil?
-      layer_final_finish_area+barrel_area
+      layer_final_finish_area + barrel_area
     end
 
     def barrel_area
       return 0 if board_thickness.nil?
-      plated_holes.map{ |hole|  sum_holes_area(hole)}.sum
+      plated_holes.map { |hole| sum_holes_area(hole) }.sum
     end
 
     private
 
     def layer_final_finish_area
-      coverage = final_finish_layers.map{ |layer| layer[:coverage]}.compact
-      coverage.map{ |percent| percent/100.0*board_area}.sum
+      coverage = final_finish_layers.map { |layer| layer[:coverage] }.compact
+      coverage.map { |percent| percent / 100.0 * board_area }.sum
     end
 
     def sum_holes_area(hole)
       diameter = hole[:function_attributes][:finished_size]
       number_of_holes = hole[:function_attributes][:number_of_holes]
-      hole_area(diameter)*number_of_holes
+      hole_area(diameter) * number_of_holes
     end
 
     def hole_area(finished_size)
-      (finished_size/1000)*Math::PI*board_thickness
+      (finished_size / 1000) * Math::PI * board_thickness
     end
 
     def board_thickness
@@ -41,8 +40,8 @@ module Circuitdata
     end
 
     def plated_holes
-      holes.select{ |process| requires_final_finish?(process) }
-        .select{ |process| has_necessary_data?(process) }
+      holes.select { |process| requires_final_finish?(process) }
+        .select { |process| has_necessary_data?(process) }
     end
 
     def requires_final_finish?(process)
@@ -57,7 +56,7 @@ module Circuitdata
 
     def holes
       @product.processes
-        .select{|process| process[:function] == "holes"}
+        .select { |process| process[:function] == "holes" }
     end
 
     def layers
@@ -65,7 +64,7 @@ module Circuitdata
     end
 
     def final_finish_layers
-      layers.select{ |layer| layer[:function] == "final_finish" }
+      layers.select { |layer| layer[:function] == "final_finish" }
     end
   end
 end

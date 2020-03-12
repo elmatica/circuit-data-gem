@@ -30,6 +30,9 @@ jobs:
           paths:
             - vendor/bundle
       - run:
+          name: Check code formatting
+          command: bundle exec rufo -c .
+      - run:
           name: Run rspec
           command: |
             bundle exec rspec --profile 10 \
